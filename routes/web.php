@@ -67,13 +67,15 @@ Route::get('/personal/collect','Home\PersonalController@collect'); //个人中�
 
 
 //后台路由组
-//Route::get("ad/login/index","Admin\LoginController@index");//加载登录页面
-//Route::get("ad/login/index","Admin\LoginController@index");//加载登录页面
-Route::get("/ad",function (){
-	return "dd";
-});//执行登录验证
-Route::get("ad/login/loginOut","Admin\LoginController@loginOut");//退出
-Route::group(["prefix" => "admin","middlware" => "admin"], function () {
+Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
+Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
+Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
+Route::get("admin/login/loginOut","Admin\LoginController@loginOut");//退出
+Route::group(["prefix" => "admin","middleware" => "admin"], function () {
+	
+	
+	
+
 	Route::get("/","Admin\IndexController@index");//后台首页
 
 	Route::get("root","Admin\RootController@index");//超级管理员
@@ -93,13 +95,20 @@ Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 	Route::put("role/{id}","Admin\RoleController@update");//执行角色修改
 	Route::delete('/role/destroy/{id}',"Admin\RoleController@destroy");//角色删除操作
 	Route::get("role/loadNode/{id}","Admin\RoleController@loadNode");//加载节点分配模板	
+	//Route::post("role/saveNode","Admin\RoteController@saveNode");//保存节点信息
+	Route::post("role/saveNode",function(){
+		return "dd";
+	});//保存节点信息
 	
 	
 	//Route::resource("node","Admin\NodeController");//节点管理
-	Route::get("node","Admin\NodeController@index");//节点管理
+	Route::get("node","Admin\NodeController@index");//节点管理首页
 	Route::post("node","Admin\NodeController@store");//执行节点添加
+	Route::get("node/edit/{id}","Admin\NodeController@edit");//加载节点修改
+
+	Route::put("node/{id}","Admin\NodeController@update");//执行节点修改
 	
-	Route::delete("node/{id}","Admin\NodeController@destroy");//节点管理
+	Route::delete("node/{id}","Admin\NodeController@destroy");//节点删除
 	Route::resource("vip","Admin\VipController");//会员管理
 	Route::resource("shop","Admin\ShopController");//商家管理
 

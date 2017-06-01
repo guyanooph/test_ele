@@ -30,7 +30,6 @@
     <link href="{{asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
    <!-- jQuery 2.1.4 -->
     <script src="{{asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
- <script src="{{asset('myadmin/new/load.js')}}"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -249,7 +248,7 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">亚力山大-皮尔斯</span>
+                  <span class="hidden-xs">{{ Session::get("adminuser['name']") }}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
