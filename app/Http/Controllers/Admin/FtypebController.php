@@ -101,7 +101,11 @@ class FtypebController extends Controller
         \DB::table("mer_sid")->where("id",$id)->delete();
                  return back()->with("err","删除成功");
 
-        
-    
+    }
+
+    public function doEdit()
+    {
+        $title=\DB::table("mer_mid")->get();
+       print_r($title);
     }
 }

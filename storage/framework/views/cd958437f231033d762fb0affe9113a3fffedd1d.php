@@ -63,10 +63,24 @@
                             </td>
                             <td><?php echo e($vo->created_at); ?></td>
                             
-                            <td><button class="btn btn-xs btn-danger" onclick="doDel(<?php echo e($vo->id); ?>)">删除</button> 
+                            <td><button class="btn btn-xs btn-danger" data-target="#myModal" onclick="doDel(<?php echo e($vo->id); ?>)">删除</button> 
                             
                               
-                     <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModal">编辑</button>
+                     <button class="btn btn-xs btn-primary" data-toggle="modal"  onclick="doEdit()">编辑</button>
+                     <script type="text/javascript">
+                        function doEdit(mid){
+                         // alert(mid);
+                                      $.ajax({
+                                        url:'<?php echo e(URL('admin/ftypeb/doEdit')); ?>',
+                                        type:'get',
+                                        dataType:'text',
+                                        async:true,
+                                        success:function(data){
+                                           alert(data);
+                                        },
+                                      });
+                        }
+                     </script>
                              
           <!--弹框添加-->
           <!-- Modal -->
@@ -75,20 +89,27 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">添加分类</h4>
+                  <h4 class="modal-title" id="myModalLabel">编辑子分类</h4>
                 </div>
                 <div class="modal-body">
                   <!--表单添加-->
-                   <form action="" id="form" method="post" class="form-horizontal" onsubmit="doCreate()">
+                   <form action="" id="editform" method="post" class="form-horizontal" onsubmit="doCreate()">
                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                         <div class="box-body">
                            <div class="form-group">
-                          <label for="inputEmail3" class="col-sm-2 control-label">商家父类名：</label>
+                          <label for="inputEmail3" class="col-sm-2 control-label">父类名：</label>
                           <div class="col-sm-4">
-                            <input type="text" name="title" value="<?php echo e($vo->title); ?>" readonly class="form-control" id="inputEmail3" placeholder="商家父类名">
+                            <input type="text" name="title" value="" readonly class="form-control" id="inputEmail3" placeholder="商家父类名">
                           </div>
                         </div>
                          
+                           <div class="box-body">
+                           <div class="form-group">
+                          <label for="inputEmail3" class="col-sm-2 control-label">子类名：</label>
+                          <div class="col-sm-4">
+                            <input type="text" name="title" value="<?php echo e($vo->title); ?>" readonly class="form-control" id="inputEmail3" placeholder="商家子分类名">
+                          </div>
+                        </div>
                       <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">状态：</label>
                            <div class="col-sm-4">

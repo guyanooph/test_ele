@@ -108,6 +108,8 @@ Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 	
 	Route::get("/ftypeb","Admin\FtypebController@index");//菜品子分类加载页面
 	Route::delete("/ftypeb/destroy/{id}","Admin\FtypebController@destroy");//菜品子分类删除
+	Route::get("ftypeb/doEdit","Admin\FtypebController@doEdit");//ajax编辑子分类时查找父类title
+		
 	
 	
 	
