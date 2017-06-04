@@ -1,11 +1,13 @@
 <?php
-//商家管理控制器
+//菜品分类管理
 namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Response;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ShopController extends Controller
+class FtypebController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,9 @@ class ShopController extends Controller
      */
     public function index()
     {
-        return view("admin.shop.index");
+        $list=\DB::table('mer_sid')->simplePaginate(10);
+
+       return view("admin.ftypeb.index",["list"=>$list]);
     }
 
     /**
@@ -24,7 +28,7 @@ class ShopController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +39,19 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $data=$request->only('title',"status");
+       $data['created_at']=date("Y-m-d H:i:s",time());
+      
+       if(\DB::table("mer_mid")->insert($data)){
+            $info="添加成功";
+       }else{
+            $info="添加失败";
+       }
+    
+     //$request->session()->flash("err",$info);
+    // return response()->json($info);
+     //return redirect("admin/ftype")->with("err",$info);
+      return back()->with("err",$info);
     }
 
     /**
@@ -80,6 +96,12 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+     
+        \DB::table("mer_sid")->where("id",$id)->delete();
+                 return back()->with("err","删除成功");
+
+        
+    
     }
 }

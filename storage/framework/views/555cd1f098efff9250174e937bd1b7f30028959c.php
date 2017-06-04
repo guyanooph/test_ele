@@ -1,7 +1,4 @@
-@extends('admin.base')
-
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- Content Header (Page header) -->
     <section class="content-header">
           <h1>
@@ -86,19 +83,19 @@
 
                       <th>操作</th>
                     </tr>
-                    @foreach($list as $vo)
+                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td>{{ $vo->id }}</td>
-                            <td>{{ $vo->title }}</td>
-                            <td>@if($vo->status==1)
+                            <td><?php echo e($vo->id); ?></td>
+                            <td><?php echo e($vo->title); ?></td>
+                            <td><?php if($vo->status==1): ?>
                                 <b>有效</b>
-                                  @else
+                                  <?php else: ?>
                                  <b> 无效</b>
-                                  @endif
+                                  <?php endif; ?>
                             </td>
-                            <td>{{$vo->created_at }}</td>
+                            <td><?php echo e($vo->created_at); ?></td>
                             
-                            <td><button class="btn btn-xs btn-danger" onclick="doDel({{ $vo->id }})">删除</button> 
+                            <td><button class="btn btn-xs btn-danger" onclick="doDel(<?php echo e($vo->id); ?>)">删除</button> 
                              
                               <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModalq">
                                 添加子分类
@@ -114,14 +111,14 @@
                               </div>
                               <div class="modal-body">
                                 <!--表单添加-->
-                                 <form action="{{url('admin/ftype/storyEr')}}" id="addform" method="post" class="form-horizontal">
+                                 <form action="<?php echo e(url('admin/ftype/storyEr')); ?>" id="addform" method="post" class="form-horizontal">
                                       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                                      <<input type="hidden" name="mid" value="{{ $vo->id}}">
+                                      <<input type="hidden" name="mid" value="<?php echo e($vo->id); ?>">
                                       <div class="box-body">
                                         <div class="form-group">
                                           <label for="inputEmail3" class="col-sm-2 control-label">商家父类名：</label>
                                           <div class="col-sm-4">
-                                            <input type="text" name="title" value="{{ $vo->title }}" readonly class="form-control" id="inputEmail3" placeholder="商家父类名">
+                                            <input type="text" name="title" value="<?php echo e($vo->title); ?>" readonly class="form-control" id="inputEmail3" placeholder="商家父类名">
                                           </div>
                                         </div>
                                        <div class="form-group">
@@ -143,12 +140,12 @@
                                       </div><!-- /.box-header -->
                                 </div>
                                <button class="btn btn-xs btn-primary" onclick="">查看子分类</button>
-                               <button class="btn btn-xs btn-primary" onclick="window.location='{{URL('admin/ftype/edit')}}/{{$vo->id}}'">编辑</button>
+                               <button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('admin/ftype/edit')); ?>/<?php echo e($vo->id); ?>'">编辑</button>
                   
 
                             </td>
                         </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     
                   </table>
 					
@@ -156,7 +153,8 @@
 
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                 {{ $list->links()}}
+                 <?php echo e($list->links()); ?>
+
                 </div>
               </div><!-- /.box -->
 
@@ -164,9 +162,9 @@
           </div><!-- /.row -->
         </section><!-- /.content -->
         
-    @endsection
+    <?php $__env->stopSection(); ?>
     
-    @section('myscript')
+    <?php $__env->startSection('myscript'); ?>
    <form action="" style="display:none;" id="mydeleteform" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="_method" value="DELETE">
@@ -197,8 +195,9 @@
      	function doDel(id){
 
             if(confirm('确定要删除吗？')){
-                    $("#mydeleteform").attr("action","{{URL('admin/ftype')}}/"+id).submit(); 
+                    $("#mydeleteform").attr("action","<?php echo e(URL('admin/ftype')); ?>/"+id).submit(); 
                 }
         }
 </script>
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

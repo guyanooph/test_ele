@@ -28,7 +28,9 @@
     <link href="<?php echo e(asset('myadmin/plugins/daterangepicker/daterangepicker-bs3.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="<?php echo e(asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')); ?>" rel="stylesheet" type="text/css" />
-
+   <!-- jQuery 2.1.4 -->
+    <script src="<?php echo e(asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')); ?>"></script>
+ <script src="<?php echo e(asset('myadmin/new/load.js')); ?>"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -298,31 +300,52 @@
             </div>
             <div class="pull-left info">
              
-              <a href="<?php echo e(url('merchant/logout')); ?>"><i class="fa fa-circle text-success"></i>退出</a>
+              <a href="<?php echo e(url('admin/logout')); ?>"><i class="fa fa-circle text-success"></i>退出</a>
             </div>
           </div>
 
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主导航</li>
-            <li class="active treeview">
+               
+                <li class="active treeview">
               <a href="#">
-                <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gittip"></i><span>超级管理员</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('merchant/mer')); ?>"><i class="fa fa-circle-o"></i>商家信息</a></li>
-                <li class="active"><a href="<?php echo e(url('merchant/open')); ?>"><i class="fa fa-circle-o"></i>营业信息</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/root')); ?>"><i class="fa fa-youtube-play"></i> 管理员资料</a></li>
+              </ul>
+            </li>
+
+                  
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-gittip"></i><span>权限管理</span><i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="<?php echo e(URL('admin/user')); ?>"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/role')); ?>"><i class="fa fa-youtube-play"></i> 角色管理</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/node')); ?>"><i class="fa fa-youtube-play"></i> 节点管理</a></li>
+              </ul>
+            </li>
+            
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-gittip"></i> <span> 会员管理</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="<?php echo e(url('admin/vip')); ?>"><i class="fa fa-circle-o"></i>查看会员信息</a></li>
     
               </ul>
             </li>
             
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-gittip"></i> <span>菜单管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gittip"></i> <span>商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('merchant/foodtype')); ?>"><i class="fa fa-circle-o"></i> 菜单种类</a></li>
-                <li><a href="<?php echo e(url('merchant/food')); ?>"><i class="fa fa-circle-o"></i> 菜单浏览</a></li>
+                <li class="active"><a href=""><i class="fa fa-circle-o"></i> 待审核商家</a></li>
+                <li><a href="<?php echo e(url('admin/shop')); ?>"><i class="fa fa-circle-o"></i> 普通商家</a></li>
               </ul>
             </li>
             
@@ -332,7 +355,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php echo e(url('admin/ftype')); ?>"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
-                <li><a href="<?php echo e(url('admin/ftype/create')); ?>"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <li><a href="<?php echo e(url('admin/ftypeb')); ?>"><i class="fa fa-circle-o"></i> 子分类管理</a></li>
               </ul>
             </li>
              <li class="active treeview">
@@ -341,7 +364,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php echo e(url('admin/letter')); ?>"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
-                <li><a href="<?php echo e(url('admin/type/offer')); ?>"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
+                <li><a href="<?php echo e(url('admin/offer')); ?>"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
               </ul>
             </li>
 

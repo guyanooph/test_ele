@@ -28,6 +28,8 @@
     <link href="{{asset('myadmin/plugins/daterangepicker/daterangepicker-bs3.css')}}" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="{{asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
+   <!-- jQuery 2.1.4 -->
+    <script src="{{asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
  <script src="{{asset('myadmin/new/load.js')}}"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -353,7 +355,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('admin/ftype')}}"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
-                <li><a href="{{url('admin/ftype/create')}}"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <li><a href="{{url('admin/ftypeb')}}"><i class="fa fa-circle-o"></i> 子分类管理</a></li>
               </ul>
             </li>
              <li class="active treeview">
