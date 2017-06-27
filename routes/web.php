@@ -11,12 +11,13 @@
 |
 */
 
-/* Route::get('/',function(){
-	return "a";
-}); */
+
 Route::get('/','Home\ShopController@list'); //商家信息
 
 Route::get('/food','Home\FoodController@list'); //菜品信息
 
 Route::get('/geren','Home\PersonalController@personal'); //个人中心
+
+
+Route::get('/list/detail', 'Home\FoodController@index');
 

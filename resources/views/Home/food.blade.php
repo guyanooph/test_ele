@@ -1,3 +1,3 @@
 @foreach($list as $v)
-<p>{{$v->shopname}}</p>
+<p>{{$v->title}}</p>
 @endforeach
