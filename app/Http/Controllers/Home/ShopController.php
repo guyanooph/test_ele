@@ -12,7 +12,7 @@ class ShopController extends Controller
 	public function list()
 	{
 		//$list = Shop_list::where('id',1)->first();
-		$list = Shop_list::find(1);
+		$list = Shop_list::all();
 		return view('home.list',['list'=>$list]);
 		
 	}
