@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Merchant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gregwar\Captcha\CaptchaBuilder;
+use Session;
 
 class LoginController extends Controller
 {
@@ -43,9 +44,10 @@ class LoginController extends Controller
    //加载验证码
    public function getCode()
    {
+	   
         $builder = new CaptchaBuilder();
         $builder->build(150,32);
-        \Session::set('phrase',$builder->getPhrase()); //存储验证码
+        \Session::put('phrase',$builder->getPhrase()); //存储验证码
         return response($builder->output())->header('Content-type','image/jpeg');
    }
    
