@@ -10,7 +10,7 @@ class FoodController extends Controller
     //
 	public function list()
 	{
-		$list = Food_list::find(1);
+		$list = Food_list::all();
 		return view('home.index', ['list'=>$list]);
 		
 	}
