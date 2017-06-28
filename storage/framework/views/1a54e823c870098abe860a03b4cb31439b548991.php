@@ -29,9 +29,9 @@
         <?php if(session("msg")): ?>
             <p class="login-box-msg" style="color:red;"><?php echo e(session("msg")); ?></p>
         <?php else: ?>
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">请输入您的邮箱账号</p>
         <?php endif; ?>
-        <form action="<?php echo e(url('admin/dologin')); ?>" method="post">
+        <form action="<?php echo e(url('merchant/dologin')); ?>" method="post">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
           <div class="form-group has-feedback">
             <input type="email" class="form-control" name="email" placeholder="Email"/>
@@ -56,7 +56,7 @@
             <div class="col-xs-8">    
               <div class="checkbox icheck">
                 <label>
-                  <input type="checkbox"> Remember Me
+                  <input type="checkbox"> 记住账号
                 </label>
               </div>                        
             </div><!-- /.col -->

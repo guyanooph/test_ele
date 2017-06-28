@@ -39,9 +39,11 @@ Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 
 });
 
-
-Route::get('/merchant/login',"Merchant\LoginController@login"); //加载商家登录界面
-Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商家登录界面
+//加载商家登录界面
+Route::get('/merchant/login',"Merchant\LoginController@login"); 
+Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); 
+Route::get('/merchant/dologin',"Merchant\LoginController@doLogin"); 
+Route::get('/merchant/logout',"Merchant\LoginController@logout"); 
 
 //商家管理路由组
 Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {

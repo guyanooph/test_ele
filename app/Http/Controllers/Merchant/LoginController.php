@@ -28,7 +28,7 @@ class LoginController extends Controller
         $email = $request->input("email");
         $password = $request->input("password");
         //获取对应用户信息
-        $user = \DB::table("users")->where("email",$email)->first();
+        $user = \DB::table("merchant")->where("email",$email)->first();
         if(!empty($user)){
             //判断密码
             if(md5($password)==$user->password){
