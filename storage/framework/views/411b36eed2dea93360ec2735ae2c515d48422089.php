@@ -298,50 +298,31 @@
             </div>
             <div class="pull-left info">
              
-              <a href="<?php echo e(url('admin/logout')); ?>"><i class="fa fa-circle text-success"></i>退出</a>
+              <a href="<?php echo e(url('merchant/logout')); ?>"><i class="fa fa-circle text-success"></i>退出</a>
             </div>
           </div>
 
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主导航</li>
-               
-                <li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i><span>超级管理员</span><i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(URL('admin/root')); ?>"><i class="fa fa-youtube-play"></i> 管理员资料</a></li>
-              </ul>
-            </li>
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-gittip"></i><span>权限管理</span><i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(URL('admin/com')); ?>"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
-                <li class="active"><a href="<?php echo e(URL('admin/role')); ?>"><i class="fa fa-youtube-play"></i> 角色管理</a></li>
-                <li class="active"><a href="<?php echo e(URL('admin/node')); ?>"><i class="fa fa-youtube-play"></i> 节点管理</a></li>
-              </ul>
-            </li>
-            
-            <li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i> <span> 会员管理</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('admin/vip')); ?>"><i class="fa fa-circle-o"></i>查看会员信息</a></li>
+                <li class="active"><a href="<?php echo e(url('merchant/mer')); ?>"><i class="fa fa-circle-o"></i>商家信息</a></li>
+                <li class="active"><a href="<?php echo e(url('merchant/open')); ?>"><i class="fa fa-circle-o"></i>营业信息</a></li>
     
               </ul>
             </li>
             
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-gittip"></i> <span>商家管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gittip"></i> <span>菜单管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href=""><i class="fa fa-circle-o"></i> 待审核商家</a></li>
-                <li><a href="<?php echo e(url('admin/shop')); ?>"><i class="fa fa-circle-o"></i> 普通商家</a></li>
+                <li class="active"><a href="<?php echo e(url('merchant/foodtype')); ?>"><i class="fa fa-circle-o"></i> 菜单种类</a></li>
+                <li><a href="<?php echo e(url('merchant/food')); ?>"><i class="fa fa-circle-o"></i> 菜单浏览</a></li>
               </ul>
             </li>
             
