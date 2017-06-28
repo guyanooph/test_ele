@@ -13,7 +13,7 @@ class ShopController extends Controller
 	{
 		//$list = Shop_list::where('id',1)->first();
 		$list = Shop_list::all();
-		return view('home.list',['list'=>$list]);
+		return view('home.shop.list',['list'=>$list]);
 		
 	}
 }

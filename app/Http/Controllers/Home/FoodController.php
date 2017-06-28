@@ -10,9 +10,8 @@ class FoodController extends Controller
     //
 	public function list()
 	{
-		$list = Food_list::all();
-		return view('home.index', ['list'=>$list]);
-		
+		$list = Food_list::where('shopid',$_GET[id]);
+		return view('home.food.index', ['list'=>$list]);
 	}
 
 }
