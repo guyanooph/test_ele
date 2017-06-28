@@ -37,6 +37,16 @@ Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 	Route::get("/stati","Admin\StatiController@index");//建议管理
 	Route::get("/offer","Admin\OfferController@index");//建议管理
 
-	
-
 });
+
+
+Route::get('/merchant/login',"Merchant\LoginController@login"); //加载商家登录界面
+Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商家登录界面
+
+//商家管理路由组
+Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {
+	Route::get("/","Merchant\IndexController@index");//管理首页
+});
+
+
+
