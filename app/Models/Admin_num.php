@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Shop_list extends Model
+class Admin_num extends Model
 {
     //
-	protected $table = 'Shop_list'; //商家列表
+	protected $table = 'admin_num'; //后台统计表
 }
+
