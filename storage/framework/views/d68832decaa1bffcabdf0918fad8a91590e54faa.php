@@ -31,7 +31,7 @@
         <?php else: ?>
             <p class="login-box-msg">Sign in to start your session</p>
         <?php endif; ?>
-        <form action="<?php echo e(url('admin/dologin')); ?>" method="post">
+        <form action="<?php echo e(url('merchant/dologin')); ?>" method="post">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
           <div class="form-group has-feedback">
             <input type="email" class="form-control" name="email" placeholder="Email"/>

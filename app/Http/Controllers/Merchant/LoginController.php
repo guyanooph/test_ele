@@ -27,12 +27,12 @@ class LoginController extends Controller
         $email = $request->input("email");
         $password = $request->input("password");
         //获取对应用户信息
-        $user = \DB::table("users")->where("email",$email)->first();
+        $user = \DB::table("mer_login")->where("email",$email)->first();
         if(!empty($user)){
             //判断密码
-            if(md5($password)==$user->password){
+            if(($password)==$user->password){
                 //存储session跳转页面
-                session()->set("merchantname",$user);
+                session()->put("merchantname",$user);
                 return redirect("merchant");
                 //echo "测试成功!";
             }
@@ -45,7 +45,7 @@ class LoginController extends Controller
    {
         $builder = new CaptchaBuilder();
         $builder->build(150,32);
-        \Session::set('phrase',$builder->getPhrase()); //存储验证码
+        \Session::put('phrase',$builder->getPhrase()); //存储验证码
         return response($builder->output())->header('Content-type','image/jpeg');
    }
    

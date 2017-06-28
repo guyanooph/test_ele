@@ -31,7 +31,7 @@
         @else
             <p class="login-box-msg">Sign in to start your session</p>
         @endif
-        <form action="{{url('admin/dologin')}}" method="post">
+        <form action="{{url('merchant/dologin')}}" method="post">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
           <div class="form-group has-feedback">
             <input type="email" class="form-control" name="email" placeholder="Email"/>
