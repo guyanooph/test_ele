@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="/admin">后台管理</a>
+                    <a href="/merchant">后台管理</a>
                 </div>
             </div>
         </div>
