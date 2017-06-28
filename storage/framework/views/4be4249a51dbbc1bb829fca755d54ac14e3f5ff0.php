@@ -28,7 +28,7 @@
     <link href="<?php echo e(asset('myadmin/plugins/daterangepicker/daterangepicker-bs3.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="<?php echo e(asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')); ?>" rel="stylesheet" type="text/css" />
- <script src="<?php echo e(asset('myadmin/new/load.js')); ?>"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -314,14 +314,12 @@
                 <li class="active"><a href="<?php echo e(URL('admin/root')); ?>"><i class="fa fa-youtube-play"></i> 管理员资料</a></li>
               </ul>
             </li>
-
-                  
             <li class="active treeview">
               <a href="#">
                 <i class="fa fa-gittip"></i><span>权限管理</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(URL('admin/user')); ?>"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/com')); ?>"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
                 <li class="active"><a href="<?php echo e(URL('admin/role')); ?>"><i class="fa fa-youtube-play"></i> 角色管理</a></li>
                 <li class="active"><a href="<?php echo e(URL('admin/node')); ?>"><i class="fa fa-youtube-play"></i> 节点管理</a></li>
               </ul>
@@ -362,7 +360,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php echo e(url('admin/letter')); ?>"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
-                <li><a href="<?php echo e(url('admin/offer')); ?>"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
+                <li><a href="<?php echo e(url('admin/type/offer')); ?>"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
               </ul>
             </li>
 

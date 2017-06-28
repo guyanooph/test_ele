@@ -24,7 +24,7 @@ class FtypeController extends Controller
      */
     public function create()
     {
-        return view("admin.ftype.create");
+        //
     }
 
     /**
