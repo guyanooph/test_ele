@@ -68,6 +68,7 @@ class PersonalController extends Controller
 
 	public function userInfo()
 	{
+
 		
 		//$userInfo=User_info::where('userid',1);
 		/*$id=session['user']['userid'];
