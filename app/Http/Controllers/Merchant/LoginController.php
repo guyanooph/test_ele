@@ -45,7 +45,7 @@ class LoginController extends Controller
    {
         $builder = new CaptchaBuilder();
         $builder->build(150,32);
-        \Session::set('phrase',$builder->getPhrase()); //存储验证码
+        \Session::put('phrase',$builder->getPhrase()); //存储验证码
         return response($builder->output())->header('Content-type','image/jpeg');
    }
    
