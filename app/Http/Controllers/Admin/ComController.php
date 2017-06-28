@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin_user;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class ComController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-
-
-        $d= Admin_user::all();
-
-        return view("admin.user.index",["list"=>$d]);
+        return view("admin.com.index");
         
     }
 
@@ -30,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-       return view("admin.user.create");
+        //
     }
 
     /**
@@ -40,25 +36,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
-            // $data=$request->only('name','password');
-             $data['name']=$request->input('name');
-           
-            $pass=$request->input("password");
-         
-            $data['password']=md5($pass);
-
-            $data['addtime']=date("Y-m-d H:i:s",time());
-            //$data['addtime']=time();
-
-           
-                $id=\DB::table('Admin_user')->insertGetId($data);
-                if($id>0){
-                    $info="添管理员成功";
-                }else{
-                    $info="添加信息失败";
-                }
-            return redirect('admin/user')->with("err",$info);
+    {
+        //
     }
 
     /**
@@ -80,9 +59,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $a=Admin_user::find($id);
-
-        return view("admin.user.edit",["v"=>$a]);
+        //
     }
 
     /**
@@ -94,10 +71,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data['name']=Admin_user::input("name");
-        $data['password']=md5(Admin_user::input("password"));
-        $data['update_at']=date("Y-m-d H:i:s",time());
-        Admin_user::update("update admin_user set ");
+        //
     }
 
     /**
@@ -108,16 +82,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $a =Admin_user::destroy($id);
-        //$a = $b->delete($id);
-       // $a=\DB::table("admin_user")->delete($id);
-       
-
-        if($a){
-            $info="删除成功";
-        }else{
-            $info="删除失败";
-        }
-        return redirect("admin/user")->with("err",$info);
+        //
     }
 }
