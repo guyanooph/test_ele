@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Merchant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gregwar\Captcha\CaptchaBuilder;
+use Session;
 
 class LoginController extends Controller
 {
@@ -16,6 +17,9 @@ class LoginController extends Controller
    //执行用户登录
    public function doLogin(Request $request)
    {
+	   
+	   //return "aaaa";
+	 
         //执行验证码判断
         $mycode = $request->input("mycode");
         $yanzhengma = $request->session()->get('phrase');
@@ -38,11 +42,13 @@ class LoginController extends Controller
             }
         }
         return back()->with("msg","账号或密码错误！");
+		
    }
    
    //加载验证码
    public function getCode()
    {
+	   
         $builder = new CaptchaBuilder();
         $builder->build(150,32);
         \Session::put('phrase',$builder->getPhrase()); //存储验证码

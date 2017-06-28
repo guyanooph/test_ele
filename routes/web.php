@@ -39,17 +39,18 @@ Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 
 });
 
-
-Route::get('/merchant/login',"Merchant\LoginController@login"); //加载商家登录界面
-Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载（验证码）
-Route::post('/merchant/dologin',"Merchant\LoginC ontroller@doLogin");//执行登录
-Route::get('/merchant/logout', "Merchant\LoginController@logout");//执行退出
+//加载商家登录界面
+Route::get('/merchant/login',"Merchant\LoginController@login"); 
+Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); 
+Route::post('/merchant/dologin',"Merchant\LoginController@doLogin"); 
+Route::get('/merchant/logout',"Merchant\LoginController@logout"); 
 
 //商家后台管理
 Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
 	Route::resource('/merchantopen', "Merchant\MerchantopenController");//营业信息管理
 	//Route::resource('/merchantopen/index', "Merchant\MerchantopenController/index");
+	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
 });
 
 
