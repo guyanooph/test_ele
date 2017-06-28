@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Shop_list extends Model
+class Admin_role extends Model
 {
     //
-	protected $table = 'Shop_list'; //商家列表
+	protected $table = 'merchant'; //关联商家表
 }
