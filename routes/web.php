@@ -10,16 +10,31 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//前台路由
+
+Route::get('/shop/add/{id}',"Home\Cart\CartController@add"); //放入购物车
+Route::get('/shop/show',"Home\Cart\CartController@show"); //浏览购物车
+Route::get('/shop/del/{id}',"Home\Cart\CartController@del"); //删除购物车中的某个商品
+Route::get('/shop/clear',"Home\Cart\CartController@clear"); //清空购物车
+
+Route::get('/login',"Home\LoginController@login"); //加载前台登录界面
+Route::post('/dologin',"Home\LoginController@doLogin"); //执行前台登录
+Route::get('/logout',"Home\LoginController@logout"); //执行退出
+Route::get('/getcode',"Home\LoginController@getCode"); //加载验证码
+
+Route::get('/shoplist','Home\ShopController@list'); //商家信息列表
+Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
+//Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
 
 
-Route::get('/','Home\ShopController@list'); //商家信息
+Route::get('/personal','Home\PersonalController@index'); //个人中心
+Route::get('/personal/info','Home\PersonalController@personal'); //个人中心/个人资料
+Route::get('/personal/order','Home\PersonalController@order'); //个人中心/个人订单
+Route::get('/personal/assets','Home\PersonalController@assets'); //个人中心/个人资产
+Route::get('/personal/collection','Home\PersonalController@collection'); //个人中心/个人收藏
 
-Route::get('/food','Home\FoodController@list'); //菜品信息
-
-Route::get('/geren','Home\PersonalController@personal'); //个人中心
 
 
-Route::get('/list/detail', 'Home\FoodController@index');
 
 //后台路由组
 Route::group(["prefix" => "admin","middlware" => "admin"], function () {
