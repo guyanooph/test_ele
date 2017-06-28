@@ -40,3 +40,14 @@ Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 	
 
 });
+
+//商家后台登录
+Route::get('/merchart/myadmin/assets/img/{a}/{b}','Merchart\LoginController@load_img');
+Route::get("/merchart/login","Merchart\LoginController@login");//加载登录页
+Route::get('/merchart/getcode',"Merchart\LoginController@getCode");//加载验证码
+Route::post('/merchart/dologin',"Merchart\LoginController@doLogin");//执行登录
+Route::get('/merchart/logout',"Merchart\LoginController@logout");//执行退出
+//商家后台管理
+Route::group(["prefix" => "merchart","middlware" => "merchart"], function () {
+   Route::get('/','Merchart\IndexController@index');//后台首页路由
+});
