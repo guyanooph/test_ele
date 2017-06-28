@@ -6,34 +6,34 @@
     <!-- 告诉浏览器响应屏幕宽度 -->
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="{{asset('myadmin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />    
+    <link href="<?php echo e(asset('myadmin/bootstrap/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />    
     <!-- FontAwesome 4.3.0 -->
-    <link href="{{asset('myadmin/bootstrap/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/bootstrap/css/font-awesome.min.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
-    <link href="{{asset('myadmin/bootstrap/css/ionicons.min.css')}}" rel="stylesheet" type="text/css" />    
+    <link href="<?php echo e(asset('myadmin/bootstrap/css/ionicons.min.css')); ?>" rel="stylesheet" type="text/css" />    
     <!-- Theme style -->
-    <link href="{{asset('myadmin/dist/css/AdminLTE.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/dist/css/AdminLTE.min.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
-    <link href="{{asset('myadmin/dist/css/skins/_all-skins.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/dist/css/skins/_all-skins.min.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="{{asset('myadmin/plugins/iCheck/flat/blue.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/iCheck/flat/blue.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Morris chart -->
-    <link href="{{asset('myadmin/plugins/morris/morris.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/morris/morris.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
-    <link href="{{asset('myadmin/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/jvectormap/jquery-jvectormap-1.2.2.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Date Picker -->
-    <link href="{{asset('myadmin/plugins/datepicker/datepicker3.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/datepicker/datepicker3.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Daterange picker -->
-    <link href="{{asset('myadmin/plugins/daterangepicker/daterangepicker-bs3.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/daterangepicker/daterangepicker-bs3.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
-    <link href="{{asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')); ?>" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="{{asset('myadmin/bootstrap/js/html5shiv.min.js')}}"></script>
-        <script src="{{asset('myadmin/bootstrap/js/respond.min.js')}}"></script>
+        <script src="<?php echo e(asset('myadmin/bootstrap/js/html5shiv.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('myadmin/bootstrap/js/respond.min.js')); ?>"></script>
     <![endif]-->
   </head>
   <body class="skin-blue sidebar-mini">
@@ -69,7 +69,7 @@
                       <li><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image"/>
                           </div>
                           <h4>
                             支持团队
@@ -81,7 +81,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user3-128x128.jpg')}}" class="img-circle" alt="user image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user3-128x128.jpg')); ?>" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             AdminLTE 设计团队
@@ -93,7 +93,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user4-128x128.jpg')}}" class="img-circle" alt="user image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user4-128x128.jpg')); ?>" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             开发商
@@ -105,7 +105,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user3-128x128.jpg')}}" class="img-circle" alt="user image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user3-128x128.jpg')); ?>" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             卖场部
@@ -117,7 +117,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user4-128x128.jpg')}}" class="img-circle" alt="user image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user4-128x128.jpg')); ?>" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             审稿人
@@ -246,13 +246,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
+                  <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">亚力山大-皮尔斯</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+                    <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image" />
                     <p>
                      亚力山大-皮尔斯-网站开发
                       <small>会员于2012-11</small>
@@ -294,11 +294,11 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+              <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
              
-              <a href="{{url('merchant/logout')}}"><i class="fa fa-circle text-success"></i>退出</a>
+              <a href="<?php echo e(url('merchant/logout')); ?>"><i class="fa fa-circle text-success"></i>退出</a>
             </div>
           </div>
 
@@ -310,8 +310,8 @@
                 <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/mer')}}"><i class="fa fa-circle-o"></i>商家信息</a></li>
-                <li class="active"><a href="{{url('merchant/open')}}"><i class="fa fa-circle-o"></i>营业信息</a></li>
+                <li class="active"><a href="<?php echo e(url('merchant/mer')); ?>"><i class="fa fa-circle-o"></i>商家信息</a></li>
+                <li class="active"><a href="<?php echo e(url('merchant/open')); ?>"><i class="fa fa-circle-o"></i>营业信息</a></li>
     
               </ul>
             </li>
@@ -321,8 +321,8 @@
                 <i class="fa fa-gittip"></i> <span>菜单管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/foodtype')}}"><i class="fa fa-circle-o"></i> 菜单种类</a></li>
-                <li><a href="{{url('merchant/food')}}"><i class="fa fa-circle-o"></i> 菜单浏览</a></li>
+                <li class="active"><a href="<?php echo e(url('merchant/foodtype')); ?>"><i class="fa fa-circle-o"></i> 菜单种类</a></li>
+                <li><a href="<?php echo e(url('merchant/food')); ?>"><i class="fa fa-circle-o"></i> 菜单浏览</a></li>
               </ul>
             </li>
             
@@ -331,8 +331,8 @@
                 <i class="fa fa-bomb"></i> <span> 菜品分类管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('admin/ftype')}}"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
-                <li><a href="{{url('admin/ftype/create')}}"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <li class="active"><a href="<?php echo e(url('admin/ftype')); ?>"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
+                <li><a href="<?php echo e(url('admin/ftype/create')); ?>"><i class="fa fa-circle-o"></i> 添加分类</a></li>
               </ul>
             </li>
              <li class="active treeview">
@@ -340,8 +340,8 @@
                 <i class="fa fa-gittip"></i> <span>投诉建议管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('admin/letter')}}"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
-                <li><a href="{{url('admin/type/offer')}}"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
+                <li class="active"><a href="<?php echo e(url('admin/letter')); ?>"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
+                <li><a href="<?php echo e(url('admin/type/offer')); ?>"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
               </ul>
             </li>
 
@@ -356,7 +356,7 @@
                 <span class="label label-primary pull-right">4</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{URL('admin/stati')}}"><i class="fa fa-circle-o"></i> ChartJS实例</a></li>
+                <li><a href="<?php echo e(URL('admin/stati')); ?>"><i class="fa fa-circle-o"></i> ChartJS实例</a></li>
               </ul>
             </li>
             
@@ -367,9 +367,9 @@
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-          @section('content')
+          <?php $__env->startSection('content'); ?>
             这是页面主内容区。
-          @show
+          <?php echo $__env->yieldSection(); ?>
       </div><!-- /.content-wrapper -->
       
       <footer class="main-footer">
@@ -406,56 +406,49 @@
     <!-- xdl-model-end -->
     
     <!-- jQuery 2.1.4 -->
-    <script src="{{asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')); ?>"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="{{asset('myadmin/bootstrap/js/jquery-ui.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/jquery-ui.min.js')); ?>" type="text/javascript"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       //$.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="{{asset('myadmin/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>  
-        {{--    
-    <!-- Morris.js charts -->
-    <script src="{{asset('myadmin/bootstrap/js/raphael-min.js')}}"></script>
-    <script src="{{asset('myadmin/plugins/morris/morris.min.js')}}" type="text/javascript"></script>
-        --}}
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/bootstrap.min.js')); ?>" type="text/javascript"></script>  
+        
     <!-- Sparkline -->
-    <script src="{{asset('myadmin/plugins/sparkline/jquery.sparkline.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/sparkline/jquery.sparkline.min.js')); ?>" type="text/javascript"></script>
     <!-- jvectormap -->
-    <script src="{{asset('myadmin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('myadmin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')); ?>" type="text/javascript"></script>
     <!-- jQuery Knob Chart -->
-    <script src="{{asset('myadmin/plugins/knob/jquery.knob.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/knob/jquery.knob.js')); ?>" type="text/javascript"></script>
     <!-- daterangepicker -->
-    <script src="{{asset('myadmin/bootstrap/js/moment.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('myadmin/plugins/daterangepicker/daterangepicker.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/moment.min.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/daterangepicker/daterangepicker.js')); ?>" type="text/javascript"></script>
     <!-- datepicker -->
-    <script src="{{asset('myadmin/plugins/datepicker/bootstrap-datepicker.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/datepicker/bootstrap-datepicker.js')); ?>" type="text/javascript"></script>
     <!-- Bootstrap WYSIHTML5 -->
-    <script src="{{asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')); ?>" type="text/javascript"></script>
     <!-- Slimscroll -->
-    <script src="{{asset('myadmin/plugins/slimScroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/slimScroll/jquery.slimscroll.min.js')); ?>" type="text/javascript"></script>
     <!-- FastClick -->
-    <script src='{{asset('myadmin/plugins/fastclick/fastclick.min.js')}}'></script>
+    <script src='<?php echo e(asset('myadmin/plugins/fastclick/fastclick.min.js')); ?>'></script>
     <!-- AdminLTE App -->
-    <script src="{{asset('myadmin/dist/js/app.min.js')}}" type="text/javascript"></script>    
-        {{--
-    <!-- AdminLTE 仪表板演示（这只是用于演示目的） -->
-    <script src="{{asset('myadmin/dist/js/pages/dashboard.js')}}" type="text/javascript"></script>
-    --}}
+    <script src="<?php echo e(asset('myadmin/dist/js/app.min.js')); ?>" type="text/javascript"></script>    
+        
     <!-- XDL-model-提示框 -->
-    <script src="{{asset('myadmin/bootstrap/js/xdl-modal-alert-confirm.js')}}" type="text/javascript"></script> 
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/xdl-modal-alert-confirm.js')); ?>" type="text/javascript"></script> 
     <!-- AdminLTE 用于演示目的 -->
-    <script src="{{asset('myadmin/dist/js/demo.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/dist/js/demo.js')); ?>" type="text/javascript"></script>
     
-    @if(session("err"))
+    <?php if(session("err")): ?>
         <script type="text/javascript">
-            Modal.alert({msg: "{{session('err')}}",title: ' 信息提示',btnok: '确定',btncl:'取消'});
+            Modal.alert({msg: "<?php echo e(session('err')); ?>",title: ' 信息提示',btnok: '确定',btncl:'取消'});
         </script>
-    @endif
+    <?php endif; ?>
     
-    @yield('myscript')
+    <?php echo $__env->yieldContent('myscript'); ?>
     
   </body>
 </html>
