@@ -1,5 +1,4 @@
-@extends('admin.base')
-    @section('content')
+    <?php $__env->startSection('content'); ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -20,9 +19,9 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 普通管理员管理</h3>&nbsp;&nbsp;	
-                  <button class="btn btn-sm btn-primary" onclick="window.location='{{ URL('admin/user/create') }}'">添加</button>
+                  <button class="btn btn-sm btn-primary" onclick="window.location='<?php echo e(URL('admin/user/create')); ?>'">添加</button>
                   <div class="box-tools">
-                    <form action="{{url('admin/stu')}}" method="get">
+                    <form action="<?php echo e(url('admin/stu')); ?>" method="get">
                     <div class="input-group" style="width: 150px;">
                       <input type="text" name="name" class="form-control input-sm pull-right" placeholder="管理员账号"/>
                       <div class="input-group-btn">
@@ -44,26 +43,27 @@
                       <th>添加时间</th>
                       <th style="width: 100px">操作</th>
                     </tr>
-                    @foreach($list as $v)
+                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                      <td>{{$v->id}}</td>
-                      <td>{{$v->name}}</td>
-                      <td>{{$v->password}}</td>
-                      <td>{{$v->role}}</td>
-                      <td>{{$v->logtime}}</td>
-                      <td>{{$v->updated_at}}</td>
+                      <td><?php echo e($v->id); ?></td>
+                      <td><?php echo e($v->name); ?></td>
+                      <td><?php echo e($v->password); ?></td>
+                      <td><?php echo e($v->role); ?></td>
+                      <td><?php echo e($v->logtime); ?></td>
+                      <td><?php echo e($v->updated_at); ?></td>
 
-                      <td>{{$v->addtime}}</td>
-                      <td><button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> 
-                      <button onclick="window.location='{{ URL('admin/user/edit')}}/{{ $v->id}}'"class="btn btn-xs btn-primary">编辑</button> </td>
+                      <td><?php echo e($v->addtime); ?></td>
+                      <td><button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> 
+                      <button onclick="window.location='<?php echo e(URL('admin/user/edit')); ?>/<?php echo e($v->id); ?>'"class="btn btn-xs btn-primary">编辑</button> </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   
                    
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                 {{ $list->links() }}
+                 <?php echo e($list->links()); ?>
+
                 </div>
               </div><!-- /.box -->
 
@@ -78,15 +78,16 @@
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="_method" value="DELETE">
         </form>
-    @endsection
+    <?php $__env->stopSection(); ?>
     
     
-    @section("myscript")
+    <?php $__env->startSection("myscript"); ?>
       <script type="text/javascript">
             function doDel(id){
                 if(confirm('确定要删除吗？')){
-                    $("#mydeleteform").attr("action","{{url('admin/user')}}/"+id).submit(); 
+                    $("#mydeleteform").attr("action","<?php echo e(url('admin/user')); ?>/"+id).submit(); 
                 }
             }
       </script>
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

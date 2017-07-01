@@ -1,5 +1,4 @@
-@extends('admin.base')
-    @section('content')
+    <?php $__env->startSection('content'); ?>
         <!-- Content Header (Page header) -->
         <!-- Main content -->
         <section class="content">
@@ -12,15 +11,15 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i> 修改管理员信息</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{url('admin/user')}}/{{$v->id}}" method="post" class="form-horizontal">
-                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <form action="<?php echo e(url('admin/user')); ?>/<?php echo e($v->id); ?>" method="post" class="form-horizontal">
+                  <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                   <input type="hidden" name="_method" value="put">
                 
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">姓名：</label>
                       <div class="col-sm-4">
-                        <input type="text" name="name" class="form-control" id="inputEmail3"  value="{{ $v->name }}">
+                        <input type="text" name="name" class="form-control" id="inputEmail3"  value="<?php echo e($v->name); ?>">
                       </div>
                     </div>
                    
@@ -47,4 +46,5 @@
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
