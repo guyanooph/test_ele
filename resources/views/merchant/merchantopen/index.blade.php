@@ -57,9 +57,9 @@
 						   <td>{{ $merchantopen->method }}</td>
 						   <td>{{ $merchantopen->money }}</td>
 						   <td>{{ $merchantopen->num }}</td>
-						   <td>@if ($merchantopen->status=="0")营业 @else 男 @endif</td>
-						   <td><a href="/merchantopen/{{ $merchantopen->id }}/edit">编辑</a> 
-                            <a href="javascript:doDel({{ $merchantopen->id }})">删除</a></td>
+						   <td>@if ($merchantopen->state=="0")营业 @else ($merchantopen->state=="1")歇业 @endif</td>
+						   <td><button class="btn btn-xs btn-primary" onclick="window.location='{{ URL('/merchant/merchantopen') }}/{{ $merchantopen->id }}/edit'">编辑</button> 
+                            <button class="btn btn-xs btn-danger" onclick="javascript:doDel({{ $merchantopen->id }})">删除</button></td>
                        </tr>
                    @endforeach
                   </table>
@@ -69,12 +69,12 @@
 
               
               
-            </div><!-- /.col -->
+            </div><!-- /.col onclick="/merchantopen/{{ $merchantopen->id }}/edit"-->
             
           </div><!-- /.row -->
          
         </section><!-- /.content -->
-        <form action="" style="display:none;" id="mydeleteform" method="post">
+        <form action="{{url('merchant/merchantopen')}}" style="display:none;" id="mydeleteform" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="_method" value="DELETE">
         </form>

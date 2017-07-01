@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Merchant;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Merchantopen;
+use App\Models\Order;
 
-class MerchantopenController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class MerchantopenController extends Controller
      */
     public function index(Request $request)
     {
-		$table = merchantopen::all();//查询所有参数
+		$table = order::all();//查询所有数据
 		/* //判断并封装搜索条件
         $params = array();
         if(!empty($_GET['name'])){
@@ -27,7 +27,7 @@ class MerchantopenController extends Controller
         //$list = $table->sortBy("id"); //10条每页浏览
 		//dd($list); */
 		//return "你好！";
-        return view("merchant.merchantopen.index",["table"=>$table]);//加载商家管理
+        return view("merchant.order.index",["table"=>$table]);//加载商家管理
     }
 
     /**
@@ -37,8 +37,8 @@ class MerchantopenController extends Controller
      */
     public function create()
     {
-        //
-		
+		//return "你好！";
+		return view("merchant.order.add");//加载订单添加页面
     }
 
     /**
@@ -49,7 +49,21 @@ class MerchantopenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //执行添加
+        $data = $request->all();//获取要添加的参数
+        unset($data['_token']);//移除_token参数
+		//dd($data);
+        //执行添加
+        $id = \DB::table("order")->insertGetId($data);
+        //判断
+        if($id>0){
+            $add = "订单信息添加成功！";
+        }else{
+            $add = "订单信息添加失败！";
+        }
+        //return "你好！";
+        //return view("merchant.order.index",['add'=>$add]);
+        return redirect("merchant/order")->with("err",$add);
     }
 
     /**
@@ -72,10 +86,7 @@ class MerchantopenController extends Controller
     public function edit($id)
     {
         //加载修改页面
-		//return "你的厚爱！";
-		$table = merchantopen::where("id",$id)->first();
-		
-		return view("merchant.merchantopen.edit",['merchantopen'=>$table]); 
+		//return view("merchant.order.edit"); 
     }
 
     /**
@@ -88,20 +99,7 @@ class MerchantopenController extends Controller
     public function update(Request $request, $id)
     {
         //执行修改
-		$data = $request->all();//获取要添加的参数
-        unset($data['_token']);//移除_token参数
-		/* $this->validate($request, [//执行表单验证
-            'name' => 'required|max:16',
-        ]);
-        $data = $request->only("name","state");
-        $data['updated_at'] = time(); */
-        $table = merchantopen::where("id",$id)->update($data);
-        dd($data);
-        if($table>0){
-            return redirect('merchant/merchantopen');
-        }else{
-            return back()->with("err","修改失败!");
-        }
+		
     }
 
     /**
@@ -113,7 +111,8 @@ class MerchantopenController extends Controller
     public function destroy($id)
     {
         //执行删除
-		\DB::table("merchant_open")->where("id",$id)->delete();
-		return redirect('merchant/merchantopen');
+		\DB::table("order")->where("id",$id)->delete();
+
+        return redirect('merchant/order');
     }
 }

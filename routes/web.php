@@ -17,12 +17,24 @@
 //Route::get('/shop/del/{id}',"Home\CartController@del"); //删除购物车中的某个商品
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
 
+
 Route::get('/login',"Home\LoginController@login"); //加载前台登录界面
 Route::post('/dologin',"Home\LoginController@doLogin"); //执行前台登录
 Route::get('/logout',"Home\LoginController@logout"); //执行退出
 Route::get('/getcode',"Home\LoginController@getCode"); //加载验证码
 
 Route::get('/shoplist','Home\ShopController@list'); //商家信息列表
+
+Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
+//Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
+
+
+Route::get('/personal','Home\PersonalController@index'); //个人中心
+Route::get('/personal/info','Home\PersonalController@personal'); //个人中心/个人资料
+Route::get('/personal/order','Home\PersonalController@order'); //个人中心/个人订单
+Route::get('/personal/assets','Home\PersonalController@assets'); //个人中心/个人资产
+Route::get('/personal/collection','Home\PersonalController@collection'); //个人中心/个人收藏
+
 
 Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
 
@@ -48,32 +60,31 @@ Route::get('/personal/collect','Home\PersonalController@collect'); //个人中�
 
 
 
+
 //后台路由组
 Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 	Route::get("/","Admin\IndexController@index");//后台首页
 	Route::get("root","Admin\RootController@index");//超级管理员
 	Route::resource("role","Admin\RoleController");//角色管理
-	Route::resource("com","Admin\ComController");//普通管理员
-	Route::resource("/node","Admin\NodeController");//节点管理
-	Route::resource("/vip","Admin\VipController");//会员管理
-	Route::resource("/shop","Admin\ShopController");//商家管理
-	Route::resource("/ftype","Admin\FtypeController");//菜品分类管理
+	Route::resource("user","Admin\UserController");//普通管理员
+	Route::resource("node","Admin\NodeController");//节点管理
+	Route::resource("vip","Admin\VipController");//会员管理
+	Route::resource("shop","Admin\ShopController");//商家管理
+	Route::resource("ftype","Admin\FtypeController");//菜品分类管理
 	
 
 	Route::get("/letter","Admin\LetterController@index");//投诉管理
-	Route::get("/stati","Admin\StatiController@index");//建议管理
+	
 	Route::get("/offer","Admin\OfferController@index");//建议管理
-
+    Route::get("/stati","Admin\StatiController@index");//统计管理
 	
 
 });
 
 //加载商家登录界面
-Route::get('/merchant/login',"Merchant\LoginController@login"); 
-Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); 
+ 
 Route::post('/merchant/dologin',"Merchant\LoginController@doLogin"); 
 Route::get('/merchant/logout',"Merchant\LoginController@logout"); 
-
 Route::get('/merchant/login',"Merchant\LoginController@login"); //加载商家登录界面
 Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商家登录界面
 Route::get("merchant/register","Merchant\RegisterController@index");////商家注册页面
@@ -81,7 +92,11 @@ Route::get("merchant/register","Merchant\RegisterController@index");////商家�
 //商家后台管理
 Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
-	Route::resource('/merchantopen', "Merchant\MerchantopenController");//营业信息管理
-	//Route::resource('/merchantopen/index', "Merchant\MerchantopenController/index");
+	Route::resource('merchantopen', "Merchant\MerchantopenController");//营业信息管理
+	//Route::resource('merchantopen/edit', "Merchant\MerchantopenController@edit");//修改营业信息
+	Route::resource('order', "Merchant\OrderController");//订单信息管理
+	//Route::resource('order/add', "Merchant\OrderController\create");//添加订单
+	//Route::resource('order/edit', "Merchant\OrderController\store");//添加订单内容
+	
 	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
 });
