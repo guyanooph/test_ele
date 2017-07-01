@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Food_list extends Model
+class Merchant extends Model
 {
     //
-	protected $table = 'food'; //å…³è”èœå“è¡¨
-	
+	protected $table = 'merchant'; //ÉÌ¼ÒÐÅÏ¢±í
 }
