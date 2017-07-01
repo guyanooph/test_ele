@@ -17,6 +17,9 @@
 //Route::get('/shop/del/{id}',"Home\CartController@del"); //删除购物车中的某个商品
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
 
+Route::get('/register',"Home\RegisterController@index");//用户注册认证
+Route::get('/doregister',"Home\RegisterController@doRegister");//用户登录认证
+
 
 Route::get('/login',"Home\LoginController@login"); //加载前台登录界面
 Route::post('/dologin',"Home\LoginController@doLogin"); //执行前台登录
