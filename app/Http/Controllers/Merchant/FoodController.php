@@ -15,11 +15,12 @@ class FoodController extends Controller
      */
     public function index()
     {
-		$list = \DB::select("select * from food order by concat(shopid,id) asc");
+		//$db = \DB::select("select * from food order by concat(shopid,id) asc");
 		//$db = \DB::table("food");
+		//$list = $db->paginate(5); //5条每页浏览
+       $list = Food::select('id','typeid','shopid','title','picname','descr','price','num','food_rate','norms','stutas','create_time')->orderBy('id', 'desc')->paginate(1);
        
-       //$list = $db->paginate(5); //5条每页浏览
-      
+       
        //遍历当前数据并添加商品类别名称
        foreach($list as $v){
            $name = \DB::table("food_type")->where("id",$v->typeid)->value("title");
@@ -66,13 +67,10 @@ class FoodController extends Controller
             //随机一个新的文件名
             $filename = time().rand(1000,9999).".".$ext;
             //移动上传文件
-            $file->move("./upload/",$filename);
+            $file->move("./upload/merchant/food/",$filename);
             $data['picname'] = $filename;                   
             //return response($filename); //输出
             //exit();
-        }else{
-            //闪存信息
-            return redirect('merchant/food')->with('status', '请选择上传文件!');
         }
         
         //执行添加
@@ -106,7 +104,7 @@ class FoodController extends Controller
      */
     public function edit($id)
     {
-        $type = \DB::table("food_type")->where("id",$id)->first(); //获取要编辑的信息
+        $type = \DB::table("food")->where("id",$id)->first(); //获取要编辑的信息
         return view("merchant.food.edit",["type"=>$type]);
     }
 
@@ -126,7 +124,7 @@ class FoodController extends Controller
         ]);
         $data = $request->only("title");
         //$data['updated_at'] = time();
-        $id = \DB::table("food_type")->where("id",$id)->update($data);
+        $id = \DB::table("food")->where("id",$id)->update($data);
         
         if($id>0){
             return redirect('merchant/foodtype');
