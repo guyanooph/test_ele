@@ -45,7 +45,7 @@
 					  <th>状态</th>
                       <th style="width: 100px">操作</th>
                     </tr>
-                    <?php $__currentLoopData = $table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $merchantopen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $merchantopen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 					   <tr>
 					       <td><?php echo e($merchantopen->id); ?></td>
 						   <td><?php echo e($merchantopen->shopid); ?></td>
@@ -53,7 +53,7 @@
 						   <td><?php echo e($merchantopen->opentime); ?></td>
 						   <td><?php echo e($merchantopen->overtime); ?></td>
 						   <td><?php echo e($merchantopen->givemoney); ?></td>
-						   <td><?php echo e($merchantopen->method); ?></td>
+						   <td><?php if($merchantopen->method=="0"): ?>自营快送 <?php else: ?>蜂鸟快送 <?php endif; ?></td>
 						   <td><?php echo e($merchantopen->money); ?></td>
 						   <td><?php echo e($merchantopen->num); ?></td>
 						   <td><?php if($merchantopen->state=="0"): ?>营业 <?php else: ?>歇业 <?php endif; ?></td>
@@ -66,7 +66,7 @@
                
               </div><!-- /.box -->
 
-              
+             
               
             </div><!-- /.col onclick="/merchantopen/<?php echo e($merchantopen->id); ?>/edit"-->
             
