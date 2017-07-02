@@ -122,12 +122,11 @@ Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 	Route::get("/letter","Admin\LetterController@index");//投诉管理
 	
 	Route::get("/offer","Admin\OfferController@index");//建议管理
-<<<<<<< HEAD
 
 	Route::get("/stati","Admin\StatiController@index");//统计管理
-=======
+
     Route::get("/stati","Admin\StatiController@index");//统计管理
->>>>>>> 57980c748126d122e0bf3ca51cc36d4c1a602389
+
 	
 
 });

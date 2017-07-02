@@ -301,8 +301,7 @@
 					</div>
 				</div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主导航</li>
@@ -378,9 +377,7 @@
         </section>
         <!-- /.sidebar -->
       </aside>
-=======
-=======
->>>>>>> 57980c748126d122e0bf3ca51cc36d4c1a602389
+
 			  <!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">主导航</li>
