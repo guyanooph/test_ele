@@ -59,12 +59,9 @@
 	<script>window.location.href = 'https://h.ele.me/activities/landing';</script><![endif]-->
 
 	<script src="//crayfish.elemecdn.com/www.ele.me@ref/api" data-ref="API_CONFIG"></script>
-<<<<<<< HEAD
-=======
 	<script src="jjs/perf.js" type="text/javascript" crossorigin="anonymous"></script>
 	<script src="jjs/vendor.3b50a2.js" type="text/javascript" crossorigin="anonymous"></script>
 	<script src="jjs/home.b48686.js" type="text/javascript" crossorigin="anonymous"></script>
->>>>>>> 19baee58d8caecc409d1d496bf8588d392d14304
 	<script src="{{asset('js/jquery-1.8.3.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 	<base href="/home/">
 	<meta name="mobile-agent" content="undefined">

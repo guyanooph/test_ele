@@ -59,9 +59,12 @@
 	<script>window.location.href = 'https://h.ele.me/activities/landing';</script><![endif]-->
 
 	<script src="//crayfish.elemecdn.com/www.ele.me@ref/api" data-ref="API_CONFIG"></script>
+<<<<<<< HEAD
+=======
 	<script src="jjs/perf.js" type="text/javascript" crossorigin="anonymous"></script>
 	<script src="jjs/vendor.3b50a2.js" type="text/javascript" crossorigin="anonymous"></script>
 	<script src="jjs/home.b48686.js" type="text/javascript" crossorigin="anonymous"></script>
+>>>>>>> 19baee58d8caecc409d1d496bf8588d392d14304
 	<script src="<?php echo e(asset('js/jquery-1.8.3.min.js')); ?>" type="text/javascript" crossorigin="anonymous"></script>
 	<base href="/home/">
 	<meta name="mobile-agent" content="undefined">
@@ -82,12 +85,11 @@
 				<h2 class="map-logo"><img src="//faas.elemecdn.com/desktop/media/img/map-logo-center.4eb348.png"
 				                          alt="eleme"></h2>
 				<div class="map-navbar clearfix hasuserinfo" ng-class="{hasuserinfo: $root.user.user_id}">
-					<div map-city="" hide-search-result="hideSearchResult" current-city="currentCity"
+					<div id="mapCityToggle" map-city="" hide-search-result="hideSearchResult" current-city="currentCity"
 					     class="map-city ng-isolate-scope" map-mode="mapMode">
 						<a class="mapcity-current ng-binding" href="javascript:" ng-bind="mapCity.current.name"
 						   ng-click="mapCity.toggle($event)">安溪</a>
 						<!-- ngIf: mapCity.showCities -->
-						
 						<!-- end ngIf: mapCity.showCities -->
 					</div>
 					<div map-search="" hide-search-result="hideSearchResult" current-city="currentCity"
