@@ -306,36 +306,9 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主导航</li>
-               
-                <li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i><span>超级管理员</span><i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('merchant/root')}}"><i class="fa fa-youtube-play"></i> 管理员资料</a></li>
-              </ul>
-            </li>
-            <li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i><span>权限管理</span><i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('merchant/com')}}"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
-                <li class="active"><a href="{{URL('merchant/role')}}"><i class="fa fa-youtube-play"></i> 角色管理</a></li>
-                <li class="active"><a href="{{URL('merchant/node')}}"><i class="fa fa-youtube-play"></i> 节点管理</a></li>
-              </ul>
-            </li>
-            
+               		
 			
-			
-			
-			
-            <li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i> <span> 营业信息管理</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/merchantopen')}}"><i class="fa fa-circle-o"></i>查看营业信息</a></li>   
+
             <li class="active treeview">
               <a href="#">
                 <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
@@ -347,7 +320,13 @@
               </ul>
             </li>
             
-			
+			<li class="active treeview">
+              <a href="#">
+                <i class="fa fa-gittip"></i> <span> 营业信息管理</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="{{url('merchant/merchantopen')}}"><i class="fa fa-circle-o"></i>查看营业信息</a></li> </ul>  
+			</li>
 			
 			
 			
@@ -356,8 +335,6 @@
                 <i class="fa fa-gittip"></i> <span>菜单管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href=""><i class="fa fa-circle-o"></i> 待审核商家</a></li>
-                <li><a href="{{url('merchant/shop')}}"><i class="fa fa-circle-o"></i> 普通商家</a></li>
                 <li class="active"><a href="{{url('merchant/foodtype')}}"><i class="fa fa-circle-o"></i> 菜单种类</a></li>
                 <li><a href="{{url('merchant/food')}}"><i class="fa fa-circle-o"></i> 菜单浏览</a></li>
               </ul>
@@ -365,7 +342,7 @@
             
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-bomb"></i> <span> 菜品分类管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-bomb"></i> <span>订单</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('merchant/ftype')}}"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>

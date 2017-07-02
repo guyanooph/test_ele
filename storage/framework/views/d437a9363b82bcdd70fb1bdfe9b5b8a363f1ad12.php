@@ -322,6 +322,7 @@
             position: absolute;
         }</style>
     <meta charset="utf-8">
+    <meta name="_token" content="<?php echo e(csrf_token()); ?>"/>
     <title>吃货-开店申请</title>
     <meta name="description" content="吃货-开店申请">
     <meta id="viewport" name="viewport"
@@ -330,6 +331,7 @@
     <base href="/">
     <link href="<?php echo e(asset('css/app.73972d6.css')); ?>" rel="stylesheet" type="text/css">
     <link href="<?php echo e(asset('css/app.feb75eb.css')); ?>" rel="stylesheet" type="text/css">
+    
     <style type="text/css">.fancybox-margin {
             margin-right: 17px;
         }</style>
@@ -339,19 +341,30 @@
 
         .amap-drag {
             cursor: url(https://webapi.amap.com/theme/v1.3/closedhand.cur), default;
-        }</style>
+        }
+    </style>
+    <script src="<?php echo e(asset('js/jquery-3.2.1.js')); ?>"></script>
+
 </head>
+
 <body ng-app="nevermore" class="ng-scope">
 <!-- uiView: -->
 <ui-view autoscroll="true" class="ng-scope">
     <header class="row ng-scope ng-isolate-scope" show-user="false">
         <div> <!-- ngIf: showUser -->
-            <!-- ngIf: !showUser --><a ui-sref="home" class="title ng-scope" ng-if="!showUser" href="/">
-                <span>吃货商户中心</span> </a><!-- end ngIf: !showUser -->
-            <a class="notification-link" ng-click="openNotification()">点击查看《廉正告知书》</a> <!-- ngIf: showUser -->
             <!-- ngIf: !showUser -->
-            <div class="pull-right tips ng-scope" ng-if="!showUser"><span>如开店过程遇到问题，可以拨打客服电话：021-80203777</span></div>
-            <!-- end ngIf: !showUser --> </div>
+            <a ui-sref="home" class="title ng-scope" ng-if="!showUser" href="/">
+                <span>吃货商户中心</span>
+            </a><!-- end ngIf: !showUser -->
+            <a class="notification-link" ng-click="openNotification()">
+                点击查看《廉正告知书》
+            </a> <!-- ngIf: showUser -->
+            <!-- ngIf: !showUser -->
+            <div class="pull-right tips ng-scope" ng-if="!showUser">
+                <span>如开店过程遇到问题，可以拨打客服电话：021-80203777</span>
+            </div>
+            <!-- end ngIf: !showUser -->
+        </div>
     </header>
     <div class="steps ng-scope ng-isolate-scope" index="step" isrequireactivity="isRequireActivity">
         <ul> <!-- ngRepeat: step in steps -->
@@ -396,1846 +409,637 @@
                 活动信息
             </li><!-- end ngRepeat: step in steps --> </ul>
     </div> <!-- uiView: -->
+
+
     <div class="main-container ng-scope" ui-view="" autoscroll="true">
         <div class="store-info step-container ng-scope">
-            <form name="storeForm" id="storeFormID" novalidate=""
-                  class="store-form form-horizontal ng-invalid ng-invalid-require ng-invalid-required ng-valid-maxlength ng-valid-pattern ng-valid-door-pic-input ng-valid-store-pic-input ng-submitted ng-dirty ng-valid-parse"
-                  style="">
-                <div class="form-group"><span id="mobile" class="ng-binding"> 门店绑定手机号：188-5145-7819 </span></div>
-                <div class="form-group flex"><label for="store-name" class="control-label"> <b class="required">*</b>
-                        门店名称 </label>
-                    <div class="control-content"><input type="text" name="storeName"
-                                                        class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-touched"
-                                                        id="store-name" ng-model="form.store_name" maxlength="80"
-                                                        required="" style="">
-                        <small class="red"
-                               ng-show="storeForm.storeName.$invalid &amp;&amp; (storeForm.storeName.$dirty || storeForm.$submitted)"
-                               style=""> 门店名称不能为空
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group flex"><label for="store-name" class="control-label"> <b class="required">*</b>
-                        外卖电话 </label>
-                    <div class="control-content"><input type="text" name="extPhone"
-                                                        class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-pattern ng-touched"
-                                                        id="ext-phone" ng-model="form.ext_phone"
-                                                        ng-pattern="/^\d+(-\d+)?$/" required="" style="">
-                        <small class="red"
-                               ng-show="storeForm.extPhone.$error.required &amp;&amp; (storeForm.extPhone.$dirty || storeForm.$submitted)"
-                               style=""> 外卖电话不能为空
-                        </small>
-                        <small class="red ng-hide"
-                               ng-show="storeForm.extPhone.$error.pattern &amp;&amp; (storeForm.extPhone.$dirty || storeForm.$submitted)">
-                            外卖电话只能出现数字和-
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group flex"><label for="contact-name" class="control-label"> <b class="required">*</b>
-                        联系人姓名 </label>
-                    <div class="control-content"><input type="text" name="contactName"
-                                                        class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-touched"
-                                                        id="contact-name" ng-model="form.contact_name" maxlength="80"
-                                                        required="" style="">
-                        <small class="red"
-                               ng-show="storeForm.contactName.$invalid &amp;&amp; (storeForm.contactName.$dirty || storeForm.$submitted)"
-                               style=""> 联系人姓名不能为空
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group flex"><label class="control-label"> <b class="required">*</b>
-                        门店分类 </label>
+            <form name="storeForm" id="storeFormID" novalidate="" action="<?php echo e(url('merchant/register')); ?>" method="post"
+                  enctype = "multipart/form-data" class="store-form form-horizontal ng-invalid ng-invalid-require ng-invalid-required ng-valid-maxlength ng-valid-pattern ng-valid-door-pic-input ng-valid-store-pic-input ng-submitted ng-dirty ng-valid-parse"
+                  style="" onsubmit="return doSubmit()">
+                <?php echo e(csrf_field()); ?>
+
+                <div class="form-group flex">
+                    <label for="store-name" class="control-label"> <b class="required">*</b>
+                        账号 </label>
                     <div class="control-content">
-                        <div id="categories">
-                            <div id="nevSelect" class="need-validate ng-isolate-scope ng-invalid-require ng-not-empty"
-                                 name="categories" items="categories" ng-model="form.store_classification_list"
-                                 selected-items="form.store_classification_list">
-                                <ul class="select-choices" ng-click="toggleContent()">
-                                    <li class="tips" ng-show="!selectedItems.length">最多2个</li>
-                                    <!-- ngRepeat: item in selectedItems track by $index -->
-                                    <li class="icon"><i class="caret" ng-class="{'rotate': showContent}" style=""></i>
-                                    </li>
-                                </ul>
-                                <div class="select-content ng-hide" ng-show="showContent" style="">
-                                    <!-- ngRepeat: item in items -->
-                                    <div ng-repeat="item in items" class="clearfix ng-scope"><span
-                                                class="select-nav ng-binding">快餐便当</span>
-                                        <div class="select-sub-content">
-                                            <!-- ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">盖浇饭</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">汉堡</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">米粉面馆</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">麻辣烫</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">包子粥店</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">生煎锅贴</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">饺子馄饨</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">香锅砂锅</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">简餐</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">烧腊饭</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">黄焖鸡米饭</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">咖喱饭</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">煲仔饭</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --> </div>
-                                    </div><!-- end ngRepeat: item in items -->
-                                    <div ng-repeat="item in items" class="clearfix ng-scope"><span
-                                                class="select-nav ng-binding">特色菜系</span>
-                                        <div class="select-sub-content">
-                                            <!-- ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">川湘菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">粤菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">东北菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">云南菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">江浙菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">西北菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">鲁菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">新疆菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">火锅烤鱼</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">海鲜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">其他菜系</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --> </div>
-                                    </div><!-- end ngRepeat: item in items -->
-                                    <div ng-repeat="item in items" class="clearfix ng-scope"><span
-                                                class="select-nav ng-binding">小吃夜宵</span>
-                                        <div class="select-sub-content">
-                                            <!-- ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">烧烤</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">炸鸡炸串</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">鸭脖卤味</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">小龙虾</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">地方小吃</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">零食</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --> </div>
-                                    </div><!-- end ngRepeat: item in items -->
-                                    <div ng-repeat="item in items" class="clearfix ng-scope"><span
-                                                class="select-nav ng-binding">甜品饮品</span>
-                                        <div class="select-sub-content">
-                                            <!-- ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">奶茶果汁</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">甜品</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">咖啡</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --> </div>
-                                    </div><!-- end ngRepeat: item in items -->
-                                    <div ng-repeat="item in items" class="clearfix ng-scope"><span
-                                                class="select-nav ng-binding">果蔬生鲜</span>
-                                        <div class="select-sub-content">
-                                            <!-- ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">水果</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">蔬菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">生鲜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">海鲜水产</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --> </div>
-                                    </div><!-- end ngRepeat: item in items -->
-                                    <div ng-repeat="item in items" class="clearfix ng-scope"><span
-                                                class="select-nav ng-binding">鲜花蛋糕</span>
-                                        <div class="select-sub-content">
-                                            <!-- ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">蛋糕</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">面包</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">鲜花</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --> </div>
-                                    </div><!-- end ngRepeat: item in items -->
-                                    <div ng-repeat="item in items" class="clearfix ng-scope"><span
-                                                class="select-nav ng-binding">商店超市</span>
-                                        <div class="select-sub-content">
-                                            <!-- ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">超市</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">水站</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">奶站</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">粮油</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">茶</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">便利店</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">美妆母婴</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">零食饮料</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">名酒坊</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --> </div>
-                                    </div><!-- end ngRepeat: item in items -->
-                                    <div ng-repeat="item in items" class="clearfix ng-scope"><span
-                                                class="select-nav ng-binding">异国料理</span>
-                                        <div class="select-sub-content">
-                                            <!-- ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">披萨意面</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">日韩料理</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">西餐</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --><label
-                                                    ng-repeat="sons in item.sons track by $id(sons)"
-                                                    ng-class="{'active': sons.checked}" class="ng-scope"> <input
-                                                        type="checkbox" style="display:none" ng-model="sons.checked"
-                                                        ng-change="onCheckChange(sons)"
-                                                        class="ng-pristine ng-untouched ng-valid ng-empty">
-                                                <span class="item-label ng-binding">东南亚菜</span> </label>
-                                            <!-- end ngRepeat: sons in item.sons track by $id(sons) --> </div>
-                                    </div><!-- end ngRepeat: item in items --> </div>
-                            </div>
-                            <small class="red"
-                                   ng-show="storeForm.categories.$invalid &amp;&amp; (storeForm.categories.$dirty || storeForm.$submitted)"
-                                   style=""> 门店分类不能为空
-                            </small>
-                        </div>
+                        <input type="text" onblur="checkMername()" name="mername"/>
+
+                        <small class="control-label">
+                            <div id="div_mername"></div>
+                        </small>
+
                     </div>
                 </div>
-                <div class="form-group flex"><label class="control-label"> <b class="required">*</b>
-                        营业时间 </label>
+                <div class="form-group flex">
+                    <label for="store-name" class="control-label"> <b class="required">*</b>
+                        密码 </label>
                     <div class="control-content">
-                        <div class="open-period-directive ng-isolate-scope" value="form.open_period"
-                             locked="uiNeedLock">
-                            <div class="day-panel"><label class="title">营业日期</label><!-- ngRepeat: day in days --><label
-                                        ng-repeat="day in days" class="ng-binding ng-scope"> <input type="checkbox"
-                                                                                                    ng-model="day.selected"
-                                                                                                    ng-click="select()"
-                                                                                                    class="ng-pristine ng-untouched ng-valid ng-empty">
-                                    周一 </label><!-- end ngRepeat: day in days --><label ng-repeat="day in days"
-                                                                                        class="ng-binding ng-scope">
-                                    <input type="checkbox" ng-model="day.selected" ng-click="select()"
-                                           class="ng-pristine ng-untouched ng-valid ng-empty"> 周二 </label>
-                                <!-- end ngRepeat: day in days --><label ng-repeat="day in days"
-                                                                         class="ng-binding ng-scope"> <input
-                                            type="checkbox" ng-model="day.selected" ng-click="select()"
-                                            class="ng-pristine ng-untouched ng-valid ng-empty"> 周三 </label>
-                                <!-- end ngRepeat: day in days --><label ng-repeat="day in days"
-                                                                         class="ng-binding ng-scope"> <input
-                                            type="checkbox" ng-model="day.selected" ng-click="select()"
-                                            class="ng-pristine ng-untouched ng-valid ng-empty"> 周四 </label>
-                                <!-- end ngRepeat: day in days --><label ng-repeat="day in days"
-                                                                         class="ng-binding ng-scope"> <input
-                                            type="checkbox" ng-model="day.selected" ng-click="select()"
-                                            class="ng-pristine ng-untouched ng-valid ng-empty"> 周五 </label>
-                                <!-- end ngRepeat: day in days --><label ng-repeat="day in days"
-                                                                         class="ng-binding ng-scope"> <input
-                                            type="checkbox" ng-model="day.selected" ng-click="select()"
-                                            class="ng-pristine ng-untouched ng-valid ng-empty"> 周六 </label>
-                                <!-- end ngRepeat: day in days --><label ng-repeat="day in days"
-                                                                         class="ng-binding ng-scope"> <input
-                                            type="checkbox" ng-model="day.selected" ng-click="select()"
-                                            class="ng-pristine ng-untouched ng-valid ng-empty"> 周日 </label>
-                                <!-- end ngRepeat: day in days --> </div>
-                            <div class="time-panel"> <!-- ngIf: --> <label class="padding-left-0"> <input type="radio"
-                                                                                                          name="openTime"
-                                                                                                          value="full"
-                                                                                                          ng-model="openTime.type"
-                                                                                                          ng-change="changeType()"
-                                                                                                          ng-disabled="locked"
-                                                                                                          class="ng-valid ng-not-empty ng-dirty ng-touched"
-                                                                                                          style=""> 24小时
-                                </label> <label> <input type="radio" name="openTime" value="part"
-                                                        ng-model="openTime.type" ng-change="changeType()"
-                                                        ng-disabled="locked"
-                                                        class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched"
-                                                        style=""> 自定义 </label>
-                                <div class="part-content" ng-show="openTime.type === 'part'" style="">
-                                    <!-- ngRepeat: time in openTime.partTime -->
-                                    <div class="other-time ng-scope" ng-repeat="time in openTime.partTime"
-                                         id="other-time-0"><input type="text" class="form-control input-sm"
-                                                                  placeholder="其他时段"
-                                                                  ng-click="showSelector(time, $index)"
-                                                                  ng-value="time._open.hour + ':' + time._open.minute + ' - ' + time._close.hour + ':' + time._close.minute"
-                                                                  ng-keydown="cancelInput($event)"
-                                                                  value="10:00 - 22:00">
-                                        <i class="icon-clock"></i>
-                                        <div class="selector ng-hide" ng-show="time.selectorIsVisible" style="">
-                                            <div class="title">开始时间</div>
-                                            <div class="title">结束时间</div>
-                                            <div class="scroll-box">
-                                                <ul> <!-- ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">00</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">01</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">02</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">03</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">04</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">05</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">06</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">07</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">08</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">09</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding active">10</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">11</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">12</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">13</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">14</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">15</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">16</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">17</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">18</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">19</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">20</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding">21</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding disabled">22</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._open.hour === h,
-              'disabled': time._close.hour < h ||
-              (time._close.minute <= time._open.minute &amp;&amp; time._close.hour === h) }"
-                                                                                                   ng-click="scrollToItem(0, h, time)"
-                                                                                                   class="ng-binding disabled">23</a>
-                                                    </li><!-- end ngRepeat: h in hours --> </ul>
-                                            </div>
-                                            <div class="scroll-box">
-                                                <ul> <!-- ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding active">00</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">01</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">02</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">03</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">04</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">05</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">06</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">07</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">08</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">09</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">10</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">11</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">12</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">13</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">14</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">15</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">16</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">17</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">18</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">19</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">20</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">21</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">22</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">23</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">24</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">25</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">26</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">27</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">28</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">29</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">30</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">31</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">32</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">33</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">34</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">35</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">36</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">37</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">38</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">39</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">40</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">41</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">42</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">43</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">44</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">45</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">46</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">47</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">48</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">49</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">50</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">51</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">52</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">53</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">54</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">55</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">56</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">57</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">58</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._open.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._close.minute <= m }" ng-click="scrollToItem(1, m, time)" class="ng-binding">59</a></li>
-                                                    <!-- end ngRepeat: m in minutes --> </ul>
-                                            </div>
-                                            <div class="scroll-box">
-                                                <ul> <!-- ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">00</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">01</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">02</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">03</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">04</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">05</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">06</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">07</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">08</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">09</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding disabled">10</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">11</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">12</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">13</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">14</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">15</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">16</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">17</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">18</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">19</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">20</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">21</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding active">22</a>
-                                                    </li><!-- end ngRepeat: h in hours -->
-                                                    <li ng-repeat="h in hours" class="ng-scope"><a href="" ng-class="{ 'active': time._close.hour === h,
-              'disabled': time._open.hour > h ||
-              (time._open.minute >= time._close.minute &amp;&amp; time._open.hour === h) }"
-                                                                                                   ng-click="scrollToItem(2, h, time)"
-                                                                                                   class="ng-binding">23</a>
-                                                    </li><!-- end ngRepeat: h in hours --> </ul>
-                                            </div>
-                                            <div class="scroll-box">
-                                                <ul> <!-- ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding active">00</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">01</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">02</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">03</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">04</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">05</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">06</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">07</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">08</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">09</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">10</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">11</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">12</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">13</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">14</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">15</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">16</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">17</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">18</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">19</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">20</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">21</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">22</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">23</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">24</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">25</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">26</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">27</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">28</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">29</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">30</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">31</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">32</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">33</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">34</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">35</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">36</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">37</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">38</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">39</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">40</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">41</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">42</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">43</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">44</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">45</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">46</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">47</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">48</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">49</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">50</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">51</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">52</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">53</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">54</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">55</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">56</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">57</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">58</a></li>
-                                                    <!-- end ngRepeat: m in minutes -->
-                                                    <li ng-repeat="m in minutes" class="ng-scope"><a href="" ng-class="{ 'active': time._close.minute === m,
-              'disabled': time._open.hour === time._close.hour &amp;&amp;
-              time._open.minute >= m }" ng-click="scrollToItem(3, m, time)" class="ng-binding">59</a></li>
-                                                    <!-- end ngRepeat: m in minutes --> </ul>
-                                            </div>
-                                        </div> <!-- ngIf: openTime.partTime.length > 1 --> </div>
-                                    <!-- end ngRepeat: time in openTime.partTime -->
-                                    <!-- ngIf: openTime.partTime.length < 3 --><a class="add ng-scope" href=""
-                                                                                  ng-click="addItem()"
-                                                                                  ng-if="openTime.partTime.length < 3">新增</a>
-                                    <!-- end ngIf: openTime.partTime.length < 3 --></div>
-                            </div>
-                        </div>
-                        <small class="red ng-hide"
-                               ng-show="methods.checkOpenTimeInvalid() &amp;&amp; storeForm.openTimeIsEmpty &amp;&amp; storeForm.$submitted">
-                            营业时间不能为空
-                        </small>
-                        <small class="red ng-hide"
-                               ng-show="methods.checkOpenTimeInvalid() &amp;&amp; storeForm.openTimeIsIncomplete &amp;&amp; storeForm.$submitted">
-                            自定义时间填写不完整
-                        </small>
-                        <small class="red ng-binding ng-hide"
-                               ng-show="methods.checkOpenTimeInvalid() &amp;&amp; storeForm.openTimeTooShort &amp;&amp; storeForm.$submitted">
-                            营业总时长不能少于小时，请重新填写
-                        </small>
-                        <small class="red ng-binding ng-hide"
-                               ng-show="methods.checkOpenTimeInvalid() &amp;&amp; storeForm.openPeakHourTooShort &amp;&amp; storeForm.$submitted">
-                            高峰时段总时长不能少于小时，请重新填写
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group flex"><label class="control-label"> <b class="required">*</b>
-                        城市 </label>
-                    <div class="control-content city-group"><span> <div
-                                    class="city-select ui-select-container ui-select-bootstrap dropdown ng-touched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required"
-                                    ng-class="{open: $select.open}" name="province"
-                                    ng-model="form.pcd_region.province_id"
-                                    ng-change="methods.provinceChange($select.selected)" style=""><div
-                                        class="ui-select-match ng-scope"
-                                        ng-hide="$select.open &amp;&amp; $select.searchEnabled"
-                                        ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}"
-                                        placeholder="-省-" style=""><span tabindex="-1"
-                                                                         class="btn btn-default form-control ui-select-toggle"
-                                                                         aria-label="Select box activate"
-                                                                         ng-disabled="$select.disabled"
-                                                                         ng-click="$select.activate()"
-                                                                         style="outline: 0;"><span
-                                                ng-show="$select.isEmpty()"
-                                                class="ui-select-placeholder text-muted ng-binding ng-hide"
-                                                style="">-省-</span> <span ng-hide="$select.isEmpty()"
-                                                                          class="ui-select-match-text pull-left"
-                                                                          ng-class="{'ui-select-allow-clear': $select.allowClear &amp;&amp; !$select.isEmpty()}"
-                                                                          ng-transclude="" style=""><span
-                                                    class="ng-binding ng-scope">北京市</span></span> <i
-                                                class="caret pull-right" ng-click="$select.toggle($event)"></i> <a
-                                                ng-show="$select.allowClear &amp;&amp; !$select.isEmpty() &amp;&amp; ($select.disabled !== true)"
-                                                aria-label="Select box clear" style="margin-right: 10px"
-                                                ng-click="$select.clear($event)"
-                                                class="btn btn-xs btn-link pull-right ng-hide"><i
-                                                    class="glyphicon glyphicon-remove"
-                                                    aria-hidden="true"></i></a></span></div><input type="search"
-                                                                                                   autocomplete="off"
-                                                                                                   tabindex="-1"
-                                                                                                   aria-expanded="true"
-                                                                                                   aria-label="Select box"
-                                                                                                   aria-owns="ui-select-choices-0"
-                                                                                                   aria-activedescendant="ui-select-choices-row-0-2"
-                                                                                                   class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched ng-hide"
-                                                                                                   placeholder="-省-"
-                                                                                                   ng-model="$select.search"
-                                                                                                   ng-show="$select.searchEnabled &amp;&amp; $select.open"
-                                                                                                   style="width: 10px;"><ul
-                                        class="ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope ng-hide"
-                                        role="listbox" ng-show="$select.open &amp;&amp; $select.items.length > 0"
-                                        repeat="item.id as item in data.provinces | filter: { name: $select.search }"
-                                        style="opacity: 0;"><li class="ui-select-choices-group"
-                                                                id="ui-select-choices-0"><div class="divider ng-hide"
-                                                                                              ng-show="$select.isGrouped &amp;&amp; $index > 0"></div><div
-                                                ng-show="$select.isGrouped"
-                                                class="ui-select-choices-group-label dropdown-header ng-binding ng-hide"
-                                                ng-bind="$group.name"></div><!-- ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open -->
-                                        <!-- end ngRepeat: item in $select.items --></li></ul><div
-                                        class="ui-select-no-choice"></div><ui-select-single></ui-select-single><input
-                                        ng-disabled="$select.disabled"
-                                        class="ui-select-focusser ui-select-offscreen ng-scope" type="text"
-                                        id="focusser-0" aria-label="Select box focus" aria-haspopup="true"
-                                        role="button"></div> <small class="red ng-hide"
-                                                                    ng-show="storeForm.province.$invalid &amp;&amp; (storeForm.province.$dirty || storeForm.$submitted)"
-                                                                    style=""> 省份不能为空 </small> </span>
-                        <span> <div class="city-select ui-select-container ui-select-bootstrap dropdown ng-touched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required"
-                                    ng-class="{open: $select.open}" name="city" ng-model="form.pcd_region.city_id"
-                                    ng-change="methods.cityChange($select.selected)" style=""><div
-                                        class="ui-select-match ng-scope"
-                                        ng-hide="$select.open &amp;&amp; $select.searchEnabled"
-                                        ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}"
-                                        placeholder="-市-" style=""><span tabindex="-1"
-                                                                         class="btn btn-default form-control ui-select-toggle"
-                                                                         aria-label="Select box activate"
-                                                                         ng-disabled="$select.disabled"
-                                                                         ng-click="$select.activate()"
-                                                                         style="outline: 0;"><span
-                                                ng-show="$select.isEmpty()"
-                                                class="ui-select-placeholder text-muted ng-binding ng-hide"
-                                                style="">-市-</span> <span ng-hide="$select.isEmpty()"
-                                                                          class="ui-select-match-text pull-left"
-                                                                          ng-class="{'ui-select-allow-clear': $select.allowClear &amp;&amp; !$select.isEmpty()}"
-                                                                          ng-transclude="" style=""><span
-                                                    class="ng-binding ng-scope">北京市</span></span> <i
-                                                class="caret pull-right" ng-click="$select.toggle($event)"></i> <a
-                                                ng-show="$select.allowClear &amp;&amp; !$select.isEmpty() &amp;&amp; ($select.disabled !== true)"
-                                                aria-label="Select box clear" style="margin-right: 10px"
-                                                ng-click="$select.clear($event)"
-                                                class="btn btn-xs btn-link pull-right ng-hide"><i
-                                                    class="glyphicon glyphicon-remove"
-                                                    aria-hidden="true"></i></a></span></div><input type="search"
-                                                                                                   autocomplete="off"
-                                                                                                   tabindex="-1"
-                                                                                                   aria-expanded="true"
-                                                                                                   aria-label="Select box"
-                                                                                                   aria-owns="ui-select-choices-1"
-                                                                                                   aria-activedescendant="ui-select-choices-row-1-0"
-                                                                                                   class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched ng-hide"
-                                                                                                   placeholder="-市-"
-                                                                                                   ng-model="$select.search"
-                                                                                                   ng-show="$select.searchEnabled &amp;&amp; $select.open"
-                                                                                                   style="width: 10px;"><ul
-                                        class="ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope ng-hide"
-                                        role="listbox" ng-show="$select.open &amp;&amp; $select.items.length > 0"
-                                        repeat="item.id as item in data.cities | filter: { name: $select.search }"
-                                        style="opacity: 0;"><li class="ui-select-choices-group"
-                                                                id="ui-select-choices-1"><div class="divider ng-hide"
-                                                                                              ng-show="$select.isGrouped &amp;&amp; $index > 0"></div><div
-                                                ng-show="$select.isGrouped"
-                                                class="ui-select-choices-group-label dropdown-header ng-binding ng-hide"
-                                                ng-bind="$group.name"></div><!-- ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open -->
-                                        <!-- end ngRepeat: item in $select.items --></li></ul><div
-                                        class="ui-select-no-choice"></div><ui-select-single></ui-select-single><input
-                                        ng-disabled="$select.disabled"
-                                        class="ui-select-focusser ui-select-offscreen ng-scope" type="text"
-                                        id="focusser-1" aria-label="Select box focus" aria-haspopup="true"
-                                        role="button"></div> <small class="red ng-hide"
-                                                                    ng-show="storeForm.city.$invalid &amp;&amp; (storeForm.city.$dirty || storeForm.$submitted)"
-                                                                    style=""> 城市不能为空 </small> </span>
-                        <span> <div class="city-select ui-select-container ui-select-bootstrap dropdown ng-touched ng-not-empty ng-valid ng-valid-required"
-                                    ng-class="{open: $select.open}" name="district"
-                                    ng-model="form.pcd_region.district_id"
-                                    ng-change="methods.districtChange($select.selected)" style=""><div
-                                        class="ui-select-match ng-scope"
-                                        ng-hide="$select.open &amp;&amp; $select.searchEnabled"
-                                        ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}"
-                                        placeholder="-区/县-" style=""><span tabindex="-1"
-                                                                           class="btn btn-default form-control ui-select-toggle"
-                                                                           aria-label="Select box activate"
-                                                                           ng-disabled="$select.disabled"
-                                                                           ng-click="$select.activate()"
-                                                                           style="outline: 0;"><span
-                                                ng-show="$select.isEmpty()"
-                                                class="ui-select-placeholder text-muted ng-binding ng-hide" style="">-区/县-</span> <span
-                                                ng-hide="$select.isEmpty()" class="ui-select-match-text pull-left"
-                                                ng-class="{'ui-select-allow-clear': $select.allowClear &amp;&amp; !$select.isEmpty()}"
-                                                ng-transclude="" style=""><span
-                                                    class="ng-binding ng-scope">昌平区</span></span> <i
-                                                class="caret pull-right" ng-click="$select.toggle($event)"></i> <a
-                                                ng-show="$select.allowClear &amp;&amp; !$select.isEmpty() &amp;&amp; ($select.disabled !== true)"
-                                                aria-label="Select box clear" style="margin-right: 10px"
-                                                ng-click="$select.clear($event)"
-                                                class="btn btn-xs btn-link pull-right ng-hide"><i
-                                                    class="glyphicon glyphicon-remove"
-                                                    aria-hidden="true"></i></a></span></div><input type="search"
-                                                                                                   autocomplete="off"
-                                                                                                   tabindex="-1"
-                                                                                                   aria-expanded="true"
-                                                                                                   aria-label="Select box"
-                                                                                                   aria-owns="ui-select-choices-2"
-                                                                                                   aria-activedescendant="ui-select-choices-row-2-0"
-                                                                                                   class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched ng-hide"
-                                                                                                   placeholder="-区/县-"
-                                                                                                   ng-model="$select.search"
-                                                                                                   ng-show="$select.searchEnabled &amp;&amp; $select.open"
-                                                                                                   style="width: 10px;"><ul
-                                        class="ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope ng-hide"
-                                        role="listbox" ng-show="$select.open &amp;&amp; $select.items.length > 0"
-                                        repeat="item.id as item in data.districts | filter: { name: $select.search }"
-                                        style="opacity: 0;"><li class="ui-select-choices-group"
-                                                                id="ui-select-choices-2"><div class="divider ng-hide"
-                                                                                              ng-show="$select.isGrouped &amp;&amp; $index > 0"></div><div
-                                                ng-show="$select.isGrouped"
-                                                class="ui-select-choices-group-label dropdown-header ng-binding ng-hide"
-                                                ng-bind="$group.name"></div><!-- ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
-                                        <!-- ngIf: $select.open -->
-                                        <!-- end ngRepeat: item in $select.items --></li></ul><div
-                                        class="ui-select-no-choice"></div><ui-select-single></ui-select-single><input
-                                        ng-disabled="$select.disabled"
-                                        class="ui-select-focusser ui-select-offscreen ng-scope" type="text"
-                                        id="focusser-2" aria-label="Select box focus" aria-haspopup="true"
-                                        role="button"></div> <small class="red ng-hide"
-                                                                    ng-show="storeForm.district.$invalid &amp;&amp; (storeForm.district.$dirty || storeForm.$submitted)"
-                                                                    style=""> 区/县不能为空 </small> </span></div>
-                </div>
-                <div class="form-group flex"><label class="control-label"> <b class="required">*</b>
-                        详细地址 </label>
-                    <div class="form-inline"><input type="text" name="address"
-                                                    class="form-control address-detail mr-10 ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-touched"
-                                                    ng-model="form.address_info.address" placeholder="详细至门牌号，请与执照地址一致"
-                                                    maxlength="255" required="" style="">
-                        <button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位
-                        </button>
-                        <br>
-                        <small class="red"
-                               ng-show="storeForm.address.$invalid &amp;&amp; (storeForm.address.$dirty || storeForm.$submitted || storeForm.address._searched)"
-                               style=""> 详细地址不能为空
+                        <input type="password" name="password" onblur="checkPass()"/>
+
+                        <small class="control-label">
+                            <div id="div_password"></div>
                         </small>
                     </div>
                 </div>
                 <div class="form-group flex">
-                    <div class="control-label"></div>
+                    <label for="store-name" class="control-label"> <b class="required">*</b>
+                        确认密码 </label>
                     <div class="control-content">
-                        <div class="amap-position-pick flex ng-isolate-scope" points="data.searchResults"
-                             area="data.area" position="form.address_info">
-                            <div id="search-results" ng-show="points" class="ng-hide">
-                                <div class="count">请选择门店位置</div>
-                                <ul ng-show="points.length" class="ng-hide"> <!-- ngRepeat: result in points --> </ul>
-                                <p class="empty" ng-show="!points.length"> 未搜索到您输入的地址，请重新输入地址或者直接在右侧地图中<span
-                                            class="blue">标记位置</span>！ </p></div>
-                            <div id="map-container" class="amap-container"
-                                 style="position: relative; background: rgb(252, 249, 242); cursor: url(&quot;https://webapi.amap.com/theme/v1.3/openhand.cur&quot;), default;">
-                                <object style="display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;"
-                                        type="text/html" data="about:blank"></object>
-                                <div class="amap-maps">
-                                    <div class="amap-drags">
-                                        <div class="amap-layers" style="transform: translateZ(0px);">
-                                            <canvas class="amap-layer" width="798" height="498"
-                                                    style="position: absolute; z-index: 0; top: 0px; left: 0px; height: 498px; width: 798px;"></canvas>
-                                            <canvas class="amap-labels" draggable="false"
-                                                    style="position: absolute; z-index: 99; height: 498px; width: 798px; top: 0px; left: 0px;"
-                                                    width="798" height="498"></canvas>
-                                            <div class="amap-markers"
-                                                 style="position: absolute; z-index: 120; top: 249px; left: 399px;">
-                                                <div class="amap-marker"
-                                                     style="top: -35px; left: 32px; z-index: 100; transform: rotate(0deg); transform-origin: 9px 31px 0px; display: block;">
-                                                    <div class="amap-marker-content" style="opacity: 1;"><i
-                                                                class="amap-marker-custom selected"></i></div>
-                                                </div>
-                                            </div>
-                                            <canvas class="amap-vectors" width="798" height="498"
-                                                    style="position: absolute; z-index: 110; top: 0px; left: 0px;"></canvas>
-                                        </div>
-                                        <div class="amap-overlays"></div>
-                                    </div>
-                                </div>
-                                <div style="display: none;">
-                                    <div class="amap-info" style="position: absolute; left: 296px; top: 245px;">
-                                        <div style="position: absolute; bottom: 20px; left: 15px;">
-                                            <div>
-                                                <div class="amap-info-window">
-                                                    <div class="main">
-                                                        <div class="title">
-                                                            是否将该位置设置成门店位置?
-                                                        </div>
-                                                        <div class="content">
+                        <input type="password" name="repassword" onblur="checkRepass()"/>
 
-                                                            <h6>北京市昌平区城北街道清真寺胡同酒厂宿舍</h6>
-                                                            <p>北京市昌平区城北街道清真寺胡同酒厂宿舍</p>
-                                                            <button class="btn btn-primary btn-sm"
-                                                                    onclick="markPosition()" type="button">确定
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="amap-info-sharp"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="amap-controls">
-                                    <div class="amap-toolbar" style="left: 20px; top: 60px; visibility: visible;">
-                                        <div class="amap-pancontrol" style="position: relative; display: block;">
-                                            <div class="amap-pan-left"></div>
-                                            <div class="amap-pan-top"></div>
-                                            <div class="amap-pan-right"></div>
-                                            <div class="amap-pan-bottom"></div>
-                                        </div>
-                                        <div class="amap-locate"
-                                             style="position: relative; left: 17px; display: block;"></div>
-                                        <div class="amap-zoomcontrol" style="position: relative; left: 14px;">
-                                            <div class="amap-zoom-plus"></div>
-                                            <div class="amap-zoom-ruler" style="display: block;">
-                                                <div class="amap-zoom-mask" style="height: 73px;"></div>
-                                                <div class="amap-zoom-cursor" style="top: 73px;"></div>
-                                                <div class="amap-zoom-labels" style="display: none;">
-                                                    <div class="amap-zoom-label-street"></div>
-                                                    <div class="amap-zoom-label-city"></div>
-                                                    <div class="amap-zoom-label-province"></div>
-                                                    <div class="amap-zoom-label-country"></div>
-                                                </div>
-                                            </div>
-                                            <div class="amap-zoom-minus"></div>
-                                        </div>
-                                    </div>
-                                    <div class="amap-indoormap-floorbar-control can-scroll can-scroll-up"
-                                         title="西单商场(西单北大街店)" style="display: none;">
-                                        <div class="panel-box">
-                                            <div class="select-dock" style="top: 98px;"></div>
-                                            <div class="floor-btn floor-nav floor-plus">+</div>
-                                            <div class="floor-list-box">
-                                                <ul class="floor-list" style="margin-top: -43px;">
-                                                    <li class="floor-list-item">
-                                                        <div class="floor-btn floor-nonas">F5</div>
-                                                    </li>
-                                                    <li class="floor-list-item">
-                                                        <div class="floor-btn floor-nonas">F4</div>
-                                                    </li>
-                                                    <li class="floor-list-item">
-                                                        <div class="floor-btn floor-nonas">F3</div>
-                                                    </li>
-                                                    <li class="floor-list-item">
-                                                        <div class="floor-btn floor-nonas">F2</div>
-                                                    </li>
-                                                    <li class="floor-list-item selected">
-                                                        <div class="floor-btn floor-nonas">F1</div>
-                                                    </li>
-                                                    <li class="floor-list-item">
-                                                        <div class="floor-btn floor-nonas">B1</div>
-                                                    </li>
-                                                    <li class="floor-list-item">
-                                                        <div class="floor-btn floor-nonas">B2</div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="floor-btn floor-nav floor-minus">-</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a class="amap-logo" href="http://gaode.com" target="_blank"><img
-                                            src="https://webapi.amap.com/theme/v1.3/autonavi.png"></a>
-                                <div class="amap-copyright" style="display: none;"><!--v1.3.28--> ? 2017 AutoNavi <span
-                                            class="amap-mcode">- GS(2016)710号</span></div>
-                            </div>
-                        </div>
-                        <small class="red ng-hide"
-                               ng-show="!form.address_info.longitude &amp;&amp; storeForm.$submitted" style="">
-                            请点击[去定位]，并在地图上选择准确的地址
+                        <small class="control-label">
+                            <div id="div_repassword"></div>
                         </small>
                     </div>
                 </div>
-                <div class="form-group flex"><label class="control-label"> <b class="required">*</b>
-                        门店照片 </label>
+                <div class="form-group flex">
+                    <label for="store-name" class="control-label"> <b class="required">*</b>
+                        门店名称 </label>
                     <div class="control-content">
-                        <div class="picture-item ng-isolate-scope" name="门脸照" desc="一张真实美观的门脸照可以提升店铺形象"
+                        <input type="text" name="shoptitle" onblur="checkShoptitle()"/>
+                        <small class="control-label">
+                            <div id="div_shoptitle"></div>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group flex">
+                    <label for="store-name" class="control-label"> <b class="required">*</b>外卖电话 </label>
+                    <div class="control-content">
+                        <input type="text" name="phone" onblur="checkPhone()"/>
+                        <small class="control-label">
+                            <div id="div_phone"></div>
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group flex">
+                    <label for="contact-name" class="control-label"> <b class="required">*</b>真实姓名 </label>
+                    <div class="control-content">
+                        <input type="text" name="username" onblur="checkUsername()" />
+                        <small class="control-label">
+                            <div id="div_username"></div>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group flex">
+                    <label for="contact-name" class="control-label"> <b class="required">*</b>身份证号码 </label>
+                    <div class="control-content">
+                        <input type="text" name="identity" onblur="checkIdentity()"/>
+                        <small class="control-label">
+                            <div id="div_identity"></div>
+                        </small>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+
+                    
+                        
+                        
+                            
+                                   
+                        
+                        
+                            
+                                   
+                        
+                                                                 
+                                    
+                                    
+                        
+                                                                 
+                                    
+                                    
+                        
+                                                                 
+                                    
+                                    
+                        
+                                                                 
+                                    
+                                    
+                        
+                        
+                                                                 
+                                    
+                                    
+                        
+                    
+                
+                
+                
+                    
+                    
+                        
+                             
+                            
+                                
+                                    
+                                           
+                                           
+                                           
+                                
+                                
+                                    
+                                           
+                                           
+                                           
+                                    
+                                
+                                
+                                    
+                                    
+                                         
+                                        
+                                               
+                                               
+                                               
+                                        
+                                        
+                                            
+                                            
+                                        
+                                
+                            
+                        
+                    
+                
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                
+                <div class="form-group flex"><label class="control-label">
+                        <b class="required">*</b>照片 </label>
+                    <div class="control-content">
+                        <div class="picture-item ng-isolate-scope" name="" desc=""
                              src="assets/ex-front.png">
-                            <div class="name ng-binding">门脸照</div>
+                            <div class="name ng-binding">营业执照照片</div>
                             <ng-transclude class="img-container">
                                 <div class="img-flow ng-scope ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-door-pic-input"
-                                     name="doorPicInput" ng-model="form.door_pic" mobile="18851457819"><img
-                                            ng-class="{ 'show': ngModel &amp;&amp; isUploadStatus !== 1 }" safe-img=""
-                                            mobile="18851457819" safe-src="ngModel" class="ng-isolate-scope" src=""
-                                            ng-src="">
-                                    <input type="file" accept="image/*"
-                                           onchange="angular.element(this).scope().onload(this)">
+                                     name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
+                                    <img ng-class="{ 'show': ngModel &amp;&amp; isUploadStatus !== 1 }" safe-img=""
+                                         mobile="18851457819" safe-src="ngModel" class="ng-isolate-scope" src=""
+                                         ng-src="">
+                                    <input type="file" accept="image/*" name="logoname">
                                     <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img
                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAABGdBTUEAALGPC/xhBQAAArRJREFUSA29lj2IE0EUx929TQxaBCxsPPQQTg4CCfnAVomF1x1cdXCF4AeKFmLlIYJYCNqJWghHCgXxKsHCwsJgpRzmw8RGEfzgBMHCSiUmZuPvrXubvWRnd/aQG5h7b97H//9m581cjG0xR61WmyHlFPOoYRj7JH0wGHxGPGUul0qlt2LTHYZuICQTjUbjOvICOROKvD8UdbNQKCwh+4qYDWatAiA16/X6IzLnNmSrF4+LxeI8RdjqkH8eMypA/M1m8wpCl1xS5twc0UNH5BdotVqTvV7vPSipUKRxZyeRSEzncrkv466hJfIL9Pv9RcLjkgtDys0dsgVokQXYtn0kIE/LpJMbWQCNNKnFFhCkkzvWA5z5bs58AbyyAHADcuhWAL6OqQdGGwzpgyo9sUJPfPMnegUQZHDVLpJwGX2nP+h/6WD/APsaV/QG+kBwnQIwmjwyD5Cy87hDHhzVwxSIBfkKj9Ui0nZ6gJ1fjUsuycz5dDq9C/kykElhFC7hFLfRbrf3d7tdeb8TiniV+Rbv/nlxuhhvUHeoggPsvWQyOWPScKdxxiX/SENdWgfNZrMf0L31uj1CJoRbjmA2InDMzSc/STf/9DtorNvYX/htGvqsyXlMaQR6IZAsQ1b1DK6C3bYs6zjLzqhPtRZu+QJx7ngnlUotqQD5Ku8o5K7KH2C3pIDQfxb+JMDXMpnMd79tVGdXr0dtIes12f0z5oGQIM8F+DTX5yFScr5yC56Ik19Je03TPMTbv4elczPErjGqFruqEHgGUO9VDEskbgG/zCbTKQDyg5DfD8sb9cErL2HFpKHqgMZKHgXb5PqecEsPyDjLXHW0rfmzyqbPCZVTAGf5C73M3IovIRxll3N4BV3DMX7L3eE8T1DhYc5pCrmdhE0PMH6D8Qn5nF6p5PP5V36wvySB+WxWUYFgAAAAAElFTkSuQmCC"><br>
                                         点击上传 </p>
-                                    <p class="rechoose ng-hide" ng-show="ngModel &amp;&amp; isUploadStatus !== 1">
-                                        重新上传</p>
-                                    <div class="inprogress ng-hide" ng-show="isUploadStatus === 1">
-                                        <div class="bar-container">
-                                            <bar-progress class="bar-progress"></bar-progress>
-                                        </div>
-                                        <div class="margin-top-5">上传中...</div>
-                                    </div>
+                                </div>
+                            </ng-transclude>
+                            <div class="desc ng-binding"> 营业执照可以加速审核喔！</div>
+                            <div class="example"><span>示例</span>
+                                <div class="directive-image-preview ng-isolate-scope" src="assets/ex-front.png">
+                                    <img class="d-thumbnail" ng-src="assets/ex-front.png" alt="thumbnail"
+                                         src="<?php echo e(asset('images/ex_licen.png')); ?>">
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="picture-item ng-isolate-scope" name="门脸照" desc="一张真实美观的门脸照可以提升店铺形象"
+                             src="assets/ex-front.png">
+                            <div class="name ng-binding">店铺照片</div>
+                            <ng-transclude class="img-container">
+                                <div class="img-flow ng-scope ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-door-pic-input"
+                                     name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
+                                    <img ng-class="{ 'show': ngModel &amp;&amp; isUploadStatus !== 1 }" safe-img=""
+                                         mobile="18851457819" safe-src="ngModel" class="ng-isolate-scope" src=""
+                                         ng-src="">
+                                    <input type="file" accept="image/*" name="picname">
+                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img
+                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAABGdBTUEAALGPC/xhBQAAArRJREFUSA29lj2IE0EUx929TQxaBCxsPPQQTg4CCfnAVomF1x1cdXCF4AeKFmLlIYJYCNqJWghHCgXxKsHCwsJgpRzmw8RGEfzgBMHCSiUmZuPvrXubvWRnd/aQG5h7b97H//9m581cjG0xR61WmyHlFPOoYRj7JH0wGHxGPGUul0qlt2LTHYZuICQTjUbjOvICOROKvD8UdbNQKCwh+4qYDWatAiA16/X6IzLnNmSrF4+LxeI8RdjqkH8eMypA/M1m8wpCl1xS5twc0UNH5BdotVqTvV7vPSipUKRxZyeRSEzncrkv466hJfIL9Pv9RcLjkgtDys0dsgVokQXYtn0kIE/LpJMbWQCNNKnFFhCkkzvWA5z5bs58AbyyAHADcuhWAL6OqQdGGwzpgyo9sUJPfPMnegUQZHDVLpJwGX2nP+h/6WD/APsaV/QG+kBwnQIwmjwyD5Cy87hDHhzVwxSIBfkKj9Ui0nZ6gJ1fjUsuycz5dDq9C/kykElhFC7hFLfRbrf3d7tdeb8TiniV+Rbv/nlxuhhvUHeoggPsvWQyOWPScKdxxiX/SENdWgfNZrMf0L31uj1CJoRbjmA2InDMzSc/STf/9DtorNvYX/htGvqsyXlMaQR6IZAsQ1b1DK6C3bYs6zjLzqhPtRZu+QJx7ngnlUotqQD5Ku8o5K7KH2C3pIDQfxb+JMDXMpnMd79tVGdXr0dtIes12f0z5oGQIM8F+DTX5yFScr5yC56Ik19Je03TPMTbv4elczPErjGqFruqEHgGUO9VDEskbgG/zCbTKQDyg5DfD8sb9cErL2HFpKHqgMZKHgXb5PqecEsPyDjLXHW0rfmzyqbPCZVTAGf5C73M3IovIRxll3N4BV3DMX7L3eE8T1DhYc5pCrmdhE0PMH6D8Qn5nF6p5PP5V36wvySB+WxWUYFgAAAAAElFTkSuQmCC"><br>
+                                        点击上传 </p>
                                 </div>
                             </ng-transclude>
                             <div class="desc ng-binding"> 一张真实美观的门脸照可以提升店铺形象</div>
                             <div class="example"><span>示例</span>
-                                <div class="directive-image-preview ng-isolate-scope" src="assets/ex-front.png"><img
-                                            class="d-thumbnail" ng-src="assets/ex-front.png" alt="thumbnail"
-                                            src="assets/ex-front.png">
-                                    <img class="d-preview" ng-src="assets/ex-front.png" alt="preview"
-                                         src="assets/ex-front.png"></div>
-                            </div>
-                        </div>
-                        <div class="mrt-1 picture-item ng-isolate-scope" name="店内照片" desc="简洁干净的店内照可以让用户放心点单"
-                             src="assets/ex-shop.png">
-                            <div class="name ng-binding">店内照片</div>
-                            <ng-transclude class="img-container">
-                                <div class="img-flow ng-scope ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-store-pic-input"
-                                     name="storePicInput" ng-model="form.store_pic" mobile="18851457819"><img
-                                            ng-class="{ 'show': ngModel &amp;&amp; isUploadStatus !== 1 }" safe-img=""
-                                            mobile="18851457819" safe-src="ngModel" class="ng-isolate-scope" src=""
-                                            ng-src="">
-                                    <input type="file" accept="image/*"
-                                           onchange="angular.element(this).scope().onload(this)">
-                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img
-                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAABGdBTUEAALGPC/xhBQAAArRJREFUSA29lj2IE0EUx929TQxaBCxsPPQQTg4CCfnAVomF1x1cdXCF4AeKFmLlIYJYCNqJWghHCgXxKsHCwsJgpRzmw8RGEfzgBMHCSiUmZuPvrXubvWRnd/aQG5h7b97H//9m581cjG0xR61WmyHlFPOoYRj7JH0wGHxGPGUul0qlt2LTHYZuICQTjUbjOvICOROKvD8UdbNQKCwh+4qYDWatAiA16/X6IzLnNmSrF4+LxeI8RdjqkH8eMypA/M1m8wpCl1xS5twc0UNH5BdotVqTvV7vPSipUKRxZyeRSEzncrkv466hJfIL9Pv9RcLjkgtDys0dsgVokQXYtn0kIE/LpJMbWQCNNKnFFhCkkzvWA5z5bs58AbyyAHADcuhWAL6OqQdGGwzpgyo9sUJPfPMnegUQZHDVLpJwGX2nP+h/6WD/APsaV/QG+kBwnQIwmjwyD5Cy87hDHhzVwxSIBfkKj9Ui0nZ6gJ1fjUsuycz5dDq9C/kykElhFC7hFLfRbrf3d7tdeb8TiniV+Rbv/nlxuhhvUHeoggPsvWQyOWPScKdxxiX/SENdWgfNZrMf0L31uj1CJoRbjmA2InDMzSc/STf/9DtorNvYX/htGvqsyXlMaQR6IZAsQ1b1DK6C3bYs6zjLzqhPtRZu+QJx7ngnlUotqQD5Ku8o5K7KH2C3pIDQfxb+JMDXMpnMd79tVGdXr0dtIes12f0z5oGQIM8F+DTX5yFScr5yC56Ik19Je03TPMTbv4elczPErjGqFruqEHgGUO9VDEskbgG/zCbTKQDyg5DfD8sb9cErL2HFpKHqgMZKHgXb5PqecEsPyDjLXHW0rfmzyqbPCZVTAGf5C73M3IovIRxll3N4BV3DMX7L3eE8T1DhYc5pCrmdhE0PMH6D8Qn5nF6p5PP5V36wvySB+WxWUYFgAAAAAElFTkSuQmCC"><br>
-                                        点击上传 </p>
-                                    <p class="rechoose ng-hide" ng-show="ngModel &amp;&amp; isUploadStatus !== 1">
-                                        重新上传</p>
-                                    <div class="inprogress ng-hide" ng-show="isUploadStatus === 1">
-                                        <div class="bar-container">
-                                            <bar-progress class="bar-progress"></bar-progress>
-                                        </div>
-                                        <div class="margin-top-5">上传中...</div>
-                                    </div>
+                                <div class="directive-image-preview ng-isolate-scope" src="assets/ex-front.png">
+                                    <img class="d-thumbnail" ng-src="assets/ex-front.png" alt="thumbnail"
+                                         src="<?php echo e(asset('images/ex_licen.png')); ?>">
                                 </div>
-                            </ng-transclude>
-                            <div class="desc ng-binding"> 简洁干净的店内照可以让用户放心点单</div>
-                            <div class="example"><span>示例</span>
-                                <div class="directive-image-preview ng-isolate-scope" src="assets/ex-shop.png"><img
-                                            class="d-thumbnail" ng-src="assets/ex-shop.png" alt="thumbnail"
-                                            src="assets/ex-shop.png">
-                                    <img class="d-preview" ng-src="assets/ex-shop.png" alt="preview"
-                                         src="assets/ex-shop.png"></div>
                             </div>
                         </div>
-                        <small class="red"
-                               ng-show="(storeForm.doorPicInput.$invalid || storeForm.storePicInput.$invalid ) &amp;&amp; storeForm.$submitted"
-                               style=""> 门店照片不能为空
-                        </small>
-                    </div>
                 </div>
-                <div class="form-group flex"><label class="control-label"> <b class="required">*</b>
-                        门店Logo </label>
-                    <div class="control-content">
-                        <div class="logo-item flex">
-                            <div class="logo-card flex">
-                                <div class="logo-crop ng-isolate-scope ng-not-empty ng-valid" ng-model="logo"
-                                     mobile="18851457819"><img safe-img="" mobile="18851457819"
-                                                               safe-src="ngModel.oldLogo"
-                                                               ng-show="ngModel.oldLogo.dataUri"
-                                                               class="ng-isolate-scope ng-hide" src="">
-                                    <input type="file" accept="image/*"
-                                           onchange="angular.element(this).scope().onload(this)">
-                                    <p class="tip" ng-hide="ngModel.oldLogo.dataUri"><img
-                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAABGdBTUEAALGPC/xhBQAAArRJREFUSA29lj2IE0EUx929TQxaBCxsPPQQTg4CCfnAVomF1x1cdXCF4AeKFmLlIYJYCNqJWghHCgXxKsHCwsJgpRzmw8RGEfzgBMHCSiUmZuPvrXubvWRnd/aQG5h7b97H//9m581cjG0xR61WmyHlFPOoYRj7JH0wGHxGPGUul0qlt2LTHYZuICQTjUbjOvICOROKvD8UdbNQKCwh+4qYDWatAiA16/X6IzLnNmSrF4+LxeI8RdjqkH8eMypA/M1m8wpCl1xS5twc0UNH5BdotVqTvV7vPSipUKRxZyeRSEzncrkv466hJfIL9Pv9RcLjkgtDys0dsgVokQXYtn0kIE/LpJMbWQCNNKnFFhCkkzvWA5z5bs58AbyyAHADcuhWAL6OqQdGGwzpgyo9sUJPfPMnegUQZHDVLpJwGX2nP+h/6WD/APsaV/QG+kBwnQIwmjwyD5Cy87hDHhzVwxSIBfkKj9Ui0nZ6gJ1fjUsuycz5dDq9C/kykElhFC7hFLfRbrf3d7tdeb8TiniV+Rbv/nlxuhhvUHeoggPsvWQyOWPScKdxxiX/SENdWgfNZrMf0L31uj1CJoRbjmA2InDMzSc/STf/9DtorNvYX/htGvqsyXlMaQR6IZAsQ1b1DK6C3bYs6zjLzqhPtRZu+QJx7ngnlUotqQD5Ku8o5K7KH2C3pIDQfxb+JMDXMpnMd79tVGdXr0dtIes12f0z5oGQIM8F+DTX5yFScr5yC56Ik19Je03TPMTbv4elczPErjGqFruqEHgGUO9VDEskbgG/zCbTKQDyg5DfD8sb9cErL2HFpKHqgMZKHgXb5PqecEsPyDjLXHW0rfmzyqbPCZVTAGf5C73M3IovIRxll3N4BV3DMX7L3eE8T1DhYc5pCrmdhE0PMH6D8Qn5nF6p5PP5V36wvySB+WxWUYFgAAAAAElFTkSuQmCC"><br>
-                                        选择Logo </p>
-                                    <p class="rechoose ng-hide" ng-show="ngModel.oldLogo.dataUri">重新上传</p></div>
-                                <div class="exam"><p class="name ng-binding" uib-tooltip="">门店名称</p>
-                                    <p class="stars"> <!-- ngRepeat: item in [1,2,3,4,5] --><img
-                                                ng-repeat="item in [1,2,3,4,5]"
-                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAARCAYAAADQWvz5AAAAAXNSR0IArs4c6QAAAWpJREFUOBGNUz0vREEUPfdlJYqtNEg0lKImyw8QhUSCv6ARu1p/gNqiWYVWhGITCfEDRKXSopGgI1EQ641z57195n2M9ya5yZ17zzlz594ZoGSZNo7VSmCQ/wBmHw384NpiBA1p4saHD3wJGw/RcvKbjp9zvRXxOmMweCSjFrN6rH+cVT3lVBjwV2Sw44got0ZhjRUuMUcYxAemCBqlDfPUESIX6M8WM2zPLph/IfaV9ow67sTs4p6EiUJS9eBDwMsdVsd7kNSwzWZVa4Qc0PqN9TBy4R4j69JCJ5ma2bN9OeHd6zl4UUDYWYNVilxqOhHSDcWWEeJU/dIVYEU2cNbHpYUMO9bGN5P+ZxExQzQxIMJj45UmdDBUQUSpASJsLJM9+Yt/q+rKYNMVAXMpHcEn9+fWIv8vnXmwWaHpBCnochSTnMqimvq0rpOfSXw62XfzTvAt41v8nFcukBPSD7zEyc5z7Nu0Nzf/C8ZHVEepikvmAAAAAElFTkSuQmCC"
-                                                class="ng-scope"><!-- end ngRepeat: item in [1,2,3,4,5] --><img
-                                                ng-repeat="item in [1,2,3,4,5]"
-                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAARCAYAAADQWvz5AAAAAXNSR0IArs4c6QAAAWpJREFUOBGNUz0vREEUPfdlJYqtNEg0lKImyw8QhUSCv6ARu1p/gNqiWYVWhGITCfEDRKXSopGgI1EQ641z57195n2M9ya5yZ17zzlz594ZoGSZNo7VSmCQ/wBmHw384NpiBA1p4saHD3wJGw/RcvKbjp9zvRXxOmMweCSjFrN6rH+cVT3lVBjwV2Sw44got0ZhjRUuMUcYxAemCBqlDfPUESIX6M8WM2zPLph/IfaV9ow67sTs4p6EiUJS9eBDwMsdVsd7kNSwzWZVa4Qc0PqN9TBy4R4j69JCJ5ma2bN9OeHd6zl4UUDYWYNVilxqOhHSDcWWEeJU/dIVYEU2cNbHpYUMO9bGN5P+ZxExQzQxIMJj45UmdDBUQUSpASJsLJM9+Yt/q+rKYNMVAXMpHcEn9+fWIv8vnXmwWaHpBCnochSTnMqimvq0rpOfSXw62XfzTvAt41v8nFcukBPSD7zEyc5z7Nu0Nzf/C8ZHVEepikvmAAAAAElFTkSuQmCC"
-                                                class="ng-scope"><!-- end ngRepeat: item in [1,2,3,4,5] --><img
-                                                ng-repeat="item in [1,2,3,4,5]"
-                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAARCAYAAADQWvz5AAAAAXNSR0IArs4c6QAAAWpJREFUOBGNUz0vREEUPfdlJYqtNEg0lKImyw8QhUSCv6ARu1p/gNqiWYVWhGITCfEDRKXSopGgI1EQ641z57195n2M9ya5yZ17zzlz594ZoGSZNo7VSmCQ/wBmHw384NpiBA1p4saHD3wJGw/RcvKbjp9zvRXxOmMweCSjFrN6rH+cVT3lVBjwV2Sw44got0ZhjRUuMUcYxAemCBqlDfPUESIX6M8WM2zPLph/IfaV9ow67sTs4p6EiUJS9eBDwMsdVsd7kNSwzWZVa4Qc0PqN9TBy4R4j69JCJ5ma2bN9OeHd6zl4UUDYWYNVilxqOhHSDcWWEeJU/dIVYEU2cNbHpYUMO9bGN5P+ZxExQzQxIMJj45UmdDBUQUSpASJsLJM9+Yt/q+rKYNMVAXMpHcEn9+fWIv8vnXmwWaHpBCnochSTnMqimvq0rpOfSXw62XfzTvAt41v8nFcukBPSD7zEyc5z7Nu0Nzf/C8ZHVEepikvmAAAAAElFTkSuQmCC"
-                                                class="ng-scope"><!-- end ngRepeat: item in [1,2,3,4,5] --><img
-                                                ng-repeat="item in [1,2,3,4,5]"
-                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAARCAYAAADQWvz5AAAAAXNSR0IArs4c6QAAAWpJREFUOBGNUz0vREEUPfdlJYqtNEg0lKImyw8QhUSCv6ARu1p/gNqiWYVWhGITCfEDRKXSopGgI1EQ641z57195n2M9ya5yZ17zzlz594ZoGSZNo7VSmCQ/wBmHw384NpiBA1p4saHD3wJGw/RcvKbjp9zvRXxOmMweCSjFrN6rH+cVT3lVBjwV2Sw44got0ZhjRUuMUcYxAemCBqlDfPUESIX6M8WM2zPLph/IfaV9ow67sTs4p6EiUJS9eBDwMsdVsd7kNSwzWZVa4Qc0PqN9TBy4R4j69JCJ5ma2bN9OeHd6zl4UUDYWYNVilxqOhHSDcWWEeJU/dIVYEU2cNbHpYUMO9bGN5P+ZxExQzQxIMJj45UmdDBUQUSpASJsLJM9+Yt/q+rKYNMVAXMpHcEn9+fWIv8vnXmwWaHpBCnochSTnMqimvq0rpOfSXw62XfzTvAt41v8nFcukBPSD7zEyc5z7Nu0Nzf/C8ZHVEepikvmAAAAAElFTkSuQmCC"
-                                                class="ng-scope"><!-- end ngRepeat: item in [1,2,3,4,5] --><img
-                                                ng-repeat="item in [1,2,3,4,5]"
-                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAARCAYAAADQWvz5AAAAAXNSR0IArs4c6QAAAWpJREFUOBGNUz0vREEUPfdlJYqtNEg0lKImyw8QhUSCv6ARu1p/gNqiWYVWhGITCfEDRKXSopGgI1EQ641z57195n2M9ya5yZ17zzlz594ZoGSZNo7VSmCQ/wBmHw384NpiBA1p4saHD3wJGw/RcvKbjp9zvRXxOmMweCSjFrN6rH+cVT3lVBjwV2Sw44got0ZhjRUuMUcYxAemCBqlDfPUESIX6M8WM2zPLph/IfaV9ow67sTs4p6EiUJS9eBDwMsdVsd7kNSwzWZVa4Qc0PqN9TBy4R4j69JCJ5ma2bN9OeHd6zl4UUDYWYNVilxqOhHSDcWWEeJU/dIVYEU2cNbHpYUMO9bGN5P+ZxExQzQxIMJj45UmdDBUQUSpASJsLJM9+Yt/q+rKYNMVAXMpHcEn9+fWIv8vnXmwWaHpBCnochSTnMqimvq0rpOfSXw62XfzTvAt41v8nFcukBPSD7zEyc5z7Nu0Nzf/C8ZHVEepikvmAAAAAElFTkSuQmCC"
-                                                class="ng-scope"><!-- end ngRepeat: item in [1,2,3,4,5] --> </p>
-                                    <p class="sale">月售999单</p> <span>示例</span></div>
-                            </div>
-                            <p class="desc"> 上传与店铺气质吻合的Logo，能提高用户进店的概率<br> 支持JPG/JPEG/PNG格式图片，文件大小不超过500K </p></div>
-                        <small class="red" ng-show="!logo.newLogo.url &amp;&amp; storeForm.$submitted" style="">
-                            门店logo不能为空
-                        </small>
-                    </div>
-                </div>
-                <div class="out-link flex">
-                    <div class="desc">其他平台开店链接</div>
-                    <div class="input-container"><input type="text"
-                                                        class="form-control ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"
-                                                        ng-model="form.third_party_platform_url" maxlength="255"
-                                                        placeholder="选填，填写网址可快速开店"></div>
-                </div>
+             </div>
             </form>
         </div>
         <div class="footer-btns ng-scope">
             <button class="btn btn-default btn-pre" ui-sref="guide({ id: id })" href="/guide">返回上一步</button>
-            <button type="submit" form="storeFormID" class="btn btn-primary btn-next" ng-click="methods.submit()"
+            <button type="submit" form="storeFormID" class="btn btn-primary btn-next" ng-click="doSubmit()"
                     ng-disabled="data.isSubmitting || !mobile"> 提交并进入下一步
             </button>
         </div>
     </div>
 </ui-view>
 
-        
 
 
 
 
+
+
+
+<script type="text/javascript" src="<?php echo e(asset('js/register.js')); ?>"></script>
 </body>
 </html>
