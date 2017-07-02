@@ -26,6 +26,7 @@
                     <tr>
                       <th style="width:60px">id号</th>
                       <th>菜类名称</th>
+                      <th>父类ID</th>
                       <th>路径</th>
                       <th style="width: 100px">操作</th>
                     </tr>
@@ -33,9 +34,10 @@
                     <tr>
                       <td><?php echo e($v->id); ?></td>
                       <td><?php echo e($v->title); ?></td>
+                      <td><?php echo e($v->pid); ?></td>
                       <td><?php echo e($v->path); ?></td>
-                      <td><button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> 
-                      <button class="btn btn-xs btn-primary">编辑</button> </td>
+                      <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/foodtype')); ?>/<?php echo e($v->id); ?>/edit'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>
+                      
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   

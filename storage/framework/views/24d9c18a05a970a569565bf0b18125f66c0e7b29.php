@@ -1,16 +1,8 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>网站后台管理</title>
-	<style type="text/css">  
-		 #preview, .img, img  
-		 {  
-			width:100px;  
-			height:100px;		 
-		 }  
-		 
-	 </style>
     <!-- 告诉浏览器响应屏幕宽度 -->
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
@@ -305,57 +297,61 @@
               <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <a href="#"><i class="fa fa-circle text-success"></i>在线</a>
              
-              <a href="<?php echo e(url('merchant/logout')); ?>"><i class="fa fa-circle text-success"></i>退出</a>
+              <a href="<?php echo e(url('admin/logout')); ?>"><i class="fa fa-circle text-success"></i>退出</a>
             </div>
           </div>
 
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主导航</li>
-               		
-			
-
-            <li class="active treeview">
+               
+                <li class="active treeview">
               <a href="#">
-                <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gittip"></i><span>超级管理员</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('merchant/mer')); ?>"><i class="fa fa-circle-o"></i>商家信息</a></li>
-                <li class="active"><a href="<?php echo e(url('merchant/merchantopen')); ?>"><i class="fa fa-circle-o"></i>营业信息</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/root')); ?>"><i class="fa fa-youtube-play"></i> 管理员资料</a></li>
+              </ul>
+            </li>
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-gittip"></i><span>权限管理</span><i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="<?php echo e(URL('admin/com')); ?>"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/role')); ?>"><i class="fa fa-youtube-play"></i> 角色管理</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/node')); ?>"><i class="fa fa-youtube-play"></i> 节点管理</a></li>
+              </ul>
+            </li>
+            
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-gittip"></i> <span> 会员管理</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="<?php echo e(url('admin/vip')); ?>"><i class="fa fa-circle-o"></i>查看会员信息</a></li>
     
               </ul>
             </li>
             
-			<li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i> <span> 营业信息管理</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('merchant/merchantopen')); ?>"><i class="fa fa-circle-o"></i>查看营业信息</a></li> </ul>  
-			</li>
-			
-			
-			
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-gittip"></i> <span>菜单管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gittip"></i> <span>商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('merchant/foodtype')); ?>"><i class="fa fa-circle-o"></i> 菜单种类</a></li>
-                <li><a href="<?php echo e(url('merchant/food')); ?>"><i class="fa fa-circle-o"></i> 菜单浏览</a></li>
-                <li><a href="<?php echo e(url('merchant/food/create')); ?>"><i class="fa fa-circle-o"></i> 添加菜单</a></li>
+                <li class="active"><a href=""><i class="fa fa-circle-o"></i> 待审核商家</a></li>
+                <li><a href="<?php echo e(url('admin/shop')); ?>"><i class="fa fa-circle-o"></i> 普通商家</a></li>
               </ul>
             </li>
             
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-bomb"></i> <span>订单</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-bomb"></i> <span> 菜品分类管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('merchant/ftype')); ?>"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
-                <li><a href="<?php echo e(url('merchant/ftype/create')); ?>"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <li class="active"><a href="<?php echo e(url('admin/ftype')); ?>"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
+                <li><a href="<?php echo e(url('admin/ftype/create')); ?>"><i class="fa fa-circle-o"></i> 添加分类</a></li>
               </ul>
             </li>
              <li class="active treeview">
@@ -363,8 +359,8 @@
                 <i class="fa fa-gittip"></i> <span>投诉建议管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('merchant/letter')); ?>"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
-                <li><a href="<?php echo e(url('merchant/type/offer')); ?>"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
+                <li class="active"><a href="<?php echo e(url('admin/letter')); ?>"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
+                <li><a href="<?php echo e(url('admin/type/offer')); ?>"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
               </ul>
             </li>
 
@@ -379,7 +375,7 @@
                 <span class="label label-primary pull-right">4</span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo e(URL('merchant/stati')); ?>"><i class="fa fa-circle-o"></i> ChartJS实例</a></li>
+                <li><a href="<?php echo e(URL('admin/stati')); ?>"><i class="fa fa-circle-o"></i> ChartJS实例</a></li>
               </ul>
             </li>
             
@@ -464,24 +460,7 @@
     <script src="<?php echo e(asset('myadmin/bootstrap/js/xdl-modal-alert-confirm.js')); ?>" type="text/javascript"></script> 
     <!-- AdminLTE 用于演示目的 -->
     <script src="<?php echo e(asset('myadmin/dist/js/demo.js')); ?>" type="text/javascript"></script>
-    <script type="text/javascript">    
-		 function preview(file)  
-		 {  
-		 var prevDiv = document.getElementById('preview'); 	
-		 if (file.files && file.files[0])  
-		 {  
-		 var reader = new FileReader();  
-		 reader.onload = function(evt){  
-		 prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';  
-		}    
-		 reader.readAsDataURL(file.files[0]);  
-		}  
-		 else    
-		 {  
-		 prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
-		 }  
-		}  
-	</script>
+    
     <?php if(session("err")): ?>
         <script type="text/javascript">
             Modal.alert({msg: "<?php echo e(session('err')); ?>",title: ' 信息提示',btnok: '确定',btncl:'取消'});

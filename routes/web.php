@@ -82,6 +82,7 @@ Route::get("merchant/register","Merchant\RegisterController@index");////商家�
 Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
 	Route::resource('/merchantopen', "Merchant\MerchantopenController");//营业信息管理
-	//Route::resource('/merchantopen/index', "Merchant\MerchantopenController/index");
+
 	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
+	Route::resource("/food","Merchant\FoodController");//管理首页
 });

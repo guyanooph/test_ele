@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Merchant;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Merchant\Food_type;
+use App\Models\Merchant\Food;
 
-class FoodtypeController extends Controller
+class FoodController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +15,19 @@ class FoodtypeController extends Controller
      */
     public function index()
     {
-		$list = \DB::select("select * from food_type order by concat(path,id) asc");
-        //$list = food_type::all();
-        //处理信息
-        foreach($list as &$v){
-            $m = substr_count($v->path,","); //获取path中的逗号
-            //生成缩进
-            $v->title = str_repeat("&nbsp;",($m-1)*8)."|--".$v->title;
-        }
-        return view('merchant.foodtype.index',['list'=>$list]);
+		$list = \DB::select("select * from food order by concat(shopid,id) asc");
+		//$db = \DB::table("food");
+       
+       //$list = $db->paginate(5); //5条每页浏览
+      
+       //遍历当前数据并添加商品类别名称
+       foreach($list as $v){
+           $name = \DB::table("food_type")->where("id",$v->typeid)->value("title");
+           $v->typename = $name; //放置进去
+           
+       }
+        
+       return view("merchant.food.index",['list'=>$list]);
     }
 
     /**
@@ -41,7 +45,7 @@ class FoodtypeController extends Controller
             //生成缩进
             $v->title = str_repeat("&nbsp;",($m-1)*8)."|--".$v->title;
         }
-        return view("merchant.foodtype.create",['list'=>$list]);
+        return view("merchant.food.create",['list'=>$list]);
     }
 
     /**
@@ -53,18 +57,26 @@ class FoodtypeController extends Controller
     public function store(Request $request)
     {
         //获取要添加的数据
-        $data = $request->only("title",'pid','shopid');
-        $pid = $data['pid'];
-        if($pid==0){
-            $data['path']="0,";
+        $data = $request->only("title",'typeid','shopid',"descr","price","stutas");
+		$data['create_time'] = date('Y-m-d');
+        if ($request->file('picname') && $request->file('picname')->isValid()) {
+            //获取上传文件信息
+            $file = $request->file('picname');
+            $ext = $file->extension(); //获取文件的扩展名
+            //随机一个新的文件名
+            $filename = time().rand(1000,9999).".".$ext;
+            //移动上传文件
+            $file->move("./upload/",$filename);
+            $data['picname'] = $filename;                   
+            //return response($filename); //输出
+            //exit();
         }else{
-            $type = \DB::table("food_type")->where("id",$pid)->first();
-            $data['path'] = $type->path.$pid.",";
-            
+            //闪存信息
+            return redirect('merchant/food')->with('status', '请选择上传文件!');
         }
         
         //执行添加
-        $id = \DB::table("food_type")->insertGetId($data);
+        $id = \DB::table("food")->insertGetId($data);
         //判断
         if($id>0){
             $info = "类别信息添加成功！";
@@ -72,7 +84,7 @@ class FoodtypeController extends Controller
             $info = "类别信息添加失败！";
         }
         
-        return redirect("merchant/foodtype")->with("err",$info);
+        return redirect("merchant/food")->with("err",$info);
     }
 
     /**
@@ -95,7 +107,7 @@ class FoodtypeController extends Controller
     public function edit($id)
     {
         $type = \DB::table("food_type")->where("id",$id)->first(); //获取要编辑的信息
-        return view("merchant.foodtype.edit",["type"=>$type]);
+        return view("merchant.food.edit",["type"=>$type]);
     }
 
     /**
@@ -138,6 +150,6 @@ class FoodtypeController extends Controller
         }  
       
         \DB::table('food_type')->delete($id);
-        return redirect("merchant/foodtype")->with("err","删除成功！");
+        return redirect("merchant/food")->with("err","删除成功！");
     }
 }

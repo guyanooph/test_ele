@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <title>网站后台管理</title>
+	<style type="text/css">  
+		 #preview, .img, img  
+		 {  
+			width:100px;  
+			height:100px;		 
+		 }  
+		 
+	 </style>
     <!-- 告诉浏览器响应屏幕宽度 -->
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
@@ -306,48 +314,27 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主导航</li>
-               
-                <li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i><span>超级管理员</span><i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('merchant/root')}}"><i class="fa fa-youtube-play"></i> 管理员资料</a></li>
-              </ul>
-            </li>
-            <li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i><span>权限管理</span><i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('merchant/com')}}"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
-                <li class="active"><a href="{{URL('merchant/role')}}"><i class="fa fa-youtube-play"></i> 角色管理</a></li>
-                <li class="active"><a href="{{URL('merchant/node')}}"><i class="fa fa-youtube-play"></i> 节点管理</a></li>
-              </ul>
-            </li>
-            
+               		
 			
-			
-			
-			
-            <li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i> <span> 营业信息管理</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/merchantopen')}}"><i class="fa fa-circle-o"></i>查看营业信息</a></li>   
+
             <li class="active treeview">
               <a href="#">
                 <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('merchant/mer')}}"><i class="fa fa-circle-o"></i>商家信息</a></li>
-                <li class="active"><a href="{{url('merchant/open')}}"><i class="fa fa-circle-o"></i>营业信息</a></li>
+                <li class="active"><a href="{{url('merchant/merchantopen')}}"><i class="fa fa-circle-o"></i>营业信息</a></li>
     
               </ul>
             </li>
             
-			
+			<li class="active treeview">
+              <a href="#">
+                <i class="fa fa-gittip"></i> <span> 营业信息管理</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="{{url('merchant/merchantopen')}}"><i class="fa fa-circle-o"></i>查看营业信息</a></li> </ul>  
+			</li>
 			
 			
 			
@@ -356,16 +343,15 @@
                 <i class="fa fa-gittip"></i> <span>菜单管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href=""><i class="fa fa-circle-o"></i> 待审核商家</a></li>
-                <li><a href="{{url('merchant/shop')}}"><i class="fa fa-circle-o"></i> 普通商家</a></li>
                 <li class="active"><a href="{{url('merchant/foodtype')}}"><i class="fa fa-circle-o"></i> 菜单种类</a></li>
                 <li><a href="{{url('merchant/food')}}"><i class="fa fa-circle-o"></i> 菜单浏览</a></li>
+                <li><a href="{{url('merchant/food/create')}}"><i class="fa fa-circle-o"></i> 添加菜单</a></li>
               </ul>
             </li>
             
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-bomb"></i> <span> 菜品分类管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-bomb"></i> <span>订单</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('merchant/ftype')}}"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
@@ -485,7 +471,24 @@
     <script src="{{asset('myadmin/bootstrap/js/xdl-modal-alert-confirm.js')}}" type="text/javascript"></script> 
     <!-- AdminLTE 用于演示目的 -->
     <script src="{{asset('myadmin/dist/js/demo.js')}}" type="text/javascript"></script>
-    
+    <script type="text/javascript">    
+		 function preview(file)  
+		 {  
+		 var prevDiv = document.getElementById('preview'); 	
+		 if (file.files && file.files[0])  
+		 {  
+		 var reader = new FileReader();  
+		 reader.onload = function(evt){  
+		 prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';  
+		}    
+		 reader.readAsDataURL(file.files[0]);  
+		}  
+		 else    
+		 {  
+		 prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+		 }  
+		}  
+	</script>
     @if(session("err"))
         <script type="text/javascript">
             Modal.alert({msg: "{{session('err')}}",title: ' 信息提示',btnok: '确定',btncl:'取消'});
