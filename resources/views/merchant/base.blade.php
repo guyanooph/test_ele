@@ -302,6 +302,7 @@
 				</div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">主导航</li>
@@ -378,6 +379,8 @@
         <!-- /.sidebar -->
       </aside>
 =======
+=======
+>>>>>>> 57980c748126d122e0bf3ca51cc36d4c1a602389
 			  <!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">主导航</li>
@@ -439,7 +442,10 @@
 			</section>
 			<!-- /.sidebar -->
 		</aside>
+<<<<<<< HEAD
 >>>>>>> 3e19369f3df1a650e384dc50aa8b59508e61d201
+=======
+>>>>>>> 57980c748126d122e0bf3ca51cc36d4c1a602389
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
