@@ -1,6 +1,6 @@
 <html ng-app="eleme" perf-error="desktop/" class="ng-scope">
 <head>
-	<style type="text/css">@charset  "UTF-8";
+	<style type="text/css">@charset "UTF-8";
 		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
 			display: none !important;
 		}
@@ -49,9 +49,9 @@
 	<link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32">
 	<link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
 
-	<link href="css/vendor.0cb970.css" rel="stylesheet">
+	<link href="{{asset('css/vendor.0cb970.css')}}" rel="stylesheet">
 
-	<link href="css/main.5e33c3.css" rel="stylesheet">
+	<link href="{{asset('css/main.5e33c3.css')}}" rel="stylesheet">
 
 
 	<!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
@@ -193,9 +193,7 @@
 							class="changelocation"><a ng-href="/home" hardjump="" href="/home">修改收货地址<span
 									class="icon-location"></span></a></li></ul></span> <span ng-transclude=""></span>
 		</div>
-		<div class="place-search" role="search" search-input=""><a class="place-search-btn icon-search" ubt-click="403"
-		                                                           ng-attr-ubt-data-keyword=""
-		                                                           title="搜索商家或美食" ubt-data-keyword=""></a><label
+		<div class="place-search" role="search" search-input=""><label
 					for="globalsearch">搜索商家或美食</label><input id="globalsearch"
 		                                                     class="place-search-input ng-pristine ng-valid"
 		                                                     ng-model="searchText" autocomplete=""
@@ -313,30 +311,29 @@
 			<div class="clearfix"
 			     data="filteredRestaurants = (rstStream.restaurants | filter: rstStream.filter | filter: otherFilter | orderBy: [ '-is_opening', rstStream.orderBy || 'index' ])"
 			     style="height: 840px;">
-				 <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				 <a href="/shop/2076789" data-rst-id="2076789" data-bidding="" target="_blank"
+				 @foreach( $list as $vo)
+				 <a href="/shoplist/9" data-rst-id="" data-bidding="" target="_blank"
 			                               class="rstblock">
-					
-					<div class="rstblock-logo"><img src="//fuss10.elemecdn.com/8/38/68c554160c254ba06eef15bb963ebpng.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-								width="70" height="70" alt="<?php echo e($v->title); ?>" class="rstblock-logo-icon"><span><?php echo e($v->service_time); ?>分钟</span>
+					<div class="rstblock-logo">
+					<img src="//fuss10.elemecdn.com/8/38/68c554160c254ba06eef15bb963ebpng.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
+					width="70" height="70" alt="{{ $vo->shopname }}" class="rstblock-logo-icon"><span>{{ $vo->service_time }}分钟</span>
 					</div>
 					<div class="rstblock-content">
-						<div class="rstblock-title"><?php echo e($v->shopname); ?></div>
+						<div class="rstblock-title">{{ $vo->shopname }}</div>
 						<div class="starrating icon-star"><span class="icon-star" style="width:100%;"></span></div>
-						<span class="rstblock-monthsales">月售</span>
-						<div class="rstblock-cost">配送费:￥<?php echo e($v->month_num); ?></div>
-						<div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i 
-						style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
+						<span class="rstblock-monthsales">月售{{ $vo->month_num }}单</span>
+						<div class="rstblock-cost">配送费¥{{ 5 }}</div>
+						<div class="rstblock-cost">起送价¥{{ $vo->givemoney }}</div>
+						<div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
+									style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
 					</div>
-				
-				 
-				</a>
-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				  </a>
+				 @endforeach
 				</div>
 			<div class="loading ng-binding ng-isolate-scope" ng-show="rstStream.status === 'LOADING'" loading=""
 			     content="正在载入更多商家..." type="normal"><!-- ngIf: type==='profile' --> <!-- ngIf: type==='normal' --><img
 						ng-if="type==='normal'" class="normal ng-scope"
-						src="images/jiazai.gif" alt="正在加载">
+						src="{{asset('images/jiazai.gif')}}" alt="正在加载">
 				<!-- end ngIf: type==='normal' -->正在载入更多商家...
 			</div>
 			<div id="fetchMoreRst" ng-show="rstStream.status === 'NEED_USER_ACTION'" class="ng-hide">点击加载更多商家...</div>

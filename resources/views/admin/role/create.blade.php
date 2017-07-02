@@ -1,4 +1,5 @@
-    <?php $__env->startSection('content'); ?>
+@extends('admin.base')
+    @section('content')
         <!-- Content Header (Page header) -->
         <!-- Main content -->
         <section class="content">
@@ -8,24 +9,28 @@
               <!-- Horizontal Form -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><i class="fa fa-plus"></i> 添加管理员信息</h3>
+                  <h3 class="box-title"><i class="fa fa-plus"></i> 添加角色信息</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form action="<?php echo e(url('admin/user')); ?>" method="post" class="form-horizontal">
+                <form action="{{url('admin/role')}}" method="post" class="form-horizontal">
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                   <div class="box-body">
                     <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">姓名：</label>
+                      <label for="inputEmail3" class="col-sm-2 control-label">角色名称：</label>
                       <div class="col-sm-4">
-                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="姓名">
+                        <input type="text" name="role" class="form-control" id="inputEmail3" placeholder="角色名称">
                       </div>
                     </div>
                    
 				      	<div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">密码：</label>
-                      <div class="col-sm-4">
-                        <input type="password" class="form-control" id="inputPassword3" placeholder="密码" name="password">
-                      </div>
+                      <label for="inputPassword3" class="col-sm-2 control-label">当前状态：</label>
+                     <div class="col-sm-4">
+                        <label class="radio-inline">
+                          <input type="radio" name="status" id="inlineRadio1" value="1"> 启用
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="status" id="inlineRadio2" value="0"> 禁用
+                        </label>
                     </div>
 				 
                   </div><!-- /.box-body -->
@@ -34,7 +39,7 @@
 						<button type="submit" class="btn btn-primary">添加</button>
                     </div>
 					<div class="col-sm-1">
-						<button type="submit" class="btn btn-primary">重置</button>
+						<button type="reset" class="btn btn-primary">重置</button>
 					</div>
                   </div><!-- /.box-footer -->
                 </form>
@@ -44,5 +49,4 @@
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->
-    <?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    @endsection

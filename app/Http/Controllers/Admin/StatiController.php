@@ -1,5 +1,5 @@
 <?php
-
+//数据统计管理
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\controller;

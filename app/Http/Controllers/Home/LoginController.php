@@ -17,7 +17,9 @@ class LoginController extends Controller
    //执行用户登录
    public function doLogin(Request $request)
    {
-        
+        $user = $request->username();
+        echo $user['username'].'登录成功！';
+		return redirect("home/shoplist");
    }
    
    //加载验证码

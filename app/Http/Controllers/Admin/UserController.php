@@ -1,11 +1,11 @@
 <?php
-
+//普通会员管理器
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin_user;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Database\Query\Builder;
 class UserController extends Controller
 {
     /**
@@ -17,9 +17,8 @@ class UserController extends Controller
     {
 
 
-        $d= Admin_user::all();
-
-        return view("admin.user.index",["list"=>$d]);
+        $list= \DB::table("admin_user")->paginate(3);
+        return view("admin.user.index",["list"=>$list]);
         
     }
 
@@ -54,7 +53,7 @@ class UserController extends Controller
            
                 $id=\DB::table('Admin_user')->insertGetId($data);
                 if($id>0){
-                    $info="添管理员成功";
+                    $info="添加管理员成功";
                 }else{
                     $info="添加信息失败";
                 }
@@ -84,7 +83,6 @@ class UserController extends Controller
 
         return view("admin.user.edit",["v"=>$a]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -93,13 +91,22 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $data['name']=Admin_user::input("name");
-        $data['password']=md5(Admin_user::input("password"));
-        $data['update_at']=date("Y-m-d H:i:s",time());
-        Admin_user::update("update admin_user set ");
-    }
+    {  
 
+
+        
+         $data['name']=$request->input("name");
+
+       $data['password']=md5($request->input("password"));
+       $data['updated_at']=date("Y-m-d H:i:s",time());
+       
+      
+       if(\DB::table("admin_user")->where("id",$id)->update($data)){
+
+       return redirect("admin/user")->with("err","修改成功");
+   }
+        
+    }
     /**
      * Remove the specified resource from storage.
      *

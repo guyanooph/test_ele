@@ -1,5 +1,5 @@
 <?php
-
+//建议管理器
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\controller;
