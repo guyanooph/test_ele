@@ -322,7 +322,6 @@
             position: absolute;
         }</style>
     <meta charset="utf-8">
-    <meta name="_token" content="{{ csrf_token() }}"/>
     <title>吃货-开店申请</title>
     <meta name="description" content="吃货-开店申请">
     <meta id="viewport" name="viewport"
@@ -415,13 +414,13 @@
         <div class="store-info step-container ng-scope">
             <form name="storeForm" id="storeFormID" novalidate="" action="{{ url('merchant/register') }}" method="post"
                   enctype = "multipart/form-data" class="store-form form-horizontal ng-invalid ng-invalid-require ng-invalid-required ng-valid-maxlength ng-valid-pattern ng-valid-door-pic-input ng-valid-store-pic-input ng-submitted ng-dirty ng-valid-parse"
-                  style="" onsubmit="return doSubmit()">
+                  style="">
                 {{ csrf_field() }}
                 <div class="form-group flex">
                     <label for="store-name" class="control-label"> <b class="required">*</b>
                         账号 </label>
                     <div class="control-content">
-                        <input type="text" onblur="checkMername()" name="mername"/>
+                        <input type="text" name="mername"/>
 
                         <small class="control-label">
                             <div id="div_mername"></div>
@@ -433,7 +432,7 @@
                     <label for="store-name" class="control-label"> <b class="required">*</b>
                         密码 </label>
                     <div class="control-content">
-                        <input type="password" name="password" onblur="checkPass()"/>
+                        <input type="password" name="password"/>
 
                         <small class="control-label">
                             <div id="div_password"></div>
@@ -444,7 +443,7 @@
                     <label for="store-name" class="control-label"> <b class="required">*</b>
                         确认密码 </label>
                     <div class="control-content">
-                        <input type="password" name="repassword" onblur="checkRepass()"/>
+                        <input type="password" name="repassword"/>
 
                         <small class="control-label">
                             <div id="div_repassword"></div>
@@ -455,7 +454,7 @@
                     <label for="store-name" class="control-label"> <b class="required">*</b>
                         门店名称 </label>
                     <div class="control-content">
-                        <input type="text" name="shoptitle" onblur="checkShoptitle()"/>
+                        <input type="text" name="shoptitle"/>
                         <small class="control-label">
                             <div id="div_shoptitle"></div>
                         </small>
@@ -465,7 +464,7 @@
                 <div class="form-group flex">
                     <label for="store-name" class="control-label"> <b class="required">*</b>外卖电话 </label>
                     <div class="control-content">
-                        <input type="text" name="phone" onblur="checkPhone()"/>
+                        <input type="text" name="phone"/>
                         <small class="control-label">
                             <div id="div_phone"></div>
                         </small>
@@ -474,7 +473,7 @@
                 <div class="form-group flex">
                     <label for="contact-name" class="control-label"> <b class="required">*</b>真实姓名 </label>
                     <div class="control-content">
-                        <input type="text" name="username" onblur="checkUsername()" />
+                        <input type="text" name="username"/>
                         <small class="control-label">
                             <div id="div_username"></div>
                         </small>
@@ -484,7 +483,7 @@
                 <div class="form-group flex">
                     <label for="contact-name" class="control-label"> <b class="required">*</b>身份证号码 </label>
                     <div class="control-content">
-                        <input type="text" name="identity" onblur="checkIdentity()"/>
+                        <input type="text" name="identity"/>
                         <small class="control-label">
                             <div id="div_identity"></div>
                         </small>
@@ -1025,7 +1024,7 @@
         </div>
         <div class="footer-btns ng-scope">
             <button class="btn btn-default btn-pre" ui-sref="guide({ id: id })" href="/guide">返回上一步</button>
-            <button type="submit" form="storeFormID" class="btn btn-primary btn-next" ng-click="doSubmit()"
+            <button type="submit" form="storeFormID" class="btn btn-primary btn-next" ng-click="methods.submit()"
                     ng-disabled="data.isSubmitting || !mobile"> 提交并进入下一步
             </button>
         </div>
@@ -1039,6 +1038,118 @@
 {{--<script type="text/javascriot">--}}
 
 {{--</script>--}}
-<script type="text/javascript" src="{{ asset('js/register.js') }}"></script>
+<script type="text/javascript">
+    $(function () {
+        $('input[name = \'mername\']').change(function () {
+            //alert('ok');
+            if (($('input[name =\'mername\']').val()).match(/^\w{6,18}$/) == null) {
+
+                $('#div_mername').empty()
+
+                $('#div_mername').append('<span>请输入正确的账户名，6～18字母数字下划线</span>')
+                //alert('ok');
+            } else {
+                $('#div_mername').empty()
+                $('#div_mername').append('<span>可用</span>')
+                //$("#div_mername").empty();
+            }
+        })
+
+        $('input[name = \'password\']').change(function () {
+            //alert('ok');
+            if (($('input[name =\'password\']').val()).match(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/) == null) {
+
+                $('#div_password').empty()
+
+                $('#div_password').append('<span>请输入正确的密码，8到16位数字与字母组合</span>')
+                //alert('ok');
+            } else {
+                $('#div_password').empty()
+                $('#div_password').append('<span>可用</span>')
+                //$("#div_mername").empty();
+            }
+        })
+
+        $('input[name = \'repassword\']').change(function () {
+            //alert('ok');
+            if (($('input[name =\'password\']').val()) == $('input[name = \'repassword\']').val()) {
+
+
+                $('#div_repassword').empty()
+
+                $('#div_repassword').append('<span>密码一致，可用</span>')
+                //alert('ok');
+            } else {
+                $('#div_repassword').empty()
+                $('#div_repassword').append('<span>两次输入密码不同或格式错误，不可用</span>')
+                //$("#div_mername").empty();
+            }
+        })
+
+        $('input[name = \'shoptitle\']').change(function () {
+            //alert('ok');
+            if (($('input[name =\'shoptitle\']').val()).match(/^(\S){2,10}$/) == null) {
+
+                $('#div_shoptitle').empty()
+
+                $('#div_shoptitle').append('<span>账户名必须为2～10位非空白字符</span>')
+                //alert('ok');
+            } else {
+                $('#div_shoptitle').empty()
+                $('#div_shoptitle').append('<span>可用</span>')
+                //$("#div_mername").empty();
+            }
+        })
+
+        $('input[name = \'phone\']').change(function () {
+            //alert('ok');
+            if (($('input[name =\'phone\']').val()).match(/^(((1[0-9]{2}))+\d{8})$/) == null) {
+
+                $('#div_phone').empty()
+
+                $('#div_phone').append('<span>请输入正确格式的手机号码</span>')
+                //alert('ok');
+            } else {
+                $('#div_phone').empty()
+                $('#div_phone').append('<span>可用</span>')
+                //$("#div_mername").empty();
+            }
+        })
+
+        $('input[name = \'username\']').change(function () {
+            //alert('ok');
+            if (($('input[name =\'username\']').val()).match(/^(\S){2,8}$/) == null) {
+
+                $('#div_username').empty()
+
+                $('#div_username').append('<span>真实姓名必须为2～8位非空白字符</span>')
+                //alert('ok');
+            } else {
+                $('#div_username').empty()
+                $('#div_username').append('<span>可用</span>')
+                //$("#div_mername").empty();
+            }
+        })
+
+        $('input[name = \'identity\']').change(function () {
+            //alert('ok');
+            //if (($('input[name =\'identity\']').val()).match(/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/) == null ){
+            if (($('input[name =\'identity\']').val()).match(/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/) == null ){
+
+                    $('#div_identity').empty()
+
+                    $('#div_identity').append('<span>请输入合法的身份证号码</span>')
+                    //alert('ok');
+                } else {
+                    $('#div_identity').empty()
+                    $('#div_identity').append('<span>可用</span>')
+                    //$("#div_mername").empty();
+                }
+            }
+        })
+
+    })
+
+</script>
 </body>
 </html>
