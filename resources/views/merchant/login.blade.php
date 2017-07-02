@@ -8,7 +8,7 @@
      <!-- Bootstrap 3.3.4 -->
     <link href="{{asset('myadmin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
-    <link href="{{asset('myadmin/bootstrap/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" /> 
+    <link href="{{asset('myadmin/bootstrap/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="{{asset('myadmin/dist/css/AdminLTE.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
@@ -42,7 +42,7 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
-          <div class="col-xs-6"> 
+          <div class="col-xs-6">
               <div class="form-group has-feedback" style="width:140px;">
                 <input type="text" name="mycode" class="form-control" placeholder="code"/>
                 <span class="glyphicon glyphicon-th form-control-feedback"></span>
@@ -53,12 +53,12 @@
           </div>
           </div>
           <div class="row">
-            <div class="col-xs-8">    
+            <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
                   <input type="checkbox"> 记住账号
                 </label>
-              </div>                        
+              </div>
             </div><!-- /.col -->
             <div class="col-xs-4">
               <button type="submit" class="btn btn-primary btn-block btn-flat">登 陆</button>
@@ -75,7 +75,7 @@
     <!-- jQuery 2.1.4 -->
     <script src="{{asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="{{asset('myadmin/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>  
+    <script src="{{asset('myadmin/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <!-- iCheck -->
     <script src="{{asset('myadmin/plugins/iCheck/icheck.min.js')}}" type="text/javascript"></script>
     <script>

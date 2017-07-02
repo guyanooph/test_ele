@@ -19,7 +19,8 @@
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><i class="fa fa-th"></i> 普通管理员管理</h3>&nbsp;&nbsp;	<button class="btn btn-sm btn-primary" onclick="window.location='{{ URL('admin/user/create') }}'">添加</button>
+                  <h3 class="box-title"><i class="fa fa-th"></i> 普通管理员管理</h3>&nbsp;&nbsp;	
+                  <button class="btn btn-sm btn-primary" onclick="window.location='{{ URL('admin/user/create') }}'">添加</button>
                   <div class="box-tools">
                     <form action="{{url('admin/stu')}}" method="get">
                     <div class="input-group" style="width: 150px;">
@@ -54,7 +55,7 @@
 
                       <td>{{$v->addtime}}</td>
                       <td><button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> 
-                      <button onclick="window.location='{{ URL('admin/user') }}/{{$v->id}}/edit'"class="btn btn-xs btn-primary">编辑</button> </td>
+                      <button onclick="window.location='{{ URL('admin/user/edit')}}/{{ $v->id}}'"class="btn btn-xs btn-primary">编辑</button> </td>
                     </tr>
                     @endforeach
                   
@@ -62,7 +63,7 @@
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                 
+                 {{ $list->links() }}
                 </div>
               </div><!-- /.box -->
 

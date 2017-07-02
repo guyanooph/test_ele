@@ -1,6 +1,8 @@
 <?php
-
+//菜品分类管理
 namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Response;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +16,9 @@ class FtypeController extends Controller
      */
     public function index()
     {
-       return view("admin.ftype.index");
+        $list=\DB::table('mer_mid')->simplePaginate(10);
+
+       return view("admin.ftype.index",["list"=>$list]);
     }
 
     /**
@@ -24,18 +28,25 @@ class FtypeController extends Controller
      */
     public function create()
     {
-        return view("admin.ftype.create");
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //执行添加
     public function store(Request $request)
     {
-        //
+       $data=$request->only('title',"status");
+       $data['created_at']=date("Y-m-d H:i:s",time());
+      
+       if(\DB::table("mer_mid")->insert($data)){
+         return back()->with("err","添加成功");
+    }
+        
+      
+   
+     //$request->session()->flash("err",$info);
+    // return response()->json($info);
+     //
+      //return back()->with("err",$info);
     }
 
     /**
@@ -57,7 +68,9 @@ class FtypeController extends Controller
      */
     public function edit($id)
     {
-        //
+       $list=\DB::table("mer_mid")->where("id",$id)->first();
+     
+       return view("admin.ftype.edit",["list"=>$list]);
     }
 
     /**
@@ -69,7 +82,7 @@ class FtypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "Dd";
     }
 
     /**
@@ -80,6 +93,25 @@ class FtypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $a=\DB::table("mer_mid")->delete($id);
+        if($a>0){
+            $info="删除成功";
+        }else{
+            $info="删除失败";
+        }
+
+
+        return back()->with("err",$info);
     }
+
+
+//加载子类别添加页面
+    public function storyEr(Request $request)
+    {       $data=$request->only("mid","title");//获取表单中的商家id（mid），子类名称（title）
+            $data['created_at'] = date("Y-m-d H:i:s",time());
+        if(\DB::table("mer_sid")->insert($data)){
+            return back()->with("err","添加子类别成功");
+    }
+}
 }

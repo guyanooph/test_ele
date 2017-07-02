@@ -1,5 +1,5 @@
 <?php
-
+//超级管理员控制器
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin_root;

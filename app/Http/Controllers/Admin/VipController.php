@@ -1,5 +1,5 @@
 <?php
-
+//会员管理控制器
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;

@@ -1,5 +1,5 @@
 <?php
-
+//角色管理器
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -16,8 +16,10 @@ class RoleController extends Controller
     {
        
 
-        $list=Admin_role::all();
+        $list=\DB::table('admin_role')->paginate(3);
+
        
+        //return $list;die;
         return view("admin.role.index",['list'=>$list]);
     }
 
@@ -28,7 +30,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.role.create');
     }
 
     /**
@@ -39,7 +41,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        $b=$request->only("role",'status');
+        $b['created_at']=date("Y-m-d H:i:s",time());
+        if(Admin_role::insert($b)){
+            $info="添加成功";
+        }else{
+            $info="添加失败";
+        }
+
+       
+        return redirect("admin/role")->with("err",$info);
     }
 
     /**
@@ -61,7 +73,12 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+
+
+
+        $list=\DB::table('admin_role')->where("id",$id)->first();
+        return view("admin.role.edit",['list'=>$list]);
+       
     }
 
     /**
@@ -73,7 +90,16 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $db=$request->only("role","status");
+        $db['updated_at']=date("Y-m-d H:i:s",time());
+        $a=\DB::table("admin_role")->where("id",$id)->update($db);//执行修改
+        if($a){
+            $info="修改成功";
+        }else{
+            $info="修改失败";
+        }
+        return redirect("admin/role")->with("err",$info);
     }
 
     /**
@@ -84,6 +110,32 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
+        $a=\DB::table('admin_role')->delete($id);
+        if($a>0){
+            $info="删除成功";
+        }else{
+            $info="删除失败";
+        }
+         \Session::flash('err',$info);
+       return redirect("admin/role");   
     }
+
+    //为当前角色分配节点信息
+    public function loadNode($rid=0)
+    {
+        
+        //获取所有节点信息
+        $nodelist = \DB::table("admin_node")->get();
+
+        //获取当前角色的节点ID
+        //$nids = \DB::table("admin_node")->where("rid",$rid)->list;
+        $nids = \DB::select("select nid from r_n where rid={$rid}");//获取r_n表中的角色节点ID nid
+            
+        //加载模板
+        return view("admin.role.nodelist",["rid"=>$rid,"nodelist"=>$nodelist,"nids"=>$nids]);
+     
+ }
+
 }
