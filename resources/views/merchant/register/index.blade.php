@@ -978,9 +978,7 @@
                             <ng-transclude class="img-container">
                                 <div class="img-flow ng-scope ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-door-pic-input"
                                      name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
-                                    <img ng-class="{ 'show': ngModel &amp;&amp; isUploadStatus !== 1 }" safe-img=""
-                                         mobile="18851457819" safe-src="ngModel" class="ng-isolate-scope" src=""
-                                         ng-src="">
+
                                     <input type="file" accept="image/*" name="logoname">
                                     <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img
                                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAABGdBTUEAALGPC/xhBQAAArRJREFUSA29lj2IE0EUx929TQxaBCxsPPQQTg4CCfnAVomF1x1cdXCF4AeKFmLlIYJYCNqJWghHCgXxKsHCwsJgpRzmw8RGEfzgBMHCSiUmZuPvrXubvWRnd/aQG5h7b97H//9m581cjG0xR61WmyHlFPOoYRj7JH0wGHxGPGUul0qlt2LTHYZuICQTjUbjOvICOROKvD8UdbNQKCwh+4qYDWatAiA16/X6IzLnNmSrF4+LxeI8RdjqkH8eMypA/M1m8wpCl1xS5twc0UNH5BdotVqTvV7vPSipUKRxZyeRSEzncrkv466hJfIL9Pv9RcLjkgtDys0dsgVokQXYtn0kIE/LpJMbWQCNNKnFFhCkkzvWA5z5bs58AbyyAHADcuhWAL6OqQdGGwzpgyo9sUJPfPMnegUQZHDVLpJwGX2nP+h/6WD/APsaV/QG+kBwnQIwmjwyD5Cy87hDHhzVwxSIBfkKj9Ui0nZ6gJ1fjUsuycz5dDq9C/kykElhFC7hFLfRbrf3d7tdeb8TiniV+Rbv/nlxuhhvUHeoggPsvWQyOWPScKdxxiX/SENdWgfNZrMf0L31uj1CJoRbjmA2InDMzSc/STf/9DtorNvYX/htGvqsyXlMaQR6IZAsQ1b1DK6C3bYs6zjLzqhPtRZu+QJx7ngnlUotqQD5Ku8o5K7KH2C3pIDQfxb+JMDXMpnMd79tVGdXr0dtIes12f0z5oGQIM8F+DTX5yFScr5yC56Ik19Je03TPMTbv4elczPErjGqFruqEHgGUO9VDEskbgG/zCbTKQDyg5DfD8sb9cErL2HFpKHqgMZKHgXb5PqecEsPyDjLXHW0rfmzyqbPCZVTAGf5C73M3IovIRxll3N4BV3DMX7L3eE8T1DhYc5pCrmdhE0PMH6D8Qn5nF6p5PP5V36wvySB+WxWUYFgAAAAAElFTkSuQmCC"><br>

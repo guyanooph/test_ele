@@ -147,7 +147,7 @@ Route::post("merchant/ver_i","Merchant\RegisterController@ver_i");//注册身份
 //Route::get("merchant/register1","Merchant\RegisterController@resize");
 
 //商家后台管理
-Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {
+Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
 	Route::resource('merchantopen', "Merchant\MerchantopenController");//营业信息管理
 	//Route::resource('merchantopen/edit', "Merchant\MerchantopenController@edit");//修改营业信息
