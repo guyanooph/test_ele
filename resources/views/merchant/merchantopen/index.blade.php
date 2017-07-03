@@ -46,7 +46,7 @@
 					  <th>状态</th>
                       <th style="width: 100px">操作</th>
                     </tr>
-                    @foreach ($table as $merchantopen)
+                    @foreach ($list as $merchantopen)
 					   <tr>
 					       <td>{{ $merchantopen->id }}</td>
 						   <td>{{ $merchantopen->shopid }}</td>
@@ -54,7 +54,7 @@
 						   <td>{{ $merchantopen->opentime }}</td>
 						   <td>{{ $merchantopen->overtime }}</td>
 						   <td>{{ $merchantopen->givemoney }}</td>
-						   <td>{{ $merchantopen->method }}</td>
+						   <td>@if ($merchantopen->method=="0")自营快送 @else ($merchantopen->method=="1")蜂鸟快送 @endif</td>
 						   <td>{{ $merchantopen->money }}</td>
 						   <td>{{ $merchantopen->num }}</td>
 						   <td>@if ($merchantopen->state=="0")营业 @else ($merchantopen->state=="1")歇业 @endif</td>
@@ -67,7 +67,7 @@
                
               </div><!-- /.box -->
 
-              
+             
               
             </div><!-- /.col onclick="/merchantopen/{{ $merchantopen->id }}/edit"-->
             

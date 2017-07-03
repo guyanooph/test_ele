@@ -28,7 +28,18 @@
                 <form class="form-horizontal" action="{{ URL('/merchant/merchantopen/update') }}/{{ $merchantopen->id }}" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
+				  
                   <div class="box-body">
+<<<<<<< HEAD
+=======
+				   
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">商家Id：</label>
+                      <div class="col-sm-4">
+                        <input type="text" name="shopid" class="form-control" id="inputEmail3" value="{{ $merchantopen->shopid }}">
+                      </div>
+                    </div>
+>>>>>>> 19baee58d8caecc409d1d496bf8588d392d14304
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">商家名称：</label>
                       <div class="col-sm-4">
@@ -57,10 +68,10 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">配送方式：</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="method" {{ ($merchantopen->method == 0)?"checked":"" }} value="0">自营快送  &nbsp; &nbsp;
+                           <input type="radio"  name="method" '{{ ($merchantopen->method == 0)?"checked":"" }}' value="0">自营快送  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="method" {{ ($merchantopen->method == 1)?"checked":"" }} value="1">蜂鸟快送 
+                           <input type="radio"  name="method" '{{ ($merchantopen->method == 1)?"checked":"" }}' value="1">蜂鸟快送 
                         </label>
                       </div>
                     </div>
