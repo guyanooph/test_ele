@@ -23,7 +23,7 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i>编辑菜单种类</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="<?php echo e(URL('merchant/foodtype')); ?>/<?php echo e($type->id); ?>" method="post">
+                <form class="form-horizontal" action="<?php echo e(URL('merchant/foodtype/update')); ?>/<?php echo e($type->id); ?>" method="post">
                   <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                   <input type="hidden" name="_method" value="put">
                   <div class="box-body">

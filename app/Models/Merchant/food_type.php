@@ -4,7 +4,7 @@ namespace App\Models\Merchant;
 
 use Illuminate\Database\Eloquent\Model;
 
-class food_type extends Model
+class Food_type extends Model
 {
     protected $table = 'food_type';
 	

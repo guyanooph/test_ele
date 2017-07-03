@@ -1,6 +1,6 @@
 
     <!-- form start -->
-    <form action="<?php echo e(url('merchant/foodtype')); ?>" method="post" id="myaddform" class="form-horizontal">
+    <form action="<?php echo e(url('merchant/foodtype/store')); ?>" method="post" id="myaddform" class="form-horizontal">
       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 	  <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
       <input type="hidden" name="shopid" value="<?php echo e($v->shopid); ?>">

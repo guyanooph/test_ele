@@ -1,6 +1,6 @@
 
     <!-- form start -->
-    <form action="{{url('merchant/foodtype')}}" method="post" id="myaddform" class="form-horizontal">
+    <form action="{{url('merchant/foodtype/store')}}" method="post" id="myaddform" class="form-horizontal">
       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 	  @foreach($list as $v)
       <input type="hidden" name="shopid" value="{{$v->shopid}}">

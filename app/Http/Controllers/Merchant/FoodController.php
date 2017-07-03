@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Merchant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Merchant\Food;
+use App\Models\Merchant\Food_type;
 
 class FoodController extends Controller
 {
@@ -18,9 +19,9 @@ class FoodController extends Controller
 		//$db = \DB::select("select * from food order by concat(shopid,id) asc");
 		//$db = \DB::table("food");
 		//$list = $db->paginate(5); //5条每页浏览
-       $list = Food::select('id','typeid','shopid','title','picname','descr','price','num','food_rate','norms','stutas','create_time')->orderBy('id', 'desc')->paginate(1);
        
-       
+	   $list = Food::where('shopid', '=', 1)->paginate(1);
+        
        //遍历当前数据并添加商品类别名称
        foreach($list as $v){
            $name = \DB::table("food_type")->where("id",$v->typeid)->value("title");
@@ -39,7 +40,6 @@ class FoodController extends Controller
     public function create()
     {
         $list = \DB::select("select * from food_type order by concat(path,id) asc");
-        //$list = Food_type::all();
         //处理信息
         foreach($list as &$v){
             $m = substr_count($v->path,","); //获取path中的逗号
@@ -74,7 +74,7 @@ class FoodController extends Controller
         }
         
         //执行添加
-        $id = \DB::table("food")->insertGetId($data);
+        $id = Food::insertGetId($data);
         //判断
         if($id>0){
             $info = "类别信息添加成功！";
@@ -103,9 +103,17 @@ class FoodController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $type = \DB::table("food")->where("id",$id)->first(); //获取要编辑的信息
-        return view("merchant.food.edit",["type"=>$type]);
+    { 
+		$food = Food::where("id",$id)->first(); //获取要编辑的信息
+		$list = \DB::select("select * from food_type order by concat(path,id) asc");
+        //处理信息
+        foreach($list as &$v){
+            $m = substr_count($v->path,","); //获取path中的逗号
+            //生成缩进
+            $v->title = str_repeat("&nbsp;",($m-1)*8)."|--".$v->title;
+        } 
+       
+        return view("merchant.food.edit",["type"=>$food],["list"=>$list]); 
     }
 
     /**
@@ -119,9 +127,6 @@ class FoodController extends Controller
     {
         
         //表单验证
-        $this->validate($request, [
-            'title' => 'required|max:16',
-        ]);
         $data = $request->only("title");
         //$data['updated_at'] = time();
         $id = \DB::table("food")->where("id",$id)->update($data);
