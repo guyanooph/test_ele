@@ -26,9 +26,9 @@ Route::post('/dologin',"Home\LoginController@doLogin"); //执行前台登录
 Route::get('/logout',"Home\LoginController@logout"); //执行退出
 Route::get('/getcode',"Home\LoginController@getCode"); //加载验证码
 
-Route::get('/shoplist','Home\ShopController@list'); //商家信息列表
+Route::get('/shoplist','Home\ShopController@index'); //商家信息列表
 
-Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
+Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
 //Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
 
 
