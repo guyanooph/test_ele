@@ -15,8 +15,15 @@ class MerchantopenController extends Controller
      */
     public function index()
     {
+
 		//$list = merchantopen::all();
 		$list = merchantopen::all()->where('shopid',1);//
+
+		
+		/* //判断并封装搜索条件
+        $params = array();
+		$list = merchantopen::all();//查询所有参数
+
 		//判断并封装搜索条件
        /*  $params = array();
         if(!empty($_GET['name'])){
@@ -90,16 +97,11 @@ class MerchantopenController extends Controller
     {
 		//dd($id);
         //执行修改
-		$data = $request->all();//获取要添加的参数
-        unset($data['_token']);//移除提交的_token
-		unset($data['_method']);//移除提交的_method
-		/* $this->validate($request, [//执行表单验证
-            'name' => 'required|max:16',
-        ]);
-        $data = $request->only("name","state");
-        $data['updated_at'] = time(); */
-        //$table = merchantopen::where("id",$id)->update($data);
-        $table =\DB::table("merchant_open")->where("id",$id)->update($data);
+		//$data = $request->only('name','opentime','overtime','givemoney','method','state','money','num');//获取要添加的参数
+		$data = $request->all();
+        unset($data['_token']);//移除_token参数
+        unset($data['_method']);//移除_token参数
+        $table = \DB::table("merchant_open")->where("id",$id)->update($data);
         //dd($data);
         if($table>0){
             return redirect('merchant/merchantopen');

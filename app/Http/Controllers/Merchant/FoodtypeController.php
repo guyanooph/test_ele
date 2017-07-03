@@ -131,7 +131,8 @@ class FoodtypeController extends Controller
      */
     public function destroy($id)
     {
-        //先判断当前类别下是否存在子类别
+        
+		//dd("aaa");//先判断当前类别下是否存在子类别
         $m = \DB::table('food_type')->where('pid',$id)->count();
         if($m>0){
             return back()->with("err","禁止删除");

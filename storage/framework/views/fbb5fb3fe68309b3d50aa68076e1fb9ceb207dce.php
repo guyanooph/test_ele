@@ -1,7 +1,4 @@
-@extends('merchant.base')
-
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -26,18 +23,18 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i>编辑菜单种类</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{URL('merchant/food/')}}/{{ $type->id }}" method="post">
-                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <form class="form-horizontal" action="<?php echo e(URL('merchant/food/')); ?>/<?php echo e($type->id); ?>" method="post">
+                  <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                   <input type="hidden" name="_method" value="put">
                   <div class="box-body">
 				  <div class="form-group">
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>
 					  <div class="col-sm-4">
 						<select name="typeid">
-							@foreach($list as $v)
-								<option value="0">请选择</option>
-								<option value="{{$v->id}}">{{$v->title}}</option>
-							@endforeach
+							<option value="0">请选择</option>
+								<?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<option value="<?php echo e($v->id); ?>"><?php echo e($v->title); ?></option>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						</select>
 					  </div>
 					</div>
@@ -46,7 +43,7 @@
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">菜名：</label>
                       <div class="col-sm-4">
-                        <input type="text" name="title" class="form-control" value="{{ $type->title }}">
+                        <input type="text" name="title" class="form-control" value="<?php echo e($type->title); ?>">
                       </div>
                     </div>
 
@@ -64,15 +61,15 @@
 				<div class="row"><div class="col-sm-12">&nbsp;</div></div>
 				<div class="row"><div class="col-sm-12">
                 <br/>
-                @if (count($errors) > 0)
+                <?php if(count($errors) > 0): ?>
                     <div class="alert alert-danger">
                         <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><?php echo e($error); ?></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
                 </div></div>
               </div><!-- /.box -->
        
@@ -80,5 +77,6 @@
           </div>   <!-- /.row -->
         </section><!-- /.content -->
         
-    @endsection
+    <?php $__env->stopSection(); ?>
   
+<?php echo $__env->make('merchant.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

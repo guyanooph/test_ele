@@ -91,7 +91,11 @@
       <script type="text/javascript">
             function doDel(id){
                 if(confirm('确定要删除吗？')){
+<<<<<<< HEAD
                     $("#mydeleteform").attr("action","<?php echo e(url('admin/stu')); ?>/"+id).submit(); 
+=======
+                    $("#mydeleteform").attr("action","<?php echo e(url('merchant/food')); ?>/"+id).submit(); 
+>>>>>>> 7b11977032ff4e070b7021d221aea79c05833193
                 }
             }
       </script>
