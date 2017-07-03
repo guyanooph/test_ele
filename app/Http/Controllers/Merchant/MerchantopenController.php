@@ -13,9 +13,10 @@ class MerchantopenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-		$list = merchantopen::all();//查询所有参数
+		//$list = merchantopen::all();
+		$list = merchantopen::all()->where('shopid',1);//
 		//判断并封装搜索条件
        /*  $params = array();
         if(!empty($_GET['name'])){
@@ -73,9 +74,9 @@ class MerchantopenController extends Controller
     {
         //加载修改页面
 		//return "你的厚爱！";
-		$table = merchantopen::where("id",$id)->first();
+		$table = merchantopen::where("id",$id)->first();//获取单条信息参数
 		
-		return view("merchant.merchantopen.edit",['merchantopen'=>$table]); 
+		return view("merchant.merchantopen.edit",['merchantopen'=>$table]);//加载页面
     }
 
     /**
@@ -117,6 +118,7 @@ class MerchantopenController extends Controller
     {
         //执行删除
 		\DB::table("merchant_open")->where("id",$id)->delete();
-		return redirect('merchant/merchantopen');
+		//return "fuck";
+		return redirect('merchant/merchantopen')->with("err","删除成功");
     }
 }

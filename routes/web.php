@@ -150,10 +150,13 @@ Route::post("merchant/ver_i","Merchant\RegisterController@ver_i");//注册身份
 //Route::get("merchant/register1","Merchant\RegisterController@resize");
 
 //商家后台管理
-Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {
-	Route::get("/","Merchant\IndexController@index");//管理首页
-	Route::resource('/merchantopen', "Merchant\MerchantopenController");//营业信息管理
-	Route::resource('/order', "Merchant\OrderController");//订单信息管理
-	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
-	Route::resource("/food","Merchant\FoodController");//管理首页
+Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
+	Route::delete('/merchantopen/destroy/{id}', "Merchant\MerchantopenController@destroy");//执行删除
+	
+	Route::get('/order', "Merchant\OrderController@index");//订单信息管理
+	Route::get('/order/create', "Merchant\OrderController@create");//添加订单
+	Route::post('/order', "Merchant\OrderController@store");//执行添加
+	Route::delete('/order/destroy/{id}', "Merchant\OrderController@destroy");//执行删除
+	Route::get('/order/edit/{id}', "Merchant\OrderController@edit");//修改订单信息页
+	Route::post('/order/update/{id}', "Merchant\OrderController@update");//执行修改
 });

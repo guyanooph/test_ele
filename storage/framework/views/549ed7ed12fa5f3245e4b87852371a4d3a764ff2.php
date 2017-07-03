@@ -1,5 +1,4 @@
-@extends('merchant.base')
-    @section('content')
+    <?php $__env->startSection('content'); ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -21,7 +20,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
                   <div class="box-tools">
-                    <form action="{{url('merchant/merchantopen')}}" method="get">
+                    <form action="<?php echo e(url('merchant/merchantopen')); ?>" method="get">
                     <div class="input-group" style="width: 150px;">
                       <input type="text" name="name" class="form-control input-sm pull-right" placeholder="商家"/>
                       <div class="input-group-btn">
@@ -46,51 +45,48 @@
 					  <th>状态</th>
                       <th style="width: 100px">操作</th>
                     </tr>
-                    @foreach ($list as $merchantopen)
+                    <?php $__currentLoopData = $table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $merchantopen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 					   <tr>
-					       <td>{{ $merchantopen->id }}</td>
-						   <td>{{ $merchantopen->shopid }}</td>
-						   <td>{{ $merchantopen->name }}</td>
-						   <td>{{ $merchantopen->opentime }}</td>
-						   <td>{{ $merchantopen->overtime }}</td>
-						   <td>{{ $merchantopen->givemoney }}</td>
-						   <td>@if ($merchantopen->method=="0")自营快送 @else ($merchantopen->method=="1")蜂鸟快送 @endif</td>
-						   <td>{{ $merchantopen->money }}</td>
-						   <td>{{ $merchantopen->num }}</td>
-						   <td>@if ($merchantopen->state=="0")营业 @else ($merchantopen->state=="1")歇业 @endif</td>
-						   <td><button class="btn btn-xs btn-primary" onclick="window.location='{{ URL('/merchant/merchantopen/edit') }}/{{ $merchantopen->id }}'">编辑</button> 
-                            <button class="btn btn-xs btn-danger" onclick="doDel({{ $merchantopen->id }})">删除</button></td>
+					       <td><?php echo e($merchantopen->id); ?></td>
+						   <td><?php echo e($merchantopen->shopid); ?></td>
+						   <td><?php echo e($merchantopen->name); ?></td>
+						   <td><?php echo e($merchantopen->opentime); ?></td>
+						   <td><?php echo e($merchantopen->overtime); ?></td>
+						   <td><?php echo e($merchantopen->givemoney); ?></td>
+						   <td><?php echo e($merchantopen->method); ?></td>
+						   <td><?php echo e($merchantopen->money); ?></td>
+						   <td><?php echo e($merchantopen->num); ?></td>
+						   <td><?php if($merchantopen->status=="0"): ?>营业 <?php else: ?> 男 <?php endif; ?></td>
+						   <td><a href="/merchantopen/<?php echo e($merchantopen->id); ?>/edit">编辑</a> 
+                            <a href="javascript:doDel(<?php echo e($merchantopen->id); ?>)">删除</a></td>
                        </tr>
-                   @endforeach
+                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </table>
                 </div><!-- /.box-body -->
                
               </div><!-- /.box -->
 
-             
               
-            </div><!-- /.col onclick="/merchantopen/{{ $merchantopen->id }}/edit"-->
+              
+            </div><!-- /.col -->
             
           </div><!-- /.row -->
          
         </section><!-- /.content -->
-        <form action="{{url('merchant/merchantopen')}}" style="display:none;" id="mydeleteform" name="myform" method="post">
+        <form action="" style="display:none;" id="mydeleteform" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="_method" value="DELETE">
         </form>
-    @endsection
+    <?php $__env->stopSection(); ?>
     
     
-    @section("myscript")
+    <?php $__env->startSection("myscript"); ?>
       <script type="text/javascript">
             function doDel(id){
-            Modal.confirm({msg: "是否删除信息？"}).on(function(e){
-                if(e){
-                   var form = document.myform;
-                    form.action = "{{URL('merchant/merchantopen/destroy')}}/"+id;
-                    form.submit(); 
+                if(confirm('确定要删除吗？')){
+                    $("#mydeleteform").attr("action","<?php echo e(url('merchant/merchantopen')); ?>/"+id).submit(); 
                 }
-              });
-        }
+            }
       </script>
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('merchant.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

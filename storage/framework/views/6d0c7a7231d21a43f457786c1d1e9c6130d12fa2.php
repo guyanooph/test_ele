@@ -1,7 +1,4 @@
-@extends('merchant.base')
-
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- Content Header (Page header) -->
         <section class="content-header">
 			<h1>
@@ -26,9 +23,8 @@
 					<h3 class="box-title"><i class="fa fa-plus"></i> 添加操作订单信息页面</h3>
 					</div><!-- /.box-header -->
 					<!-- form start -->
-					<form class="form-horizontal" action="{{URL('merchant/order')}}" method="post">
+					<form class="form-horizontal" action="<?php echo e(URL('merchant/order')); ?>" method="post">
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-						
 						<div class="box-body">
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">订单号：</label>
@@ -51,13 +47,13 @@
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">商家名称：</label>
 								<div class="col-sm-4">
-									<input type="name" name="shop_name" class="form-control" placeholder="商家名称">
+									<input type="text" name="shop_name" class="form-control" placeholder="商家名称">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">商家电话：</label>
 								<div class="col-sm-4">
-									<input type="number" name="shop_phone" class="form-control" placeholder="商家电话">
+									<input type="text" name="shop_phone" class="form-control" placeholder="商家电话">
 								</div>
 							</div>
 							<div class="form-group">
@@ -164,22 +160,22 @@
 								<button type="submit" class="btn btn-primary">添加</button>
 							</div>
 							<div class="col-sm-1">
-								<button type="reset" class="btn btn-primary">重置</button>
+								<button type="submit" class="btn btn-primary">重置</button>
 							</div>
 						</div><!-- /.box-footer -->
 					</form>
 				<div class="row"><div class="col-sm-12">&nbsp;</div></div>
 				<div class="row"><div class="col-sm-12">
                 <br/>
-                @if (count($errors) > 0)
+                <?php if(count($errors) > 0): ?>
                     <div class="alert alert-danger">
                         <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><?php echo e($error); ?></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
                 </div></div>
 				</div><!-- /.box -->
        
@@ -187,4 +183,5 @@
           </div>   <!-- /.row -->
         </section><!-- /.content -->
         
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('merchant.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
