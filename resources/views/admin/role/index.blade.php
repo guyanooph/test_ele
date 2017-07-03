@@ -56,7 +56,9 @@
                       <td>{{$v->created_at}}</td>
                       <td><button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> 
                       <button onclick="window.location='{{URL('admin/role/edit')}}/{{$v->id}}'" class="btn btn-xs btn-primary">编辑</button>
-                       <button class="btn btn-xs btn-success" onclick="window.location='{{URL('admin/role/loadNode')}}/{{$v->id}}'">分配节点</button></td>
+                      <!-- <button class="btn btn-xs btn-success" onclick="window.location='{{URL('admin/role/loadNode')}}/{{$v->id}}'">分配节点</button>-->
+                       <button class="btn btn-xs btn-success" onclick="loadNode('{{$v->id}}','{{$v->role}}')">分配节点</button>
+                      </td>
                     
                     </tr>
                     @endforeach
@@ -92,7 +94,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            <button type="button" onclick="saveNode()" class="btn btn-primary">保存</button>
+          <button type="button" onclick="saveNode()" class="btn btn-primary">保存</button>
           </div>
         </div>
       </div>
@@ -116,7 +118,7 @@
         $.ajax({
             url:"{{URL('admin/role/loadNode')}}/"+rid,
             type:"get",
-            dataType:"text",
+            dataType:"html",
             async:true,
             success:function(data){
               $('#exampleModal .modal-body').html(data);
@@ -124,6 +126,21 @@
         });
       }
 
+      //保存节点信息
+      function saveNode(){
+ $.ajax({
+          url:"{{URL('admin/role/saveNode')}}",
+          type:"post",
+          dataType:"text",
+          //data:$("#nodelistform").serialize(),
+          async:true,
+          success:function(data){
+           // $('#exampleModal').modal('hide');
+           // Modal.alert({msg:data,titel:'信息提示',btnok:'确定',btncl:'取消'});
+           alert("ss");
+          },
+        });
+      }
 
       </script>
     @endsection
