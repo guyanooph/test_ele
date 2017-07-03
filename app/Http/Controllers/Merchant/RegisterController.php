@@ -88,48 +88,61 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        if($request->file('picname') && $request->file('picname')->isValid()){
-            $file = $request ->file('picname');
-            $ext = $file ->extension();
-            $filename = time().rand(10000,9999).".".$ext;
-            $file ->move("./upload/",$filename);
-        }
-        Image::imageResize("$filename","./upload/",100,100,"s_");
-        Image::imageResize("$filename","./upload/",500,500,"m_");
-        Image::imageResize("$filename","./upload/",900,900,"x_");
 
+        \DB::beginTransaction();    // 事物开始
+        try {
+            if ($request->file('picname') && $request->file('picname')->isValid()) {
+                $file = $request->file('picname');
+                $ext = $file->extension();
+                $filename = time() . rand(10000, 9999) . "." . $ext;
+                $file->move("./upload/", $filename);
+            }
 
-        if($request->file('logoname') && $request->file('logoname')->isValid()){
-            $file = $request ->file('logoname');
-            $ext = $file ->extension();
-            $filename = time().rand(10000,9999).rand(10000,9999).".".$ext;
-            $file ->move("./upload/",$filename);
-        }
-        Image::imageResize("$filename","./upload/",100,100,"s_");
-        Image::imageResize("$filename","./upload/",500,500,"m_");
-        Image::imageResize("$filename","./upload/",900,900,"x_");
+            if ($request->file('logoname') && $request->file('logoname')->isValid()) {
+                $file = $request->file('logoname');
+                $ext = $file->extension();
+                $filename = time() . rand(10000, 9999) . rand(10000, 9999) . "." . $ext;
+                $file->move("./upload/", $filename);
+            }
 
-        $input = $request->only(['mername','password','shoptitle','phone','identity','username','picname','logoname']);
-        //dd($input);
-        $input['first_ip'] = $request->getClientIp();
-        //dd($input['first_ip']);
-        $input['register_time'] = date("Y-m-d H:i:s", time());
-        //dd($input['register_time']);
-        //$aa = mer_register::InsertGetId($input);还需要弥补注册IP和注册时间
-        //往不同的表去添加数据，需要开启事务！
-       $aa = \DB::table('mer_register')->InsertGetId($input);
-        //var_dump($aa);
-        if($aa>0){
-            echo '注册成功';
-        }else{
-            echo "注册失败";
-        }
+            //商家注册表
+            $input = $request->only(['mername', 'password', 'shoptitle', 'phone', 'identity', 'username', 'picname', 'logoname']);
+            $password = md5($input['password']);
+            $password = md5(substr_replace($password, $input['phone'], 0, 4));
+            $input['password'] = $password;
+            $input['first_ip'] = $request->getClientIp();
+            $input['register_time'] = date("Y-m-d H:i:s", time());
+            $res1 = \DB::table('mer_register')->InsertGetId($input);
+            //dd($res1);
+            //商家登录表
+            $info['shopid'] = $res1;
+            $info['phone'] = $input['phone'];
+            $info['password'] = $input['password'];
+            $info['shopname'] = $input['shoptitle'];
+            $res2 = \DB::table('mer_login')->InsertGetId($info);
 
+            //商家表
+            $data['shopid'] = $info['shopid'];
+            $data['shopname'] = $info['shopname'];
+            $data['logo'] = $input['logoname'];
+            $data['phone'] = $input['phone'];
+            $res3 = \DB::table('merchant')->InsertGetId($data);
 
+            $res = $res1 && $res2 && $res3;
+            if ($res) {
+                \DB::commit();
+            }
+        }catch(\PDOException $e) {
+            \DB::rollback();
+            $list = "有点问题，再来注册吧(其实是事务回滚)";
+            return view('errors.503', compact('list'));
+        };
+        $list = "恭喜您！旺铺正在审核中，请等待!";
+        return view('errors.503', compact('list'));
+    }
 
 //        $flight->save();
 //        return view('merchant.login',['merchant_register',$merchant_register]);
-    }
 
     /**
      * Display the specified resource.
