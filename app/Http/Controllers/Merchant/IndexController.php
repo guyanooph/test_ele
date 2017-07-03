@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Merchant;
 
-use App\Http\Controllers\controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 class IndexController extends Controller

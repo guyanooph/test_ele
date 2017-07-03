@@ -34,7 +34,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-             \App\Http\Middleware\AdminMiddleware::class,
+            \App\Http\Middleware\AdminMiddleware::class,
+            //\App\Http\Middleware\MerchantMiddleware::class
         ],
 
         'api' => [
@@ -58,6 +59,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'Admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'merchant' => \App\Http\Middleware\MerchantMiddleware::class,
+        'merchant' => \App\Http\Middleware\MerchantMiddleware::class
     ];
 }
