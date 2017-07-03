@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Merchant;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Merchant\Mer_register;
+use App\Org\Image;
 class RegisterController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class RegisterController extends Controller
         //$list = array('id'=>1,'content'=>'注册成功');
 //        return view('merchant.register.index',compact('$list'));
         //return view('merchant.register.index',［'list'=>""］);
-        return view("merchant.register.index",['title'=>"注册成功"]);
+        return view("merchant.register.index");
     }
 
     /**
@@ -38,9 +39,96 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //检验商户用户名
+    public function ver(Request $request){
+        $mername = $request->input('mername');
+        $res= \DB::table('mer_register')->where('mername',$mername)->first();
+        if($res){
+            echo "y";
+        }else{
+            echo "n";
+        }
+    }
+
+    //检验商户店铺名
+    public function ver_s(Request $request){
+        $shoptitle = $request->input('shoptitle');
+        $res= \DB::table('mer_register')->where('shoptitle',$shoptitle)->first();
+        if($res){
+            echo "y";
+        }else{
+            echo "n";
+        }
+    }
+
+    //检验手机号码
+    public function ver_p(Request $request){
+        $phone = $request->input('phone');
+        $res= \DB::table('mer_register')->where('phone',$phone)->first();
+        if($res){
+            echo "y";
+        }else{
+            echo "n";
+        }
+    }
+
+
+
+    //检验身份证号码
+    public function ver_i(Request $request){
+        $identity = $request->input('identity');
+        $res= \DB::table('mer_register')->where('identity',$identity)->first();
+        if($res){
+            echo "y";
+        }else{
+            echo "n";
+        }
+    }
+
     public function store(Request $request)
     {
-        //
+        if($request->file('picname') && $request->file('picname')->isValid()){
+            $file = $request ->file('picname');
+            $ext = $file ->extension();
+            $filename = time().rand(10000,9999).".".$ext;
+            $file ->move("./upload/",$filename);
+        }
+        Image::imageResize("$filename","./upload/",100,100,"s_");
+        Image::imageResize("$filename","./upload/",500,500,"m_");
+        Image::imageResize("$filename","./upload/",900,900,"x_");
+
+
+        if($request->file('logoname') && $request->file('logoname')->isValid()){
+            $file = $request ->file('logoname');
+            $ext = $file ->extension();
+            $filename = time().rand(10000,9999).rand(10000,9999).".".$ext;
+            $file ->move("./upload/",$filename);
+        }
+        Image::imageResize("$filename","./upload/",100,100,"s_");
+        Image::imageResize("$filename","./upload/",500,500,"m_");
+        Image::imageResize("$filename","./upload/",900,900,"x_");
+
+        $input = $request->only(['mername','password','shoptitle','phone','identity','username','picname','logoname']);
+        //dd($input);
+        $input['first_ip'] = $request->getClientIp();
+        //dd($input['first_ip']);
+        $input['register_time'] = date("Y-m-d H:i:s", time());
+        //dd($input['register_time']);
+        //$aa = mer_register::InsertGetId($input);还需要弥补注册IP和注册时间
+        //往不同的表去添加数据，需要开启事务！
+       $aa = \DB::table('mer_register')->InsertGetId($input);
+        //var_dump($aa);
+        if($aa>0){
+            echo '注册成功';
+        }else{
+            echo "注册失败";
+        }
+
+
+
+//        $flight->save();
+//        return view('merchant.login',['merchant_register',$merchant_register]);
     }
 
     /**
@@ -87,4 +175,10 @@ class RegisterController extends Controller
     {
         //
     }
+
+//    public function resize()
+//    {
+//        //静态类的方法
+//        Image::imageResize("1.jpg","./img/",100,100,"s_");
+//    }
 }

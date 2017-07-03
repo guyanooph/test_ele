@@ -15,23 +15,23 @@ class MerchantopenController extends Controller
      */
     public function index(Request $request)
     {
-		$table = merchantopen::all();//查询所有数据
-		/* //判断并封装搜索条件
-        $params = array();
+		$list = merchantopen::all();//查询所有参数
+		//判断并封装搜索条件
+       /*  $params = array();
         if(!empty($_GET['name'])){
            $table->where("name","like","%{$_GET['name']}%");
            $params['name'] = $_GET['name']; //维持搜索条件
-        }
-      /*  ->paginate(10); */
-        // $list = $db->get(); //获取全部
-       //$list = $table->sortBy("id"); //10条每页浏览
-		//dd($list); */
+        } */
+                
+
+        //$list = $table->paginate(1); //10条每页浏览
+		//dd($list); 
 		//return "你好！";
-        return view("merchant.merchantopen.index",["table"=>$table]);//加载商家管理
+        return view("merchant.merchantopen.index",["list"=>$list]);//加载商家管理
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.   
      *
      * @return \Illuminate\Http\Response
      */
@@ -39,7 +39,6 @@ class MerchantopenController extends Controller
     {
         //
 		
-		//return view("merchant.merchantopen.add");//加载商家添加
     }
 
     /**
@@ -72,7 +71,11 @@ class MerchantopenController extends Controller
      */
     public function edit($id)
     {
-        //
+        //加载修改页面
+		//return "你的厚爱！";
+		$table = merchantopen::where("id",$id)->first();
+		
+		return view("merchant.merchantopen.edit",['merchantopen'=>$table]); 
     }
 
     /**
@@ -84,7 +87,24 @@ class MerchantopenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		//dd($id);
+        //执行修改
+		$data = $request->all();//获取要添加的参数
+        unset($data['_token']);//移除提交的_token
+		unset($data['_method']);//移除提交的_method
+		/* $this->validate($request, [//执行表单验证
+            'name' => 'required|max:16',
+        ]);
+        $data = $request->only("name","state");
+        $data['updated_at'] = time(); */
+        //$table = merchantopen::where("id",$id)->update($data);
+        $table =\DB::table("merchant_open")->where("id",$id)->update($data);
+        //dd($data);
+        if($table>0){
+            return redirect('merchant/merchantopen');
+        }else{
+            return back()->with("err","修改失败!");
+        }
     }
 
     /**
@@ -95,6 +115,8 @@ class MerchantopenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //执行删除
+		\DB::table("merchant_open")->where("id",$id)->delete();
+		return redirect('merchant/merchantopen');
     }
 }

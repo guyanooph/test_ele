@@ -4,15 +4,20 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Food_list;
-use App\Models\Shop_list;
+use App\Models\Merchant;
 
 class FoodController extends Controller
 {
     //
 	public function list()
 	{
-		$list = Food_list::where('shopid',$_GET[id]);
-		return view('home.food.index', ['list'=>$list]);
+		//$db = \DB::table	
+		$list = Food_list::all();
+		
+		$ob = Merchant::find(1);
+		//$ob = \DB::table('merchant')->where("id",$id)->first();
+		return view('home.food.foodlist', ['list'=>$list,'ob'=>$ob]);
 	}
 
+	
 }

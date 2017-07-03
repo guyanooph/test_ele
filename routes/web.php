@@ -12,10 +12,15 @@
 */
 //前台路由
 
+Route::get("/home", "Home\LocationController@location");
+Route::post("/testshop","Home\LocationController@testshop");
 //Route::get('/shop/add/{id}',"Home\CartController@add"); //放入购物车
 //Route::get('/shop/show',"Home\CartController@show"); //浏览购物车
 //Route::get('/shop/del/{id}',"Home\CartController@del"); //删除购物车中的某个商品
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
+
+Route::get('/register',"Home\RegisterController@index");//用户注册认证
+Route::get('/doregister',"Home\RegisterController@doRegister");//用户登录认证
 
 
 Route::get('/login',"Home\LoginController@login"); //加载前台登录界面
@@ -124,25 +129,35 @@ Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 	Route::get("/letter","Admin\LetterController@index");//投诉管理
 	
 	Route::get("/offer","Admin\OfferController@index");//建议管理
+
 	Route::get("/stati","Admin\StatiController@index");//统计管理
 	
 
 });
 
 //加载商家登录界面
-Route::get('/merchant/login',"Merchant\LoginController@login"); 
-Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); 
+ 
 Route::post('/merchant/dologin',"Merchant\LoginController@doLogin"); 
 Route::get('/merchant/logout',"Merchant\LoginController@logout"); 
-
 Route::get('/merchant/login',"Merchant\LoginController@login"); //加载商家登录界面
 Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商家登录界面
+
+//商家注册
 Route::get("merchant/register","Merchant\RegisterController@index");////商家注册页面
+Route::post("merchant/register","Merchant\RegisterController@store");////商家执行注册
+Route::post("merchant/ver","Merchant\RegisterController@ver");//注册用户名验证
+Route::post("merchant/ver_s","Merchant\RegisterController@ver_s");//注册商铺名验证
+Route::post("merchant/ver_p","Merchant\RegisterController@ver_p");//注册手机号码验证
+Route::post("merchant/ver_i","Merchant\RegisterController@ver_i");//注册身份证号码验证
+
+//测试图片缩放
+//Route::get("merchant/register1","Merchant\RegisterController@resize");
 
 //商家后台管理
 Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
 	Route::resource('/merchantopen', "Merchant\MerchantopenController");//营业信息管理
-	//Route::resource('/merchantopen/index', "Merchant\MerchantopenController/index");
+	Route::resource('order', "Merchant\OrderController");//订单信息管理
 	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
+	Route::resource("/food","Merchant\FoodController");//管理首页
 });
