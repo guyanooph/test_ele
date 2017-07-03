@@ -62,8 +62,15 @@ Route::get('/personal/collect','Home\PersonalController@collect'); //个人中�
 
 
 //后台路由组
+//Route::get("ad/login/index","Admin\LoginController@index");//加载登录页面
+//Route::get("ad/login/index","Admin\LoginController@index");//加载登录页面
+Route::get("/ad",function (){
+	return "dd";
+});//执行登录验证
+Route::get("ad/login/loginOut","Admin\LoginController@loginOut");//退出
 Route::group(["prefix" => "admin","middlware" => "admin"], function () {
 	Route::get("/","Admin\IndexController@index");//后台首页
+
 	Route::get("root","Admin\RootController@index");//超级管理员
 
 	//Route::resource("user","Admin\UserController");//普通管理员
