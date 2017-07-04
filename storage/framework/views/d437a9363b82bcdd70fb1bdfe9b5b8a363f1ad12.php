@@ -1,6 +1,7 @@
 <html lang="zh" class="">
 <head>
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/style1.3.28.4.css')); ?>">
+<<<<<<< HEAD
     <style type="text/css">
         #preview, .img, img
         {
@@ -8,6 +9,9 @@
             height:100px;
         }
         .amap-indoor-map .label-canvas {
+=======
+    <style type="text/css">.amap-indoor-map .label-canvas {
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
             position: absolute;
             top: 0;
             left: 0
@@ -985,9 +989,18 @@
                             <ng-transclude class="img-container">
                                 <div class="img-flow ng-scope ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-door-pic-input"
                                      name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
+<<<<<<< HEAD
                                     <div id="preview" ></div>
                                     <input type="file" accept="image/*"  onchange="preview(this)" id="inputPassword3" name="logoname">
                                     <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img<br>
+=======
+                                    <img ng-class="{ 'show': ngModel &amp;&amp; isUploadStatus !== 1 }" safe-img=""
+                                         mobile="18851457819" safe-src="ngModel" class="ng-isolate-scope" src=""
+                                         ng-src="">
+                                    <input type="file" accept="image/*" name="logoname">
+                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img
+                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAABGdBTUEAALGPC/xhBQAAArRJREFUSA29lj2IE0EUx929TQxaBCxsPPQQTg4CCfnAVomF1x1cdXCF4AeKFmLlIYJYCNqJWghHCgXxKsHCwsJgpRzmw8RGEfzgBMHCSiUmZuPvrXubvWRnd/aQG5h7b97H//9m581cjG0xR61WmyHlFPOoYRj7JH0wGHxGPGUul0qlt2LTHYZuICQTjUbjOvICOROKvD8UdbNQKCwh+4qYDWatAiA16/X6IzLnNmSrF4+LxeI8RdjqkH8eMypA/M1m8wpCl1xS5twc0UNH5BdotVqTvV7vPSipUKRxZyeRSEzncrkv466hJfIL9Pv9RcLjkgtDys0dsgVokQXYtn0kIE/LpJMbWQCNNKnFFhCkkzvWA5z5bs58AbyyAHADcuhWAL6OqQdGGwzpgyo9sUJPfPMnegUQZHDVLpJwGX2nP+h/6WD/APsaV/QG+kBwnQIwmjwyD5Cy87hDHhzVwxSIBfkKj9Ui0nZ6gJ1fjUsuycz5dDq9C/kykElhFC7hFLfRbrf3d7tdeb8TiniV+Rbv/nlxuhhvUHeoggPsvWQyOWPScKdxxiX/SENdWgfNZrMf0L31uj1CJoRbjmA2InDMzSc/STf/9DtorNvYX/htGvqsyXlMaQR6IZAsQ1b1DK6C3bYs6zjLzqhPtRZu+QJx7ngnlUotqQD5Ku8o5K7KH2C3pIDQfxb+JMDXMpnMd79tVGdXr0dtIes12f0z5oGQIM8F+DTX5yFScr5yC56Ik19Je03TPMTbv4elczPErjGqFruqEHgGUO9VDEskbgG/zCbTKQDyg5DfD8sb9cErL2HFpKHqgMZKHgXb5PqecEsPyDjLXHW0rfmzyqbPCZVTAGf5C73M3IovIRxll3N4BV3DMX7L3eE8T1DhYc5pCrmdhE0PMH6D8Qn5nF6p5PP5V36wvySB+WxWUYFgAAAAAElFTkSuQmCC"><br>
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
                                         点击上传 </p>
                                 </div>
                             </ng-transclude>
@@ -1006,16 +1019,30 @@
                             <ng-transclude class="img-container">
                                 <div class="img-flow ng-scope ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-door-pic-input"
                                      name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
+<<<<<<< HEAD
                                     <div id="preview1" ></div>
                                     <input type="file" accept="image/*" onchange="preview1(this)" id="inputPassword3" name="picname">
                                     <p class="tip" ng-hide="ngModel || isUploadStatus === 1">点击上传 </p>
+=======
+                                    <img ng-class="{ 'show': ngModel &amp;&amp; isUploadStatus !== 1 }" safe-img=""
+                                         mobile="18851457819" safe-src="ngModel" class="ng-isolate-scope" src=""
+                                         ng-src="">
+                                    <input type="file" accept="image/*" name="picname">
+                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img
+                                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAABGdBTUEAALGPC/xhBQAAArRJREFUSA29lj2IE0EUx929TQxaBCxsPPQQTg4CCfnAVomF1x1cdXCF4AeKFmLlIYJYCNqJWghHCgXxKsHCwsJgpRzmw8RGEfzgBMHCSiUmZuPvrXubvWRnd/aQG5h7b97H//9m581cjG0xR61WmyHlFPOoYRj7JH0wGHxGPGUul0qlt2LTHYZuICQTjUbjOvICOROKvD8UdbNQKCwh+4qYDWatAiA16/X6IzLnNmSrF4+LxeI8RdjqkH8eMypA/M1m8wpCl1xS5twc0UNH5BdotVqTvV7vPSipUKRxZyeRSEzncrkv466hJfIL9Pv9RcLjkgtDys0dsgVokQXYtn0kIE/LpJMbWQCNNKnFFhCkkzvWA5z5bs58AbyyAHADcuhWAL6OqQdGGwzpgyo9sUJPfPMnegUQZHDVLpJwGX2nP+h/6WD/APsaV/QG+kBwnQIwmjwyD5Cy87hDHhzVwxSIBfkKj9Ui0nZ6gJ1fjUsuycz5dDq9C/kykElhFC7hFLfRbrf3d7tdeb8TiniV+Rbv/nlxuhhvUHeoggPsvWQyOWPScKdxxiX/SENdWgfNZrMf0L31uj1CJoRbjmA2InDMzSc/STf/9DtorNvYX/htGvqsyXlMaQR6IZAsQ1b1DK6C3bYs6zjLzqhPtRZu+QJx7ngnlUotqQD5Ku8o5K7KH2C3pIDQfxb+JMDXMpnMd79tVGdXr0dtIes12f0z5oGQIM8F+DTX5yFScr5yC56Ik19Je03TPMTbv4elczPErjGqFruqEHgGUO9VDEskbgG/zCbTKQDyg5DfD8sb9cErL2HFpKHqgMZKHgXb5PqecEsPyDjLXHW0rfmzyqbPCZVTAGf5C73M3IovIRxll3N4BV3DMX7L3eE8T1DhYc5pCrmdhE0PMH6D8Qn5nF6p5PP5V36wvySB+WxWUYFgAAAAAElFTkSuQmCC"><br>
+                                        点击上传 </p>
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
                                 </div>
                             </ng-transclude>
                             <div class="desc ng-binding"> 一张真实美观的门脸照可以提升店铺形象</div>
                             <div class="example"><span>示例</span>
                                 <div class="directive-image-preview ng-isolate-scope" src="assets/ex-front.png">
                                     <img class="d-thumbnail" ng-src="assets/ex-front.png" alt="thumbnail"
+<<<<<<< HEAD
                                          src="<?php echo e(asset('images/ex-front.png')); ?>">
+=======
+                                         src="<?php echo e(asset('images/ex_licen.png')); ?>">
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
                                 </div>
                             </div>
                         </div>

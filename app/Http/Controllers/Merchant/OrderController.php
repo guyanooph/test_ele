@@ -86,7 +86,9 @@ class OrderController extends Controller
     public function edit($id)
     {
         //加载修改页面
-		//return view("merchant.order.edit"); 
+		//return "good";
+		$table = order::where('id',$id)->first();//获取单条信息参数
+		return view("merchant.order.edit",['order'=>$table]);//加载页面
     }
 
     /**
@@ -99,7 +101,14 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //执行修改
-		
+		$data = $request->all();//获取提交的参数
+		unset($data['_token']);//移除提交的_token
+		$table =\DB::table("order")->where("id",$id)->update($data);
+		if($table>0){
+            return redirect('merchant/order');
+        }else{
+            return back()->with("err","修改失败!");
+        }
     }
 
     /**
@@ -112,7 +121,7 @@ class OrderController extends Controller
     {
         //执行删除
 		\DB::table("order")->where("id",$id)->delete();
-
-        return redirect('merchant/order');
+        //return "hhhh";
+        return redirect('merchant/order')->with("err","删除成功");
     }
 }

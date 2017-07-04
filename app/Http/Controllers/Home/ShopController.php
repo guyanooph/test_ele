@@ -9,7 +9,7 @@ use App\Models\Shop_list;
 class ShopController extends Controller
 {
     //
-	public function list()
+	public function index()
 	{
 		//$list = Shop_list::where('id',1)->first();
 		$list = Shop_list::all();

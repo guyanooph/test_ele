@@ -59,7 +59,15 @@
 						   <td>{{ $merchantopen->num }}</td>
 						   <td>@if ($merchantopen->state=="0")营业 @else ($merchantopen->state=="1")歇业 @endif</td>
 						   <td><button class="btn btn-xs btn-primary" onclick="window.location='{{ URL('/merchant/merchantopen/edit') }}/{{ $merchantopen->id }}'">编辑</button> 
+<<<<<<< HEAD
                             <button class="btn btn-xs btn-danger" onclick="javascript:doDel({{ $merchantopen->id }})">删除</button></td>
+=======
+
+                            <button class="btn btn-xs btn-danger" onclick="doDel({{ $merchantopen->id }})">删除</button></td>
+
+                            <!--<button class="btn btn-xs btn-danger" onclick="javascript:doDel({{ $merchantopen->id }})">删除</button></td>-->
+
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
                        </tr>
                    @endforeach
                   </table>
@@ -74,9 +82,9 @@
           </div><!-- /.row -->
          
         </section><!-- /.content -->
-        <form action="{{url('merchant/merchantopen')}}" style="display:none;" id="mydeleteform" method="post">
+        <form action="{{url('merchant/merchantopen')}}" style="display:none;" id="mydeleteform" name="myform" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_method" value="delete">
         </form>
     @endsection
     
@@ -84,9 +92,13 @@
     @section("myscript")
       <script type="text/javascript">
             function doDel(id){
-                if(confirm('确定要删除吗？')){
-                    $("#mydeleteform").attr("action","{{url('merchant/merchantopen')}}/"+id).submit(); 
+            Modal.confirm({msg: "是否删除信息？"}).on(function(e){
+                if(e){
+                   var form = document.myform;
+                    form.action = "{{URL('merchant/merchantopen/destroy')}}/"+id;
+                    form.submit(); 
                 }
-            }
+              });
+        }
       </script>
     @endsection

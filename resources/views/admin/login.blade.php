@@ -26,15 +26,22 @@
         <a href="#"><b>管理员登陆页</b></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
+
         @if(session("msg"))
             <p class="login-box-msg" style="color:red;">{{session("msg")}}</p>
         @else
             <p class="login-box-msg">Sign in to start your session</p>
         @endif
-        <form action="{{url('admin/dologin')}}" method="post">
+
+         @if(session("phrase"))
+            <p class="login-box-msg" style="color:red;">{{session("phrase")}}</p>
+        @else
+            <p class="login-box-msg">没有</p>
+        @endif
+        <form action="{{url('ad/dologin')}}" method="post">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" name="email" placeholder="Email"/>
+            <input type="text" class="form-control" name="name" placeholder="name"/>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
@@ -49,7 +56,7 @@
               </div>
           </div>
           <div class="col-xs-6">
-              <img src="{{url('admin/getcode')}}" onclick="this.src='{{url('admin/getcode')}}?id='+Math.random(); " width="100" height="34"/>
+              <img src="{{url('ad/getcode')}}" onclick="this.src='{{url('ad/getcode')}}?id='+Math.random(); " width="100" height="34"/>
           </div>
           </div>
           <div class="row">
@@ -88,4 +95,4 @@
       });
     </script>
   </body>
-</html>
+  </html>
