@@ -8,20 +8,91 @@ use App\Models\Merchant\Mer_register;
 use App\Org\Image;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis as redis;
+// 引入阿里大鱼命名空间
+use iscms\Alisms\SendsmsPusher as Sms;
 class RegisterController extends Controller
 {
+    //阿里大鱼
+//    public $sms;
+//
+//    public function __construct()
+//    {
+//        $this->sms = $sms;
+//    }
+
+
+    public function sendMobileCode(Request $request)
+    {
+//        echo "bb";
+//        die();
+        // 去用户登录表里边查询
+//        echo $request['tel'];
+//        die();
+        $result = \DB::table('mer_register')->find(['phone' => $request['tel']]);
+        //$result = \DB::table('mer_register')->where('phone',$request['tel'])->first();
+         //echo $result;
+        //die();
+        if ($result) {
+            // 返回错误信息
+            //dd('ok');
+            return responseMsg('手机号码已注册!', 400);
+        }
+        // 调用发送验证码 代码片段
+        $smsResult = $this->codeSnippet->mobileCodeForSms($request['tel'], config('subassembly.autograph'), config('subassembly.template_id'));
+        if (!is_bool($smsResult)) {
+            return responseMsg($smsResult, 400);
+        }
+        return responseMsg('验证码已发送!');
+
+    }
+
+    public function code(Request $request)
+    {
+        $input = $request->all(); // 判断该手机在10分钟内是否已经发过短信
+//        $exists = \Redis::exists('IT:STRING:USER:CODE:'.$input['phone']);
+//        if($exists === true){
+//            return response()->json(['ResultData '=> '失败', 'info' => '重复发送']);
+//        }
+// 生成随机号码
+        $num = rand(100000,999999); // 组装参数
+        $smsParams = [
+            'code' => $num,
+            'product' => '案例展示'
+        ];
+        // 需要参数
+        $phone = $input['phone'];
+        $name = '注册验证';
+        $content = json_encode($smsParams);
+        $code = 'SMS_3166316'; // 发送验证码方法
+        $data = $this->sms->send($phone, $name, $content, $code); // 检查对象是否具有 result 属性
+        if(property_exists($data, 'result')){
+            // 设置一个 60 秒过期的 Redis String 类型
+//            \Redis::sEtex('IT:STRING:USER:CODE:' . $phone, 600, $num);
+            return response()->json(['ResultData' => '成功', 'info' => '已发送']);
+        }else{
+            return response()->json(['ResultData' => '失败', 'info' => '重复发送']);
+        }
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    //执行注册
+    //加载注册页面
     public function index()
     {
         //
         //$list = array('id'=>1,'content'=>'注册成功');
 //        return view('merchant.register.index',compact('$list'));
         //return view('merchant.register.index',［'list'=>""］);
+        return view("merchant.register.phone");
+    }
+
+    public function register()
+    {
         return view("merchant.register.index");
     }
 
@@ -41,6 +112,15 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * 发送手机验证码
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+
 
     //检验商户用户名
     public function ver(Request $request){
@@ -93,6 +173,14 @@ class RegisterController extends Controller
 
         \DB::beginTransaction();    // 事物开始
         try {
+            // 密码处理
+            $password = trim($request['password']);
+            // 俩次密码判断
+            if ($password != $request['repassword']) {
+                // 返回错误信息
+                return responseMsg('两次密码输入不一致', 400);
+            }
+
             if ($request->file('picname') && $request->file('picname')->isValid()) {
                 $file = $request->file('picname');
                 $ext = $file->extension();

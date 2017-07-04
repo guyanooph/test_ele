@@ -81,10 +81,7 @@ Route::group(["prefix" => "personal","middlware" => "personal"], function () {
 
 
 //后台路由组
-<<<<<<< HEAD
-=======
 
->>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
 Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::get("/","Admin\IndexController@index");//后台首页
 
@@ -153,8 +150,11 @@ Route::get('/merchant/logout',"Merchant\LoginController@logout");
 Route::get('/merchant/login',"Merchant\LoginController@login"); //加载商家登录界面
 Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商家登录界面
 
+
 //商家注册
-Route::get("merchant/register","Merchant\RegisterController@index");////商家注册页面
+Route::post('merchant/register/sendMobileCode', 'Merchant\RegisterController@sendMobileCode');//发送手机验证码
+//Route::post('merchant/addRegister','Merchant\RegisterController@register');//加载详细注册信息
+Route::get("merchant/phone","Merchant\RegisterController@index");//加载商家手机注册页面
 Route::post("merchant/register","Merchant\RegisterController@store");////商家执行注册
 Route::post("merchant/ver","Merchant\RegisterController@ver");//注册用户名验证
 Route::post("merchant/ver_s","Merchant\RegisterController@ver_s");//注册商铺名验证
@@ -168,23 +168,10 @@ Route::get('test','Merchant\RegisterController@test');
 
 //商家后台管理
 Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
-<<<<<<< HEAD
 	Route::get("/","Merchant\IndexController@index");//管理首页
 	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
 	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
 	Route::put('/merchantopen/update/{id}', "Merchant\MerchantopenController@update");//执行修改
-	
-	Route::resource('order', "Merchant\OrderController");//订单信息管理
-	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
-	Route::resource("/food","Merchant\FoodController");//管理首页
-
-
-=======
-    Route::get("/","Merchant\IndexController@index");//管理首页
-	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
-	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
-	Route::put('/merchantopen/update/{id}', "Merchant\MerchantopenController@update");//执行修改
-	Route::delete('/merchantopen/destroy/{id}', "Merchant\MerchantopenController@destroy");//执行删除
 
 	Route::get('/order', "Merchant\OrderController@index");//订单信息管理
 	Route::get('/order/create', "Merchant\OrderController@create");//添加订单
@@ -193,7 +180,6 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get('/order/edit/{id}', "Merchant\OrderController@edit");//修改订单信息页
 	Route::post('/order/update/{id}', "Merchant\OrderController@update");//执行修改
 	
->>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
 	Route::get("/foodtype","Merchant\FoodtypeController@index");//管理菜单分类首页
 	Route::get("/foodtype/create","Merchant\FoodtypeController@create");//添加菜单分类
 	Route::post("/foodtype/store","Merchant\FoodtypeController@store");//执行添加
