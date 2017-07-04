@@ -154,12 +154,10 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::put('/merchantopen/update/{id}', "Merchant\MerchantopenController@update");//执行修改
 	
 	Route::resource('order', "Merchant\OrderController");//订单信息管理
-<<<<<<< HEAD
 	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
 	Route::resource("/food","Merchant\FoodController");//管理首页
-});
-=======
-	
+
+
 	Route::get("/foodtype","Merchant\FoodtypeController@index");//管理菜单分类首页
 	Route::get("/foodtype/create","Merchant\FoodtypeController@create");//添加菜单分类
 	Route::post("/foodtype/store","Merchant\FoodtypeController@store");//执行添加
@@ -172,4 +170,3 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::post("/food/store","Merchant\FoodController@store");//执行添加
 	Route::get("/food/edit/{id}","Merchant\FoodController@edit");//管理首页
 });
->>>>>>> 7b11977032ff4e070b7021d221aea79c05833193
