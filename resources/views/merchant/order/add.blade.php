@@ -51,13 +51,13 @@
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">商家名称：</label>
 								<div class="col-sm-4">
-									<input type="text" name="shop_name" class="form-control" placeholder="商家名称">
+									<input type="name" name="shop_name" class="form-control" placeholder="商家名称">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">商家电话：</label>
 								<div class="col-sm-4">
-									<input type="text" name="shop_phone" class="form-control" placeholder="商家电话">
+									<input type="number" name="shop_phone" class="form-control" placeholder="商家电话">
 								</div>
 							</div>
 							<div class="form-group">
@@ -164,7 +164,7 @@
 								<button type="submit" class="btn btn-primary">添加</button>
 							</div>
 							<div class="col-sm-1">
-								<button type="submit" class="btn btn-primary">重置</button>
+								<button type="reset" class="btn btn-primary">重置</button>
 							</div>
 						</div><!-- /.box-footer -->
 					</form>

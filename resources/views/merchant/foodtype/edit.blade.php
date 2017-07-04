@@ -26,7 +26,7 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i>编辑菜单种类</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{URL('merchant/foodtype')}}/{{ $type->id }}" method="post">
+                <form class="form-horizontal" action="{{URL('merchant/foodtype/update')}}/{{ $type->id }}" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
                   <div class="box-body">

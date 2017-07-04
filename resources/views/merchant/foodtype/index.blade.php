@@ -37,7 +37,7 @@
                       <td>{{$v->title}}</td>
                       <td>{{$v->pid}}</td>
                       <td>{{$v->path}}</td>
-                      <td><button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/foodtype')}}/{{ $v->id }}/edit'">编辑</button> <button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> </td>
+                      <td><button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/foodtype/edit')}}/{{ $v->id }}'">编辑</button> <button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> </td>
                       
                     </tr>
                     @endforeach
@@ -88,7 +88,7 @@
             Modal.confirm({msg:'是否删除此类别？'}).on(function (e){
                 if(e){
                     var form = document.getElementById("mydeleteform");
-                    form.action = "{{URL('/merchant/foodtype')}}/"+id;
+                    form.action = "{{URL('/merchant/foodtype/destroy')}}/"+id;
                     form.submit(); 
                 }
             });

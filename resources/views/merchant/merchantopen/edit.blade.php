@@ -25,12 +25,11 @@
 					<h3 class="box-title"><i class="fa fa-plus"></i> 修改营业信息页面</h3>
 			    </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{ URL('/merchant/merchantopen') }}/{{ $merchantopen->id }}" method="post">
+                <form class="form-horizontal" action="{{ URL('/merchant/merchantopen/update') }}/{{ $merchantopen->id }}" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
 				  
-                  <div class="box-body">
-				   
+                  <div class="box-body">  
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">商家Id：</label>
                       <div class="col-sm-4">

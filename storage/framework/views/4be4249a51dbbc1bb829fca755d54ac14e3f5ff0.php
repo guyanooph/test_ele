@@ -30,6 +30,10 @@
     <link href="<?php echo e(asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')); ?>" rel="stylesheet" type="text/css" />
    <!-- jQuery 2.1.4 -->
     <script src="<?php echo e(asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')); ?>"></script>
+<<<<<<< HEAD
+=======
+ <script src="<?php echo e(asset('myadmin/new/load.js')); ?>"></script>
+>>>>>>> 7be1e3003a7b6928c0528ef6509cdcad593fcb18
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -248,7 +252,11 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="user-image" alt="User Image"/>
+<<<<<<< HEAD
                   <span class="hidden-xs"><?php echo e(Session::get("adminuser['name']")); ?></span>
+=======
+                  <span class="hidden-xs">亚力山大-皮尔斯</span>
+>>>>>>> 7be1e3003a7b6928c0528ef6509cdcad593fcb18
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->

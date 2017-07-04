@@ -353,8 +353,8 @@
                 <i class="fa fa-bomb"></i> <span>订单</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/ftype')}}"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
-                <li><a href="{{url('merchant/ftype/create')}}"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <li class="active"><a href="{{url('merchant/order')}}"><i class="fa fa-circle-o"></i> 浏览订单信息</a></li>
+                <li><a href="{{url('merchant/order/create')}}"><i class="fa fa-circle-o"></i> 添加订单</a></li>
               </ul>
             </li>
              <li class="active treeview">

@@ -13,9 +13,17 @@ class MerchantopenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
+
+		//$list = merchantopen::all();
+		$list = merchantopen::all()->where('shopid',1);//
+
+		
+		/* //判断并封装搜索条件
+        $params = array();
 		$list = merchantopen::all();//查询所有参数
+
 		//判断并封装搜索条件
        /*  $params = array();
         if(!empty($_GET['name'])){
@@ -73,9 +81,9 @@ class MerchantopenController extends Controller
     {
         //加载修改页面
 		//return "你的厚爱！";
-		$table = merchantopen::where("id",$id)->first();
+		$table = merchantopen::where("id",$id)->first();//获取单条信息参数
 		
-		return view("merchant.merchantopen.edit",['merchantopen'=>$table]); 
+		return view("merchant.merchantopen.edit",['merchantopen'=>$table]);//加载页面
     }
 
     /**
@@ -89,16 +97,11 @@ class MerchantopenController extends Controller
     {
 		//dd($id);
         //执行修改
-		$data = $request->all();//获取要添加的参数
-        unset($data['_token']);//移除提交的_token
-		unset($data['_method']);//移除提交的_method
-		/* $this->validate($request, [//执行表单验证
-            'name' => 'required|max:16',
-        ]);
-        $data = $request->only("name","state");
-        $data['updated_at'] = time(); */
-        //$table = merchantopen::where("id",$id)->update($data);
-        $table =\DB::table("merchant_open")->where("id",$id)->update($data);
+		//$data = $request->only('name','opentime','overtime','givemoney','method','state','money','num');//获取要添加的参数
+		$data = $request->all();
+        unset($data['_token']);//移除_token参数
+        unset($data['_method']);//移除_token参数
+        $table = \DB::table("merchant_open")->where("id",$id)->update($data);
         //dd($data);
         if($table>0){
             return redirect('merchant/merchantopen');
@@ -117,6 +120,7 @@ class MerchantopenController extends Controller
     {
         //执行删除
 		\DB::table("merchant_open")->where("id",$id)->delete();
-		return redirect('merchant/merchantopen');
+		//return "fuck";
+		return redirect('merchant/merchantopen')->with("err","删除成功");
     }
 }

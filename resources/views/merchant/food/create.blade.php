@@ -24,7 +24,7 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i> 添加菜单信息</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{url('merchant/food')}}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <form action="{{url('merchant/food/store')}}" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 				  @foreach($list as $v)
 				  <input type="hidden" name="shopid" value="{{$v->shopid}}">

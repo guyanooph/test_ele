@@ -81,13 +81,8 @@ Route::group(["prefix" => "personal","middlware" => "personal"], function () {
 
 
 //后台路由组
-Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
-Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
-Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
-Route::get("admin/login/loginOut","Admin\LoginController@loginOut");//退出
-Route::group(["prefix" => "admin","middleware" => "admin"], function () {
-	
 
+Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::get("/","Admin\IndexController@index");//后台首页
 
 	Route::get("root","Admin\RootController@index");//超级管理员
@@ -166,17 +161,30 @@ Route::post("merchant/ver_i","Merchant\RegisterController@ver_i");//注册身份
 //测试图片缩放
 //Route::get("merchant/register1","Merchant\RegisterController@resize");
 
- //商家后台管理
-Route::group(["prefix" => "merchant","middlware" => "merchant"], function () {
-	Route::get("/","Merchant\IndexController@index");//管理首页
-	Route::resource('/merchantopen', "Merchant\MerchantopenController");//营业信息管理
-<<<<<<< HEAD
-	Route::resource('order', "Merchant\OrderController");//订单信息管理
-	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
-	Route::resource("/food","Merchant\FoodController");//管理首页
+//商家后台管理
+Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
+    Route::get("/","Merchant\IndexController@index");//管理首页
+	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
+	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
+	Route::put('/merchantopen/update/{id}', "Merchant\MerchantopenController@update");//执行修改
+	Route::delete('/merchantopen/destroy/{id}', "Merchant\MerchantopenController@destroy");//执行删除
+
+	Route::get('/order', "Merchant\OrderController@index");//订单信息管理
+	Route::get('/order/create', "Merchant\OrderController@create");//添加订单
+	Route::post('/order', "Merchant\OrderController@store");//执行添加
+	Route::delete('/order/destroy/{id}', "Merchant\OrderController@destroy");//执行删除
+	Route::get('/order/edit/{id}', "Merchant\OrderController@edit");//修改订单信息页
+	Route::post('/order/update/{id}', "Merchant\OrderController@update");//执行修改
+	
+	Route::get("/foodtype","Merchant\FoodtypeController@index");//管理菜单分类首页
+	Route::get("/foodtype/create","Merchant\FoodtypeController@create");//添加菜单分类
+	Route::post("/foodtype/store","Merchant\FoodtypeController@store");//执行添加
+	Route::get("/foodtype/edit/{id}","Merchant\FoodtypeController@edit");//修改菜单分类
+	Route::put("/foodtype/update/{id}","Merchant\FoodtypeController@update");//执行修改
+	Route::delete("/foodtype/destroy/{id}","Merchant\FoodtypeController@destroy");//执行修改
+	
+	Route::get("/food","Merchant\FoodController@index");//管理首页
+	Route::get("/food/create","Merchant\FoodController@create");//管理菜的添加
+	Route::post("/food/store","Merchant\FoodController@store");//执行添加
+	Route::get("/food/edit/{id}","Merchant\FoodController@edit");//管理首页
 });
-=======
-Route::resource('/merchantopen/index', "Merchant\MerchantopenController/index");
-	Route::resource("/foodtype","Merchant\FoodtypeController");//管理首页
- });
->>>>>>> b233444dbae0372b5fffa1469f18b0edd043d7cb

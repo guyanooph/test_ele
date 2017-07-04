@@ -26,18 +26,32 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i>编辑菜单种类</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{URL('merchant/foodtype')}}/{{ $type->id }}" method="post">
+                <form class="form-horizontal" action="{{URL('merchant/food/')}}/{{ $type->id }}" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
                   <div class="box-body">
+				  <div class="form-group">
+					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>
+					  <div class="col-sm-4">
+						<select name="typeid">
+							@foreach($list as $v)
+								<option value="0">请选择</option>
+								<option value="{{$v->id}}">{{$v->title}}</option>
+							@endforeach
+						</select>
+					  </div>
+					</div>
+					</div>
+				  <div class="box-body">
                     <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">菜单种类</label>
+                      <label for="inputEmail3" class="col-sm-2 control-label">菜名：</label>
                       <div class="col-sm-4">
                         <input type="text" name="title" class="form-control" value="{{ $type->title }}">
                       </div>
                     </div>
 
-                  </div><!-- /.box-body -->
+                  </div>
+				  <!-- /.box-body -->
                   <div class="box-footer">
 				    <div class="col-sm-offset-2 col-sm-1">
 						<button type="submit" class="btn btn-primary">保存</button>
