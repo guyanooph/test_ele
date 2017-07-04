@@ -248,14 +248,15 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs"><?php echo e(Session::get("adminuser['name']")); ?></span>
+                  <span class="hidden-xs"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image" />
                     <p>
-                     亚力山大-皮尔斯-网站开发
+                     1亚力山大-皮尔斯-网站开发<?php echo e(session("adminuser['name']")); ?>
+
                       <small>会员于2012-11</small>
                     </p>
                   </li>
@@ -343,7 +344,7 @@
                 <i class="fa fa-gittip"></i> <span>商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href=""><i class="fa fa-circle-o"></i> 待审核商家</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/shop/index')); ?>"><i class="fa fa-circle-o"></i> 待审核商家</a></li>
                 <li><a href="<?php echo e(url('admin/shop')); ?>"><i class="fa fa-circle-o"></i> 普通商家</a></li>
               </ul>
             </li>

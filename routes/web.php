@@ -66,15 +66,13 @@ Route::get('/personal/collect','Home\PersonalController@collect'); //个人中�
 
 
 
-//后台路由组
-Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
-Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
-Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
-Route::get("admin/login/loginOut","Admin\LoginController@loginOut");//退出
+    //后台路由组
+    Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
+    Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
+    Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
+    Route::get("admin/login/loginOut","Admin\LoginController@loginOut");//退出
+
 Route::group(["prefix" => "admin","middleware" => "admin"], function () {
-	
-	
-	
 
 	Route::get("/","Admin\IndexController@index");//后台首页
 
@@ -109,8 +107,9 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::put("node/{id}","Admin\NodeController@update");//执行节点修改
 	
 	Route::delete("node/{id}","Admin\NodeController@destroy");//节点删除
-	Route::resource("vip","Admin\VipController");//会员管理
-	Route::resource("shop","Admin\ShopController");//商家管理
+	Route::get("vip","Admin\VipController@index");//加载会员信息页面
+	Route::get("shop/index","Admin\ShopController@index");//待审核商家管理
+	Route::get("shop/detail/{id}","Admin\ShopController@detail");//待审核商家详情
 
 	Route::get("ftype","Admin\FtypeController@index");//菜品分类加载页面
 	Route::post("ftype","Admin\FtypeController@store");//菜品分类执行添加

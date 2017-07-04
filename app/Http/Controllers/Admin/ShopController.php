@@ -12,9 +12,12 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //待审核商家页面
     public function index()
     {
-        return view("admin.shop.index");
+        //查询mer_register表中状态为1：未审核的商家
+        $list=\DB::table("mer_register")->where("state","1")->paginate(5);
+        return view("admin.shop.index",["list"=>$list]);
     }
 
     /**
@@ -33,9 +36,13 @@ class ShopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    //查看待审核商家详情
+    public function detail($id)
     {
-        //
+        //待审核商家的注册信息详情
+        $list=\DB::table("mer_register")->where("id",$id)->where("state","1")->first();
+
+        return view("admin.shop.detail",['list'=>$list]);
     }
 
     /**
