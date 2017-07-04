@@ -1,3 +1,4 @@
+
 <form method="POST" action="/shoplist">
     {!! csrf_field() !!}
 
@@ -6,9 +7,10 @@
         <input type="text" name="name" value="{{ old('name') }}">
     </div>
 
+
     <div>
-        Email
-        <input type="email" name="email" value="{{ old('email') }}">
+        请输入
+        <input type="text" name="info" value="{{ '手机号码/邮箱/用户名') }}">
     </div>
 
     <div>
