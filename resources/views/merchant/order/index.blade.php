@@ -22,7 +22,7 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 操作订单信息管理</h3>
-                  <button class="btn btn-primary" onclick="window.location='{{URL('merchant/order/')}}'">添加订单信息</button
+                  <button class="btn btn-primary" onclick="window.location='{{URL('merchant/order')}}'">添加订单信息</button
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table class="table table-bordered">
@@ -48,7 +48,7 @@
 					  <th>配送方式</th>
 					  <th>发票信息</th>
 					  <th>备注</th>
-                      <th style="width: 80px">操作</th>
+                      <th style="width: 50px">操作</th>
                     </tr>
                     @foreach($table as $order)
                         <tr>
@@ -56,11 +56,13 @@
                             <td>{{ $order->orderid }}</td>
                             <td>{{ $order->userid }}</td>
                             <td>{{ $order->shopid }}</td>
-                            <td>{{ $order->goods_num }}</td>
+                            <td>{{ $order->shop_name }}</td>
+							<td>{{ $order->shop_phone }}</td>
+							<td>{{ $order->goods_num }}</td>
 							<td>{{ $order->create_time }}</td>
 							<td>{{ $order->addressid }}</td>
 							<td>{{ $order->amount }}</td>
-							<td>{{ $order->status }}</td>
+							<td>@if ($order->status=="0")已发货 @elseif ($order->status=="1")正在配送 @else ($order->status=="2")未配送 @endif</td>
 							<td>{{ $order->order_description }}</td>
 							<td>{{ $order->over_times }}</td>
 							<td>{{ $order->delivery_fee }}</td>
@@ -72,7 +74,7 @@
 							<td>{{ $order->invoice_info }}</td>
 							<td>{{ $order->remark }}</td>
                             <td>
-                               <button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/order')}}/{{ $order->id }}/edit'">编辑</button> </td>
+                               <button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/order/edit')}}/{{ $order->id }}'">编辑</button>
                                <button class="btn btn-xs btn-danger" onclick="doDel({{ $order->id }})">删除</button>
                             </td>							   
 							</tr>
@@ -90,7 +92,7 @@
     @endsection
     
     @section('myscript')
-    <form action="{{URL('merchant/order/')}}" method="post" name="myform" style="display:none;">
+    <form action="{{URL('merchant/order')}}" method="post" name="myform" style="display:none;">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
             <input type="hidden" name="_method" value="delete"/>
            
@@ -100,7 +102,7 @@
             Modal.confirm({msg: "是否删除信息？"}).on(function(e){
                 if(e){
                    var form = document.myform;
-                    form.action = "{{URL('/merchant/order')}}/"+id;
+                    form.action = "{{URL('merchant/order/destroy')}}/"+id;
                     form.submit(); 
                 }
               });

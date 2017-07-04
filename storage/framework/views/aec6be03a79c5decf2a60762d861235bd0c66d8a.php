@@ -19,7 +19,7 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 操作订单信息管理</h3>
-                  <button class="btn btn-primary" onclick="window.location='<?php echo e(URL('merchant/order/')); ?>'">添加订单信息</button
+                  <button class="btn btn-primary" onclick="window.location='<?php echo e(URL('merchant/order')); ?>'">添加订单信息</button
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table class="table table-bordered">
@@ -45,7 +45,7 @@
 					  <th>配送方式</th>
 					  <th>发票信息</th>
 					  <th>备注</th>
-                      <th style="width: 80px">操作</th>
+                      <th style="width: 50px">操作</th>
                     </tr>
                     <?php $__currentLoopData = $table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
@@ -53,11 +53,13 @@
                             <td><?php echo e($order->orderid); ?></td>
                             <td><?php echo e($order->userid); ?></td>
                             <td><?php echo e($order->shopid); ?></td>
-                            <td><?php echo e($order->goods_num); ?></td>
+                            <td><?php echo e($order->shop_name); ?></td>
+							<td><?php echo e($order->shop_phone); ?></td>
+							<td><?php echo e($order->goods_num); ?></td>
 							<td><?php echo e($order->create_time); ?></td>
 							<td><?php echo e($order->addressid); ?></td>
 							<td><?php echo e($order->amount); ?></td>
-							<td><?php echo e($order->status); ?></td>
+							<td><?php if($order->status=="0"): ?>已发货 <?php elseif($order->status=="1"): ?>正在配送 <?php else: ?>未配送 <?php endif; ?></td>
 							<td><?php echo e($order->order_description); ?></td>
 							<td><?php echo e($order->over_times); ?></td>
 							<td><?php echo e($order->delivery_fee); ?></td>
@@ -69,7 +71,7 @@
 							<td><?php echo e($order->invoice_info); ?></td>
 							<td><?php echo e($order->remark); ?></td>
                             <td>
-                               <button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/order')); ?>/<?php echo e($order->id); ?>/edit'">编辑</button> </td>
+                               <button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/order/edit')); ?>/<?php echo e($order->id); ?>'">编辑</button>
                                <button class="btn btn-xs btn-danger" onclick="doDel(<?php echo e($order->id); ?>)">删除</button>
                             </td>							   
 							</tr>
@@ -87,7 +89,7 @@
     <?php $__env->stopSection(); ?>
     
     <?php $__env->startSection('myscript'); ?>
-    <form action="<?php echo e(URL('merchant/order/')); ?>" method="post" name="myform" style="display:none;">
+    <form action="<?php echo e(URL('merchant/order')); ?>" method="post" name="myform" style="display:none;">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"/>
             <input type="hidden" name="_method" value="delete"/>
            
@@ -97,7 +99,7 @@
             Modal.confirm({msg: "是否删除信息？"}).on(function(e){
                 if(e){
                    var form = document.myform;
-                    form.action = "<?php echo e(URL('/merchant/order')); ?>/"+id;
+                    form.action = "<?php echo e(URL('merchant/order/destroy')); ?>/"+id;
                     form.submit(); 
                 }
               });

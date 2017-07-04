@@ -111,12 +111,18 @@
                             <td>{{ $vo->state }}</td>
                             <td>{{ $vo->created_at}}</td>
                             <td>{{ $vo->updated_at}}</td>
-                            <td><button class="btn btn-xs btn-danger" onclick="doDel({{ $vo->id }})">删除</button> 
-                               <button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/admin/node/edit')}}/{{ $vo->id }}'">编辑</button> </td>
+                            <td><button class="btn btn-xs btn-danger" onclick="doDel({{ $vo->id }})">删除</button>                                      
+                            <button type="button" onclick="doEdit('{{$vo->id}}')" class="btn  btn-xs btn-primary"> 修改 </button>
+                            <!-- <button type="button" class="btn btn-xs btn-danger" onclick="window.location='{{url('admin/node/edit')}}/{{$vo->id}}'">修改</button>-->
+                             </td>
                         </tr>
                     @endforeach
+
                     
                   </table>
+                  <script type="text/javascript">
+                    
+                        </script>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
                   {!! $list->render() !!}
@@ -135,7 +141,27 @@
             <input type="hidden" name="_method" value="delete"/>
            
     </form>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+          </div>
+          <div class="modal-body">
+           <!-- 此处填充 -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" onclick="saveNode()" class="btn btn-primary">保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="text/javascript">
+      //节点删除
+
         function doDel(id){
             Modal.confirm({msg: "是否删除信息？"}).on(function(e){
                 if(e){
@@ -145,5 +171,37 @@
                 }
               });
         }
+
+       //ajax加载修改表单
+     function doEdit(id){
+      $("#exampleModalLabel").html("节点修改");
+      $("#exampleModal").modal("show");
+        $.ajax({
+            url:"{{url('admin/node/edit')}}/"+id,
+            type:'get',
+            dataType:"html",
+            async:true,
+            success:function(data){
+           
+              $("#exampleModal .modal-body").html(data);
+
+            },
+        });
+      }
+     
+       
+      //ajax执行节点保存
+      function saveNode(){
+         $.ajax({
+              url:"{{URL("admin/node")}}/"+id,
+              type:"post",
+              data:$("#saveform").serialize(),
+              async:true,
+              success:function(data){
+                $("#exampleModal").modal('hide');
+                Modal.alert({msg:data,title:'信息提示',btnok:'确定',btncl:"取消"});
+              },
+          });
+      }           
     </script>
     @endsection

@@ -40,14 +40,12 @@ class NodeController extends CommonController
         $data = $request->only("name","method","url","state");
         $data['created_at'] = date("Y-m-d H:i:s",time());
     
-        $id = \DB::table("admin_node")->insertGetId($data);
-        
-        if($id>0){
-            $request->session()->flash('err', '添加成功!');
-            return redirect('admin/node');
-        }else{
-           return back()->with("err","添加失败!");
+        if(\DB::table("admin_node")->insert($data)){
+
+                return back()->with("err","添加成功！");
         }
+        
+        
     }
     
     //执行删除
@@ -63,13 +61,14 @@ class NodeController extends CommonController
     //加载修改表单
     public function edit($id)
     {
-        $node = \DB::table("node")->where("id",$id)->first(); //获取要编辑的信息
+        $node = \DB::table("admin_node")->where("id",$id)->first(); //获取要编辑的信息
         return view("admin.node.edit",["vo"=>$node]);
     }
     
     //执行修改
     public function update($id,Request $request)
     {
+        return "dd";die;
         //表单验证
         $this->validate($request, [
             'name' => 'required|max:16',

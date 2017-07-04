@@ -9,7 +9,7 @@ use App\Models\Merchant;
 class FoodController extends Controller
 {
     //
-	public function list()
+	public function index()
 	{
 		//$db = \DB::table	
 		$list = Food_list::all();

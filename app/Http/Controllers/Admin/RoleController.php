@@ -137,5 +137,27 @@ class RoleController extends Controller
         return view("admin.role.nodelist",["rid"=>$rid,"nodelist"=>$nodelist,"nids"=>$nids]);
      
  }
+    //保存角色节点信息
+    public function saveNode(Request $request)
+    {
+        return "dd";die;
+        $rid = $request->input("rid");
+        //清除数据
+        \DB::table("r_n")->where("rid",$rid)->delete();
+
+        $nids=$request->input("nids");
+        if(!empty($nids)){
+            //处理添加数据
+            $data = [];
+            foreach($nids as $v){
+                //将节点跟角色对应保存
+                $data[] = ["rid"=>$rid,"nid"=>$v];
+        }
+        //添加数据
+        \DB::table("r_n")->insert($data);        
+    }
+    return "节点保存成功!";
+    }
+
 
 }

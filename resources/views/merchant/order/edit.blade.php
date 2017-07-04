@@ -22,139 +22,137 @@
 				<div class="col-md-12">
 				<!-- Horizontal Form -->
 				<div class="box box-primary">
-					<div class="box-header with-border">
-					<h3 class="box-title"><i class="fa fa-plus"></i> 添加操作订单信息页面</h3>
-					</div><!-- /.box-header -->
+					<!-- /.box-header -->
 					<!-- form start -->
-					<form class="form-horizontal" action="{{URL('merchant/order')}}" method="post">
+					<form class="form-horizontal" action="{{URL('merchant/order/update')}}/{{ $order->id }}" method="post">
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 						<div class="box-body">
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">订单号</label>
 								<div class="col-sm-4">
-									<input type="text" name="orderid" class="form-control" placeholder="订单号">
+									<input type="text" name="orderid" class="form-control" placeholder="订单号" value="{{ $order->orderid }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">用户id</label>
 								<div class="col-sm-4">
-									<input type="text" name="userid" class="form-control" placeholder="用户id" value="{{ $merchantopen->userid }}">
+									<input type="text" name="userid" class="form-control" placeholder="用户id" value="{{ $order->userid }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">商家id</label>
 								<div class="col-sm-4">
-									<input type="text" name="shopid" class="form-control" placeholder="商家id" value="{{ $merchantopen->shopid }}">
+									<input type="text" name="shopid" class="form-control" placeholder="商家id" value="{{ $order->shopid }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">商家名称</label>
 								<div class="col-sm-4">
-									<input type="text" name="shop_name" class="form-control" placeholder="商家名称" value="{{ $merchantopen->shop_name }}">
+									<input type="text" name="shop_name" class="form-control" placeholder="商家名称" value="{{ $order->shop_name }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">商家电话</label>
 								<div class="col-sm-4">
-									<input type="text" name="shop_phone" class="form-control" placeholder="商家电话"value="{{ $merchantopen->shop_phone }}">
+									<input type="text" name="shop_phone" class="form-control" placeholder="商家电话"value="{{ $order->shop_phone }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">商品数量</label>
 								<div class="col-sm-4">
-									<input type="text" name="goods_num" class="form-control" placeholder="商品数量" value="{{ $merchantopen->goods_num }}">
+									<input type="text" name="goods_num" class="form-control" placeholder="商品数量" value="{{ $order->goods_num }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">订单创建时间</label>
 								<div class="col-sm-4">
-									<input type="text" name="create_time" class="form-control" placeholder="订单创建时间" value="{{ $merchantopen->create_time }}">
+									<input type="text" name="create_time" class="form-control" placeholder="订单创建时间" value="{{ $order->create_time }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">送（收）货地址</label>
 								<div class="col-sm-4">
-									<input type="text" name="addressid" class="form-control" placeholder="送货地址" value="{{ $merchantopen->addressid }}">
+									<input type="text" name="addressid" class="form-control" placeholder="送货地址" value="{{ $order->addressid }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">金额</label>
 								<div class="col-sm-4">
-									<input type="text" name="amount" class="form-control" placeholder="金额" value="{{ $merchantopen->amount }}">
+									<input type="text" name="amount" class="form-control" placeholder="金额" value="{{ $order->amount }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
 								<div class="col-sm-4">
 								<label class="radio-inline">
-									<input type="radio" name="status" id="inlineRadio1" {{ $merchantopen->status }} value="0"> 已发货
+									<input type="radio" name="status" id="inlineRadio1" {{ $order->status }} value="0"> 已发货
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="status" id="inlineRadio2" {{ $merchantopen->status }} value="1"> 正在配送
+									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="1"> 正在配送
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="status" id="inlineRadio2" {{ $merchantopen->status }} value="1"> 未配送
+									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="1"> 未配送
 								</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">订单描述</label>
 								<div class="col-sm-4">
-									<input type="text" name="order_description" class="form-control" placeholder="订单描述" value="{{ $merchantopen->order_description }}">
+									<input type="text" name="order_description" class="form-control" placeholder="订单描述" value="{{ $order->order_description }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">订单结束时间</label>
 								<div class="col-sm-4">
-									<input type="text" name="over_time" class="form-control" placeholder="订单结束时间" value="{{ $merchantopen->over_time }}">
+									<input type="text" name="over_time" class="form-control" placeholder="订单结束时间" value="{{ $order->over_time }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">配送费</label>
 								<div class="col-sm-4">
-									<input type="text" name="delivery_fee" class="form-control" placeholder="配送费" value="{{ $merchantopen->delivery_fee }}">
+									<input type="text" name="delivery_fee" class="form-control" placeholder="配送费" value="{{ $order->delivery_fee }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">餐盒费</label>
 								<div class="col-sm-4">
-									<input type="text" name="lunch_box_fee" class="form-control" placeholder="餐盒费" value="{{ $merchantopen->lunch_box_fee }}">
+									<input type="text" name="lunch_box_fee" class="form-control" placeholder="餐盒费" value="{{ $order->lunch_box_fee }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">送达时间</label>
 								<div class="col-sm-4">
-									<input type="text" name="service_time" class="form-control" placeholder="送达时间" value="{{ $merchantopen->service_time }}">
+									<input type="text" name="service_time" class="form-control" placeholder="送达时间" value="{{ $order->service_time }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">使用红包id</label>
 								<div class="col-sm-4">
-									<input type="text" name="packetid" class="form-control" placeholder="使用红包id" value="{{ $merchantopen->packetid }}">
+									<input type="text" name="packet_id" class="form-control" placeholder="使用红包id" value="{{ $order->packet_id }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
 								<div class="col-sm-4">
-									<input type="text" name="pay" class="form-control" placeholder="支付方式" value="{{ $merchantopen->pay }}">
+									<input type="text" name="pay" class="form-control" placeholder="支付方式" value="{{ $order->pay }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">配送方式</label>
 								<div class="col-sm-4">
-									<input type="text" name="distribution" class="form-control" placeholder="配送方式" value="{{ $merchantopen->distribution }}">
+									<input type="text" name="distribution" class="form-control" placeholder="配送方式" value="{{ $order->distribution }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">发票信息</label>
 								<div class="col-sm-4">
-									<input type="text" name="invoice_info" class="form-control" placeholder="发票信息" value="{{ $merchantopen->invoice_info }}">
+									<input type="text" name="invoice_info" class="form-control" placeholder="发票信息" value="{{ $order->invoice_info }}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">备注</label>
 								<div class="col-sm-4">
-									<input type="text" name="remark" class="form-control" placeholder="备注" value="{{ $merchantopen->remark }}">
+									<input type="text" name="remark" class="form-control" placeholder="备注" value="{{ $order->remark }}">
 								</div>
 							</div>	
 						</div><!-- /.box-body -->

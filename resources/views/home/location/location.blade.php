@@ -59,9 +59,6 @@
 	<script>window.location.href = 'https://h.ele.me/activities/landing';</script><![endif]-->
 
 	<script src="//crayfish.elemecdn.com/www.ele.me@ref/api" data-ref="API_CONFIG"></script>
-	<script src="jjs/perf.js" type="text/javascript" crossorigin="anonymous"></script>
-	<script src="jjs/vendor.3b50a2.js" type="text/javascript" crossorigin="anonymous"></script>
-	<script src="jjs/home.b48686.js" type="text/javascript" crossorigin="anonymous"></script>
 	<script src="{{asset('js/jquery-1.8.3.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
 	<base href="/home/">
 	<meta name="mobile-agent" content="undefined">
@@ -84,9 +81,10 @@
 				<div class="map-navbar clearfix hasuserinfo" ng-class="{hasuserinfo: $root.user.user_id}">
 					<div id="mapCityToggle" map-city="" hide-search-result="hideSearchResult" current-city="currentCity"
 					     class="map-city ng-isolate-scope" map-mode="mapMode">
-						<a class="mapcity-current ng-binding" href="javascript:" ng-bind="mapCity.current.name"
-						   ng-click="mapCity.toggle($event)">安溪</a>
+						<a onclick="showcity()" id="the_city"  class="mapcity-current ng-binding" href="javascript:" ng-bind="mapCity.current.name"
+						   ng-click="mapCity.toggle($event)">北京</a>
 						<!-- ngIf: mapCity.showCities -->
+                        <!-- 这里放置城市列表，由js获取后台传过来的数据json后，再由js加工输出到这里大概有1万多行。。。 -->
 						<!-- end ngIf: mapCity.showCities -->
 					</div>
 					<div map-search="" hide-search-result="hideSearchResult" current-city="currentCity"
@@ -138,11 +136,43 @@
 <script>
     function select(ob) {
         document.getElementById("position_search").value = ob.firstChild.innerHTML;
-        //document.getElementById("search_form").innerHTML = ob.lastChild.innerHTML;
         $("#search_form").append("<input type='hidden' name='location' value='" + ob.lastChild.innerHTML + "' />");
         $("div.mapsearch-suggestlist ul").remove();
     }
     
+    var city_data = null;
+
+    function showcity(){
+        if(document.getElementById("city_list")){
+            $("#city_list").remove();
+        }else{
+            var str_city="<div id=\"city_list\" class=\"mapcity-dialog ng-scope\" ng-if=\"mapCity.showCities\" ng-click=\"stopPropagation($event)\"><div class=\"mapcity-container ui-scrollbar-light\" style=\"max-height: 152px;\"><div class=\"mapcity-header\"><div class=\"mapcity-breadcrumb\"><span class=\"highlight\">选城市</span> &gt; 定位置 &gt; 叫外卖</div><h3>请选择你所在的城市</h3></div><div class=\"mapcity-guess\"><div class=\"mapcity-quickguess\"><span class=\"highlight\">猜你在</span> <button type=\"button\" name=\"button\" ng-bind=\"mapCity.guess.name\" ng-click=\"mapCity.changeCity(mapCity.guess)\" class=\"ng-binding\">北京</button></div><div class=\"mapcity-search\"><input name=\"name\" placeholder=\"请输入城市\" ng-model=\"queryText\" ng-keydown=\"mapCity.chooseFromQuery($event)\" class=\"ng-pristine ng-valid\"><!-- ngIf: mapCity.suggests.length && queryText --></div></div><!-- ngIf: mapCity.groups.$resolved --><div class=\"mapcity-list ng-scope\" ng-if=\"mapCity.groups.$resolved\"><!-- ngRepeat: (key, group) in mapCity.groups track by key -->";
+            if(!city_data){
+                $.ajax({
+                    url:"http://mainsite-restapi.ele.me/shopping/v1/cities",
+                    dataType:"json",
+                    async:false,
+                    success:function(data){
+                        city_data = data;
+                    },
+                })
+            }
+            for(var i in city_data){
+                str_city += "<dl ng-repeat=\"(key, group) in mapCity.groups track by key\" class=\"ng-scope\"><dt class=\"highlight ng-binding\" ng-bind=\"key\">" + i + "</dt>";
+                for(var j=0;j<city_data[i].length;j++){
+                    str_city += "<dd ng-repeat=\"city in group\" class=\"ng-scope\"><a onclick=\"select_city(this)\" href=\"javascript:\" ng-bind=\"city.name\" ng-click=\"mapCity.changeCity(city)\" class=\"ng-binding\">" + city_data[i][j].name + "</a></dd>";
+                }
+                str_city += "</dl>";
+            }
+            str_city += "</div></div></div>"; 
+            $("#mapCityToggle").append(str_city);
+        }
+    }
+
+    function select_city(obj) {
+        document.getElementById("the_city").innerHTML = obj.innerHTML;
+        $("#city_list").remove();
+    }
 
 
     $(function () {
@@ -151,7 +181,7 @@
         setInterval(function(){
             key_2 = $("#position_search").val();
             if(key_2 === key_1){
-                
+               // 
             }else if(key_2 === ""){
                 $("div.mapsearch-suggestlist ul").remove();
             }else if(key_2 !== ""){
@@ -171,7 +201,12 @@
                 key_1 = key_2;
             }
         }, 33);
+
+        
     });
+
+    
+
 </script>
 </body>
 </html>

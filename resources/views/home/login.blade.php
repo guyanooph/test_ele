@@ -1,9 +1,9 @@
-<form method="POST" action="/home/login">
+<form method="POST" action="/Home/Login">
   {{ csrf_field() }} 
 
     <div>
-        Email
-        <input type="email" name="email" value="{{ old('email') }}">
+        请输入
+        <input type="text" name="info" value="{{ '手机号码/邮箱/用户名') }}">
     </div>
 
     <div>
