@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Merchant\Mer_register;
 use App\Org\Image;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 class RegisterController extends Controller
 {
     /**
@@ -105,10 +107,16 @@ class RegisterController extends Controller
                 $file->move("./upload/", $filename);
             }
 
+
+
             //商家注册表
             $input = $request->only(['mername', 'password', 'shoptitle', 'phone', 'identity', 'username', 'picname', 'logoname']);
-            $password = md5($input['password']);
-            $password = md5(substr_replace($password, $input['phone'], 0, 4));
+            //$password = md5($input['password']);
+            //$password = md5(substr_replace($password, $input['phone'], 0, 4));
+            //$password = Crypt::encrypt($input['password']);
+            //dd($password);
+            $password = HASH::make($input['password']);
+            //die();
             $input['password'] = $password;
             $input['first_ip'] = $request->getClientIp();
             $input['register_time'] = date("Y-m-d H:i:s", time());
@@ -194,4 +202,17 @@ class RegisterController extends Controller
 //        //静态类的方法
 //        Image::imageResize("1.jpg","./img/",100,100,"s_");
 //    }
+
+    public function test()
+    {
+//        $a = Crypt::encrypt("12");
+//        $b = Crypt::encrypt('3j&*gfdA2A_6h@lngfr5');
+//        dd(strlen($b));
+//        $c = Crypt::decrypt($b);
+//        $c = \HASH($b);
+//        dd($c);
+        $a = Hash::make('1234Ae&$fguhjswdefrghujkldergthyujkbfjbwejfbwjebfkjbewjkfbewkj3sd!');
+        dd(strlen($a));
+
+    }
 }

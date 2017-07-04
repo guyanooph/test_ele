@@ -146,6 +146,8 @@ Route::post("merchant/ver_i","Merchant\RegisterController@ver_i");//注册身份
 //测试图片缩放
 //Route::get("merchant/register1","Merchant\RegisterController@resize");
 
+Route::get('test','Merchant\RegisterController@test');
+
 //商家后台管理
 Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
