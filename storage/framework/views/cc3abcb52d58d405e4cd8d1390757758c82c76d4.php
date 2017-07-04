@@ -58,7 +58,11 @@
 						   <td><?php echo e($merchantopen->num); ?></td>
 						   <td><?php if($merchantopen->state=="0"): ?>营业 <?php else: ?>歇业 <?php endif; ?></td>
 						   <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchantopen/edit')); ?>/<?php echo e($merchantopen->id); ?>'">编辑</button> 
+
                             <button class="btn btn-xs btn-danger" onclick="doDel(<?php echo e($merchantopen->id); ?>)">删除</button></td>
+
+                            <!--<button class="btn btn-xs btn-danger" onclick="javascript:doDel(<?php echo e($merchantopen->id); ?>)">删除</button></td>-->
+
                        </tr>
                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </table>
