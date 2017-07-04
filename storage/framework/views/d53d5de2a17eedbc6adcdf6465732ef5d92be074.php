@@ -1,5 +1,11 @@
-<form method="POST" action="/home/login">
-  <?php echo e(csrf_field()); ?> 
+<form method="POST" action="/shoplist">
+    <?php echo csrf_field(); ?>
+
+
+    <div>
+        用户名
+        <input type="text" name="name" value="<?php echo e(old('name')); ?>">
+    </div>
 
     <div>
         Email
@@ -8,14 +14,15 @@
 
     <div>
         密码
-        <input type="password" name="password" id="password">
+        <input type="password" name="password">
     </div>
 
     <div>
-        <input type="checkbox" name="remember"> 记住我
+        确认密码
+        <input type="password" name="password_confirmation">
     </div>
 
     <div>
-        <button type="submit">登录</button>
+         <button type="submit">注册</button>
     </div>
 </form>

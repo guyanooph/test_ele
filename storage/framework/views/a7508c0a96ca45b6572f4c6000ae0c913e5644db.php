@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="eleme" perf-error="desktop/profile/" class="ng-scope">
 <head>
-	<style type="text/css">@charset "UTF-8";
+	<style type="text/css">@charset  "UTF-8";
 		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
 			display: none !important;
 		}
@@ -50,9 +50,9 @@
 	<link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32">
 	<link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
 
-	<link href="{{asset('css/vendor.0cb970.css')}}" rel="stylesheet">
+	<link href="<?php echo e(asset('css/vendor.0cb970.css')); ?>" rel="stylesheet">
 
-	<link href="{{asset('css/profile.d8f427.css')}}" rel="stylesheet">
+	<link href="<?php echo e(asset('css/profile.d8f427.css')); ?>" rel="stylesheet">
 
 
 	<!--[if lte IE 8]>
@@ -81,9 +81,9 @@
 			                                                                                                 hardjump=""
 			                                                                                                 class="topbar-item topbar-homepage"
 			                                                                                                 ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
-				<a href="/profile/order" hardjump="" class="topbar-item"
+				<a href="/personal/order" hardjump="" class="topbar-item"
 				   ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> <a
-						href="//h5.ele.me/service/cooperation/" target="_blank" class="topbar-item cooperation">加盟合作</a>
+						href="" target="_blank" class="topbar-item cooperation">加盟合作</a>
 				<nav class="topbar-nav"><a href="/support/center" hardjump="" class="topbar-nav-link" target="_blank"><i
 								class="topbar-nav-icon icon-service"></i>服务中心</a> <a href="/support/rules/default"
 				                                                                     hardjump="" class="topbar-nav-link"
@@ -115,11 +115,11 @@
 										ng-if="$root.topbarType !== 'checkout'"></span>
 								<!-- end ngIf: $root.topbarType !== 'checkout' --><div
 										class="dropbox topbar-profilebox-dropbox"><a class="icon-profile"
-								                                                     href="/profile"
+								                                                     href="/personal"
 								                                                     hardjump="">个人中心</a> <a
-											class="icon-star" href="/profile/favor" hardjump="">我的收藏</a> <a
-											class="icon-location" href="/profile/address" hardjump="">我的地址</a> <a
-											class="icon-setting" href="/profile/security" hardjump="">安全设置</a> <a
+											class="icon-star" href="/personal/collect" hardjump="">我的收藏</a> <a
+											class="icon-location" href="/personal/address" hardjump="">我的地址</a> <a
+											class="icon-setting" href="" hardjump="">安全设置</a> <a
 											class="icon-logout" href="JavaScript:"
 											ng-click="logout()">退出登录</a></div></span></div>
 					</div>
@@ -131,7 +131,7 @@
 <div class="importantnotification container" role="banner"><!-- ngIf: enable --></div>
 <div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar">
 	<div class="sidebar-tabs">
-		<div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="/profile/order"
+		<div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="/personal/order"
 		                                    hardjump="" tooltip="我的订单" tooltip-placement="left"
 		                                    ubt-click="toolbar_order">
 				<!-- ngIf: sidebarCount.uncompletedOrder > 0 --></a>
@@ -204,38 +204,38 @@
 		<ul class="profile-sidebar" role="navigation" profile-sidebar="">
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle active"
 			                                        ng-class="{ active: pageName === 'profile' }"><i
-							class="icon-line-home"></i><a href="/profile">个人中心</a></h2></li>
+							class="icon-line-home"></i><a href="/personal">个人中心</a></h2></li>
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-order"></i>我的订单
 				</h2>
 				<ul>
-					<li ng-class="{ active: pageName === 'order' }"><a href="/profile/order">近三个月订单</a></li>
-					<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/profile/order/unrated">待评价订单
+					<li ng-class="{ active: pageName === 'order' }"><a href="/personal/order">近三个月订单</a></li>
+					<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/personal/order/unrated">待评价订单
 							<!-- ngIf: unratedNumber --></a></li>
-					<li ng-class="{ active: pageName === 'order-refunding' }"><a href="/profile/order/refund">退单记录</a>
+					<li ng-class="{ active: pageName === 'order-refunding' }"><a href="/personal/order/refund">退单记录</a>
 					</li>
 				</ul>
 			</li>
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-yen"></i>我的资产
 				</h2>
 				<ul>
-					<li ng-class="{ active: pageName === 'hongbao' }"><a href="/profile/hongbao">我的红包</a></li>
-					<li ng-class="{ active: pageName === 'balance' }"><a href="/profile/balance">账户余额</a></li>
-					<li ng-class="{ active: pageName === 'points' }"><a href="/profile/points">我的积分</a></li>
+					<li ng-class="{ active: pageName === 'hongbao' }"><a href="/personal/red_packet">我的红包</a></li>
+					<li ng-class="{ active: pageName === 'balance' }"><a href="/personal/balance">账户余额</a></li>
+					<li ng-class="{ active: pageName === 'points' }"><a href="/personal/score">我的积分</a></li>
 				</ul>
 			</li>
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i
 							class="icon-line-profile"></i>我的资料</h2>
 				<ul>
-					<li ng-class="{ active: pageName === 'info' }"><a href="/profile/info">个人资料</a></li>
-					<li ng-class="{ active: pageName === 'address' }"><a href="/profile/address">地址管理</a></li>
-					<li ng-class="{ active: pageName === 'security-center' }"><a href="/profile/security">安全中心</a></li>
-					<li ng-class="{ active: pageName === 'changepassword' }"><a href="/profile/security/changepassword">修改密码</a>
+					<li ng-class="{ active: pageName === 'info' }"><a href="/personal/info/">个人资料</a></li>
+					<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address/">地址管理</a></li>
+					<li ng-class="{ active: pageName === 'security-center' }"><a href="">安全中心</a></li>
+					<li ng-class="{ active: pageName === 'changepassword' }"><a href="">修改密码</a>
 					</li>
 				</ul>
 			</li>
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"
 			                                        ng-class="{ active: pageName === 'favor' }"><a
-							href="/profile/favor"><i class="icon-order-favor"></i>我的收藏</a></h2></li>
+							href="/personal/collect"><i class="icon-order-favor"></i>我的收藏</a></h2></li>
 		</ul>
 		<div class="profile-panel" role="main"><!-- ngIf: pageTitleVisible -->
 			<div class="profile-panelcontent" ng-transclude="">
@@ -249,8 +249,8 @@
 							<a href="/profile/info" class="profile-edit">编辑资料</a></div>
 						<div class="profile-perosondata">
 						
-						<h3 class="profile-name ng-binding">下午好，<strong class="ng-binding">dage</strong></h3>
-							<p class="profile-tips ng-binding" ng-bind="timeSection.tipText">喝杯下午茶，提提精神呗！</p>
+						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding"><?php echo e($list->userid); ?></strong></h3>
+							<p class="profile-tips ng-binding" ng-bind="timeSection.tipText">祝你一天好心情！</p>
 							<p class="profile-security">账户安全：<span
 										ng-class="{'low': level === 0, 'mid': level === 1, 'high': level ===2 || level ===3}"
 										ng-bind="levelText" class="ng-binding high">高</span> <a href="/profile/security"
@@ -271,14 +271,14 @@
 					<div class="profile-infoitem"><a class="inherit" href="/profile/hongbao"><p>我的红包</p>
 					
 							<p class="profile-infoitem-number hongbao">
-                      <span class="number ng-binding" ng-bind="hongbaocount">{{ $personal->red_packet }}</span>个</p></a>
+                      <span class="number ng-binding" ng-bind="hongbaocount"><?php echo e($list->red_packet); ?></span>个</p></a>
 					</div>
 					<div class="profile-infoitem"><a class="inherit" href="/profile/points"><p>我的积分</p>
-							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point">{{ $personal->score }}</span>分</p></a>
+							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point"><?php echo e($list->score); ?></span>分</p></a>
 					</div>
 					<div class="profile-infoitem"><a class="inherit" href="/profile/balance"><p>账户余额</p>
 							<p class="profile-infoitem-number balance"><span class="number ng-binding"
-							                                                 ng-bind="user.balance| number : 2">{{ $personal->balance }}</span>元
+							                                                 ng-bind="user.balance| number : 2"><?php echo e($list->balance); ?></span>元
 							</p></a>
 					</div>
 					

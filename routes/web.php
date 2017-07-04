@@ -32,11 +32,23 @@ Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
 //Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
 
 
-Route::get('/personal','Home\PersonalController@index'); //个人中心
-Route::get('/personal/info','Home\PersonalController@personal'); //个人中心/个人资料
-Route::get('/personal/order','Home\PersonalController@order'); //个人中心/个人订单
-Route::get('/personal/assets','Home\PersonalController@assets'); //个人中心/个人资产
-Route::get('/personal/collection','Home\PersonalController@collection'); //个人中心/个人收藏
+Route::group(["prefix" => "personal","middlware" => "personal"], function () {
+	
+Route::get('/','Home\PersonalController@index'); //个人中心
+
+Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
+Route::get('/order/unrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
+Route::get('/order/refund','Home\PersonalController@orderRefund'); //个人中心/个人订单/退单记录
+Route::get('/red_packet','Home\PersonalController@red_packet'); //个人中心/个人资产/我的红包
+Route::get('/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
+Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
+Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
+Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
+Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
+
+});
+
+
 
 
 Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
