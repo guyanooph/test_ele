@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+       // iscms/Alisms/AidayuServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -177,6 +178,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        iscms\Alisms\AlidayuServiceProvider::class,
+
+		zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
+		
+
     ],
 
     /*
