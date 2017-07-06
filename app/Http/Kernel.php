@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             //\App\Http\Middleware\AdminMiddleware::class,
             //\App\Http\Middleware\MerchantMiddleware::class
+            //\App\Http\Middleware\MerchantMiddleware::class,
         ],
 
         'api' => [

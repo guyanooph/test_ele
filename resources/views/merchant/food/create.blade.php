@@ -71,7 +71,7 @@
                       <div class="col-sm-4">
                         <input type="radio"  name="stutas" value="1">在售  &nbsp; &nbsp; 
                         <input type="radio"  name="stutas" value="2">售完   &nbsp;&nbsp;
-						<input type="radio"  name="stutas" value="3">售完
+						<input type="radio"  name="stutas" value="3">下架
                       </div>
                     </div>
                   </div><!-- /.box-body -->

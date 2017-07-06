@@ -6,20 +6,93 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Merchant\Mer_register;
 use App\Org\Image;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis as redis;
+// 引入阿里大鱼命名空间
+use iscms\Alisms\SendsmsPusher as Sms;
 class RegisterController extends Controller
 {
+    //阿里大鱼
+//    public $sms;
+//
+//    public function __construct()
+//    {
+//        $this->sms = $sms;
+//    }
+
+
+    public function sendMobileCode(Request $request)
+    {
+//        echo "bb";
+//        die();
+        // 去用户登录表里边查询
+//        echo $request['tel'];
+//        die();
+        $result = \DB::table('mer_register')->find(['phone' => $request['tel']]);
+        //$result = \DB::table('mer_register')->where('phone',$request['tel'])->first();
+         //echo $result;
+        //die();
+        if ($result) {
+            // 返回错误信息
+            //dd('ok');
+            return responseMsg('手机号码已注册!', 400);
+        }
+        // 调用发送验证码 代码片段
+        $smsResult = $this->codeSnippet->mobileCodeForSms($request['tel'], config('subassembly.autograph'), config('subassembly.template_id'));
+        if (!is_bool($smsResult)) {
+            return responseMsg($smsResult, 400);
+        }
+        return responseMsg('验证码已发送!');
+
+    }
+
+    public function code(Request $request)
+    {
+        $input = $request->all(); // 判断该手机在10分钟内是否已经发过短信
+//        $exists = \Redis::exists('IT:STRING:USER:CODE:'.$input['phone']);
+//        if($exists === true){
+//            return response()->json(['ResultData '=> '失败', 'info' => '重复发送']);
+//        }
+// 生成随机号码
+        $num = rand(100000,999999); // 组装参数
+        $smsParams = [
+            'code' => $num,
+            'product' => '案例展示'
+        ];
+        // 需要参数
+        $phone = $input['phone'];
+        $name = '注册验证';
+        $content = json_encode($smsParams);
+        $code = 'SMS_3166316'; // 发送验证码方法
+        $data = $this->sms->send($phone, $name, $content, $code); // 检查对象是否具有 result 属性
+        if(property_exists($data, 'result')){
+            // 设置一个 60 秒过期的 Redis String 类型
+//            \Redis::sEtex('IT:STRING:USER:CODE:' . $phone, 600, $num);
+            return response()->json(['ResultData' => '成功', 'info' => '已发送']);
+        }else{
+            return response()->json(['ResultData' => '失败', 'info' => '重复发送']);
+        }
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    //执行注册
+    //加载注册页面
     public function index()
     {
         //
         //$list = array('id'=>1,'content'=>'注册成功');
 //        return view('merchant.register.index',compact('$list'));
         //return view('merchant.register.index',［'list'=>""］);
+        return view("merchant.register.phone");
+    }
+
+    public function register()
+    {
         return view("merchant.register.index");
     }
 
@@ -39,6 +112,15 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * 发送手机验证码
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+
 
     //检验商户用户名
     public function ver(Request $request){
@@ -88,48 +170,75 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        if($request->file('picname') && $request->file('picname')->isValid()){
-            $file = $request ->file('picname');
-            $ext = $file ->extension();
-            $filename = time().rand(10000,9999).".".$ext;
-            $file ->move("./upload/",$filename);
-        }
-        Image::imageResize("$filename","./upload/",100,100,"s_");
-        Image::imageResize("$filename","./upload/",500,500,"m_");
-        Image::imageResize("$filename","./upload/",900,900,"x_");
+
+        \DB::beginTransaction();    // 事物开始
+        try {
+            // 密码处理
+            $password = trim($request['password']);
+            // 俩次密码判断
+            if ($password != $request['repassword']) {
+                // 返回错误信息
+                return responseMsg('两次密码输入不一致', 400);
+            }
+
+            if ($request->file('picname') && $request->file('picname')->isValid()) {
+                $file = $request->file('picname');
+                $ext = $file->extension();
+                $filename = time() . rand(10000, 9999) . "." . $ext;
+                $file->move("./upload/", $filename);
+            }
+
+            if ($request->file('logoname') && $request->file('logoname')->isValid()) {
+                $file = $request->file('logoname');
+                $ext = $file->extension();
+                $filename = time() . rand(10000, 9999) . rand(10000, 9999) . "." . $ext;
+                $file->move("./upload/", $filename);
+            }
 
 
-        if($request->file('logoname') && $request->file('logoname')->isValid()){
-            $file = $request ->file('logoname');
-            $ext = $file ->extension();
-            $filename = time().rand(10000,9999).rand(10000,9999).".".$ext;
-            $file ->move("./upload/",$filename);
-        }
-        Image::imageResize("$filename","./upload/",100,100,"s_");
-        Image::imageResize("$filename","./upload/",500,500,"m_");
-        Image::imageResize("$filename","./upload/",900,900,"x_");
 
-        $input = $request->only(['mername','password','shoptitle','phone','identity','username','picname','logoname']);
-        //dd($input);
-        $input['first_ip'] = $request->getClientIp();
-        //dd($input['first_ip']);
-        $input['register_time'] = date("Y-m-d H:i:s", time());
-        //dd($input['register_time']);
-        //$aa = mer_register::InsertGetId($input);还需要弥补注册IP和注册时间
-        //往不同的表去添加数据，需要开启事务！
-       $aa = \DB::table('mer_register')->InsertGetId($input);
-        //var_dump($aa);
-        if($aa>0){
-            echo '注册成功';
-        }else{
-            echo "注册失败";
-        }
+            //商家注册表
+            $input = $request->only(['mername', 'password', 'shoptitle', 'phone', 'identity', 'username', 'picname', 'logoname']);
+            //$password = md5($input['password']);
+            //$password = md5(substr_replace($password, $input['phone'], 0, 4));
+            //$password = Crypt::encrypt($input['password']);
+            //dd($password);
+            $password = HASH::make($input['password']);
+            //die();
+            $input['password'] = $password;
+            $input['first_ip'] = $request->getClientIp();
+            $input['register_time'] = date("Y-m-d H:i:s", time());
+            $res1 = \DB::table('mer_register')->InsertGetId($input);
+            //dd($res1);
+            //商家登录表
+            $info['shopid'] = $res1;
+            $info['phone'] = $input['phone'];
+            $info['password'] = $input['password'];
+            $info['shopname'] = $input['shoptitle'];
+            $res2 = \DB::table('mer_login')->InsertGetId($info);
 
+            //商家表
+            $data['shopid'] = $info['shopid'];
+            $data['shopname'] = $info['shopname'];
+            $data['logo'] = $input['logoname'];
+            $data['phone'] = $input['phone'];
+            $res3 = \DB::table('merchant')->InsertGetId($data);
 
+            $res = $res1 && $res2 && $res3;
+            if ($res) {
+                \DB::commit();
+            }
+        }catch(\PDOException $e) {
+            \DB::rollback();
+            $list = "有点问题，再来注册吧(其实是事务回滚)";
+            return view('errors.503', compact('list'));
+        };
+        $list = "恭喜您！旺铺正在审核中，请等待!";
+        return view('errors.503', compact('list'));
+    }
 
 //        $flight->save();
 //        return view('merchant.login',['merchant_register',$merchant_register]);
-    }
 
     /**
      * Display the specified resource.
@@ -181,4 +290,17 @@ class RegisterController extends Controller
 //        //静态类的方法
 //        Image::imageResize("1.jpg","./img/",100,100,"s_");
 //    }
+
+    public function test()
+    {
+//        $a = Crypt::encrypt("12");
+//        $b = Crypt::encrypt('3j&*gfdA2A_6h@lngfr5');
+//        dd(strlen($b));
+//        $c = Crypt::decrypt($b);
+//        $c = \HASH($b);
+//        dd($c);
+        $a = Hash::make('1234Ae&$fguhjswdefrghujkldergthyujkbfjbwejfbwjebfkjbewjkfbewkj3sd!');
+        dd(strlen($a));
+
+    }
 }
