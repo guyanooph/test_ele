@@ -43,6 +43,7 @@
                                 <th>注册时间</th>
                                 <th style="width: 100px">操作</th>
                             </tr>
+
                             @foreach($list as $v)
                                 <tr>
                                     <td>{{$v->id}}</td>

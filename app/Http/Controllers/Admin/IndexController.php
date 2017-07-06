@@ -10,8 +10,9 @@ class IndexController extends Controller
     
     public function index()
     {
+        $adminuser=\Session::get('adminuser');
 
-        return view("admin.index");
+        return view("admin.index",['adminuser'=>$adminuser]);
     	
     }
 

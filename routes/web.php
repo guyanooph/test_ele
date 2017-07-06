@@ -70,7 +70,7 @@ Route::get('/personal/collect','Home\PersonalController@collect'); //个人中�
     Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
     Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
     Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
-    Route::get("admin/login/loginOut","Admin\LoginController@loginOut");//退出
+    Route::get("admin/login/logOut","Admin\LoginController@loginOut");//退出
 
 Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 
@@ -108,8 +108,15 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	
 	Route::delete("node/{id}","Admin\NodeController@destroy");//节点删除
 	Route::get("vip","Admin\VipController@index");//加载会员信息页面
-	Route::get("shop/index","Admin\ShopController@index");//待审核商家管理
+	Route::get("shop/index","Admin\ShopController@index");//待审核商家管理页面
 	Route::get("shop/detail/{id}","Admin\ShopController@detail");//待审核商家详情
+    Route::get("shop/check/{id}/{state}","Admin\ShopController@check");//商家审核操作
+
+    Route::get("shopCom","Admin\ShopController@indexCom");//加载普通商家信息
+    Route::get("shop/detailCom/{id}","Admin\ShopController@detailCom");//加载普通商家详情信息
+    Route::get("shop/checkCom/{id}/{state}","Admin\ShopController@checkCom");//违规商家手动处理
+
+
 
 	Route::get("ftype","Admin\FtypeController@index");//菜品分类加载页面
 	Route::post("ftype","Admin\FtypeController@store");//菜品分类执行添加
@@ -123,9 +130,6 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::post('ftype/storyEr',"Admin\FtypeController@storyEr");//执行子类别添加
 	
 	//Route::resource("ftype","Admin\FtypeController");//菜品分类删除,用delete没删掉
-	
-	
-	
 	Route::get("/ftypeb","Admin\FtypebController@index");//菜品子分类加载页面
 	Route::delete("/ftypeb/destroy/{id}","Admin\FtypebController@destroy");//菜品子分类删除
 	Route::get("ftypeb/doEdit","Admin\FtypebController@doEdit");//ajax编辑子分类时查找父类title

@@ -44,7 +44,7 @@ class LoginController extends Controller
 				//更新登录时间
                 $db->logtime=date("Y-m-d H:i:s",time());
 			    //更新表中登录时间字段
-                \DB::table("admin_root")->where("id","1")->update('logtime',$db->logtime);
+                \DB::table("admin_root")->where("id",1)->update(['logtime'=>$db->logtime]);
 			    \Session::put("adminuser",$db);
 
 				return redirect("admin");
@@ -70,9 +70,10 @@ class LoginController extends Controller
 	
 
 	//执行退出
-	public function loginOut()
+	public function loginOut(Request $request)
 	{
-
+        $request->session()->forget('adminuser');
+        return redirect("admin");
 	}
 
 
