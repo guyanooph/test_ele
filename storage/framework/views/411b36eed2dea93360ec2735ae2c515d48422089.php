@@ -354,7 +354,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php echo e(url('merchant/order')); ?>"><i class="fa fa-circle-o"></i> 浏览订单信息</a></li>
-                <li><a href="<?php echo e(url('merchant/order/create')); ?>"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <li><a href="<?php echo e(url('merchant/order/create')); ?>"><i class="fa fa-circle-o"></i> 添加订单</a></li>
               </ul>
             </li>
              <li class="active treeview">

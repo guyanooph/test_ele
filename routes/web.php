@@ -186,5 +186,7 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/food","Merchant\FoodController@index");//管理首页
 	Route::get("/food/create","Merchant\FoodController@create");//管理菜的添加
 	Route::post("/food/store","Merchant\FoodController@store");//执行添加
-	Route::get("/food/edit/{id}","Merchant\FoodController@edit");//管理首页
+	Route::get("/food/edit/{id}","Merchant\FoodController@edit");//修改菜单
+	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
+	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
 });

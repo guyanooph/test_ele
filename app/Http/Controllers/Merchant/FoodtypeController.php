@@ -64,7 +64,7 @@ class FoodtypeController extends Controller
         }
         
         //执行添加
-        $id = \DB::table("food_type")->insertGetId($data);
+        $id = Food_type::insertGetId($data);
         //判断
         if($id>0){
             $info = "类别信息添加成功！";

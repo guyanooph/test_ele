@@ -23,11 +23,7 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i> 添加菜单信息</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-<<<<<<< HEAD
-                <form action="<?php echo e(url('merchant/food')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-=======
                 <form action="<?php echo e(url('merchant/food/store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
->>>>>>> 7b11977032ff4e070b7021d221aea79c05833193
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 				  <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				  <input type="hidden" name="shopid" value="<?php echo e($v->shopid); ?>">
@@ -74,7 +70,7 @@
                       <div class="col-sm-4">
                         <input type="radio"  name="stutas" value="1">在售  &nbsp; &nbsp; 
                         <input type="radio"  name="stutas" value="2">售完   &nbsp;&nbsp;
-						<input type="radio"  name="stutas" value="3">售完
+						<input type="radio"  name="stutas" value="3">下架
                       </div>
                     </div>
                   </div><!-- /.box-body -->
