@@ -59,11 +59,15 @@
 						   <td>{{ $merchantopen->num }}</td>
 						   <td>@if ($merchantopen->state=="0")营业 @else ($merchantopen->state=="1")歇业 @endif</td>
 						   <td><button class="btn btn-xs btn-primary" onclick="window.location='{{ URL('/merchant/merchantopen/edit') }}/{{ $merchantopen->id }}'">编辑</button> 
+<<<<<<< HEAD
+                            <button class="btn btn-xs btn-danger" onclick="javascript:doDel({{ $merchantopen->id }})">删除</button></td>
+=======
 
                             <button class="btn btn-xs btn-danger" onclick="doDel({{ $merchantopen->id }})">删除</button></td>
 
                             <!--<button class="btn btn-xs btn-danger" onclick="javascript:doDel({{ $merchantopen->id }})">删除</button></td>-->
 
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
                        </tr>
                    @endforeach
                   </table>

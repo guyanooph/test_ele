@@ -56,6 +56,7 @@
 						   <td><?php if($merchantopen->method=="0"): ?>自营快送 <?php else: ?>蜂鸟快送 <?php endif; ?></td>
 						   <td><?php echo e($merchantopen->money); ?></td>
 						   <td><?php echo e($merchantopen->num); ?></td>
+<<<<<<< HEAD
 						   <td><?php if($merchantopen->state=="0"): ?>营业 <?php else: ?>歇业 <?php endif; ?></td>
 						   <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchantopen/edit')); ?>/<?php echo e($merchantopen->id); ?>'">编辑</button> 
 
@@ -63,6 +64,23 @@
 
                             <!--<button class="btn btn-xs btn-danger" onclick="javascript:doDel(<?php echo e($merchantopen->id); ?>)">删除</button></td>-->
 
+=======
+<<<<<<< HEAD
+						   <td><?php if($merchantopen->state=="0"): ?>营业 <?php else: ?>歇业 <?php endif; ?></td>
+						   <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchantopen/edit')); ?>/<?php echo e($merchantopen->id); ?>'">编辑</button> 
+                            <button class="btn btn-xs btn-danger" onclick="javascript:doDel(<?php echo e($merchantopen->id); ?>)">删除</button></td>
+=======
+<<<<<<< HEAD
+						   <td><?php if($merchantopen->status=="0"): ?>营业 <?php else: ?> 男 <?php endif; ?></td>
+						   <td><a href="/merchantopen/<?php echo e($merchantopen->id); ?>/edit">编辑</a> 
+                            <a href="javascript:doDel(<?php echo e($merchantopen->id); ?>)">删除</a></td>
+=======
+						   <td><?php if($merchantopen->state=="0"): ?>营业 <?php else: ?>歇业 <?php endif; ?></td>
+						   <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchantopen/edit')); ?>/<?php echo e($merchantopen->id); ?>'">编辑</button> 
+                            <button class="btn btn-xs btn-danger" onclick="javascript:doDel(<?php echo e($merchantopen->id); ?>)">删除</button></td>
+>>>>>>> 7b11977032ff4e070b7021d221aea79c05833193
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
+>>>>>>> 66676d8a4698d36036499d225ff7ac8f94215ff4
                        </tr>
                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </table>
@@ -72,12 +90,37 @@
 
              
               
+<<<<<<< HEAD
             </div><!-- /.col onclick="/merchantopen/<?php echo e($merchantopen->id); ?>/edit"-->
+=======
+              
+<<<<<<< HEAD
+            </div><!-- /.col onclick="/merchantopen/<?php echo e($merchantopen->id); ?>/edit"-->
+=======
+<<<<<<< HEAD
+            </div><!-- /.col -->
+=======
+            </div><!-- /.col onclick="/merchantopen/<?php echo e($merchantopen->id); ?>/edit"-->
+>>>>>>> 7b11977032ff4e070b7021d221aea79c05833193
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
+>>>>>>> 66676d8a4698d36036499d225ff7ac8f94215ff4
             
           </div><!-- /.row -->
          
         </section><!-- /.content -->
+<<<<<<< HEAD
         <form action="<?php echo e(url('merchant/merchantopen')); ?>" style="display:none;" id="mydeleteform" name="myform" method="post">
+=======
+<<<<<<< HEAD
+        <form action="<?php echo e(url('merchant/merchantopen')); ?>" style="display:none;" id="mydeleteform" method="post">
+=======
+<<<<<<< HEAD
+        <form action="" style="display:none;" id="mydeleteform" method="post">
+=======
+        <form action="<?php echo e(url('merchant/merchantopen')); ?>" style="display:none;" id="mydeleteform" method="post">
+>>>>>>> 7b11977032ff4e070b7021d221aea79c05833193
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
+>>>>>>> 66676d8a4698d36036499d225ff7ac8f94215ff4
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="_method" value="delete">
         </form>

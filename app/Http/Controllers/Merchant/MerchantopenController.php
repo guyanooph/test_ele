@@ -15,12 +15,12 @@ class MerchantopenController extends Controller
      */
     public function index()
     {
+		$table = Merchantopen::all()->where('shopid','=',1);//查询所有参数
 
 		//$list = merchantopen::all();
 		$list = merchantopen::all()->where('shopid',1);//
 
-		
-		/* //判断并封装搜索条件
+        /* //判断并封装搜索条件
         $params = array();
 		$list = merchantopen::all();//查询所有参数
 
