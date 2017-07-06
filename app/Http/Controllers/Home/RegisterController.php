@@ -19,7 +19,30 @@ class RegisterController extends Controller
 		return view('home.register.register');
 	}
 
-	public function Alidayu(Request $request)
+	public function sendSms(Request $request){
+	        $phone = $request ->input('phone','13161610031'); // 用户手机号，接收验证码
+	        $name = '兄弟连';  // 短信签名,可以在阿里大鱼的管理中心看到
+	        $num = rand(100000, 999999); // 生成随机验证码
+	        $smsParams = [
+	            'number' => "$num"
+	        ];
+	        $content = json_encode($smsParams); // 转换成json格式的
+	        $code = "SMS_75835101";   // 阿里大于(鱼)短信模板ID
+	        //$request ->session()->put('alidayu',$num);  // 存入session 后面做数据验证
+	        $result=$this->sms->send($phone,$name,$content,$code);
+	        //dd('aa');
+	        echo "<pre>";
+	        var_dump($result);die;
+	        echo "验证码：".session('alidayu').'<br/>';
+	        if(property_exists($request,'result')){
+	            // 使用PHP函数json_encode方法将给定数组转化为JSON：
+	            return json_encode(['ResultData' => '成功', 'info' => '已发送']);
+	        }else{
+	            return json_encode(['ResultData' => '失败', 'info' => '重复发送']);
+	        }
+
+	    }
+	/*public function Alidayu(Request $request)
 	{
 	    //return "aa";
 	    //$phone = $request ->input('phone','13161610031'); // 用户手机号，接收验证码
@@ -34,8 +57,8 @@ class RegisterController extends Controller
 	    //var_dump($request);
 
 	    $result=$this->sms->send(13161610031,$name,$number,$code);
-	    //echo "<pre>";
-	    // var_dump($result);die;
+	    echo "<pre>";
+	    var_dump($result);die;
 	    echo "验证码：".session('alidayu').'<br/>';
 	    if(property_exists($request,'result')){
 	       // 使用PHP函数json_encode方法将给定数组转化为JSON：
@@ -44,7 +67,7 @@ class RegisterController extends Controller
 	        return json_encode(['ResultData' => '失败', 'info' => '重复发送']);
 	    }
 	}    
-
+*/
 	  // 用户登录认证
 	public function doRegister(Request $request)
 	{
