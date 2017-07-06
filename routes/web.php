@@ -152,8 +152,8 @@ Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商�
 
 
 //商家注册
-Route::post('merchant/register/sendMobileCode', 'Merchant\RegisterController@sendMobileCode');//发送手机验证码
-//Route::post('merchant/addRegister','Merchant\RegisterController@register');//加载详细注册信息
+Route::get('merchant/register/sendsms', 'Merchant\RegisterController@sendSms');//发送手机验证码
+Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
 Route::get("merchant/phone","Merchant\RegisterController@index");//加载商家手机注册页面
 Route::post("merchant/register","Merchant\RegisterController@store");////商家执行注册
 Route::post("merchant/ver","Merchant\RegisterController@ver");//注册用户名验证
@@ -163,8 +163,11 @@ Route::post("merchant/ver_i","Merchant\RegisterController@ver_i");//注册身份
 
 //测试图片缩放
 //Route::get("merchant/register1","Merchant\RegisterController@resize");
-
-Route::get('test','Merchant\RegisterController@test');
+Route::get('a','Merchant\RegisterController@a');
+Route::post('/test','Merchant\RegisterController@test');
+//Route::get('test',function (){
+//    return view('merchant.register.test');
+//});
 
 //商家后台管理
 Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {

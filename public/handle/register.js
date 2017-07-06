@@ -18,14 +18,13 @@ $('#telCode').blur(function () {
 function sendMobileCode() {
     //alert("ok");
     var result = checkTel($('#phone'), $('#telErrorMessage'));
-    //alert(result);
     if (result != 100) {
         return false;
     }
     //alert(ok);
     time($('.dyMobileButton'));
     sendAjax({'tel': $('#phone').val(), '_token': token}, telVerifyCodeUrl, function (response) {
-        //alert(response);
+        alert(response.ServerNo);
         if (response.ServerNo == 200) {
             $('#message').html('验证码已发送');
         } else {

@@ -10,7 +10,8 @@
         "gregwar/captcha": "^1.1",
         "iscms/alisms-for-laravel": "^0.0.3",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "zgldh/qiniu-laravel-storage": "^0.6.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -51,4 +52,5 @@
         "sort-packages": true,
         "optimize-autoloader": true
     }
-}
+    
+    }
