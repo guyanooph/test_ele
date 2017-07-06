@@ -66,9 +66,7 @@ return [
 		'qiniu' => [
             'driver'  => 'qiniu',
             'domains' => [
-                'default'   => '', //你的七牛域名
-                'https'     => '', //你的HTTPS域名
-                'custom'    => '', //你的自定义域名
+                'default'   => 'osm0q0d.bkt.clouddn.com', //你的七牛域名
              ],
             'access_key'=> '_HP0W5BQJgtJxJsdrOBTEwB5_E87f6_WAAeg_58I',  //AccessKey
             'secret_key'=> 'RrZlAfOrHMk6bR-P4DFKVs4WyKFFkGDD3QGF_2TQ',  //SecretKey
