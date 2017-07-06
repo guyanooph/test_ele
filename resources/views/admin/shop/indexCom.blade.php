@@ -43,7 +43,6 @@
                                 <th>注册时间</th>
                                 <th style="width: 100px">操作</th>
                             </tr>
-
                             @foreach($list as $v)
                                 <tr>
                                     <td>{{$v->id}}</td>
@@ -53,7 +52,7 @@
                                     <td>{{$v->typeid}}</td>
                                     <td>{{$v->city}}</td>
                                     <td>{{$v->register_time}}</td>
-                                    <td><button onclick='window.location="{{url('admin/shop/detail')}}/{{$v->id}}"' class="btn btn-xs btn-danger">详情</button></td>
+                                    <td><button onclick='window.location="{{url('admin/shop/detailCom')}}/{{$v->id}}"' class="btn btn-xs btn-danger">详情</button></td>
                                 </tr>
                             @endforeach
                         </table>

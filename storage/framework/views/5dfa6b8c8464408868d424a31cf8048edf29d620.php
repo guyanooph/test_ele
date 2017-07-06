@@ -6,18 +6,18 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
      <!-- Bootstrap 3.3.4 -->
-    <link href="{{asset('myadmin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/bootstrap/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
-    <link href="{{asset('myadmin/bootstrap/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" /> 
+    <link href="<?php echo e(asset('myadmin/bootstrap/css/font-awesome.min.css')); ?>" rel="stylesheet" type="text/css" /> 
     <!-- Theme style -->
-    <link href="{{asset('myadmin/dist/css/AdminLTE.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/dist/css/AdminLTE.min.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="{{asset('myadmin/plugins/iCheck/square/blue.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/iCheck/square/blue.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="{{asset('myadmin/bootstrap/js/html5shiv.min.js')}}"></script>
-        <script src="{{asset('myadmin/bootstrap/js/respond.min.js')}}"></script>
+        <script src="<?php echo e(asset('myadmin/bootstrap/js/html5shiv.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('myadmin/bootstrap/js/respond.min.js')); ?>"></script>
     <![endif]-->
   </head>
   <body class="login-page">
@@ -37,7 +37,7 @@
             </div>
             <div class="modal-body">
               <form id="sid" >
-                <input  type="hidden" name="_token" value="{{csrf_field()}}" >
+                <input  type="hidden" name="_token" value="<?php echo e(csrf_field()); ?>" >
                 <div class="form-group">
                   <label for="recipient-name" class="control-label">手机号:</label>
                   <input type="tel" name="tel" class="form-control" id="phone" placeholder="请输入手机号" >
@@ -89,18 +89,18 @@
 
       <div class="login-box-body">
 
-        @if(session("msg"))
-            <p class="login-box-msg" style="color:red;">{{session("msg")}}</p>
-        @else
+        <?php if(session("msg")): ?>
+            <p class="login-box-msg" style="color:red;"><?php echo e(session("msg")); ?></p>
+        <?php else: ?>
             <p class="login-box-msg">Sign in to start your session</p>
-        @endif
+        <?php endif; ?>
 
-         @if(session("phrase"))
-            <p class="login-box-msg" style="color:red;">{{session("phrase")}}</p>
-        @else
+         <?php if(session("phrase")): ?>
+            <p class="login-box-msg" style="color:red;"><?php echo e(session("phrase")); ?></p>
+        <?php else: ?>
             <p class="login-box-msg">没有</p>
-        @endif
-        <form action="{{url('ad/dologin')}}" method="post" id="nform">
+        <?php endif; ?>
+        <form action="<?php echo e(url('ad/dologin')); ?>" method="post" id="nform">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
           <div class="form-group has-feedback">
            账号： <input type="text" class="form-control" name="name" placeholder="name"/>
@@ -118,7 +118,7 @@
               </div>
           </div>
           <div class="col-xs-6">
-              <img src="{{url('ad/getcode')}}" onclick="this.src='{{url('ad/getcode')}}?id='+Math.random(); " width="100" height="34"/>
+              <img src="<?php echo e(url('ad/getcode')); ?>" onclick="this.src='<?php echo e(url('ad/getcode')); ?>?id='+Math.random(); " width="100" height="34"/>
           </div>
           </div>
           <div class="row">
@@ -145,11 +145,11 @@
 
 
     <!-- jQuery 2.1.4 -->
-    <script src="{{asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')); ?>"></script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="{{asset('myadmin/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>  
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/bootstrap.min.js')); ?>" type="text/javascript"></script>  
     <!-- iCheck -->
-    <script src="{{asset('myadmin/plugins/iCheck/icheck.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/iCheck/icheck.min.js')); ?>" type="text/javascript"></script>
     <script>
       $(function () {
         $('input').iCheck({
