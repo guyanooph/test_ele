@@ -1,6 +1,6 @@
 <html>
-<form method="POST" action="{{URL('doregister')}}">
-  {{ csrf_field() }} 
+<form method="POST" action="<?php echo e(URL('doregister')); ?>">
+  <?php echo e(csrf_field()); ?> 
 
     <div>
         phone
@@ -41,7 +41,7 @@ InterValObj = window.setInterval(SetRemainTime, 1000); // 启动计时器timer�
 $.ajax({
 type: "POST", // 用POST方式传输
 dataType: "json", // 数据格式:JSON
-url: "{{URL('register/sendMessage')}}", // 目标地址
+url: "<?php echo e(URL('register/sendMessage')); ?>", // 目标地址
 data: $("form").serialize,
 success: function (data){ 
 /*data = parseInt(data, 10);

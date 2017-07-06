@@ -24,6 +24,7 @@ class LoginController extends Controller
         $rule1='/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$/';
         $rule2='/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/';
         $rule3='/[a-zA-Z0-9_]{3,16}/'; 
+        //根据类别进行密码比对
         if(preg_match($rule1,$info)){
           $m=Login_user::where('phone',$info)->first();
           if($m){
@@ -77,7 +78,7 @@ class LoginController extends Controller
    {
         $builder = new CaptchaBuilder();
         $builder->build(150,32);
-        \Session::set('phrase',$builder->getPhrase()); //存储验证码
+        \Session::put('phrase',$builder->getPhrase()); //存储验证码
         return response($builder->output())->header('Content-type','image/jpeg');
    }
    
