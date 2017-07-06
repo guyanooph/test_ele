@@ -48,7 +48,6 @@ class LoginController extends Controller
    //加载验证码
    public function getCode()
    {
-	   
         $builder = new CaptchaBuilder();
         $builder->build(150,32);
         \Session::put('phrase',$builder->getPhrase()); //存储验证码

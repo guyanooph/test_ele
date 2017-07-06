@@ -1,5 +1,12 @@
-<form method="POST" action="/Home/Login">
-  {{ csrf_field() }} 
+
+<form method="POST" action="/shoplist">
+    {!! csrf_field() !!}
+
+    <div>
+        用户名
+        <input type="text" name="name" value="{{ old('name') }}">
+    </div>
+
 
     <div>
         请输入
@@ -8,14 +15,15 @@
 
     <div>
         密码
-        <input type="password" name="password" id="password">
+        <input type="password" name="password">
     </div>
 
     <div>
-        <input type="checkbox" name="remember"> 记住我
+        确认密码
+        <input type="password" name="password_confirmation">
     </div>
 
     <div>
-        <button type="submit">登录</button>
+         <button type="submit">注册</button>
     </div>
 </form>

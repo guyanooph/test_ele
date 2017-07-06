@@ -14,12 +14,16 @@
 
 Route::get("/home", "Home\LocationController@location");
 Route::post("/testshop","Home\LocationController@testshop");
+Route::get("/sendsms","Home\LocationController@sendsms");
 //Route::get('/shop/add/{id}',"Home\CartController@add"); //放入购物车
 //Route::get('/shop/show',"Home\CartController@show"); //浏览购物车
 //Route::get('/shop/del/{id}',"Home\CartController@del"); //删除购物车中的某个商品
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
 
 Route::get('/register',"Home\RegisterController@index");//用户注册认证
+Route::get('/register/sendmessage',"Home\RegisterController@alidayu");//用户注册认证
+
+
 Route::get('/doregister',"Home\RegisterController@doRegister");//用户登录认证
 
 
@@ -34,11 +38,23 @@ Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
 //Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
 
 
-Route::get('/personal','Home\PersonalController@index'); //个人中心
-Route::get('/personal/info','Home\PersonalController@personal'); //个人中心/个人资料
-Route::get('/personal/order','Home\PersonalController@order'); //个人中心/个人订单
-Route::get('/personal/assets','Home\PersonalController@assets'); //个人中心/个人资产
-Route::get('/personal/collection','Home\PersonalController@collection'); //个人中心/个人收藏
+Route::group(["prefix" => "personal","middlware" => "personal"], function () {
+	
+Route::get('/','Home\PersonalController@index'); //个人中心
+
+Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
+Route::get('/order/unrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
+Route::get('/order/refund','Home\PersonalController@orderRefund'); //个人中心/个人订单/退单记录
+Route::get('/red_packet','Home\PersonalController@red_packet'); //个人中心/个人资产/我的红包
+Route::get('/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
+Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
+Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
+Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
+Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
+
+});
+
+
 
 
 Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
@@ -80,7 +96,11 @@ Route::group(["prefix" => "personal","middlware" => "personal"], function () {
 
 
 
-//后台路由组
+    //后台路由组
+    Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
+    Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
+    Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
+    Route::get("admin/login/logOut","Admin\LoginController@loginOut");//退出
 
 Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::get("/","Admin\IndexController@index");//后台首页
@@ -116,8 +136,16 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::put("node/{id}","Admin\NodeController@update");//执行节点修改
 	
 	Route::delete("node/{id}","Admin\NodeController@destroy");//节点删除
-	Route::resource("vip","Admin\VipController");//会员管理
-	Route::resource("shop","Admin\ShopController");//商家管理
+	Route::get("vip","Admin\VipController@index");//加载会员信息页面
+	Route::get("shop/index","Admin\ShopController@index");//待审核商家管理页面
+	Route::get("shop/detail/{id}","Admin\ShopController@detail");//待审核商家详情
+    Route::get("shop/check/{id}/{state}","Admin\ShopController@check");//商家审核操作
+
+    Route::get("shopCom","Admin\ShopController@indexCom");//加载普通商家信息
+    Route::get("shop/detailCom/{id}","Admin\ShopController@detailCom");//加载普通商家详情信息
+    Route::get("shop/checkCom/{id}/{state}","Admin\ShopController@checkCom");//违规商家手动处理
+
+
 
 	Route::get("ftype","Admin\FtypeController@index");//菜品分类加载页面
 	Route::post("ftype","Admin\FtypeController@store");//菜品分类执行添加
@@ -131,9 +159,6 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::post('ftype/storyEr',"Admin\FtypeController@storyEr");//执行子类别添加
 	
 	//Route::resource("ftype","Admin\FtypeController");//菜品分类删除,用delete没删掉
-	
-	
-	
 	Route::get("/ftypeb","Admin\FtypebController@index");//菜品子分类加载页面
 	Route::delete("/ftypeb/destroy/{id}","Admin\FtypebController@destroy");//菜品子分类删除
 	Route::get("ftypeb/doEdit","Admin\FtypebController@doEdit");//ajax编辑子分类时查找父类title
@@ -193,5 +218,7 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/food","Merchant\FoodController@index");//管理首页
 	Route::get("/food/create","Merchant\FoodController@create");//管理菜的添加
 	Route::post("/food/store","Merchant\FoodController@store");//执行添加
-	Route::get("/food/edit/{id}","Merchant\FoodController@edit");//管理首页
+	Route::get("/food/edit/{id}","Merchant\FoodController@edit");//修改菜单
+	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
+	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
 });

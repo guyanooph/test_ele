@@ -105,14 +105,18 @@ class FoodController extends Controller
     public function edit($id)
     { 
 		$food = Food::where("id",$id)->first(); //获取要编辑的信息
+		$shu = $food['typeid'];
+		$find = Food_type::where("id",$food['typeid'])->first(); 
+		//dd($shu);
+		//dd($find);
+		$food['typeid'] = $find['title'];
 		$list = \DB::select("select * from food_type order by concat(path,id) asc");
         //处理信息
         foreach($list as &$v){
             $m = substr_count($v->path,","); //获取path中的逗号
             //生成缩进
-            $v->title = str_repeat("&nbsp;",($m-1)*8)."|--".$v->title;
-        } 
-       
+            $v->title = str_repeat("&nbsp;",($m-1)*4)."|--".$v->title;			 
+        }	
         return view("merchant.food.edit",["type"=>$food],["list"=>$list]); 
     }
 
@@ -127,12 +131,32 @@ class FoodController extends Controller
     {
         
         //表单验证
-        $data = $request->only("title");
+        $data = $request->only("title","descr","picname","price","stutas");
         //$data['updated_at'] = time();
+		
+		$data['create_time'] = date('Y-m-d');
+		//$path = "./upload/merchant/food/";
+        if ($request->file('picnew') && $request->file('picnew')->isValid()) {
+            //获取上传文件信息
+            $file = $request->file('picnew');
+            $ext = $file->extension(); //获取文件的扩展名 nb 
+            //随机一个新的文件名
+            $filename = time().rand(1000,9999).".".$ext;
+			if($filename != null){
+				$file->move("./upload/merchant/food/",$filename);//移动上传文件
+				$pic['picnew'] = $filename;
+				@unlink("./upload/merchant/food/".$data['picname']);//删除原有文件			
+				$data['picname'] = $pic['picnew'];  
+			}
+                          
+            //return response($filename); //输出
+            //exit();0
+        }
+		//dd($data);
         $id = \DB::table("food")->where("id",$id)->update($data);
         
         if($id>0){
-            return redirect('merchant/foodtype');
+            return redirect('merchant/food');
         }else{
             return back()->with("err","修改失败!");
         }
@@ -147,12 +171,13 @@ class FoodController extends Controller
     public function destroy($id)
     {
         //先判断当前类别下是否存在子类别
-        $m = \DB::table('food_type')->where('pid',$id)->count();
+        /* $m = \DB::table('food')->where('pid',$id)->count();
         if($m>0){
             return back()->with("err","禁止删除");
-        }  
-      
-        \DB::table('food_type')->delete($id);
+        } */  
+		$food = Food::where("id",$id)->first();
+		@unlink("./upload/merchant/food/".$food['picname']);
+        \DB::table('food')->delete($id);
         return redirect("merchant/food")->with("err","删除成功！");
     }
 }

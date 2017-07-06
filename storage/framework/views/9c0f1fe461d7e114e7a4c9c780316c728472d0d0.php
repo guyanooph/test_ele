@@ -36,15 +36,7 @@
                       <td><?php echo e($v->title); ?></td>
                       <td><?php echo e($v->pid); ?></td>
                       <td><?php echo e($v->path); ?></td>
-<<<<<<< HEAD
                       <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/foodtype/edit')); ?>/<?php echo e($v->id); ?>'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>
-=======
-<<<<<<< HEAD
-                      <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/foodtype')); ?>/<?php echo e($v->id); ?>/edit'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>
-=======
-                      <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/foodtype/edit')); ?>/<?php echo e($v->id); ?>'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>
->>>>>>> 7b11977032ff4e070b7021d221aea79c05833193
->>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
                       
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -95,15 +87,7 @@
             Modal.confirm({msg:'是否删除此类别？'}).on(function (e){
                 if(e){
                     var form = document.getElementById("mydeleteform");
-<<<<<<< HEAD
                     form.action = "<?php echo e(URL('/merchant/foodtype/destroy')); ?>/"+id;
-=======
-<<<<<<< HEAD
-                    form.action = "<?php echo e(URL('/merchant/foodtype')); ?>/"+id;
-=======
-                    form.action = "<?php echo e(URL('/merchant/foodtype/destroy')); ?>/"+id;
->>>>>>> 7b11977032ff4e070b7021d221aea79c05833193
->>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
                     form.submit(); 
                 }
             });

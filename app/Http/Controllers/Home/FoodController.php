@@ -9,13 +9,14 @@ use App\Models\Merchant;
 class FoodController extends Controller
 {
     //
-	public function index()
+	public function list()
 	{
 		//$db = \DB::table	
-		$list = Food_list::all();
 		
+		$list = Food_list::all();
 		$ob = Merchant::find(1);
-		//$ob = \DB::table('merchant')->where("id",$id)->first();
+		
+		//$ob = \DB::table('merchant')->where("shopid",$_GET['id'])->first();
 		return view('home.food.foodlist', ['list'=>$list,'ob'=>$ob]);
 	}
 

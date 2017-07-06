@@ -35,6 +35,8 @@
     <!--[if lt IE 9]>
         <script src="{{asset('myadmin/bootstrap/js/html5shiv.min.js')}}"></script>
         <script src="{{asset('myadmin/bootstrap/js/respond.min.js')}}"></script>
+        <script src="{{asset('js/Pregister.js')}}"></script>
+
     <![endif]-->
   </head>
   <body class="skin-blue sidebar-mini">
@@ -248,17 +250,18 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">{{ Session::get("adminuser['name']") }}</span>
+                  <span class="hidden-xs"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
                     <p>
-                     亚力山大-皮尔斯-网站开发
+                     1亚力山大-皮尔斯-网站开发
                       <small>会员于2012-11</small>
                     </p>
                   </li>
+
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
@@ -299,7 +302,7 @@
             </div>
             <div class="pull-left info">
              
-              <a href="{{url('admin/logout')}}"><i class="fa fa-circle text-success"></i>退出</a>
+              <a href="{{url('admin/login/logOut')}}"><i class="fa fa-circle text-success"></i>退出</a>
             </div>
           </div>
 
@@ -343,8 +346,8 @@
                 <i class="fa fa-gittip"></i> <span>商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href=""><i class="fa fa-circle-o"></i> 待审核商家</a></li>
-                <li><a href="{{url('admin/shop')}}"><i class="fa fa-circle-o"></i> 普通商家</a></li>
+                <li class="active"><a href="{{URL('admin/shop/index')}}"><i class="fa fa-circle-o"></i> 待审核商家</a></li>
+                <li><a href="{{url('admin/shopCom')}}"><i class="fa fa-circle-o"></i> 普通商家</a></li>
               </ul>
             </li>
             
@@ -366,10 +369,6 @@
                 <li><a href="{{url('admin/offer')}}"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
               </ul>
             </li>
-
-
-
-
 
              <li class="treeview">
               <a href="#">

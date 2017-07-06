@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Personal;
 use App\Models\Order;
+use App\Models\Order_details;
 use App\Models\User_info;
 use App\Models\Collect;
 use App\Models\Packet;
@@ -19,7 +20,8 @@ class PersonalController extends Controller
 		//$id=session['userid'];
 		$list = Personal::find(1);
 		$order=order::where('userid',1)->orderBy('addtime','rsort');
-		return view('home.personal',['list'=>$list,'order'=>$order]);	
+		return view('home.personal.personal' ,['list'=>$list,'order'=>$order]);
+        	
 	}
 
 	public function order()

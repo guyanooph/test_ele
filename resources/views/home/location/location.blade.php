@@ -135,9 +135,11 @@
 
 <script>
     function select(ob) {
-        document.getElementById("position_search").value = ob.firstChild.innerHTML;
-        $("#search_form").append("<input type='hidden' name='location' value='" + ob.lastChild.innerHTML + "' />");
+        //document.getElementById("position_search").value = ob.firstChild.innerHTML;
+        $("#search_form").append("<input type='hidden' name='location' value='" + ob.firstChild.attributes[0].textContent + "' />");
+        $("#search_form").append("<input type='hidden' name='address' value='" + ob.firstChild.attributes[1].textContent + "' />");
         $("div.mapsearch-suggestlist ul").remove();
+        $("#search_form").submit();
     }
     
     var city_data = null;
@@ -185,14 +187,15 @@
             }else if(key_2 === ""){
                 $("div.mapsearch-suggestlist ul").remove();
             }else if(key_2 !== ""){
+                //alert(document.getElementById("the_city").innerHTML);
                 $.ajax({
-                    url:"http://restapi.amap.com/v3/place/text?key=b24b6f5004d3b68d10bf4a0364db7a4f&keywords=" + key_2 + "&city=110000",
+                    url:"http://restapi.amap.com/v3/place/text?key=b24b6f5004d3b68d10bf4a0364db7a4f&keywords=" + key_2 + "&city=" + document.getElementById("the_city").innerHTML,
                     dataType:"json",
                     success:function(data){
                         $("div.mapsearch-suggestlist ul").remove();
                         var str = "<ul ng-if=\"search.suggests.length\" ng-class=\"{mapmode: mapMode}\" class=\"ng-scope\"><!-- ngRepeat: suggest in search.suggests track by $index -->";
                         for(var i=0;i<data.pois.length;i++){
-                            str += "<li onclick='select(this)' ng-repeat=\"suggest in search.suggests track by $index\" ng-class=\"{suggestlight: search.suggestLight === $index}\" ng-click=\"search.chooseAction(suggest)\" ng-mouseenter=\"search.suggestLight = $index\" class=\"ng-scope\"><p class=\"suggest-name ng-binding\" ng-bind=\"suggest.name\">" + data.pois[i].name + "</p><p class=\"suggest-addr\"><span ng-bind=\"suggest.address\" class=\"ng-binding\">" + data.pois[i].address + "</span><!-- ngIf: suggest.count --><span ng-if=\"suggest.count\" ng-bind=\"' 附近有' + suggest.count + '家商家'\" class=\"ng-binding ng-scope\"> 附近有522家商家</span><!-- end ngIf: suggest.count --></p><span style=\"visibility:hidden\" >"+ data.pois[i].location +"</span></li>";
+                            str += "<li onclick='select(this)' ng-repeat=\"suggest in search.suggests track by $index\" ng-class=\"{suggestlight: search.suggestLight === $index}\" ng-click=\"search.chooseAction(suggest)\" ng-mouseenter=\"search.suggestLight = $index\" class=\"ng-scope\"><p location=\"" + data.pois[i].location + "\" address=\"" + data.pois[i].address + "\" class=\"suggest-name ng-binding\" ng-bind=\"suggest.name\">" + data.pois[i].name + "</p><p class=\"suggest-addr\"><span ng-bind=\"suggest.address\" class=\"ng-binding\">" + data.pois[i].address + "</span><!-- ngIf: suggest.count --><span ng-if=\"suggest.count\" ng-bind=\"' 附近有' + suggest.count + '家商家'\" class=\"ng-binding ng-scope\"> 附近有522家商家</span><!-- end ngIf: suggest.count --></p></li>";
                         }
                         str += "</ul>";
                         $("div.mapsearch-suggestlist").append(str);
