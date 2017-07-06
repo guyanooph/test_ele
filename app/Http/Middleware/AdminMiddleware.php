@@ -14,7 +14,16 @@ class AdminMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    {   //判断会员是否没有登录
+        if(!$request->session()->has("adminuser")){
+           return redirect("/ad/login");
+        }
+
+        //判断是否是超级用户
+        if(session("adminuser")->name=="root"){
+            return $next($request);
+        }
         return $next($request);
+        
     }
 }

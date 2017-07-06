@@ -1,5 +1,5 @@
 <?php
-
+//超级管理员控制器
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin_root;
@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 class RootController extends Controller
 {
-    //判断目前使用的环境
+
     public function index()
     {
 
