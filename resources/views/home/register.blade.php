@@ -1,9 +1,9 @@
-<form method="POST" action="/home/login">
-  <?php echo e(csrf_field()); ?> 
+<form method="POST" action="/home/register">  
+  {!! csrf_field() !!}
 
     <div>
         Email
-        <input type="email" name="email" value="<?php echo e(old('email')); ?>">
+        <input type="email" name="email" value="{{ old('email') }}">
     </div>
 
     <div>
