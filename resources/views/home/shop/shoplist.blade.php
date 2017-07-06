@@ -112,11 +112,11 @@
 										ng-if="$root.topbarType !== 'checkout'"></span>
 								<!-- end ngIf: $root.topbarType !== 'checkout' --><div
 										class="dropbox topbar-profilebox-dropbox"><a class="icon-profile"
-								                                                     href="/profile"
+								                                                     href="/personal"
 								                                                     hardjump="">个人中心</a> <a
-											class="icon-star" href="/profile/favor" hardjump="">我的收藏</a> <a
-											class="icon-location" href="/profile/address" hardjump="">我的地址</a> <a
-											class="icon-setting" href="/profile/security" hardjump="">安全设置</a> <a
+											class="icon-star" href="/personal/collect" hardjump="">我的收藏</a> <a
+											class="icon-location" href="/personal/address" hardjump="">我的地址</a> <a
+											class="icon-setting" href="/shoplist" hardjump="">安全设置</a> <a
 											class="icon-logout" href="JavaScript:"
 											ng-click="logout()">退出登录</a></div></span></div>
 					</div>
