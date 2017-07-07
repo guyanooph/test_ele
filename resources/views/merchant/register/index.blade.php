@@ -1030,14 +1030,6 @@
         </div>
     </div>
 </ui-view>
-{{--<script async="async"--}}
-{{--src="//webapi.amap.com/maps?v=1.3&amp;key=4a1d1ee27380c38faea1e11487dc4122&amp;&amp;plugin=AMap.ToolBar,AMap.PlaceSearch,AMap.Geocoder,AMap.PolyEditor,AMap.MouseTool,AMap.Scale,AMap.Walking"></script>--}}
-{{--<script src="https://github.elemecdn.com/eleme/perf-js/1.0.4/perf.js"></script>--}}
-{{--<script type="text/javascript" src="{{ asset('js/vendor.29dae2e.js') }}"></script>--}}
-{{--<script type="text/javascript" src="{{ asset('js/app.29dae2e.js') }}"></script>--}}
-{{--<script type="text/javascriot">--}}
-
-{{--</script>--}}
 <script type="text/javascript" src="{{ asset('js/register.js') }}"></script>
 </body>
 </html>

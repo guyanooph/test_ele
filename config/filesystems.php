@@ -63,7 +63,8 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
-		'qiniu' => [
+   
+        'qiniu' => [
             'driver'  => 'qiniu',
             'domains' => [
                 'default'   => env('QINIU_DEFAULT'), //你的七牛域名
@@ -73,8 +74,8 @@ return [
             'access_key'=> env('QINIU_AK'),  //AccessKey
             'secret_key'=> env('QINIU_SK'),  //SecretKey
             'bucket'    => env('QINIU_BUCKET'),  //Bucket名字
-            'access'    => env('QINIU_ACCESS'),
             'notify_url'=> '',  //持久化处理回调地址
+            'access'    =>  '',//
         ],
     ],
 ];

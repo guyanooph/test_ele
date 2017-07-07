@@ -56,3 +56,8 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+// 公共上传到七牛云的方法
+require __DIR__.'/../app/Functions/qiniu.php';
+//define("Qiniu", "七牛给你的外链网址，需要加http://");
+define("Qiniu","http://oslsovx4q.bkt.clouddn.com");

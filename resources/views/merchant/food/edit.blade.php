@@ -35,8 +35,8 @@
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>
 					  <div class="col-sm-4">
 						<select name="typeid">
-							<option value="0">请选择</option>
-							@foreach($list as $v)
+							<option value="$this->shu">{{$type->typeid}}</option>
+							@foreach($info as $v)
 								<option value="{{$v->id}}">{{$v->title}}</option>
 							@endforeach
 						</select>
@@ -56,7 +56,7 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">图片：</label>
                       <div class="col-sm-4" style="flont:left;">
                         <input type="file" onchange="preview(this)" class="form-control" name="picnew" value=""> 
-                      </div> <div id="preview" class="col-sm-3 control-label" ><img src='{{asset("upload/merchant/food/$type->picname")}}'/></div>
+                      </div> <div id="preview" class="col-sm-3 control-label" ><img src='http://osltbib18.bkt.clouddn.com/wang/image_{{$type->picname}}'/></div>
                     </div>
                   </div>
 				  <div class="box-body">
