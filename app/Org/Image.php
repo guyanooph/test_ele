@@ -1,4 +1,4 @@
-<?php
+8<?php
 namespace App\Org;//命名空间
 
 class Image

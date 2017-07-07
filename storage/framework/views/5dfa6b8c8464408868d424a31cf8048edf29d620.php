@@ -36,8 +36,9 @@
               <h4 class="modal-title" id="exampleModalLabel">手机登录</h4>
             </div>
             <div class="modal-body">
-              <form id="sid" >
-                <input  type="hidden" name="_token" value="<?php echo e(csrf_field()); ?>" >
+              <form id="sid" action="<?php echo e(URL('ad/plogin')); ?>" method="post">
+
+                <input  type="hidden" name="_token" value="<?php echo csrf_token(); ?>" >
                 <div class="form-group">
                   <label for="recipient-name" class="control-label">手机号:</label>
                   <input type="tel" name="tel" class="form-control" id="phone" placeholder="请输入手机号" >
@@ -45,46 +46,53 @@
                 <div class="form-group">
                   <label for="recipient-name" class="control-label">验证码:</label>
                   <input type="text" name="code" class="form-control" id="telCode" placeholder="请输入验证码">
+                    <a  id="codeq" onclick="aa()" style="width:40%">获取验证码</a>
+                </div>
 
-
-                    <button  id="codeq" onclick="aa()" style="width:40%">获取验证码</button>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                  <button type="submit" class="btn btn-primary">登录</button>
                 </div>
               </form>
-              <script>
-              var a=0;
-              var mytime=null;
-                function aa(){
-                  
-                  if(mytime==null){
-                   a=6;
-                   djs();
-                }
-              }
-                  //倒计时
-                  function djs(){
-                   //alert("dd");
-                     a--;
-                      $("#codeq").html(a+"秒后重新发送验证码");
-                       if(a<0){
-                        $("#codeq").html("获取验证码");
-                        mytime=null;
-                        return
-                       }
-                     
-                      mytime=setTimeout(djs,1000);
-                  }
-
-              </script>
 
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary">登录</button>
-            </div>
+
           </div>
         </div>
       </div>
-
+      <script>
+          var a=0;
+          var mytime=null;
+          function aa(){
+              var pho=$("#phone").val();
+              //ajax发送传递手机号码
+              $.ajax({
+                  url:"<?php echo e(url('admin/login/verify')); ?>/"+pho,
+                  type:'get',
+                  dataType:"html",
+                  async:true,
+                  success:function(data){
+                      $(".login-logo").append("<li>"+data['ResultData']+"</li>");
+                  },
+              });
+              if(mytime==null){
+                  a=6;
+                  djs();
+              }
+          }
+          //倒计时
+          function djs(){
+              //alert("dd");
+              a--;
+              $("#codeq").html(a+"秒后重新发送验证码");
+              if(a<0){
+                  $("#codeq").html("获取验证码");
+                  mytime=null;
+                  return
+              }
+              mytime=setTimeout(djs,1000);
+          }
+      </script>
 
 
       <div class="login-box-body">
@@ -150,6 +158,7 @@
     <script src="<?php echo e(asset('myadmin/bootstrap/js/bootstrap.min.js')); ?>" type="text/javascript"></script>  
     <!-- iCheck -->
     <script src="<?php echo e(asset('myadmin/plugins/iCheck/icheck.min.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/xdl-modal-alert-confirm.js')); ?>" type="text/javascript"></script>
     <script>
       $(function () {
         $('input').iCheck({
@@ -158,6 +167,12 @@
           increaseArea: '20%' // optional
         });
       });
+
+      <?php if(session("err")): ?>
+      <script type="text/javascript">
+          alert(session('err');
+    </script>
+    <?php endif; ?>
 
 
     </script>

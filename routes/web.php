@@ -72,6 +72,10 @@ Route::get('/personal/collect','Home\PersonalController@collect'); //个人中�
     Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
     Route::get("admin/login/logOut","Admin\LoginController@loginOut");//退出
 
+    Route::get("/admin/login/verify/{pho}","Admin\LoginController@Verify");//发送手机验证信息
+    Route::post("/ad/plogin","Admin\LoginController@plogin");//执行手机验证
+
+
 Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 
 	Route::get("/","Admin\IndexController@index");//后台首页
@@ -81,7 +85,8 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	//Route::resource("user","Admin\UserController");//普通管理员
 	Route::get("user","Admin\UserController@index");//普通管理员首页
 	Route::get("user/create","Admin\UserController@create");//普通管理员添加模板
-    Route::post("user","Admin\UserController@store");//普通管理员执行添加
+   Route::post("user","Admin\UserController@store");//普通管理员执行添加
+
 	Route::get("user/edit/{id}","Admin\UserController@edit");//普通管理员添加编辑模板
 	Route::put("user/{id}","Admin\UserController@update");//执行普通管理员修改
 	Route::resource("user","Admin\UserController");//执行普通管理员删除
