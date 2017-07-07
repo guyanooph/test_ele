@@ -21,7 +21,7 @@ Route::get("/sendsms","Home\LocationController@sendsms");
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
 
 Route::get('/register',"Home\RegisterController@index");//用户注册认证
-Route::get('/register/sendmessage',"Home\RegisterController@alidayu");//用户注册认证
+Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
 
 
 Route::get('/doregister',"Home\RegisterController@doRegister");//用户登录认证
