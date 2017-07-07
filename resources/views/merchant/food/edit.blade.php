@@ -26,16 +26,17 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i>编辑菜单种类</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{URL('merchant/food/')}}/{{ $type->id }}" method="post">
+                <form class="form-horizontal" action="{{URL('merchant/food/update')}}/{{ $type->id }}" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
+                  <input type="hidden" name="picname" value="{{$type->picname}}">
                   <div class="box-body">
 				  <div class="form-group">
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>
 					  <div class="col-sm-4">
 						<select name="typeid">
+							<option value="0">请选择</option>
 							@foreach($list as $v)
-								<option value="0">请选择</option>
 								<option value="{{$v->id}}">{{$v->title}}</option>
 							@endforeach
 						</select>
@@ -49,8 +50,41 @@
                         <input type="text" name="title" class="form-control" value="{{ $type->title }}">
                       </div>
                     </div>
-
+				  </div>
+				  <div class="box-body">
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">图片：</label>
+                      <div class="col-sm-4" style="flont:left;">
+                        <input type="file" onchange="preview(this)" class="form-control" name="picnew" value=""> 
+                      </div> <div id="preview" class="col-sm-3 control-label" ><img src='{{asset("upload/merchant/food/$type->picname")}}'/></div>
+                    </div>
                   </div>
+				  <div class="box-body">
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">介绍：</label>
+                      <div class="col-sm-4">
+                        <input type="text" name="descr" class="form-control" value="{{ $type->descr }}">
+                      </div>
+                    </div>
+				  </div>
+				  <div class="box-body">
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">价格：</label>
+                      <div class="col-sm-4">
+                        <input type="number" name="price" class="form-control" value="{{ $type->price }}">
+                      </div>
+                    </div>
+				  </div>
+				  <div class="box-body">
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">状态：</label>
+                      <div class="col-sm-4">
+                        <input type="radio" name="stutas" {{ ($type['stutas'] == 1)? "checked": "" }} value="1">在售  &nbsp; &nbsp; 
+                        <input type="radio" name="stutas" {{ ($type['stutas'] == 2)? "checked": "" }} value="2">售完   &nbsp;&nbsp;
+						<input type="radio" name="stutas" {{ ($type['stutas'] == 3)? "checked": "" }} value="3">下架
+                      </div>
+                    </div>
+				  </div>
 				  <!-- /.box-body -->
                   <div class="box-footer">
 				    <div class="col-sm-offset-2 col-sm-1">

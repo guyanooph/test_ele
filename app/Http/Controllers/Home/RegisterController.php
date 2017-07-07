@@ -21,9 +21,11 @@ class RegisterController extends Controller
 	}
 
 	public function sendSms(Request $request){
+
 			//var_dump($request);die;
 	        $phone = $request ->input('phone'); // 用户手机号，接收验证码
 	        //var_dump($phone);
+
 	        $name = '兄弟连';  // 短信签名,可以在阿里大鱼的管理中心看到
 	        $num = rand(100000, 999999); // 生成随机验证码
 	        $smsParams = [
@@ -44,6 +46,10 @@ class RegisterController extends Controller
 	        }else{
 	            return json_encode(['ResultData' => '发送失败', 'info' => '请再次发送']);
 	        }
+
+
+	}
+
 
 	    }
 	/*public function Alidayu(Request $request)
@@ -72,6 +78,7 @@ class RegisterController extends Controller
 	    }
 	}    
 */
+
 	  // 用户登录认证
 	public function doRegister(Request $request)
 	{

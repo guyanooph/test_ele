@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 class RootController extends Controller
 {
-    //判断目前使用的环境
+
     public function index()
     {
 

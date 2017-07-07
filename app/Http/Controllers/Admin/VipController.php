@@ -14,7 +14,8 @@ class VipController extends Controller
      */
     public function index()
     {
-        return view("admin.vip.index");
+        $list=\DB::table('login_user')->paginate(5);
+        return view("admin.vip.index",['list'=>$list]);
     }
 
     /**

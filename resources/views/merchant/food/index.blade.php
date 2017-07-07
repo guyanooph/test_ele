@@ -91,7 +91,7 @@
       <script type="text/javascript">
             function doDel(id){
                 if(confirm('确定要删除吗？')){
-                    $("#mydeleteform").attr("action","{{url('merchant/food')}}/"+id).submit(); 
+                    $("#mydeleteform").attr("action","{{url('merchant/food/destroy')}}/"+id).submit(); 
                 }
             }
       </script>

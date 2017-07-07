@@ -29,13 +29,21 @@
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
 				  
+<<<<<<< HEAD
+                  <div class="box-body">
+<<<<<<< HEAD
+=======
+				   
+=======
                   <div class="box-body">  
+>>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">商家Id：</label>
                       <div class="col-sm-4">
                         <input type="text" name="shopid" class="form-control" id="inputEmail3" value="{{ $merchantopen->shopid }}">
                       </div>
                     </div>
+>>>>>>> 19baee58d8caecc409d1d496bf8588d392d14304
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">商家名称：</label>
                       <div class="col-sm-4">
