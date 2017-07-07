@@ -323,6 +323,7 @@
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php echo e(url('merchant/mer')); ?>"><i class="fa fa-circle-o"></i>商家信息</a></li>
                 <li class="active"><a href="<?php echo e(url('merchant/merchantopen')); ?>"><i class="fa fa-circle-o"></i>营业信息</a></li>
+                <li class="active"><a href="<?php echo e(url('merchant/create')); ?>"><i class="fa fa-circle-o"></i>图片七牛</a></li>
     
               </ul>
             </li>

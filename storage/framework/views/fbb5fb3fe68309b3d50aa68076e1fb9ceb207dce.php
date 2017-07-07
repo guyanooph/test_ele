@@ -32,8 +32,8 @@
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>
 					  <div class="col-sm-4">
 						<select name="typeid">
-							<option value="0">请选择</option>
-							<?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<option value="$this->shu"><?php echo e($type->typeid); ?></option>
+							<?php $__currentLoopData = $info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 								<option value="<?php echo e($v->id); ?>"><?php echo e($v->title); ?></option>
 							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						</select>
@@ -53,7 +53,7 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">图片：</label>
                       <div class="col-sm-4" style="flont:left;">
                         <input type="file" onchange="preview(this)" class="form-control" name="picnew" value=""> 
-                      </div> <div id="preview" class="col-sm-3 control-label" ><img src='<?php echo e(asset("upload/merchant/food/$type->picname")); ?>'/></div>
+                      </div> <div id="preview" class="col-sm-3 control-label" ><img src='http://osltbib18.bkt.clouddn.com/wang/image_<?php echo e($type->picname); ?>'/></div>
                     </div>
                   </div>
 				  <div class="box-body">

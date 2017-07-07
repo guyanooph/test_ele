@@ -51,7 +51,7 @@
                       <td><?php echo e($v->id); ?></td>
                       <td><?php echo e($v->typename); ?></td>
                       <td><?php echo e($v->title); ?></td>
-                      <td><img style="width:50px;height:50px;" src='<?php echo e(asset("upload/merchant/food/$v->picname")); ?>'/></td>
+                      <td><img style="width:50px;height:50px;" src='http://osltbib18.bkt.clouddn.com/wang/image_<?php echo e($v->picname); ?>'/></td>
                       <td><?php echo e($v->descr); ?></td>
                       <td><?php echo e($v->price); ?></td>
                       <td><?php echo e($v->num); ?></td>
