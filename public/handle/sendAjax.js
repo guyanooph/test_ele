@@ -12,9 +12,9 @@ function sendAjax(data, sendUrl, back) {
         url: sendUrl,
         data: data,
         datatype: "json",
-        success: function (response) {
-            alert(response);
-            back(response);
+        success: function (data) {
+            //alert(response);
+            back(data);
         }
     })
 }

@@ -63,7 +63,7 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
-//    ],
+   ],
         'qiniu' => [
             'driver'  => 'qiniu',
             'domains' => [
@@ -76,6 +76,6 @@ return [
             'bucket'    => env('QINIU_BUCKET'),  //Bucket名字
             'notify_url'=> '',  //持久化处理回调地址
         ],
-        
+
 
 ];

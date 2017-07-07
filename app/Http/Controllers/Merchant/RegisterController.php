@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Merchant;
-
+//use  Illuminate\Support\Facades\Redis as Redis;
+use redis;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Merchant\Mer_register;
+use App\Models\Merchant\Mer_login;
 use App\Org\Image;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redis as redis;
 // 引入阿里大鱼命名空间
 use iscms\Alisms\SendsmsPusher as Sms;
 //导入七牛相关类
@@ -27,8 +28,10 @@ class RegisterController extends Controller
         $this->sms=$sms;
     }
 
-    public function sendSms(Request $request){
-        $phone = $request ->input('phone','15138958851'); // 用户手机号，接收验证码
+
+
+   public function sendMobileCode(Request $request){
+        $phone = $request ->input('tel','15138958851'); // 用户手机号，接收验证码`
         $name = '兄弟连';  // 短信签名,可以在阿里大鱼的管理中心看到
         $num = rand(100000, 999999); // 生成随机验证码
         $smsParams = [
@@ -38,19 +41,24 @@ class RegisterController extends Controller
         $code = "SMS_75835101";   // 阿里大于(鱼)短信模板ID
         //$request ->session()->put('alidayu',$num);  // 存入session 后面做数据验证
         $result=$this->sms->send($phone,$name,$content,$code);
-        //dd('aa');
-        echo "<pre>";
-        var_dump($result);die;
-        echo "验证码：".session('alidayu').'<br/>';
-        if(property_exists($request,'result')){
-            // 使用PHP函数json_encode方法将给定数组转化为JSON：
-            return json_encode(['ResultData' => '成功', 'info' => '已发送']);
-        }else{
-            return json_encode(['ResultData' => '失败', 'info' => '重复发送']);
-        }
-
+        //指定时间销毁
+        \Redis::sEtex($phone,15*60s, $num);
     }
 
+    public function code(Request $request){
+       //获取键
+       $phone = $request ->input('tel');
+        //获取指定键的值
+       $Rcode = \Redis::get($phone);
+       //对比用户输入的验证码与REDIS存储的验证码
+       if($request ->input('code') == $Rcode){
+           //删除用过的验证码
+            \Redis::delete($phone);
+            //加载商家注册信息页
+           return view('merchant.register.index');
+       }
+
+    }
 
 
     /**
@@ -104,9 +112,9 @@ class RegisterController extends Controller
         $mername = $request->input('mername');
         $res= \DB::table('mer_register')->where('mername',$mername)->first();
         if($res){
-            echo "y";
+            return 1;
         }else{
-            echo "n";
+            return;
         }
     }
 
@@ -115,9 +123,21 @@ class RegisterController extends Controller
         $shoptitle = $request->input('shoptitle');
         $res= \DB::table('mer_register')->where('shoptitle',$shoptitle)->first();
         if($res){
-            echo "y";
+            return 1;
         }else{
-            echo "n";
+            return;
+        }
+    }
+
+    //检验手机号码验证码
+    public function ver_tel(Request $request){
+        dd('a');
+        $tel = $request->input('tel');
+        $res= \DB::table('mer_register')->where('phone',$tel)->first();
+        if($res){
+            return 1;
+        }else{
+            return ;
         }
     }
 
@@ -126,9 +146,9 @@ class RegisterController extends Controller
         $phone = $request->input('phone');
         $res= \DB::table('mer_register')->where('phone',$phone)->first();
         if($res){
-            echo "y";
+            return 1;
         }else{
-            echo "n";
+            return ;
         }
     }
 
@@ -139,9 +159,9 @@ class RegisterController extends Controller
         $identity = $request->input('identity');
         $res= \DB::table('mer_register')->where('identity',$identity)->first();
         if($res){
-            echo "y";
+            return 1;
         }else{
-            echo "n";
+            return;
         }
     }
 
@@ -156,6 +176,7 @@ class RegisterController extends Controller
                 // 返回错误信息
                 return responseMsg('两次密码输入不一致', 400);
             }
+             //七牛文件上传
 
 //            if ($request->hasFile('picname')) {
 //                $file = $request->file('picname');
@@ -174,27 +195,6 @@ class RegisterController extends Controller
 //
 //            }
 //
-//            if ($request->hasFile('logoname')) {
-//                $file = $request->file('logoname');
-//                $disk = QiniuStorage::disk('qiniu');
-//                $filename2 = md5($file->getClientOriginalName() . time() . rand()). "." . $file->getClientOriginalExtension();
-//                //上传到七牛
-//               // dd($filename2);
-//                $bool = $disk->put('iwanli/image_' . $filename2, file_get_contents($file->getRealPath()));
-//                if ($bool) {
-//                    $path = $disk->downloadUrl('iwanli/image_' . $filename2);
-//                    //return "上传成功,图片UR:" . $path;
-//                }else{
-//                    return "上传失败2";
-//                }
-//            } else {
-//                return "没有文件2";
-//
-//            }
-
-            //dd($filename2);
-
-
                 if ($request->file('picname') && $request->file('picname')->isValid()) {
                     //获取上传文件信息
                     $file = $request->file('picname');
@@ -202,13 +202,19 @@ class RegisterController extends Controller
                     //随机一个新的文件名
                     $filename = time().rand(1000,9999).".".$ext;
                     //移动上传文件
-                    $file->move("./upload/merchant/food/",$filename);
-                    $data['picname'] = $filename;
-                    //return response($filename); //输出
-                    //exit();
+                    $file->move("./upload/merchant/lis/",$filename);
                 }
 
+                if ($request->file('logoname') && $request->file('logoname')->isValid()) {
+                    //获取上传文件信息
+                    $file = $request->file('logoname');
+                    $ext = $file->extension(); //获取文件的扩展名
+                    //随机一个新的文件名
+                    $filename2 = time().rand(1000,9999).".".$ext;
+                    //移动上传文件
+                    $file->move("./upload/merchant/lis/",$filename2);
 
+                }
 
                 //商家注册表
                 $input = $request->only(['mername', 'password', 'shoptitle', 'phone', 'identity', 'username']);
@@ -218,19 +224,22 @@ class RegisterController extends Controller
                 //dd($password);
                 $password = HASH::make($input['password']);
                 //die();
-                $input['picname'] = $filename;
-                 $input['logoname'] = $filename2;
                 $input['password'] = $password;
                 $input['first_ip'] = $request->getClientIp();
                 $input['register_time'] = date("Y-m-d H:i:s", time());
+                $input['logoname'] = $filename2;
+                $input['picname'] = $filename;
                 $res1 = \DB::table('mer_register')->InsertGetId($input);
                 //dd($res1);
-                //商家登录表
+
+
+                 //商家登录表
                 $info['shopid'] = $res1;
                 $info['phone'] = $input['phone'];
                 $info['password'] = $input['password'];
                 $info['shopname'] = $input['shoptitle'];
                 $res2 = \DB::table('mer_login')->InsertGetId($info);
+
 
                 //商家表
                 $data['shopid'] = $info['shopid'];
