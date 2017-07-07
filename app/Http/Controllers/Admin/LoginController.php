@@ -3,11 +3,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Gregwar\Captcha\CaptchaBuilder; 
-
+use Gregwar\Captcha\CaptchaBuilder;
+use iscms\Alisms\SendsmsPusher as Sms;
 class LoginController extends Controller
 {
-	//加载登录模板
+    public function __construct(Sms $sms)
+    {
+        $this->sms=$sms;
+    }
+
+    //加载登录模板
 	public function index()
 	{
 		
@@ -66,8 +71,61 @@ class LoginController extends Controller
 				return back()->with("msg","账号或密码错误！");	
 		}
 
+    //发送验证码
+    public function verify (Request $request,$pho)
+    {
+       // print_r($pho);die;
+           //$ams= new App\Org\SmsAuth\AmsAuth;
+      //return $ams->smsAuth("登录验证",$phone);
+        $phone = $pho;// 用户手机号，接收验证码
+        $name = '兄弟连';  // 短信签名,可以在阿里大鱼的管理中心看到
+        $num = rand(100000, 999999); // 生成随机验证码
+        $smsParams = [
+            'number' => "$num"
+        ];
+        $content = json_encode($smsParams); // 转换成json格式的
+        $code = "SMS_75835101";   // 阿里大于(鱼)短信模板ID
+        //$request ->session()->put('alidayu',$num);  // 存入session 后面做数据验证
+        $result=$this->sms->send($phone,$name,$content,$code);
+        //dd('aa');
+        echo "<pre>";
+        //var_dump($result);die;
+        echo "验证码：".session('alidayu').'<br/>';
+        if(property_exists($request,'result')){
+            // 使用PHP函数json_encode方法将给定数组转化为JSON：
+            return json_encode(['ResultData' => '成功', 'info' => '已发送']);
+        }else{
+            return json_encode(['ResultData' => '失败', 'info' => '重复发送']);
+        }
+    }
 
-	
+    //执行手机登录验证
+    public function plogin(Request $request)
+    {
+
+        $code=$request->input('code');
+        //var_dump($code);
+        //若验证码输入错误
+        if($code==NULL || $code!=$request->session()->get('alidayu'))
+        {
+
+            return back()->with("err","验证码输入错误");
+        }
+            //验证成功,获取登陆者信息
+            $info=\DB::table('admin_user')->where('phone',$request->input('phone'))->first();
+            //若$info为true
+            if($info)
+            {
+                //将用户信息放入session中
+                $request->session()->put('adminuser',$info);
+               // return redirect("admin");
+            } else {
+                return back()->with("err","手机号码有误，请核对后再输入");
+            }
+        }
+
+
+
 
 	//执行退出
 	public function loginOut(Request $request)
