@@ -37,7 +37,8 @@
                     <tr>
                       <th style="width:60px">ID</th>
                       <th>账号</th>
-                      <th>密码</th>
+                      <th>头像</th>
+                      <th>手机号</th>
                       <th>角色</th>
                       <th>登录时间</th>
                       <th>修改时间</th>
@@ -48,7 +49,8 @@
                     <tr>
                       <td>{{$v->id}}</td>
                       <td>{{$v->name}}</td>
-                      <td>{{$v->password}}</td>
+                      <td><img src="http://oslfm4pmj.bkt.clouddn.com/iwanli/image_{{$v->picname}}" width="50px" height="50px"></td>
+                      <td>{{$v->phone}}</td>
                       <td>{{$v->role}}</td>
                       <td>{{$v->logtime}}</td>
                       <td>{{$v->updated_at}}</td>
