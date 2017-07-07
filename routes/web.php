@@ -86,12 +86,13 @@ Route::group(["prefix" => "personal","middlware" => "personal"], function () {
 
 
     //后台路由组
-    Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
-    Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
-    Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
+    Route::get("ad/login","Admin\LoginController@index");//加载登录页面
+    Route::get('ad/getcode',"Admin\LoginController@getCode");//加载验证码
+    Route::post('ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
     Route::get("admin/login/logOut","Admin\LoginController@loginOut");//退出
 
     Route::get("/admin/login/verify/{pho}","Admin\LoginController@Verify");//发送手机验证信息
+   
     Route::post("/ad/plogin","Admin\LoginController@plogin");//执行手机验证
 
 
@@ -152,7 +153,7 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	
 	Route::post('ftype/storyEr',"Admin\FtypeController@storyEr");//执行子类别添加
 	
-	//Route::resource("ftype","Admin\FtypeController");//菜品分类删除,用delete没删掉
+	Route::resource("ftype","Admin\FtypeController");//菜品分类删除,用delete没删掉
 	Route::get("/ftypeb","Admin\FtypebController@index");//菜品子分类加载页面
 	Route::delete("/ftypeb/destroy/{id}","Admin\FtypebController@destroy");//菜品子分类删除
 	Route::get("ftypeb/doEdit","Admin\FtypebController@doEdit");//ajax编辑子分类时查找父类title

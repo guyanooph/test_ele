@@ -74,9 +74,11 @@ class LoginController extends Controller
     //发送验证码
     public function verify (Request $request,$pho)
     {
-       // print_r($pho);die;
+      //  print_r($pho);die;
            //$ams= new App\Org\SmsAuth\AmsAuth;
       //return $ams->smsAuth("登录验证",$phone);
+      //
+    
         $phone = $pho;// 用户手机号，接收验证码
         $name = '兄弟连';  // 短信签名,可以在阿里大鱼的管理中心看到
         $num = rand(100000, 999999); // 生成随机验证码

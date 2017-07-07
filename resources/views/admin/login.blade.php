@@ -24,10 +24,13 @@
     <div class="login-box">
       <div class="login-logo">
         <a href="#"><b>管理员登陆页</b></a>
+        
 
       </div><!-- /.login-logo -->
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">手机登录</button>
-
+ @if(session("err"))
+            {{session('err')}}
+         @endif
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -69,14 +72,15 @@
               $.ajax({
                   url:"{{url('admin/login/verify')}}/"+pho,
                   type:'get',
-                  dataType:"html",
+                  dataType:"text",
                   async:true,
                   success:function(data){
+                    alert(data);
                       $(".login-logo").append("<li>"+data['ResultData']+"</li>");
                   },
               });
               if(mytime==null){
-                  a=6;
+                  a=60;
                   djs();
               }
           }
@@ -168,12 +172,7 @@
         });
       });
 
-      @if(session("err"))
-      <script type="text/javascript">
-          alert(session('err');
-    </script>
-    @endif
-
+     
 
     </script>
   </body>

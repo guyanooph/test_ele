@@ -5,7 +5,7 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
           <h1>
-            管理员信息
+            菜品信息
             
           </h1>
           <ol class="breadcrumb">
@@ -100,9 +100,15 @@
                             
                             <td><button class="btn btn-xs btn-danger" onclick="doDel({{ $vo->id }})">删除</button> 
                              
-                              <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModalq">
+                              <button type="button" onclick="create('{{$vo->title}}','{{$vo->id}}')" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#myModalq">
                                 添加子分类
                               </button>
+                              <script type="text/javascript">
+                                  function create(title,id){
+                                    $("input[name='mtitle']").attr("value",title);
+                                    $("input[name='mid']").attr("value",id);
+                                  }
+                              </script>
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModalq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -116,12 +122,12 @@
                                 <!--表单添加-->
                                  <form action="{{url('admin/ftype/storyEr')}}" id="addform" method="post" class="form-horizontal">
                                       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                                      <<input type="hidden" name="mid" value="{{ $vo->id}}">
+                                      <input type="hidden" name="mid" value="{{ $vo->id}}">
                                       <div class="box-body">
                                         <div class="form-group">
                                           <label for="inputEmail3" class="col-sm-2 control-label">商家父类名：</label>
                                           <div class="col-sm-4">
-                                            <input type="text" name="title" value="{{ $vo->title }}" readonly class="form-control" id="inputEmail3" placeholder="商家父类名">
+                                            <input type="text" name="mtitle" value="{{ $vo->title }}" readonly class="form-control" id="inputEmail3" placeholder="商家父类名">
                                           </div>
                                         </div>
                                        <div class="form-group">
