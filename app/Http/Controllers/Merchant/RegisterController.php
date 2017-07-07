@@ -42,7 +42,7 @@ class RegisterController extends Controller
         //$request ->session()->put('alidayu',$num);  // 存入session 后面做数据验证
         $result=$this->sms->send($phone,$name,$content,$code);
         //指定时间销毁
-        \Redis::sEtex($phone,15*60s, $num);
+        \Redis::sEtex($phone,15*60,$num);
     }
 
     public function code(Request $request){

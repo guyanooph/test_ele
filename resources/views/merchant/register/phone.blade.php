@@ -9,13 +9,16 @@
     <script src="{{ asset('js/jquery-3.2.1.js') }}"></script>
 </head>
 <body>
+    <center>
+        <h3>吃货，商家注册</h3>
     <form method="post" action="{{ URL('code') }}">
         {{ csrf_field() }}
-        <input type="text" name="tel"  onblur="sendMobileCode()"/>输入手机号码
-        <input type="text" name="code" >请输入验证码
-        <input type="submit" value="下一步">
+        <input type="text" name="tel" value="请输入手机号码"/>  &nbsp; <button onclick="sendMobileCode()">点击发送验证码</button><br/>
+        <input type="text" name="code" value="请输入验证码">
+        <input type="submit" value="点击进行下一步">
         <div id="div_tel"></div>
     </form>
+    </center>
     <script>
         function sendMobileCode()
         {
