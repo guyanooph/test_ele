@@ -23,7 +23,7 @@ Route::get('/register',"Home\RegisterController@index");//用户注册认证
 Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
 
 
-Route::get('/doregister',"Home\RegisterController@doRegister");//用户登录认证
+Route::post('/doregister',"Home\RegisterController@doRegister");//用户登录认证
 
 
 Route::get('/login',"Home\LoginController@index"); //加载前台登录界面
