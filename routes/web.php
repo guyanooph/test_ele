@@ -21,10 +21,10 @@ Route::get("/sendsms","Home\LocationController@sendsms");
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
 
 Route::get('/register',"Home\RegisterController@index");//用户注册认证
-Route::get('/register/sendmessage',"Home\RegisterController@alidayu");//用户注册认证
+Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
 
 
-Route::get('/doregister',"Home\RegisterController@doRegister");//用户登录认证
+Route::post('/doregister',"Home\RegisterController@doRegister");//用户登录认证
 
 
 Route::get('/login',"Home\LoginController@index"); //加载前台登录界面
@@ -63,18 +63,7 @@ Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
 
 
 
-Route::get('/personal','Home\PersonalController@index'); //个人中心
 
-
-
-Route::get('/personal/order','Home\PersonalController@order'); //个人中心/个人订单
-Route::get('/personal/order/unrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
-Route::get('/personal/order/refund','Home\PersonalController@orderRefund'); //个人中心/个人订单/退单记录
-Route::get('/personal/red_packet','Home\PersonalController@red_packet'); //个人中心/个人资产/我的红包
-Route::get('/personal/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
-Route::get('/personal/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
-Route::get('/personal/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
-Route::get('/personal/address/','Home\PersonalController@address'); //个人中心/地址
 
 Route::get('/personal/collect','Home\PersonalController@collect'); //个人中心/个人收藏
 

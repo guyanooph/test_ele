@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf9641a46a6648b7a9b66533c0b07222",
+    "content-hash": "922ba7182ea1f053ef4e7b7448000016",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -16,7 +16,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/barryvdh/laravel-debugbar/af98b3a4ccac9364f2145fae974ff3392ec402b1.zip",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/af98b3a4ccac9364f2145fae974ff3392ec402b1",
                 "reference": "af98b3a4ccac9364f2145fae974ff3392ec402b1",
                 "shasum": ""
             },
@@ -178,15 +178,7 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
                 "url": "https://api.github.com/repos/erusev/parsedown/zipball/728952b90a333b5c6f77f06ea9422b94b585878d",
-=======
-<<<<<<< HEAD
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/728952b90a333b5c6f77f06ea9422b94b585878d",
-=======
-                "url": "https://files.phpcomposer.com/files/erusev/parsedown/728952b90a333b5c6f77f06ea9422b94b585878d.zip",
->>>>>>> d94371fba8e26ae9ec2e1605451070d91f58cee0
->>>>>>> 07ab8de98769fc7cb25b28f7e743ab3525ffdfd6
                 "reference": "728952b90a333b5c6f77f06ea9422b94b585878d",
                 "shasum": ""
             },
@@ -1500,15 +1492,7 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
                 "url": "https://api.github.com/repos/symfony/debug/zipball/63b85a968486d95ff9542228dc2e4247f16f9743",
-=======
-<<<<<<< HEAD
-                "url": "https://api.github.com/repos/symfony/debug/zipball/63b85a968486d95ff9542228dc2e4247f16f9743",
-=======
-                "url": "https://files.phpcomposer.com/files/symfony/debug/63b85a968486d95ff9542228dc2e4247f16f9743.zip",
->>>>>>> d94371fba8e26ae9ec2e1605451070d91f58cee0
->>>>>>> 07ab8de98769fc7cb25b28f7e743ab3525ffdfd6
                 "reference": "63b85a968486d95ff9542228dc2e4247f16f9743",
                 "shasum": ""
             },
@@ -1729,15 +1713,7 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/33f87c957122cfbd9d90de48698ee074b71106ea",
-=======
-<<<<<<< HEAD
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/33f87c957122cfbd9d90de48698ee074b71106ea",
-=======
-                "url": "https://files.phpcomposer.com/files/symfony/http-kernel/33f87c957122cfbd9d90de48698ee074b71106ea.zip",
->>>>>>> d94371fba8e26ae9ec2e1605451070d91f58cee0
->>>>>>> 07ab8de98769fc7cb25b28f7e743ab3525ffdfd6
                 "reference": "33f87c957122cfbd9d90de48698ee074b71106ea",
                 "shasum": ""
             },
@@ -2074,15 +2050,7 @@
             },
             "dist": {
                 "type": "zip",
-<<<<<<< HEAD
                 "url": "https://api.github.com/repos/symfony/var-dumper/zipball/9ee920bba1d2ce877496dcafca7cbffff4dbe08a",
-=======
-<<<<<<< HEAD
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/9ee920bba1d2ce877496dcafca7cbffff4dbe08a",
-=======
-                "url": "https://files.phpcomposer.com/files/symfony/var-dumper/9ee920bba1d2ce877496dcafca7cbffff4dbe08a.zip",
->>>>>>> d94371fba8e26ae9ec2e1605451070d91f58cee0
->>>>>>> 07ab8de98769fc7cb25b28f7e743ab3525ffdfd6
                 "reference": "9ee920bba1d2ce877496dcafca7cbffff4dbe08a",
                 "shasum": ""
             },

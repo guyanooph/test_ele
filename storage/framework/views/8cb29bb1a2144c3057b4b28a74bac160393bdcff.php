@@ -1,7 +1,7 @@
 <html>
-<script src="js/jquery-1.8.3.js"></script>
-<form method="POST" action="{{URL('doregister')}}">
-  {{ csrf_field() }} 
+<script src="js/jquery-1.8.3.min.js"></script>
+<form method="POST" action="<?php echo e(URL('doregister')); ?>">
+  <?php echo e(csrf_field()); ?> 
 
     <div>
         phone
@@ -35,7 +35,7 @@
 
 
 var InterValObj; //timer变量，控制时间
-var count = 60; //间隔函数，1秒执行
+var count = 30; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
 function sendMessage() {
 curCount = count;
@@ -45,7 +45,7 @@ document.getElementById("btnSendCode").innerHTML="请在" + curCount + "s后再�
 InterValObj = window.setInterval(SetRemainTime, 1000); // 启动计时器timer处理函数，1秒执行一次
 // 向后台发送处理数据
 $.ajax({
-url: "{{URL('register/sendmessage')}}", // 目标地址
+url: "<?php echo e(URL('register/sendmessage')); ?>", // 目标地址
 type: "GET", // 用POST方式传输
 dataType: "json", // 数据格式:JSON
 data:'phone='+$('#phone').val(),
