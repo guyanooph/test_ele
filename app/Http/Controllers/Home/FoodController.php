@@ -15,8 +15,9 @@ class FoodController extends Controller
 		
 		$list = Food_list::all();
 		$ob = Merchant::find(1);
-		
+
 		//$ob = \DB::table('merchant')->where("shopid",$_GET['id'])->first();
+		
 		return view('home.food.foodlist', ['list'=>$list,'ob'=>$ob]);
 	}
 
