@@ -218,7 +218,7 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::post("/foodtype/store","Merchant\FoodtypeController@store");//执行添加
 	Route::get("/foodtype/edit/{id}","Merchant\FoodtypeController@edit");//修改菜单分类
 	Route::put("/foodtype/update/{id}","Merchant\FoodtypeController@update");//执行修改
-	Route::delete("/foodtype/destroy/{id}","Merchant\FoodtypeController@destroy");//执行修改
+	Route::delete("/foodtype/destroy/{id}","Merchant \FoodtypeController@destroy");//执行修改
 	
 	Route::get("/food","Merchant\FoodController@index");//管理首页
 	Route::get("/food/create","Merchant\FoodController@create");//管理菜的添加
@@ -227,3 +227,5 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
 	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
 });
+//短息测试
+Route::get("/merchants/sendSms" , "Merchants\RegisterController@sendSms");

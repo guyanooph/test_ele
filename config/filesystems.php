@@ -67,14 +67,15 @@ return [
         'qiniu' => [
             'driver'  => 'qiniu',
             'domains' => [
-                'default'   => env('QINIU_DOMAINS'), //你的七牛域名
-                'https'     => '',         //你的HTTPS域名
-                'custom'    => '',                //你的自定义域名
-            ],
-            'access_key'=> env('QINIU_key'),  //AccessKey
-            'secret_key'=> env('QINIU_SECRETKEY'),  //SecretKey
+                'default'   => env('QINIU_DEFAULT'), //你的七牛域名
+                'https'     => env('QINIU_HTTPS'), //你的HTTPS域名
+                'custom'    => env('QINIU_CUSTOM'), //你的自定义域名
+             ],
+            'access_key'=> env('QINIU_AK'),  //AccessKey
+            'secret_key'=> env('QINIU_SK'),  //SecretKey
             'bucket'    => env('QINIU_BUCKET'),  //Bucket名字
             'notify_url'=> '',  //持久化处理回调地址
+            'access'    =>  '',//
         ],
 
 
