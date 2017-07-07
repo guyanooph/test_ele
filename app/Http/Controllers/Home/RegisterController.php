@@ -33,7 +33,7 @@ class RegisterController extends Controller
 	    $request ->session()->put('alidayu',$num);  // 存入session 后面做数据验证
 	    //var_dump($request);
 
-	    $result=$this->sms->send(13161610031,$name,$number,$code);
+	    $result=$this->sms->send(13773136524,$name,$number,$code);
 	    //echo "<pre>";
 	    // var_dump($result);die;
 	    echo "验证码：".session('alidayu').'<br/>';
