@@ -11,7 +11,7 @@
 |
 */
 //前台路由
-
+Route::get("/", "Home\ShopController@index");
 Route::get("/home", "Home\LocationController@location");
 Route::post("/testshop","Home\LocationController@upload");
 Route::get("/sendsms","Home\LocationController@sendsms");
@@ -179,7 +179,7 @@ Route::get("/sendMobileCode","Merchant\RegisterController@sendMobileCode");//发
 
 
 //Route::get('merchant/register/sendsms', 'Merchant\RegisterController@sendSms');//发送手机验证码
-//Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
+Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
 Route::post("merchant/register","Merchant\RegisterController@store");////商家执行注册
 Route::post("merchant/ver","Merchant\RegisterController@ver");//注册用户名验证
 Route::post("merchant/ver_s","Merchant\RegisterController@ver_s");//注册商铺名验证

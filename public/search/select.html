@@ -1,0 +1,31 @@
+
+<div onclick="show_pro()" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
+<div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-省-" style="">
+</div>
+<input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-省-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
+
+<ul id="pro_list" class="ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope" role="listbox" ng-show="$select.open &amp;&amp; $select.items.length > 0" repeat="item.id as item in data.provinces | filter: { name: $select.search }" style="opacity: 1; position: absolute; top: -200px;">
+    <li class="ui-select-choices-group" id="ui-select-choices-0">
+        <div class="divider ng-hide" ng-show="$select.isGrouped &amp;&amp; $index > 0"></div>
+        <div ng-show="$select.isGrouped" class="ui-select-choices-group-label dropdown-header ng-binding ng-hide" ng-bind="$group.name"></div>
+        <!-- ngRepeat: item in $select.items --><!-- ngIf: $select.open -->
+        <div ng-attr-id="ui-select-choices-row-{{ $select.generatedId }}-{{$index}}" class="ui-select-choices-row ng-scope active" ng-class="{active: $select.isActive(this), disabled: $select.isDisabled(this)}" role="option" ng-repeat="item in $select.items" ng-if="$select.open" ng-click="$select.select(item,$select.skipFocusser,$event)" id="ui-select-choices-row-0-0" style="">
+            <a href="" class="ui-select-choices-row-inner" uis-transclude-append="">
+            <span class="ng-binding ng-scope">安徽省</span> 
+            </a>
+        </div>
+        <!-- end ngIf: $select.open --><!-- end ngRepeat: item in $select.items --><!-- ngIf: $select.open -->
+        <!-- end ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->
+    </li>
+</ul>
+</div>
+<script>
+    function show_pro(){
+        document.getElementById("pro_list").style("display:none");
+    }
+    $(function () {
+        $.ajax({
+            
+        });
+    })
+</script>

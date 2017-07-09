@@ -89,8 +89,7 @@
 					</div>
 					<div map-search="" hide-search-result="hideSearchResult" current-city="currentCity"
 					     map-mode="mapMode" class="map-search ng-isolate-scope">
-						<form action="/shoplist" method="get" id="search_form" class="mapsearch-inputbar ng-valid ng-dirty" ng-submit="search.showSuggests($event, search.keyword)">
-                            {{ csrf_field() }}
+						<form action="/" method="get" id="search_form" class="mapsearch-inputbar ng-valid ng-dirty" ng-submit="search.showSuggests($event, search.keyword)">
 							<input name="address" id="position_search"
 									placeholder="请输入你的收货地址（写字楼，小区，街道或者学校）" ng-model="search.keyword"
 									ng-keyup="search.showSuggests($event, search.keyword)"

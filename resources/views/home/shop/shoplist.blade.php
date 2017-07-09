@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html ng-app="eleme" perf-error="desktop/" class="ng-scope">
 <head>
 	<style type="text/css">@charset "UTF-8";
