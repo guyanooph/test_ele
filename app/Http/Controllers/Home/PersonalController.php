@@ -26,7 +26,7 @@ class PersonalController extends Controller
 
 	public function order()
 	{
-		$order=Order::where('userid',1);
+		$order=Order::where('userid',1)->get();
 		return view('home.personal.order',['order'=>$order]);
 	}
 

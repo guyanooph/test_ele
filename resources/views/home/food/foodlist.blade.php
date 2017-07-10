@@ -220,11 +220,11 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 		
 		
 		<!--分类-->
-		<div ng-show="!loading &amp;&amp; !searchEnv" class="shopmenu-nav ng-isolate-scope" sticky="" sticky-class="sticky" sticky-body-class="shopmenu-nav-sticky" sticky-fn="shopNavSticky">
-	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope active">精品套餐</a>
-	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">热炒</a>
-	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">美味小菜</a></div>
-		
+	<div ng-show="!loading &amp;&amp; !searchEnv" class="shopmenu-nav ng-isolate-scope" sticky="" sticky-class="sticky" sticky-body-class="shopmenu-nav-sticky" sticky-fn="shopNavSticky">
+	@foreach ($type_list as $type)
+	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope active">{{ $type->title }}</a>
+	@endforeach
+	</div>
 		
 		
 		<!-- 菜 -->
@@ -234,9 +234,11 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 			
 			
 			<!-- 只是一个分类（需要遍历分类表，加载多个） -->
+			@foreach ( $type_list as $type)
 			<div class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
-				<h3 class="shopmenu-title ng-binding">热销 <span class="shopmenu-des ng-binding">大家喜欢吃，才叫真好吃。</span></h3>
-			@foreach($list as $cp)
+			
+			<h3 class="shopmenu-title ng-binding">{{ $type->title }} <span class="shopmenu-des ng-binding">大家喜欢吃，才叫真好吃。</span></h3>
+			@foreach($type->food as $cp)
 				<div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="534306490" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
 				<span class="col-1 ng-scope" ng-if="food.image_path">
 				<a href="javascript:" ng-click="showInfo(food)">
@@ -252,23 +254,33 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 				<button class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车</button>
 				</div></div></span></div>
 			@endforeach
-			</div>
 			
+			</div>
+			@endforeach
 			<div shop-cart="" cart-link="cartLink" ng-hide="shopCache.id == 656683" class="ng-isolate-scope">
+			
 			<div class="shop-cart">
+			
 			<div class="shop-cartbasket" id="shopbasket" style="top: -44px; height: auto;">
 			<div shop-groupswitcher="" cart="shopCart" class="ng-isolate-scope">
 			<div class="shop-grouphead single" ng-class="{ single: shopCart.vm.groups.length === 1 }">
+			
 			<a href="javascript:" class="icon-cart-add ng-scope"
 			ng-if="shopCart.vm.groups.length === 1" ng-click="addGroup()" tooltip="添加购物车"></a>
+			
 			<div class="shop-groupguidetip ng-scope" ng-if="showGuide &amp;&amp; shopCart.vm.groups.length === 1">
-			快去选购吧！
-			<a class="icon-close" ng-click="closeGuide()"></a></div>
+			快去选购吧！ <a class="icon-close" ng-click="closeGuide()"></a>
+			</div>
+			
 			<div class="shop-grouphead-row">购物车
-			<a href="javascript:" ng-click="shopCart.clearGroup(shopCart.currentGroupIndex)">[清空]</a></div></div></div>
+			<a href="javascript:" ng-click="shopCart.clearGroup(shopCart.currentGroupIndex)">[清空]</a></div>
+			 </div>
+		    </div>
 			<div class="shop-cartbasket-empty ng-scope" ng-if="!shopCart.vm.groups[shopCart.currentGroupIndex].length">
 			<div class="icon-cart"></div><p>购物车是空的，赶紧选购吧</p></div>
-			</div><div class="shop-cartfooter" ng-click="shopCart.toggleCart()">
+			</div>
+			
+			<div class="shop-cartfooter" ng-click="shopCart.toggleCart()">
 			<span class="icon-cart shop-carticon"></span>
 			<div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ ???</div>
 			<button class="shop-cartfooter-checkout ng-binding disabled" 
@@ -283,7 +295,8 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 			<em>轻松凑满起送价</em> <a href="javascript:" ng-click="closeCartHelper()">[ 关闭 ]</a></div>
 			<div class="shopcarthelper-container ui-scrollbar-light"></div></div>
 			<div class="shop-flyitem">
-			</div></div></div>
+			</div></div>
+			</div>
 			
 			
 			
