@@ -15,12 +15,13 @@ use App\Models\Address;
 
 class PersonalController extends Controller
 {
-    public function index()
+    public function index(Request $request)
 	{
 		//$id=session['userid'];
-		$list = Personal::find(1);
-		$order=order::where('userid',1)->orderBy('addtime','rsort');
-		return view('home.personal.personal' ,['list'=>$list,'order'=>$order]);
+		//$list = Personal::find();
+        $user = $request->session()->get("user");
+		$order = order::where('userid',$user->userid)->orderBy('addtime','rsort');
+		return view('home.personal.personal' ,['user'=>$user,'order'=>$order]);
         	
 	}
 

@@ -23,13 +23,13 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="#"><b>管理员登陆页</b></a>
+        <a href="#"><b>商家登陆页</b></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         @if(session("msg"))
             <p class="login-box-msg" style="color:red;">{{session("msg")}}</p>
         @else
-            <p class="login-box-msg">请输入您的邮箱账号</p>
+            <p class="login-box-msg">请输入您的账号</p>
         @endif
         <form action="{{url('merchant/dologin')}}" method="post">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -67,7 +67,7 @@
         </form>
 
         <a href="#" style="font-size:12px;">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="register.html" class="text-center" style="font-size:12px;">注册会员</a>
+        <a href="{{url('merchant/phone')}}" class="text-center" style="font-size:12px;">商家加盟</a>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

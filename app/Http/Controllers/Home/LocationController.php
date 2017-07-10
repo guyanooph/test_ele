@@ -4,19 +4,15 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Org\Dysmsapi\Request\V20170525\QuerySendDetailsRequest;
-use App\Org\Dysmsapi\Request\V20170525\SendSmsRequest;
-use App\Org\AliyunPhpSdkCore\Profile\DefaultProfile;
-use App\Org\AliyunPhpSdkCore\Auth\Credential;
-use App\Org\AliyunPhpSdkCore\DefaultAcsClient;
-
+use Illuminate\Database\Query\Builder;
+use zgldh\QiniuStorage\QiniuStorage;
 
 class LocationController extends Controller
 {
     //
-    public function location()
+    public function location(Request $request)
     {
-        return view("home.location.location",[]);
+        return view("home.location.location");
     }
     
     public function testshop(Request $request)
@@ -25,8 +21,7 @@ class LocationController extends Controller
         dd($input);
     }    
     
-    public function sendsms()
+    public function upload()
     {
-        
     }
 }

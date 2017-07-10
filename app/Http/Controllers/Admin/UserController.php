@@ -6,10 +6,12 @@ use App\Models\Admin_user;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Query\Builder;
+use zgldh\QiniuStorage\QiniuStorage;
+
+//use zgldh\QiniuStorage\QiniuFilesystemServiceProvider;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +40,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function vstore(Request $request)
     { 
             // $data=$request->only('name','password');
              $data['name']=$request->input('name');
@@ -57,8 +59,47 @@ class UserController extends Controller
                 }else{
                     $info="添加信息失败";
                 }
+
+
             return redirect('admin/user')->with("err",$info);
     }
+    //文件上传到七牛
+    //public function uploadFile(Request $request)
+    public function store(Request $request)
+    {
+
+        //判断是否有文件上传
+        if($request->hasFile('picname')) {
+            //获取文件，file对应的是前端表单上传input的name
+            $file =$request->file("picname");
+            //初始化
+            $disk =QiniuStorage::disk("qiniu");
+            //重命名文件
+            $fileName  =md5($file->getClientOriginalName().time().rand()).".".$file->getClientOriginalExtension();
+            //将文件名放入数组$data中
+            $data['picname']=$fileName;
+             //获取表单中的姓名和密码
+             $data['name']=$request->input('name');
+             $data['password'] = encrypt($request->input('password'));
+             $data['phone'] = $request->input('phone');
+             $data['addtime'] = date("Y-m-d H:i:s",time());         
+            //执行添加
+            if(\DB::table('Admin_user')->insert($data)){
+            //上传到七牛
+            $bool = $disk->put('iwanli/image_'.$fileName,file_get_contents($file->getRealPath()));
+            //判断是否上传成功
+          if($bool){
+              // $path = $disk->downloadUrl('iwanli/image_'.$fileName);
+            // print_r($path);die;
+            
+              return redirect("admin/user")->with('err',"添加成功");
+            }
+            return '上传失败';
+        }
+    }
+        return '没有文件';
+    }
+
 
     /**
      * Display the specified resource.

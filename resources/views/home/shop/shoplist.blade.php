@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html ng-app="eleme" perf-error="desktop/" class="ng-scope">
 <head>
 	<style type="text/css">@charset "UTF-8";
@@ -55,11 +56,6 @@
 
 
 	<!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
-
-	<script src="//crayfish.elemecdn.com/www.ele.me@ref/api" data-ref="API_CONFIG"></script>
-	<script src="jjjjs/perf.js" type="text/javascript" crossorigin="anonymous"></script>
-	<script src="jjjjs/vendor.3b50a2.js" type="text/javascript" crossorigin="anonymous"></script>
-	<script src="jjjjjs/main.f4d5bb.js" type="text/javascript" crossorigin="anonymous"></script>
 	<base href="/">
 	<meta name="mobile-agent" content="format=html5; url=http://m.ele.me/place/wx4sp1s1gfvn">
 	<meta name="description"
@@ -92,12 +88,13 @@
 									class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div>
 					</div>
 					<div topbar-profilebox="">
+						@if($user)
 						<div class="topbar-profilebox">
 							<!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --><img
 									class="topbar-profilebox-avatar ng-scope"
 									ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85"
 									ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像"
-									src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85">
+									src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26">
 							<!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> <span
 									class="topbar-profilebox-avatar icon-profile ng-hide"
 									ng-show="!$root.user.username"></span> <span ng-show="!$root.user.username"
@@ -105,7 +102,7 @@
 										ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F"
 										target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a></span>
 							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> <span
-										class="topbar-profilebox-username ng-binding">guyanooph</span>
+										class="topbar-profilebox-username ng-binding">{{ $user->username  }}</span>
 								<!-- ngIf: $root.topbarType === 'checkout' -->
 								<!-- ngIf: $root.topbarType !== 'checkout' --><span
 										class="topbar-profilebox-btn icon-arrow-down ng-scope"
@@ -117,8 +114,12 @@
 											class="icon-star" href="/personal/collect" hardjump="">我的收藏</a> <a
 											class="icon-location" href="/personal/address" hardjump="">我的地址</a> <a
 											class="icon-setting" href="/shoplist" hardjump="">安全设置</a> <a
-											class="icon-logout" href="JavaScript:"
-											ng-click="logout()">退出登录</a></div></span></div>
+											class="icon-logout" href="{{ url('/logout')  }}"
+											ng-click="logout()">退出登录</a></div></span>
+						</div>
+						@else
+							<div class="topbar-profilebox"><!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span> <span ng-show="!$root.user.username" class=""><a ng-href="" target="_blank" href="{{ url('/login')  }}">登录/注册</a></span> <span class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> <span class="topbar-profilebox-username ng-binding"></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' --><span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' --><div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="/profile" hardjump="">个人中心</a> <a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a> <a class="icon-location" href="/profile/address" hardjump="">我的地址</a> <a class="icon-setting" href="/profile/security" hardjump="">安全设置</a> <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a></div></span></div>
+						@endif
 					</div>
 				</nav>
 			</div>
@@ -315,7 +316,7 @@
 				 <a href="/shoplist/{{$vo->id}}" data-rst-id="" data-bidding="" target="_blank"
 			                               class="rstblock">
 					<div class="rstblock-logo">
-					<img src="//fuss10.elemecdn.com/8/38/68c554160c254ba06eef15bb963ebpng.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
+					<img src="//fuss10.elemecdn.com/8/38/68c554160c254ba06eef15bb963ebpng.png?imageMogr2/thumbnail/70x70"
 					width="70" height="70" alt="{{ $vo->shopname }}" class="rstblock-logo-icon"><span>{{ $vo->service_time }}分钟</span>
 					</div>
 					<div class="rstblock-content">

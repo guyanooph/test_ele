@@ -321,8 +321,9 @@
                 <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/mer')}}"><i class="fa fa-circle-o"></i>商家信息</a></li>
+                <li class="active"><a href="{{url('')}}"><i class="fa fa-circle-o"></i>商家信息</a></li>
                 <li class="active"><a href="{{url('merchant/merchantopen')}}"><i class="fa fa-circle-o"></i>营业信息</a></li>
+                <li class="active"><a href="{{url('merchant/create')}}"><i class="fa fa-circle-o"></i>图片七牛</a></li>
     
               </ul>
             </li>

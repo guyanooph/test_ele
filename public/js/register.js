@@ -102,7 +102,7 @@
                     headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
                     success:function(data){
                         //alert(data);
-                        if(data =='y'){
+                        if(data == 1){
                             $("<span>已经被使用</span>").insertAfter("input[name='shoptitle']");
                             //alert(data);
                             return false;
@@ -126,9 +126,6 @@
                 return false;
                 //alert('ok');
             } else {
-                 //$('#div_shoptitle').empty()
-                //$('#div_shoptitle').append('<span>可用</span>')
-                //$("#div_mername").empty();
                 //alert('ok');
                 $("#div_phone").empty();
                 $("input[name = 'phone']").nextAll('span').remove();
@@ -140,12 +137,14 @@
                     headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
                     success:function(data){
                         //alert(data);
-                        if(data =='y'){
+                        if(data == 1){
+
                             $("<span>该手机号码已经被使用</span>").insertAfter("input[name='phone']");
                             //alert(data);
                             return false;
                         }else{
                             $("<span>该手机号码可用</span>").insertAfter("input[name='phone']");
+                            alert(data);
                         }
                     }
                 })
@@ -177,7 +176,7 @@
                     headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
                     success:function(data){
                         //alert(data);
-                        if(data =='y'){
+                        if(data ==1){
                             $("<span>该身份证号码已经被使用</span>").insertAfter("input[name='identity']");
                             //alert(data);
                             return false;
@@ -238,4 +237,68 @@
         {
             prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
         }
+    }
+
+    //手机端注册验证手机号码重复性
+    function checkTel()
+    {
+        //alert('ok');
+        var tel = $("input[name='tel']").val();
+        //alert(tel);
+        if (($('input[name =\'tel\']').val()).match(/^(((1[0-9]{2}))+\d{8})$/) == null) {
+
+            $('#div_tel').empty();
+
+            $('#div_tel').append('<span>请输入正确格式的手机号码</span>');
+            return false;
+            //alert('ok');
+        } else {
+            //$('#div_shoptitle').empty()
+            //$('#div_shoptitle').append('<span>可用</span>')
+            //$("#div_mername").empty();
+            //alert('ok');
+            $("#div_tel").empty();
+            $("input[name = 'tel']").nextAll('span').remove();
+            //alert('ok');
+            $.ajax({
+                url: 'merchent/ver_tel',
+                type:"post",
+                data:'tel='+tel,
+                dataType:'text',
+                headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+                success:function(data){
+                    alert(success);
+                    if(data == 1){
+                        $("<span>该手机号码已经被使用</span>").insertAfter("input[name='phone']");
+                        //alert(data);
+                        return false;
+                    }else{
+                        $("<span>该手机号码可用</span>").insertAfter("input[name='phone']");
+                    }
+                }
+            })
+        }
+
+    }
+
+    function sendMobileCode()
+    {
+        var tel = $("input[name='tel']").val();
+        alert(tel);
+        $.ajax({
+            url: 'merchant/register/sendMobileCode',
+            type:"",
+            data:'tel='+tel,
+            dataType:'json',
+            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+            success:function(response){
+                if(data == 1){
+                    $("<span>该手机号码已经被使用</span>").insertAfter("input[name='phone']");
+                    //alert(data);
+                    return false;
+                }else{
+                    $("<span>该手机号码可用</span>").insertAfter("input[name='phone']");
+                }
+            }
+        })
     }

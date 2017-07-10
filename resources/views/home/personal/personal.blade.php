@@ -249,7 +249,7 @@
 							<a href="/profile/info" class="profile-edit">编辑资料</a></div>
 						<div class="profile-perosondata">
 						
-						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">{{ $list->userid }}</strong></h3>
+						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">{{ $user->username }}</strong></h3>
 							<p class="profile-tips ng-binding" ng-bind="timeSection.tipText">祝你一天好心情！</p>
 							<p class="profile-security">账户安全：<span
 										ng-class="{'low': level === 0, 'mid': level === 1, 'high': level ===2 || level ===3}"

@@ -616,363 +616,216 @@
                 {{--</div>--}}
 
                 {{--城市级联--}}
-                {{--<div class="form-group flex">--}}
-                {{--<label class="control-label"> <b class="required">*</b>城市 </label>--}}
-                {{--<div class="control-content city-group"><span> <div--}}
-                {{--class="city-select ui-select-container ui-select-bootstrap dropdown ng-touched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required"--}}
-                {{--ng-class="{open: $select.open}" name="province"--}}
-                {{--ng-model="form.pcd_region.province_id"--}}
-                {{--ng-change="methods.provinceChange($select.selected)" style=""><div--}}
-                {{--class="ui-select-match ng-scope"--}}
-                {{--ng-hide="$select.open &amp;&amp; $select.searchEnabled"--}}
-                {{--ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}"--}}
-                {{--placeholder="-省-" style=""><span tabindex="-1"--}}
-                {{--class="btn btn-default form-control ui-select-toggle"--}}
-                {{--aria-label="Select box activate"--}}
-                {{--ng-disabled="$select.disabled"--}}
-                {{--ng-click="$select.activate()"--}}
-                {{--style="outline: 0;"><span--}}
-                {{--ng-show="$select.isEmpty()"--}}
-                {{--class="ui-select-placeholder text-muted ng-binding ng-hide"--}}
-                {{--style="">-省-</span> <span ng-hide="$select.isEmpty()"--}}
-                {{--class="ui-select-match-text pull-left"--}}
-                {{--ng-class="{'ui-select-allow-clear': $select.allowClear &amp;&amp; !$select.isEmpty()}"--}}
-                {{--ng-transclude="" style=""><span--}}
-                {{--class="ng-binding ng-scope">北京市</span></span> <i--}}
-                {{--class="caret pull-right" ng-click="$select.toggle($event)"></i> <a--}}
-                {{--ng-show="$select.allowClear &amp;&amp; !$select.isEmpty() &amp;&amp; ($select.disabled !== true)"--}}
-                {{--aria-label="Select box clear" style="margin-right: 10px"--}}
-                {{--ng-click="$select.clear($event)"--}}
-                {{--class="btn btn-xs btn-link pull-right ng-hide"><i--}}
-                {{--class="glyphicon glyphicon-remove"--}}
-                {{--aria-hidden="true"></i></a></span></div><input type="search"--}}
-                {{--autocomplete="off"--}}
-                {{--tabindex="-1"--}}
-                {{--aria-expanded="true"--}}
-                {{--aria-label="Select box"--}}
-                {{--aria-owns="ui-select-choices-0"--}}
-                {{--aria-activedescendant="ui-select-choices-row-0-2"--}}
-                {{--class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched ng-hide"--}}
-                {{--placeholder="-省-"--}}
-                {{--ng-model="$select.search"--}}
-                {{--ng-show="$select.searchEnabled &amp;&amp; $select.open"--}}
-                {{--style="width: 10px;"><ul--}}
-                {{--class="ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope ng-hide"--}}
-                {{--role="listbox" ng-show="$select.open &amp;&amp; $select.items.length > 0"--}}
-                {{--repeat="item.id as item in data.provinces | filter: { name: $select.search }"--}}
-                {{--style="opacity: 0;"><li class="ui-select-choices-group"--}}
-                {{--id="ui-select-choices-0"><div class="divider ng-hide"--}}
-                {{--ng-show="$select.isGrouped &amp;&amp; $index > 0"></div><div--}}
-                {{--ng-show="$select.isGrouped"--}}
-                {{--class="ui-select-choices-group-label dropdown-header ng-binding ng-hide"--}}
-                {{--ng-bind="$group.name"></div><!-- ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open -->--}}
-                {{--<!-- end ngRepeat: item in $select.items --></li></ul><div--}}
-                {{--class="ui-select-no-choice"></div><ui-select-single></ui-select-single><input--}}
-                {{--ng-disabled="$select.disabled"--}}
-                {{--class="ui-select-focusser ui-select-offscreen ng-scope" type="text"--}}
-                {{--id="focusser-0" aria-label="Select box focus" aria-haspopup="true"--}}
-                {{--role="button"></div> <small class="red ng-hide"--}}
-                {{--ng-show="storeForm.province.$invalid &amp;&amp; (storeForm.province.$dirty || storeForm.$submitted)"--}}
-                {{--style=""> 省份不能为空 </small> </span>--}}
-                {{--<span> <div class="city-select ui-select-container ui-select-bootstrap dropdown ng-touched ng-not-empty ng-dirty ng-valid-parse ng-valid ng-valid-required"--}}
-                {{--ng-class="{open: $select.open}" name="city" ng-model="form.pcd_region.city_id"--}}
-                {{--ng-change="methods.cityChange($select.selected)" style=""><div--}}
-                {{--class="ui-select-match ng-scope"--}}
-                {{--ng-hide="$select.open &amp;&amp; $select.searchEnabled"--}}
-                {{--ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}"--}}
-                {{--placeholder="-市-" style=""><span tabindex="-1"--}}
-                {{--class="btn btn-default form-control ui-select-toggle"--}}
-                {{--aria-label="Select box activate"--}}
-                {{--ng-disabled="$select.disabled"--}}
-                {{--ng-click="$select.activate()"--}}
-                {{--style="outline: 0;"><span--}}
-                {{--ng-show="$select.isEmpty()"--}}
-                {{--class="ui-select-placeholder text-muted ng-binding ng-hide"--}}
-                {{--style="">-市-</span> <span ng-hide="$select.isEmpty()"--}}
-                {{--class="ui-select-match-text pull-left"--}}
-                {{--ng-class="{'ui-select-allow-clear': $select.allowClear &amp;&amp; !$select.isEmpty()}"--}}
-                {{--ng-transclude="" style=""><span--}}
-                {{--class="ng-binding ng-scope">北京市</span></span> <i--}}
-                {{--class="caret pull-right" ng-click="$select.toggle($event)"></i> <a--}}
-                {{--ng-show="$select.allowClear &amp;&amp; !$select.isEmpty() &amp;&amp; ($select.disabled !== true)"--}}
-                {{--aria-label="Select box clear" style="margin-right: 10px"--}}
-                {{--ng-click="$select.clear($event)"--}}
-                {{--class="btn btn-xs btn-link pull-right ng-hide"><i--}}
-                {{--class="glyphicon glyphicon-remove"--}}
-                {{--aria-hidden="true"></i></a></span></div><input type="search"--}}
-                {{--autocomplete="off"--}}
-                {{--tabindex="-1"--}}
-                {{--aria-expanded="true"--}}
-                {{--aria-label="Select box"--}}
-                {{--aria-owns="ui-select-choices-1"--}}
-                {{--aria-activedescendant="ui-select-choices-row-1-0"--}}
-                {{--class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched ng-hide"--}}
-                {{--placeholder="-市-"--}}
-                {{--ng-model="$select.search"--}}
-                {{--ng-show="$select.searchEnabled &amp;&amp; $select.open"--}}
-                {{--style="width: 10px;"><ul--}}
-                {{--class="ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope ng-hide"--}}
-                {{--role="listbox" ng-show="$select.open &amp;&amp; $select.items.length > 0"--}}
-                {{--repeat="item.id as item in data.cities | filter: { name: $select.search }"--}}
-                {{--style="opacity: 0;"><li class="ui-select-choices-group"--}}
-                {{--id="ui-select-choices-1"><div class="divider ng-hide"--}}
-                {{--ng-show="$select.isGrouped &amp;&amp; $index > 0"></div><div--}}
-                {{--ng-show="$select.isGrouped"--}}
-                {{--class="ui-select-choices-group-label dropdown-header ng-binding ng-hide"--}}
-                {{--ng-bind="$group.name"></div><!-- ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open -->--}}
-                {{--<!-- end ngRepeat: item in $select.items --></li></ul><div--}}
-                {{--class="ui-select-no-choice"></div><ui-select-single></ui-select-single><input--}}
-                {{--ng-disabled="$select.disabled"--}}
-                {{--class="ui-select-focusser ui-select-offscreen ng-scope" type="text"--}}
-                {{--id="focusser-1" aria-label="Select box focus" aria-haspopup="true"--}}
-                {{--role="button"></div> <small class="red ng-hide"--}}
-                {{--ng-show="storeForm.city.$invalid &amp;&amp; (storeForm.city.$dirty || storeForm.$submitted)"--}}
-                {{--style=""> 城市不能为空 </small> </span>--}}
-                {{--<span> <div class="city-select ui-select-container ui-select-bootstrap dropdown ng-touched ng-not-empty ng-valid ng-valid-required"--}}
-                {{--ng-class="{open: $select.open}" name="district"--}}
-                {{--ng-model="form.pcd_region.district_id"--}}
-                {{--ng-change="methods.districtChange($select.selected)" style=""><div--}}
-                {{--class="ui-select-match ng-scope"--}}
-                {{--ng-hide="$select.open &amp;&amp; $select.searchEnabled"--}}
-                {{--ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}"--}}
-                {{--placeholder="-区/县-" style=""><span tabindex="-1"--}}
-                {{--class="btn btn-default form-control ui-select-toggle"--}}
-                {{--aria-label="Select box activate"--}}
-                {{--ng-disabled="$select.disabled"--}}
-                {{--ng-click="$select.activate()"--}}
-                {{--style="outline: 0;"><span--}}
-                {{--ng-show="$select.isEmpty()"--}}
-                {{--class="ui-select-placeholder text-muted ng-binding ng-hide" style="">-区/县-</span> <span--}}
-                {{--ng-hide="$select.isEmpty()" class="ui-select-match-text pull-left"--}}
-                {{--ng-class="{'ui-select-allow-clear': $select.allowClear &amp;&amp; !$select.isEmpty()}"--}}
-                {{--ng-transclude="" style=""><span--}}
-                {{--class="ng-binding ng-scope">昌平区</span></span> <i--}}
-                {{--class="caret pull-right" ng-click="$select.toggle($event)"></i> <a--}}
-                {{--ng-show="$select.allowClear &amp;&amp; !$select.isEmpty() &amp;&amp; ($select.disabled !== true)"--}}
-                {{--aria-label="Select box clear" style="margin-right: 10px"--}}
-                {{--ng-click="$select.clear($event)"--}}
-                {{--class="btn btn-xs btn-link pull-right ng-hide"><i--}}
-                {{--class="glyphicon glyphicon-remove"--}}
-                {{--aria-hidden="true"></i></a></span></div><input type="search"--}}
-                {{--autocomplete="off"--}}
-                {{--tabindex="-1"--}}
-                {{--aria-expanded="true"--}}
-                {{--aria-label="Select box"--}}
-                {{--aria-owns="ui-select-choices-2"--}}
-                {{--aria-activedescendant="ui-select-choices-row-2-0"--}}
-                {{--class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched ng-hide"--}}
-                {{--placeholder="-区/县-"--}}
-                {{--ng-model="$select.search"--}}
-                {{--ng-show="$select.searchEnabled &amp;&amp; $select.open"--}}
-                {{--style="width: 10px;"><ul--}}
-                {{--class="ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope ng-hide"--}}
-                {{--role="listbox" ng-show="$select.open &amp;&amp; $select.items.length > 0"--}}
-                {{--repeat="item.id as item in data.districts | filter: { name: $select.search }"--}}
-                {{--style="opacity: 0;"><li class="ui-select-choices-group"--}}
-                {{--id="ui-select-choices-2"><div class="divider ng-hide"--}}
-                {{--ng-show="$select.isGrouped &amp;&amp; $index > 0"></div><div--}}
-                {{--ng-show="$select.isGrouped"--}}
-                {{--class="ui-select-choices-group-label dropdown-header ng-binding ng-hide"--}}
-                {{--ng-bind="$group.name"></div><!-- ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->--}}
-                {{--<!-- ngIf: $select.open -->--}}
-                {{--<!-- end ngRepeat: item in $select.items --></li></ul><div--}}
-                {{--class="ui-select-no-choice"></div><ui-select-single></ui-select-single><input--}}
-                {{--ng-disabled="$select.disabled"--}}
-                {{--class="ui-select-focusser ui-select-offscreen ng-scope" type="text"--}}
-                {{--id="focusser-2" aria-label="Select box focus" aria-haspopup="true"--}}
-                {{--role="button"></div> <small class="red ng-hide"--}}
-                {{--ng-show="storeForm.district.$invalid &amp;&amp; (storeForm.district.$dirty || storeForm.$submitted)"--}}
-                {{--style=""> 区/县不能为空 </small> </span></div>--}}
-                {{--</div>--}}
-                {{--详细地址--}}
-                {{--<div class="form-group flex">--}}
-                {{--<label class="control-label"> <b class="required">*</b>详细地址 </label>--}}
-                {{--<div class="form-inline"><input type="text" name="address"--}}
-                {{--class="form-control address-detail mr-10 ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-touched"--}}
-                {{--ng-model="form.address_info.address" placeholder="详细至门牌号，请与执照地址一致"--}}
-                {{--maxlength="255" required="" style="">--}}
-                {{--<button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位--}}
-                {{--</button>--}}
-                {{--<br>--}}
-                {{--<small class="red"--}}
-                {{--ng-show="storeForm.address.$invalid &amp;&amp; (storeForm.address.$dirty || storeForm.$submitted || storeForm.address._searched)"--}}
-                {{--style=""> 详细地址不能为空--}}
-                {{--</small>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--地图定位--}}
-                {{--<div class="form-group flex">--}}
-                {{--<div class="control-label"></div>--}}
-                {{--<div class="control-content">--}}
-                {{--<div class="amap-position-pick flex ng-isolate-scope" points="data.searchResults"--}}
-                {{--area="data.area" position="form.address_info">--}}
-                {{--<div id="search-results" ng-show="points" class="ng-hide">--}}
-                {{--<div class="count">请选择门店位置</div>--}}
-                {{--<ul ng-show="points.length" class="ng-hide"> <!-- ngRepeat: result in points --> </ul>--}}
-                {{--<p class="empty" ng-show="!points.length"> 未搜索到您输入的地址，请重新输入地址或者直接在右侧地图中<span--}}
-                {{--class="blue">标记位置</span>！ </p></div>--}}
-                {{--<div id="map-container" class="amap-container"--}}
-                {{--style="position: relative; background: rgb(252, 249, 242); cursor: url(&quot;https://webapi.amap.com/theme/v1.3/openhand.cur&quot;), default;">--}}
-                {{--<object style="display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;"--}}
-                {{--type="text/html" data="about:blank"></object>--}}
-                {{--<div class="amap-maps">--}}
-                {{--<div class="amap-drags">--}}
-                {{--<div class="amap-layers" style="transform: translateZ(0px);">--}}
-                {{--<canvas class="amap-layer" width="798" height="498"--}}
-                {{--style="position: absolute; z-index: 0; top: 0px; left: 0px; height: 498px; width: 798px;"></canvas>--}}
-                {{--<canvas class="amap-labels" draggable="false"--}}
-                {{--style="position: absolute; z-index: 99; height: 498px; width: 798px; top: 0px; left: 0px;"--}}
-                {{--width="798" height="498"></canvas>--}}
-                {{--<div class="amap-markers"--}}
-                {{--style="position: absolute; z-index: 120; top: 249px; left: 399px;">--}}
-                {{--<div class="amap-marker"--}}
-                {{--style="top: -35px; left: 32px; z-index: 100; transform: rotate(0deg); transform-origin: 9px 31px 0px; display: block;">--}}
-                {{--<div class="amap-marker-content" style="opacity: 1;"><i--}}
-                {{--class="amap-marker-custom selected"></i></div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<canvas class="amap-vectors" width="798" height="498"--}}
-                {{--style="position: absolute; z-index: 110; top: 0px; left: 0px;"></canvas>--}}
-                {{--</div>--}}
-                {{--<div class="amap-overlays"></div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div style="display: none;">--}}
-                {{--<div class="amap-info" style="position: absolute; left: 296px; top: 245px;">--}}
-                {{--<div style="position: absolute; bottom: 20px; left: 15px;">--}}
-                {{--<div>--}}
-                {{--<div class="amap-info-window">--}}
-                {{--<div class="main">--}}
-                {{--<div class="title">--}}
-                {{--是否将该位置设置成门店位置?--}}
-                {{--</div>--}}
-                {{--<div class="content">--}}
+                <div class="form-group flex">
+                <label class="control-label"> <b class="required">*</b>城市 </label>
+                <div class="control-content city-group">
+<span>
 
-                {{--<h6>北京市昌平区城北街道清真寺胡同酒厂宿舍</h6>--}}
-                {{--<p>北京市昌平区城北街道清真寺胡同酒厂宿舍</p>--}}
-                {{--<button class="btn btn-primary btn-sm"--}}
-                {{--onclick="markPosition()" type="button">确定--}}
-                {{--</button>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="amap-info-sharp"></div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="amap-controls">--}}
-                {{--<div class="amap-toolbar" style="left: 20px; top: 60px; visibility: visible;">--}}
-                {{--<div class="amap-pancontrol" style="position: relative; display: block;">--}}
-                {{--<div class="amap-pan-left"></div>--}}
-                {{--<div class="amap-pan-top"></div>--}}
-                {{--<div class="amap-pan-right"></div>--}}
-                {{--<div class="amap-pan-bottom"></div>--}}
-                {{--</div>--}}
-                {{--<div class="amap-locate"--}}
-                {{--style="position: relative; left: 17px; display: block;"></div>--}}
-                {{--<div class="amap-zoomcontrol" style="position: relative; left: 14px;">--}}
-                {{--<div class="amap-zoom-plus"></div>--}}
-                {{--<div class="amap-zoom-ruler" style="display: block;">--}}
-                {{--<div class="amap-zoom-mask" style="height: 73px;"></div>--}}
-                {{--<div class="amap-zoom-cursor" style="top: 73px;"></div>--}}
-                {{--<div class="amap-zoom-labels" style="display: none;">--}}
-                {{--<div class="amap-zoom-label-street"></div>--}}
-                {{--<div class="amap-zoom-label-city"></div>--}}
-                {{--<div class="amap-zoom-label-province"></div>--}}
-                {{--<div class="amap-zoom-label-country"></div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="amap-zoom-minus"></div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="amap-indoormap-floorbar-control can-scroll can-scroll-up"--}}
-                {{--title="西单商场(西单北大街店)" style="display: none;">--}}
-                {{--<div class="panel-box">--}}
-                {{--<div class="select-dock" style="top: 98px;"></div>--}}
-                {{--<div class="floor-btn floor-nav floor-plus">+</div>--}}
-                {{--<div class="floor-list-box">--}}
-                {{--<ul class="floor-list" style="margin-top: -43px;">--}}
-                {{--<li class="floor-list-item">--}}
-                {{--<div class="floor-btn floor-nonas">F5</div>--}}
-                {{--</li>--}}
-                {{--<li class="floor-list-item">--}}
-                {{--<div class="floor-btn floor-nonas">F4</div>--}}
-                {{--</li>--}}
-                {{--<li class="floor-list-item">--}}
-                {{--<div class="floor-btn floor-nonas">F3</div>--}}
-                {{--</li>--}}
-                {{--<li class="floor-list-item">--}}
-                {{--<div class="floor-btn floor-nonas">F2</div>--}}
-                {{--</li>--}}
-                {{--<li class="floor-list-item selected">--}}
-                {{--<div class="floor-btn floor-nonas">F1</div>--}}
-                {{--</li>--}}
-                {{--<li class="floor-list-item">--}}
-                {{--<div class="floor-btn floor-nonas">B1</div>--}}
-                {{--</li>--}}
-                {{--<li class="floor-list-item">--}}
-                {{--<div class="floor-btn floor-nonas">B2</div>--}}
-                {{--</li>--}}
-                {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div class="floor-btn floor-nav floor-minus">-</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<a class="amap-logo" href="http://gaode.com" target="_blank"><img--}}
-                {{--src="https://webapi.amap.com/theme/v1.3/autonavi.png"></a>--}}
-                {{--<div class="amap-copyright" style="display: none;"><!--v1.3.28--> ? 2017 AutoNavi <span--}}
-                {{--class="amap-mcode">- GS(2016)710号</span></div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<small class="red ng-hide"--}}
-                {{--ng-show="!form.address_info.longitude &amp;&amp; storeForm.$submitted" style="">--}}
-                {{--请点击[去定位]，并在地图上选择准确的地址--}}
-                {{--</small>--}}
-                {{--</div>--}}
-                {{--</div>--}}
+<div onclick="show_pro(this)" id_code="" code="" id="pro_div" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
+<div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-省-" style="display:none">
+</div>
+<input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-省-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
+
+</div>
+</span>
+
+<span>
+
+<div onclick="show_pro(this)" id_code="" code="" id="city_div" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
+<div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-市-" style="display:none">
+</div>
+<input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-市-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
+
+</div>
+</span>
+
+<span>
+
+<div onclick="show_pro(this)"  id_code="" code="" id="county_div" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
+<div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-区/县-" style="display:none">
+</div>
+<input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-区/县-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
+
+</div>
+</span>
+
+
+
+</div>
+</div>
+<script>
+    var pro_str = "";
+    var pro_str_1 = "<ul id='pro_list' class='ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope' role='listbox' ng-show='$select.open &amp;&amp; $select.items.length > 0' repeat='item.id as item in data.provinces | filter: { name: $select.search }' style='opacity: 1; position: absolute; top: -200px;display:block;";
+    var pro_str_2 = "<li onclick='select(this)' ";
+    var pro_str_3= "class='ui-select-choices-group' id='ui-select-choices-0'>        <div class='divider ng-hide' ng-show='$select.isGrouped &amp;&amp; $index > 0'></div>        <div ng-show='$select.isGrouped' class='ui-select-choices-group-label dropdown-header ng-binding ng-hide' ng-bind='$group.name'></div>        <!-- ngRepeat: item in $select.items --><!-- ngIf: $select.open -->        <div ng-attr-id='ui-select-choices-row-' class='ui-select-choices-row ng-scope active' ng-class='{active: $select.isActive(this), disabled: $select.isDisabled(this)}' role='option' ng-repeat='item in $select.items' ng-if='$select.open' ng-click='$select.select(item,$select.skipFocusser,$event)' id='ui-select-choices-row-0-0' style=''>            <a href='javascript:void()' class='ui-select-choices-row-inner' uis-transclude-append=''>            <span class='ng-binding ng-scope'>";
+    var pro_str_4 = "</span>             </a>        </div>        <!-- end ngIf: $select.open --><!-- end ngRepeat: item in $select.items --><!-- ngIf: $select.open -->        <!-- end ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->    </li>";
+    function show_pro(e){
+        if(e.id == "pro_div"){
+            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/provinces";
+            var ex = "'>";
+            pro_str = "";
+            sendAjax(url);
+            pro_str += (pro_str_1 + ex);
+            for(var i in pro_data){
+                for(var j in pro_data[i].list){
+                    //alert(pro_data[i].list[j].area_code);
+                    pro_str += (pro_str_2 +  " id_code='" + pro_data[i].list[j].id + "'" + " code='" + pro_data[i].list[j].area_code + "' " + pro_str_3 + pro_data[i].list[j].name + pro_str_4);
+                }
+            }
+            pro_str += "</ul>";
+            if(document.getElementById("pro_div").getElementsByTagName("ul").length){
+                $("#pro_div ul").remove();
+            }else{
+                $("#pro_div").append(pro_str);
+            }
+      }else if(e.id == "city_div"){
+            var t = document.getElementById("pro_div").attributes.id_code.value;
+            alert(document.getElementById("pro_div").attributes.id_code.value);
+            if(!t){
+                return;
+            }            
+            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/cities_by_province?province_id=" + document.getElementById("pro_div").attributes.id_code.value;  
+            var ex = "left:0;'>";
+            pro_str = "";
+            sendAjax(url);
+            pro_str += (pro_str_1 + ex);
+            for(var i in pro_data){
+                pro_str += (pro_str_2 + " id_code='" + pro_data[i].id + "'" + " code='" + pro_data[i].area_code + "' " + pro_str_3 + pro_data[i].name + pro_str_4);
+            }
+            pro_str += "</ul>";
+            if(document.getElementById("city_div").getElementsByTagName("ul").length){
+                $("#city_div ul").remove();
+            }else{
+                $("#city_div").append(pro_str);
+            }
+       }else if(e.id == "county_div"){
+            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/district_by_city?city_id=" + document.getElementById("city_div").attributes.id_code.value;  
+            var ex = "left:0;'>";
+            pro_str = "";
+            sendAjax(url);
+            pro_str += (pro_str_1 + ex);
+            for(var i in pro_data){
+                pro_str += (pro_str_2 +  " id_code='" + pro_data[i].id + "'" + " code='" + pro_data[i].area_code + "' " + pro_str_3 + pro_data[i].name + pro_str_4);
+            }
+            pro_str += "</ul>";
+            if(document.getElementById("county_div").getElementsByTagName("ul").length){
+                $("#county_div ul").remove();
+            }else{
+                $("#county_div").append(pro_str);
+            }
+       }
+    }
+    var pro_data = null;
+     
+    function select(e){
+        alert("a");
+        e.parentNode.parentNode.attributes.code.value = e.attributes.code.value;
+        e.parentNode.parentNode.attributes.id_code.value = e.attributes.id_code.value;
+        //e.parentNode.parentNode.getElementsByTagName('input')[0].value = $(e).find("span").html();
+        e.parentNode.previousSibling.previousSibling.value = $(e).find("span").html();
+        alert(e.parentNode.previousSibling.previousSibling.tagName);
+        map.setCity($(e).find("span").html());
+    }
+
+    function sendAjax(url) {
+        $.ajax({
+            url:url,    
+            datatype:"json",
+            async:false,
+            success:function(data){
+                pro_data = data;
+            },
+        });
+    }
+</script>
+
+
+
+
+
+                <div class="form-group flex">
+                <label class="control-label"> <b class="required">*</b>详细地址 </label>
+                <div class="form-inline"><input id="input" type="text" name="address"
+                class="form-control address-detail mr-10 ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-touched"
+                ng-model="form.address_info.address" placeholder="详细至门牌号，请与执照地址一致"
+                maxlength="255" required="" style="">
+                <button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位
+                </button>
+                <br>
+                <small class="red"
+                ng-show="storeForm.address.$invalid &amp;&amp; (storeForm.address.$dirty || storeForm.$submitted || storeForm.address._searched)"
+                style=""> 详细地址不能为空
+                </small>
+                </div>
+                </div>
+                地图定位
+                <div class="form-group flex">
+                <div class="control-label"></div>
+                <div class="control-content">
+                <div class="amap-position-pick flex ng-isolate-scope" points="data.searchResults"
+                area="data.area" position="form.address_info">
+                <div id="search-results" ng-show="points" class="ng-hide">
+                <div class="count">请选择门店位置</div>
+                <ul ng-show="points.length" class="ng-hide"> <!-- ngRepeat: result in points --> </ul>
+                <p class="empty" ng-show="!points.length"> 未搜索到您输入的地址，请重新输入地址或者直接在右侧地图中<span
+                class="blue">标记位置</span>！ </p></div>
+                <div id="map-container" class="amap-container" style="position: relative; background: rgb(252, 249, 242); cursor: url(&quot;https://webapi.amap.com/theme/v1.3/openhand.cur&quot;), default;">
+                    <!-- 地图显示区 -->
+                </div>
+                    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=c55b1b7a9e38ece1bea89c9f424078b7"></script>
+                    <script type="text/javascript">
+                        var map = new AMap.Map('map-container',{
+                            resizeEnable: true,
+                            zoom: 13,
+                            center: [116.39,39.9]
+                        });
+                        AMap.plugin('AMap.Geocoder',function(){
+                            var geocoder = new AMap.Geocoder({
+                                city: "010"//城市，默认：“全国”
+                            });
+                            var marker = new AMap.Marker({
+                                map:map,
+                                bubble:true
+                            })
+                            var input = document.getElementById('input');
+                            var message = document.getElementById('message');
+                            map.on('click',function(e){
+                                marker.setPosition(e.lnglat);
+                                geocoder.getAddress(e.lnglat,function(status,result){
+                                    if(status=='complete'){
+                                        input.value = result.regeocode.formattedAddress
+                                        message.innerHTML = ''
+                                    }else{
+                                        alert(result);
+                                        message.innerHTML = '无法获取地址'
+                                    }
+                                })
+                            })
+
+                            input.onchange = function(e){
+                                var address = input.value;
+                                geocoder.getLocation(address,function(status,result){
+                                    if(status=='complete'&&result.geocodes.length){
+                                        marker.setPosition(result.geocodes[0].location);
+                                        map.setCenter(marker.getPosition())
+                                        message.innerHTML = ''
+                                    }else{
+                                        message.innerHTML = '无法获取位置'
+                                    }
+                                })
+                            }
+
+                        });
+                    </script>
+                    <script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+
+                </div>
+                <small class="red ng-hide"
+                ng-show="!form.address_info.longitude &amp;&amp; storeForm.$submitted" style="">
+                请点击[去定位]，并在地图上选择准确的地址
+                </small>
+                </div>
+                </div>
 
                 {{--照片--}}
                 <div class="form-group flex"><label class="control-label">
@@ -1030,14 +883,6 @@
         </div>
     </div>
 </ui-view>
-{{--<script async="async"--}}
-{{--src="//webapi.amap.com/maps?v=1.3&amp;key=4a1d1ee27380c38faea1e11487dc4122&amp;&amp;plugin=AMap.ToolBar,AMap.PlaceSearch,AMap.Geocoder,AMap.PolyEditor,AMap.MouseTool,AMap.Scale,AMap.Walking"></script>--}}
-{{--<script src="https://github.elemecdn.com/eleme/perf-js/1.0.4/perf.js"></script>--}}
-{{--<script type="text/javascript" src="{{ asset('js/vendor.29dae2e.js') }}"></script>--}}
-{{--<script type="text/javascript" src="{{ asset('js/app.29dae2e.js') }}"></script>--}}
-{{--<script type="text/javascriot">--}}
-
-{{--</script>--}}
 <script type="text/javascript" src="{{ asset('js/register.js') }}"></script>
 </body>
 </html>
