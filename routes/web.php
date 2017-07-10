@@ -11,14 +11,18 @@
 |
 */
 //前台路由
-
+Route::get("/", "Home\ShopController@index");
 Route::get("/home", "Home\LocationController@location");
-Route::post("/testshop","Home\LocationController@upload");
-Route::get("/sendsms","Home\LocationController@sendsms");
 //Route::get('/shop/add/{id}',"Home\CartController@add"); //放入购物车
 //Route::get('/shop/show',"Home\CartController@show"); //浏览购物车
 //Route::get('/shop/del/{id}',"Home\CartController@del"); //删除购物车中的某个商品
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
+
+  //购物车
+Route::get('/addProduct/{productId}', 'CartController@addItem');
+Route::get('/removeItem/{productId}', 'CartController@removeItem');
+Route::get('/cart', 'CartController@showCart');
+
 
 Route::get('/register',"Home\RegisterController@index");//用户注册认证
 Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
@@ -57,7 +61,7 @@ Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人�
 
 
 
-Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
+Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
 
 //Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
 

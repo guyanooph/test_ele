@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="eleme" perf-error="desktop/home/" class="ng-scope">
 <head>
-	<style type="text/css">@charset "UTF-8";
+	<style type="text/css">@charset  "UTF-8";
 		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
 			display: none !important;
 		}
@@ -59,7 +59,7 @@
 	<script>window.location.href = 'https://h.ele.me/activities/landing';</script><![endif]-->
 
 	<script src="//crayfish.elemecdn.com/www.ele.me@ref/api" data-ref="API_CONFIG"></script>
-	<script src="{{asset('js/jquery-1.8.3.min.js')}}" type="text/javascript" crossorigin="anonymous"></script>
+	<script src="<?php echo e(asset('js/jquery-1.8.3.min.js')); ?>" type="text/javascript" crossorigin="anonymous"></script>
 	<base href="/home/">
 	<meta name="mobile-agent" content="undefined">
 	<meta name="description"
@@ -89,7 +89,9 @@
 					</div>
 					<div map-search="" hide-search-result="hideSearchResult" current-city="currentCity"
 					     map-mode="mapMode" class="map-search ng-isolate-scope">
-						<form action="/" method="get" id="search_form" class="mapsearch-inputbar ng-valid ng-dirty" ng-submit="search.showSuggests($event, search.keyword)">
+						<form action="/testshop" method="post" id="search_form" class="mapsearch-inputbar ng-valid ng-dirty" ng-submit="search.showSuggests($event, search.keyword)">
+                            <?php echo e(csrf_field()); ?>
+
 							<input name="address" id="position_search"
 									placeholder="请输入你的收货地址（写字楼，小区，街道或者学校）" ng-model="search.keyword"
 									ng-keyup="search.showSuggests($event, search.keyword)"

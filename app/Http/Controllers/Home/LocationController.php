@@ -10,9 +10,9 @@ use zgldh\QiniuStorage\QiniuStorage;
 class LocationController extends Controller
 {
     //
-    public function location()
+    public function location(Request $request)
     {
-        return view("home.location.location",[]);
+        return view("home.location.location");
     }
     
     public function testshop(Request $request)
