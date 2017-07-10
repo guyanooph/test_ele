@@ -1,5 +1,5 @@
 <html>
-<script src="js/jquery-1.8.3.js"></script>
+<!-- <script src="js/jquery-3.2.1.min.js"></script> -->
 <form method="POST" action="{{URL('doregister')}}">
   {{ csrf_field() }} 
 

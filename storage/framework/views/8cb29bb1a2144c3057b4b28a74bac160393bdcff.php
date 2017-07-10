@@ -1,5 +1,5 @@
 <html>
-<script src="js/jquery-1.8.3.min.js"></script>
+<!-- <script src="js/jquery-3.2.1.min.js"></script> -->
 <form method="POST" action="<?php echo e(URL('doregister')); ?>">
   <?php echo e(csrf_field()); ?> 
 
@@ -35,7 +35,7 @@
 
 
 var InterValObj; //timer变量，控制时间
-var count = 30; //间隔函数，1秒执行
+var count = 60; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
 function sendMessage() {
 curCount = count;

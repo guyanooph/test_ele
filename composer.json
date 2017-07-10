@@ -11,7 +11,11 @@
         "iscms/alisms-for-laravel": "^0.0.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "zgldh/qiniu-laravel-storage": "^0.6.8"
+        "overtrue/laravel-shopping-cart": "~2.0",
+        "predis/predis": "^1.1",
+        "syscover/shoppingcart": "dev-master",
+        "zgldh/qiniu-laravel-storage": "^0.6.8",
+		"syscover/shopping-cart": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

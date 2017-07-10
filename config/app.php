@@ -179,7 +179,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         iscms\Alisms\AlidayuServiceProvider::class,
-		
     ],
 
     /*
