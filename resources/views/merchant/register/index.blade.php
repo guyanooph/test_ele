@@ -311,7 +311,7 @@
             -webkit-transition: 0s ease-in-out left;
             transition: 0s ease-in-out left
         }</style>
-    <style type="text/css">@charset "UTF-8";
+    <style type="text/css">
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
             display: none !important;
         }
@@ -372,51 +372,6 @@
             <!-- end ngIf: !showUser -->
         </div>
     </header>
-    <div class="steps ng-scope ng-isolate-scope" index="step" isrequireactivity="isRequireActivity">
-        <ul> <!-- ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope active">
-                <!-- ngIf: $index --> <i class="index ng-binding">1</i>
-                门店信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">2</i>
-                资质信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">3</i>
-                合作方案
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">4</i>
-                配送方案
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">5</i>
-                结算信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">6</i>
-                商品内容
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">7</i>
-                活动信息
-            </li><!-- end ngRepeat: step in steps --> </ul>
-    </div> <!-- uiView: -->
-
-
     <div class="main-container ng-scope" ui-view="" autoscroll="true">
         <div class="store-info step-container ng-scope">
             <form name="storeForm" id="storeFormID" novalidate="" action="{{ url('merchant/register') }}" method="post"
@@ -671,17 +626,12 @@
 
                 <div class="form-group flex">
                 <label class="control-label"> <b class="required">*</b>详细地址 </label>
-                <div class="form-inline"><input id="input" type="text" name="address"
-                class="form-control address-detail mr-10 ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-touched"
-                ng-model="form.address_info.address" placeholder="详细至门牌号，请与执照地址一致"
-                maxlength="255" required="" style="">
-                <button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位
-                </button>
+                    <input type="text" name="address" style="width:300px" onblur="checkAddress()"/>
+                    <small class="control-label">
+                        <div id="div_address"></div>
+                {{--<button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位--}}
+                {{--</button>--}}
                 <br>
-                <small class="red"
-                ng-show="storeForm.address.$invalid &amp;&amp; (storeForm.address.$dirty || storeForm.$submitted || storeForm.address._searched)"
-                style=""> 详细地址不能为空
-                </small>
                 </div>
                 </div>
                 地图定位
@@ -716,6 +666,9 @@
                             var input = document.getElementById('input');
                             var message = document.getElementById('message');
                             map.on('click',function(e){
+                                $("#longitude_latitude").remove();
+                                var str = "<input id='longitude_latitude'' type='hidden' name='longitude_latitude' value='" +  e.lnglat + "' >";
+                                $("#toreFormID").prepend(str);
                                 marker.setPosition(e.lnglat);
                                 geocoder.getAddress(e.lnglat,function(status,result){
                                     if(status=='complete'){
