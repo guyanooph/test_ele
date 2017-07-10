@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Geohash generation class test harness
  * http://blog.dixo.net/downloads/
