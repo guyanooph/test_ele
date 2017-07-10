@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c175a69a0256c11af8ef700e67838d57",
+    "content-hash": "3e092af3eef6be55fdbdbc771c1a3bd6",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -956,6 +956,62 @@
             "time": "2017-06-28T20:53:48+00:00"
         },
         {
+            "name": "overtrue/laravel-shopping-cart",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-shopping-cart.git",
+                "reference": "3d9dbe9f895db87c17de7e251e8cda65ed26fe43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-shopping-cart/zipball/3d9dbe9f895db87c17de7e251e8cda65ed26fe43",
+                "reference": "3d9dbe9f895db87c17de7e251e8cda65ed26fe43",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "illuminate/session": "5.0.*",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelShoppingCart\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "ShoppingCart": "Overtrue\\LaravelShoppingCart\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelShoppingCart\\": "src/LaravelShoppingCart/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "Shopping cart for Laravel Application.",
+            "keywords": [
+                "laravel",
+                "shopping",
+                "shopping cart"
+            ],
+            "time": "2017-07-02T22:28:03+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v2.0.10",
             "source": {
@@ -1172,6 +1228,7 @@
                 "shell"
             ],
             "time": "2017-07-06T14:53:52+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "pusher/pusher-php-server",
@@ -2151,6 +2208,89 @@
                 "dump"
             ],
             "time": "2017-07-05T13:02:37+00:00"
+        },
+        {
+            "name": "syscover/shopping-cart",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/syscover/shopping-cart.git",
+                "reference": "848e16ed0545932bcd7579b8e5252bbfd3a7d215"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/syscover/shopping-cart/zipball/848e16ed0545932bcd7579b8e5252bbfd3a7d215",
+                "reference": "848e16ed0545932bcd7579b8e5252bbfd3a7d215",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Syscover\\ShoppingCart\\": "src/Syscover/ShoppingCart"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "SYSCOVER SL",
+                    "email": "info@syscover.com"
+                }
+            ],
+            "description": "Shopping Cart package",
+            "keywords": [
+                "cart",
+                "laravel",
+                "pulsar",
+                "shopping",
+                "shoppingcart",
+                "syscover"
+            ],
+            "time": "2016-09-04T18:09:08+00:00"
+        },
+        {
+            "name": "syscover/shoppingcart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/syscover/shopping-cart.git",
+                "reference": "afe14105801f5906b0486d8b14ddf3d0b0a8c676"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/syscover/shopping-cart/zipball/afe14105801f5906b0486d8b14ddf3d0b0a8c676",
+                "reference": "afe14105801f5906b0486d8b14ddf3d0b0a8c676",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Syscover\\ShoppingCart\\": "src/Syscover/ShoppingCart"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "SYSCOVER SL",
+                    "email": "info@syscover.com"
+                }
+            ],
+            "description": "Shopping Cart package",
+            "keywords": [
+                "cart",
+                "laravel",
+                "pulsar",
+                "shopping",
+                "shoppingcart",
+                "syscover"
+            ],
+            "abandoned": "syscover/shopping-cart",
+            "time": "2017-02-09 10:06:50"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -3777,7 +3917,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "syscover/shoppingcart": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
