@@ -175,11 +175,14 @@ Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商�
 Route::get("merchant/phone","Merchant\RegisterController@index");//加载商家手机注册页面
 Route::post("merchant/ver_tel","Merchant\RegisterController@ver_tel");//手机验证码验证手机号是否已经被用
 Route::post("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
+Route::get("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
+//Route::get("sid","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
+Route::get("sid/{id}","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
 Route::get("/sendMobileCode","Merchant\RegisterController@sendMobileCode");//发送手机验证码
 
 
 //Route::get('merchant/register/sendsms', 'Merchant\RegisterController@sendSms');//发送手机验证码
-//Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
+Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
 Route::post("merchant/register","Merchant\RegisterController@store");////商家执行注册
 Route::post("merchant/ver","Merchant\RegisterController@ver");//注册用户名验证
 Route::post("merchant/ver_s","Merchant\RegisterController@ver_s");//注册商铺名验证

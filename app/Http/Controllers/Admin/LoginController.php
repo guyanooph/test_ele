@@ -62,7 +62,7 @@ class LoginController extends Controller
                 //更新登录时间
                 $user->log_time=date("Y-m-d H:i:s",time());
                 //更新表字段中的admin_user字段
-                \DB::table('admin_user')->where("id",$user->id)->update("logtime",$user->log_time);
+                \DB::table('admin_user')->where("id",$user->id)->update(["logtime"=>$user->log_time]);
 			    //存储session跳转页面
 				\Session::put("adminuser",$user);
 				return redirect("admin");
