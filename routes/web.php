@@ -13,8 +13,6 @@
 //前台路由
 Route::get("/", "Home\ShopController@index");
 Route::get("/home", "Home\LocationController@location");
-Route::post("/testshop","Home\LocationController@upload");
-Route::get("/sendsms","Home\LocationController@sendsms");
 //Route::get('/shop/add/{id}',"Home\CartController@add"); //放入购物车
 //Route::get('/shop/show',"Home\CartController@show"); //浏览购物车
 //Route::get('/shop/del/{id}',"Home\CartController@del"); //删除购物车中的某个商品

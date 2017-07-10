@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Shop_list;
 use App\Org\Geohash;
+use Session;
 
 class ShopController extends Controller
 {
@@ -22,14 +23,14 @@ class ShopController extends Controller
 
             //用私有方法加载附近商家
             $list = $this->loadShops($location);
-            return view('home.shop.shoplist', ['list'=>$list]);
+            return view('home.shop.shoplist', ['list'=>$list, 'user'=>\Session::get('user')]);
         }elseif($request->input("location")){
             $location = $request->input("location");
             $request->session()->put("location", $request->input("location"));
 
             //用私有方法加载附近商家
             $list = $this->loadShops($location);
-       	    return view('home.shop.shoplist',['list'=>$list]);
+       	    return view('home.shop.shoplist',['list'=>$list, 'user'=>\Session::get('user')]);
             //$this->loadShops($location);
         }else{
             return redirect("/home");
@@ -40,7 +41,7 @@ class ShopController extends Controller
         //加载附近商家
         $geohash = new Geohash();
         $geo = $geohash->encode(explode(",",$location)[1],explode(",",$location)[0]);
-		$list = Shop_list::where('position', 'like', substr($geo,0,5).'%')->limit(110)->get();
+		$list = Shop_list::where('position', 'like', substr($geo,0,5).'%')->limit(10)->get();
 		//$list = Shop_list::where('position', 'like', substr($geo,0,5).'%')->paginate(15);
        	return $list;
     }

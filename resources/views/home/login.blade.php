@@ -10,7 +10,7 @@
 
     <div>
         请输入
-        <input type="text" name="info" value="{{ '手机号码/邮箱/用户名') }}">
+        <input type="text" name="info" value="{{ '手机号码/邮箱/用户名' }}">
     </div>
 
     <div>
