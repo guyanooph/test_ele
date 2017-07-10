@@ -1699,7 +1699,7 @@
                     dataType:'text',
                     headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
                     success:function(data){
-                        alert('a');
+                        alert('已发送');
                     },
                     error:function(){
                         alert('b');

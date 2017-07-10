@@ -328,7 +328,7 @@
             position: absolute;
         }</style>
     <meta charset="utf-8">
-    <meta name="_token" content="{{ csrf_token() }}"/>
+    {{--<meta name="_token" content="{{ csrf_token() }}"/>--}}
     <title>吃货-开店申请</title>
     <meta name="description" content="吃货-开店申请">
     <meta id="viewport" name="viewport"
