@@ -312,7 +312,7 @@
 			     data="filteredRestaurants = (rstStream.restaurants | filter: rstStream.filter | filter: otherFilter | orderBy: [ '-is_opening', rstStream.orderBy || 'index' ])"
 			     style="height: 840px;">
 				 <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				 <a href="/shoplist/9" data-rst-id="" data-bidding="" target="_blank"
+				 <a href="/shoplist/{id}" data-rst-id="" data-bidding="" target="_blank"
 			                               class="rstblock">
 					<div class="rstblock-logo">
 					<img src="//fuss10.elemecdn.com/8/38/68c554160c254ba06eef15bb963ebpng.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>5566</title>
+    </head>
+    <body>
+        <input type="text" name="input_test">
+        <div id="">
+            <ul>
+                <li onclick="select(this)">
+                    aaaa
+                </li>
+            </ul>
+        </div>
+        <script>
+            function select(e){
+                alert("aa");
+                alert(e.parentNode.parentNode.previousSibling.previousSibling.tagName);
+                e.parentNode.parentNode.previousSibling.previousSibling.value = "aa";
+            }
+        </script>
+    </body>
+</html>

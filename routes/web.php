@@ -11,14 +11,20 @@
 |
 */
 //前台路由
-
+Route::get("/", "Home\ShopController@index");
 Route::get("/home", "Home\LocationController@location");
-Route::post("/testshop","Home\LocationController@upload");
-Route::get("/sendsms","Home\LocationController@sendsms");
 //Route::get('/shop/add/{id}',"Home\CartController@add"); //放入购物车
 //Route::get('/shop/show',"Home\CartController@show"); //浏览购物车
 //Route::get('/shop/del/{id}',"Home\CartController@del"); //删除购物车中的某个商品
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
+
+  //购物车
+//Route::get('/addProduct/{productId}', 'CartController@addItem');
+//Route::get('/removeItem/{productId}', 'CartController@removeItem');
+//Route::get('/cart', 'CartController@showCart');
+//购物车
+Route::get('/addtocart/{shopid}/{foodid}', 'Home\ShopcartController_2@addCart');
+Route::get('/clearcart/{shopid}', 'Home\ShopcartController_2@clearCart');
 
 Route::get('/register',"Home\RegisterController@index");//用户注册认证
 Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
@@ -57,7 +63,7 @@ Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人�
 
 
 
-Route::get('/shoplist/{id}','Home\FoodController@list'); //菜品信息列表
+Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
 
 //Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
 
@@ -175,11 +181,14 @@ Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商�
 Route::get("merchant/phone","Merchant\RegisterController@index");//加载商家手机注册页面
 Route::post("merchant/ver_tel","Merchant\RegisterController@ver_tel");//手机验证码验证手机号是否已经被用
 Route::post("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
+Route::get("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
+//Route::get("sid","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
+Route::get("sid/{id}","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
 Route::get("/sendMobileCode","Merchant\RegisterController@sendMobileCode");//发送手机验证码
 
 
 //Route::get('merchant/register/sendsms', 'Merchant\RegisterController@sendSms');//发送手机验证码
-//Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
+Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
 Route::post("merchant/register","Merchant\RegisterController@store");////商家执行注册
 Route::post("merchant/ver","Merchant\RegisterController@ver");//注册用户名验证
 Route::post("merchant/ver_s","Merchant\RegisterController@ver_s");//注册商铺名验证
@@ -227,4 +236,3 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
 	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
 });
-

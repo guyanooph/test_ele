@@ -498,341 +498,224 @@
                     </div>
                 </div>
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                    
-
-                    
-                        
-                        
-                            
-                                   
-                        
-                        
-                            
-                                   
-                        
-                                                                 
-                                    
-                                    
-                        
-                                                                 
-                                    
-                                    
-                        
-                                                                 
-                                    
-                                    
-                        
-                                                                 
-                                    
-                                    
-                        
-                        
-                                                                 
-                                    
-                                    
-                        
-                    
-                
-                
-                
-                    
-                    
-                        
-                             
+                <div class="form-group flex">
+                <label class="control-label"> <b class="required">*</b>门店分类 </label>
+                    <div class="control-content">
+                        <div id="categories">
+                            <div  class=""  name="categories">
+                                <select style="width:100px;"  id="mid">
+                                    <option>店铺分类</option>
+                                    <?php $__currentLoopData = $mids; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mid): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option  style="width:150px;" value="<?php echo e($mid->id); ?>"><?php echo e($mid->title); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <select id="sid" name="typeid"></select>
                             
                                 
-                                    
-                                           
-                                           
-                                           
                                 
-                                
-                                    
-                                           
-                                           
-                                           
-                                    
-                                
-                                
-                                    
-                                    
-                                         
-                                        
-                                               
-                                               
-                                               
-                                        
-                                        
-                                            
-                                            
-                                        
                                 
                             
-                        
+                            <div class="select-content ng-hide" ng-show="showContent" style="">
+                            <!-- ngRepeat: item in items -->
+                                <div ng-repeat="item in items" class="clearfix ng-scope">
+                                <span class="select-nav ng-binding">异国料理</span>
+                                <div class="select-sub-content">
+                                <!-- ngRepeat: sons in item.sons track by $id(sons) -->
+                                <label ng-repeat="sons in item.sons track by $id(sons)" ng-class="{'active': sons.checked}" class="ng-scope">
+                                <input type="checkbox" style="display:none" ng-model="sons.checked" ng-change="onCheckChange(sons)" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                <span class="item-label ng-binding">披萨意面</span>
+                                </label>
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                <label ng-repeat="sons in item.sons track by $id(sons)"
+                                ng-class="{'active': sons.checked}" class="ng-scope">
+                                <input type="checkbox" name="type" style="display:none" ng-model="sons.checked"
+                                ng-change="onCheckChange(sons)"
+                                class="ng-pristine ng-untouched ng-valid ng-empty">
+                                <span class="item-label ng-binding">日韩料理</span>
+                                </label>
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                </div>
+                                </div><!-- end ngRepeat: item in items --> </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                     
-                
-
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
                 
                 
                 
@@ -987,7 +870,7 @@
                                      name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
                                     <div id="preview" ></div>
                                     <input type="file" accept="image/*"  onchange="preview(this)" id="inputPassword3" name="logoname">
-                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img<br>
+                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1">
                                         点击上传 </p>
                                 </div>
                             </ng-transclude>
