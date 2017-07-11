@@ -19,64 +19,58 @@
               <!-- Horizontal Form -->
               <div class="box box-primary">
 			    <div class="box-header with-border">
-					<h3 class="box-title"><i class="fa fa-plus"></i> 修改营业信息页面</h3>
+					<h3 class="box-title"><i class="fa fa-plus"></i> 修改商家信息页面</h3>
 			    </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="<?php echo e(URL('/merchant/merchantopen/update')); ?>/<?php echo e($merchantopen->id); ?>" method="post">
+                <form class="form-horizontal" action="<?php echo e(URL('/merchant/merchant/update')); ?>/<?php echo e($merchant->id); ?>" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                   <input type="hidden" name="_method" value="put">
 
                   <div class="box-body">  
                     <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">营业时间：</label>
+                      <label for="inputEmail3" class="col-sm-2 control-label">商家名称：</label>
                       <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputPassword3" name="opentime" value="<?php echo e($merchantopen->opentime); ?>">
-                      </div>
-                    </div>
-					<div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
-                      <div class="col-sm-4">
-                       <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="<?php echo e($merchantopen->overtime); ?>">
-                      </div>
-                    </div>
-					<div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">起送价：</label>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputPassword3"  name="givemoney" value="<?php echo e($merchantopen->givemoney); ?>">
-                      </div>
-                    </div>
-					<div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">配送方式：</label>
-                      <div class="col-sm-4">
-                        <label class="radio-inline">
-                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 1)?"checked":""); ?> value="0">自营快送  &nbsp; &nbsp;
-                        </label>
-                        <label class="radio-inline">
-                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 2)?"checked":""); ?> value="1">蜂鸟快送 
-                        </label>
-                      </div>
-                    </div>
-					
-					
-					
-					
-					<div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">配送费：</label>
-                      <div class="col-sm-4">
-                         <input type="text" class="form-control" id="inputPassword3"  name="money" value="<?php echo e($merchantopen->money); ?>">
+                        <input type="text" name="shopname" class="form-control" id="inputEmail3" readonly value="<?php echo e($merchant->shopname); ?>">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
+                      <label for="inputEmail3" class="col-sm-2 control-label">服务评价：</label>
                       <div class="col-sm-4">
-                        <label class="radio-inline">
-                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 1)?"checked":""); ?> value="0">营业  &nbsp; &nbsp;
-                        </label>
-                        <label class="radio-inline">
-                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 2)?"checked":""); ?> value="1">歇业 
-                        </label>
+                        <input type="text" class="form-control" id="inputPassword3" readonly name="rate" value="<?php echo e($merchant->rate); ?>">
                       </div>
                     </div>
+					<div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">图片：</label>
+                      <div class="col-sm-4" style="flont:left;">
+                        <input type="file" onchange="preview(this)" class="form-control" name="logo" value=""> 
+                      </div> <div id="preview" class="col-sm-3 control-label" ><img src=''/></div>
+                    </div>
+					<div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">地址：</label>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control" id="inputPassword3"  name="address" value="<?php echo e($merchant->address); ?>">
+                      </div>
+                    </div>
+					<div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">商家电话：</label>
+						<div class="col-sm-4">
+                         <input type="text" class="form-control" id="inputPassword3"  name="phone" value="<?php echo e($merchant->phone); ?>">
+                      </div>
+                    </div>
+
+					<div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">商家介绍：</label>
+                      <div class="col-sm-4">
+                         <input type="text" class="form-control" id="inputPassword3"  name="desc" value="<?php echo e($merchant->descr); ?>">
+                      </div>
+                    </div>
+					<div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">商家承诺：</label>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control" id="inputPassword3" name="commit" value="<?php echo e($merchant->commit); ?>">
+                      </div>
+                    </div>
+       
                   </div><!-- /.box-body -->
                   <div class="box-footer">
 				    <div class="col-sm-offset-2 col-sm-1">

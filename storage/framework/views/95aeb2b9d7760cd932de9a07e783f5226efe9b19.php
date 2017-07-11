@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+<style type="text/css">@charset  "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
 
-    <title ng-bind="SEO.title" class="ng-binding">{{ $ob->shopname }}  {{ $ob->address }}-饿了么网上订餐</title>
+    <title ng-bind="SEO.title" class="ng-binding"><?php echo e($ob->shopname); ?>  <?php echo e($ob->address); ?>-饿了么网上订餐</title>
 
     
     <meta name="format-detection" content="telephone=no, email=no">
@@ -33,7 +33,10 @@
     
     <link href="//faas.elemecdn.com/desktop/main.5e33c3.css" rel="stylesheet">
 
-    <script src="{{ asset('js/jquery-1.8.3.min.js') }}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="//jscrayfish.elemecdn.com/www.ele.me@ref/api" data-ref="API_CONFIG"></script>
+    <script src="//jsfaas.elemecdn.com/desktop/perf.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="//jsfaas.elemecdn.com/desktop/vendor.3b50a2.js" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="//jsfaas.elemecdn.com/desktop/main.f4d5bb.js" type="text/javascript" crossorigin="anonymous"></script>
     <base href="/">
   <meta name="mobile-agent" content="format=html5;url=https://h5.ele.me/shop/#id=150045824">
   <meta name="description" content="兄弟小馆位于北京市北京经济技术开发区荣华中路7号院4幢1028、1029，主要美食有煎鸡蛋、三鲜炒饭、辣白菜、馒头、鱼香肉丝饭等，了解更多美食外卖，上饿了么网上订餐">
@@ -63,7 +66,7 @@
  <span>扫一扫, 手机订餐更方便</span>
  <img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div></div>
  <div topbar-profilebox=""><div class="topbar-profilebox">
- <img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26">
+ <img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85">
  <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span> 
  <span ng-show="!$root.user.username" class="ng-hide">
  <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2F150045824" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2F150045824">登录/注册</a></span>
@@ -123,20 +126,20 @@
 <img ng-src="//fuss10.elemecdn.com/d/42/b2c1317cc18fdb9cfcfab618c02fapng.png?imageMogr2/thumbnail/95x95/format/webp/quality/85" 
  alt="兄弟小馆" itemprop="image" src="//fuss10.elemecdn.com/d/42/b2c1317cc18fdb9cfcfab618c02fapng.png?imageMogr2/thumbnail/95x95/format/webp/quality/85">
 <div class="shopguide-info-wrapper"><div>
-<h1 title="兄弟小馆" ng-class="{hastip: shop.tip}" itemprop="name" class="ng-binding hastip">{{ $ob->shopname }}</h1>
+<h1 title="兄弟小馆" ng-class="{hastip: shop.tip}" itemprop="name" class="ng-binding hastip"><?php echo e($ob->shopname); ?></h1>
 <span ng-if="shop.tip" ng-style="{'background-color': shop.tip.bgColor}" class="shopguide-tip ng-binding ng-scope"
  style="background-color: rgb(192, 192, 192);">商家休息</span>
 <a ng-href="/shop/150045824/info" href="/shop/150045824/info"></a></div>
 <p class="shopguide-info-rate">
-<div class="starrating icon-star ng-isolate-scope" title="评分{{ $ob->rate }}分" rate-star="" rating="shop.rating">
+<div class="starrating icon-star ng-isolate-scope" title="评分<?php echo e($ob->rate); ?>分" rate-star="" rating="shop.rating">
 <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 92%;"></span></div>
- (<a ng-href="/shop/150045824/rate" class="ng-binding" href="/shop/150045824/rate">{{ $ob->rate }}</a>) 
- <span class="ng-binding">月售{{ $ob->month_num }}单</span></p>
+ (<a ng-href="/shop/150045824/rate" class="ng-binding" href="/shop/150045824/rate"><?php echo e($ob->rate); ?></a>) 
+ <span class="ng-binding">月售<?php echo e($ob->month_num); ?>单</span></p>
  <p></p></div>
  <div class="shopguide-info-extra"><ul>
  <li class="shopguide-extra-item shopguide-extra-compete ng-scope" ng-if="shopRatingScore">
  <div itemscope="" itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating">
- <h2 class="color-stress ng-binding" itemprop="ratingValue">{{ $ob->rate }}</h2>
+ <h2 class="color-stress ng-binding" itemprop="ratingValue"><?php echo e($ob->rate); ?></h2>
  <meta itemprop="bestRating" content="5">
  <meta itemprop="reviewCount" content="2366"><p>综合评价<br>
  <span class="color-mute ng-binding">高于周边商家</span>
@@ -144,31 +147,27 @@
  </p></div>
  <div><p>服务态度<div class="starrating icon-star ng-isolate-scope" title="评分4.7分" rate-star="" rating="shopRatingScore.service_score">
  <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 93.494%;"></span></div> 
- <span class="color-stress ng-binding">{{ $ob->rate }}分</span></p>
+ <span class="color-stress ng-binding"><?php echo e($ob->rate); ?>分</span></p>
  <p>菜品评价<div class="starrating icon-star ng-isolate-scope" title="评分4.6分" rate-star="" rating="shopRatingScore.food_score">
  <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 92.1634%;"></span></div>
- <span class="color-stress ng-binding">{{ $ob->rate }}分</span></p></div></li>
- <li class="shopguide-extra-item ng-binding ng-scope" ng-if="shop.description" itemprop="description">{{ $ob->desc }}</li>
+ <span class="color-stress ng-binding"><?php echo e($ob->rate); ?>分</span></p></div></li>
+ <li class="shopguide-extra-item ng-binding ng-scope" ng-if="shop.description" itemprop="description"><?php echo e($ob->desc); ?></li>
  <li class="shopguide-extra-item address">
  <p itemscope="" itemprop="streetAddress" itemtype="http://schema.org/PostalAddress">
- <span class="label">商家地址：{{ $ob->address }}</span><br/>
- <span class="label">商家描述：</span><span class="ng-binding">{{ $ob->desc }}</span>
+ <span class="label">商家地址：<?php echo e($ob->address); ?></span><br/>
+ <span class="label">商家描述：</span><span class="ng-binding"><?php echo e($ob->desc); ?></span>
  <span class="ng-binding"></span>
  <meta itemprop="telephone" content="15830461171 15801421533"></p>
  <p><span class="label">营业时间：</span> 
  <span itemprop="openingHours" class="ng-binding">??? </span></p></li>
  <li class="shopguide-extra-item">
- <p class="shopguide-extra-delivery">由<span class="ng-binding">{{ $ob->shopname }}</span>提供配送服务</p></li></ul></div></div>
- <div class="shopguide-server">
-<span ng-hide="shop.id == 656683" class=""><em>起送价</em>
- <em class="shopguide-server-value ng-binding">{{ $ob->givemoney }}元</em>
-</span>
+ <p class="shopguide-extra-delivery">由<span class="ng-binding"><?php echo e($ob->shopname); ?></span>提供配送服务</p></li></ul></div></div>
+ <div class="shopguide-server"><span ng-hide="shop.id == 656683" class=""><em>起送价</em>
+ <em class="shopguide-server-value ng-binding"><?php echo e($ob->givemoney); ?>元</em></span>
  <span ng-hide="shop.id == 656683" class=""><em>配送费</em>
- <em class="shopguide-server-value ng-binding">配送费¥ {{ $ob->money }}</em>
-</span>
+ <em class="shopguide-server-value ng-binding">配送费￥ ???</em></span>
  <span ng-hide="shop.id == 656683" class=""><em>平均送达速度</em> 
- <em class="shopguide-server-value ng-binding">{{ $ob->service_time }}分钟</em>
-</span></div>
+ <em class="shopguide-server-value ng-binding"><?php echo e($ob->service_time); ?>分钟</em></span></div>
  <a class="shopguide-favor" href="javascript:" ng-click="favor()">
  <i ng-if="!isFavorShop" class="icon-favorite ng-scope"></i>
  <span ng-if="!isFavorShop" class="ng-scope">收藏</span></a></div></div>
@@ -221,11 +220,11 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 		
 		
 		<!--分类-->
-	<div ng-show="!loading &amp;&amp; !searchEnv" class="shopmenu-nav ng-isolate-scope" sticky="" sticky-class="sticky" sticky-body-class="shopmenu-nav-sticky" sticky-fn="shopNavSticky">
-	@foreach ($type_list as $type)
-	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope active">{{ $type->title }}</a>
-	@endforeach
-	</div>
+		<div ng-show="!loading &amp;&amp; !searchEnv" class="shopmenu-nav ng-isolate-scope" sticky="" sticky-class="sticky" sticky-body-class="shopmenu-nav-sticky" sticky-fn="shopNavSticky">
+	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope active">精品套餐</a>
+	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">热炒</a>
+	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope">美味小菜</a></div>
+		
 		
 		
 		<!-- 菜 -->
@@ -235,153 +234,58 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 			
 			
 			<!-- 只是一个分类（需要遍历分类表，加载多个） -->
-			@foreach ( $type_list as $type)
 			<div class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
-			
-			<h3 class="shopmenu-title ng-binding">{{ $type->title }} <span class="shopmenu-des ng-binding">大家喜欢吃，才叫真好吃。</span></h3>
-			@foreach($type->food as $cp)
+				<h3 class="shopmenu-title ng-binding">热销 <span class="shopmenu-des ng-binding">大家喜欢吃，才叫真好吃。</span></h3>
+			<?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="534306490" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
 				<span class="col-1 ng-scope" ng-if="food.image_path">
 				<a href="javascript:" ng-click="showInfo(food)">
 				<img ng-src="//fuss10.elemecdn.com/4/0c/48ecf64ee7c95655cfb6e8a684142jpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="煎鸡蛋的图片" src="//fuss10.elemecdn.com/4/0c/48ecf64ee7c95655cfb6e8a684142jpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85"></a></span>
-				<div class="col-2 shopmenu-food-main"><h3 class="shopmenu-food-name ui-ellipsis ng-binding">{{ $cp->title }}</h3>
+				<div class="col-2 shopmenu-food-main"><h3 class="shopmenu-food-name ui-ellipsis ng-binding"><?php echo e($cp->title); ?></h3>
 				<p class="color-mute ui-ellipsis ng-binding" tooltip=""></p>
-				<p><div class="starrating icon-star ng-isolate-scope" title="评分{{ $cp->rate }}分" rate-star="" rating="food.rating">
+				<p><div class="starrating icon-star ng-isolate-scope" title="评分<?php echo e($cp->rate); ?>分" rate-star="" rating="food.rating">
 				<span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 86.2%;"></span></div>
-				<span class="color-mute ng-binding">({{ $cp->foodrate }})</span> <span class="color-mute ng-binding">月售{{ $cp->num }}份</span></p></div>
-				<span class="col-3 shopmenu-food-price color-stress ng-binding">{{ $cp->price }}<small class="ng-binding"></small></span>
+				<span class="color-mute ng-binding">(<?php echo e($cp->foodrate); ?>)</span> <span class="color-mute ng-binding">月售<?php echo e($cp->num); ?>份</span></p></div>
+				<span class="col-3 shopmenu-food-price color-stress ng-binding"><?php echo e($cp->price); ?><small class="ng-binding"></small></span>
 				<span class="col-4"><div shop-cartbutton="" food="food" ng-hide="shop.id == '656683'" class="ng-isolate-scope">
 				<div ng-if="!menuFood.hasSpec" class="ng-scope">
-				<button onclick="addShopcart(this,1)" foodid="{{ $cp->id }}" class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车</button>
+				<button class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车</button>
 				</div></div></span></div>
-			@endforeach
-			
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			</div>
-			@endforeach
+			
 			<div shop-cart="" cart-link="cartLink" ng-hide="shopCache.id == 656683" class="ng-isolate-scope">
+			<div class="shop-cart">
+			<div class="shop-cartbasket" id="shopbasket" style="top: -44px; height: auto;">
+			<div shop-groupswitcher="" cart="shopCart" class="ng-isolate-scope">
+			<div class="shop-grouphead single" ng-class="{ single: shopCart.vm.groups.length === 1 }">
+			<a href="javascript:" class="icon-cart-add ng-scope"
+			ng-if="shopCart.vm.groups.length === 1" ng-click="addGroup()" tooltip="添加购物车"></a>
+			<div class="shop-groupguidetip ng-scope" ng-if="showGuide &amp;&amp; shopCart.vm.groups.length === 1">
+			快去选购吧！
+			<a class="icon-close" ng-click="closeGuide()"></a></div>
+			<div class="shop-grouphead-row">购物车
+			<a href="javascript:" ng-click="shopCart.clearGroup(shopCart.currentGroupIndex)">[清空]</a></div></div></div>
+			<div class="shop-cartbasket-empty ng-scope" ng-if="!shopCart.vm.groups[shopCart.currentGroupIndex].length">
+			<div class="icon-cart"></div><p>购物车是空的，赶紧选购吧</p></div>
+			</div><div class="shop-cartfooter" ng-click="shopCart.toggleCart()">
+			<span class="icon-cart shop-carticon"></span>
+			<div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ ???</div>
+			<button class="shop-cartfooter-checkout ng-binding disabled" 
+			ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
+			ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" 
+			ng-click="checkout($event)" disabled="disabled">购物车是空的</button></div>
+			<div class="shop-carthelper-opener" ng-class="{show: shopCart.cartHelper.show}" 
+			ng-click="showCartHelper()"></div>
+			<div class="shop-carthelper ng-isolate-scope" id="shophelper" shop-cart-helper="" 
+			group="shopCart.cartHelper.group" cart="shopCart">
+			<div class="shopcarhelper-title clearfix"><span>凑一凑</span>
+			<em>轻松凑满起送价</em> <a href="javascript:" ng-click="closeCartHelper()">[ 关闭 ]</a></div>
+			<div class="shopcarthelper-container ui-scrollbar-light"></div></div>
+			<div class="shop-flyitem">
+			</div></div></div>
 			
-    			<div class="shop-cart">
-    			
-        			<div class="shop-cartbasket" id="shopbasket" style="top: -44px; height: auto;">
-        			    <div shop-groupswitcher="" cart="shopCart" class="ng-isolate-scope">
-        			        <div class="shop-grouphead single" ng-class="{ single: shopCart.vm.groups.length === 1 }">
-        			
-        			            <a href="javascript:" class="icon-cart-add ng-scope" ng-if="shopCart.vm.groups.length === 1" ng-click="addGroup()" tooltip="添加购物车"></a>
-        			
-        			            <div class="shop-groupguidetip ng-scope" ng-if="showGuide &amp;&amp; shopCart.vm.groups.length === 1">快去选购吧！ 
-                                    <a class="icon-close" ng-click="closeGuide()"></a>
-        			            </div>
-        			
-        			            <div class="shop-grouphead-row">购物车
-        			                <a href="javascript:" ng-click="shopCart.clearGroup(shopCart.currentGroupIndex)">[清空]</a>
-                                </div>
-        			        </div>
-        		        </div>
-
-                        @if(!$shopcart['shopcart'])
-        			    <div id="emptycart" class="shop-cartbasket-empty ng-scope" ng-if="!shopCart.vm.groups[shopCart.currentGroupIndex].length">
-        			        <div class="icon-cart"></div>
-                            <p>购物车是空的，赶紧选购吧</p>
-                        </div>
-                        @else
-                        @foreach($shopcart['shopcart'] as $id=>$food)    
-                        <div foodid="{{ $id }}" ng-repeat="item in shopCart.vm.groups[shopCart.currentGroupIndex]" class="shop-cartbasket-tablerow ng-scope" entityid="547033283">
-                            <div class="cell itemname ng-binding" ng-bind="item.name" title="{{ $food['food']->title }}">
-                                {{ $food['food']->title }}
-                            </div>
-                            <div class="cell itemquantity">
-                                <button foodid="{{ $id }}" onclick="addShopcart(this,-1)" ng-click="shopCart.subEntity(item, $event)">-</button><input ng-model="item.quantity" ng-blur="shopCart.updateFromInput(item, item.quantity)" class="ng-pristine ng-valid" value="{{ $food['num'] }}"><button foodid="{{ $id }}" onclick="addShopcart(this,1)" ng-click="shopCart.addEntity(item, $event)">+</button>
-                            </div>
-                            <div class="cell itemtotal ng-binding" ng-bind="'¥' + ((item.price * item.quantity).toFixed(2) | number)">
-                                ￥{{ $food['food']->price * $food['num'] }}
-                            </div>
-                        </div>
-                        @endforeach
-                        @endif
-
-        			</div>
-    			
-                    @if(!$shopcart['shopcart'])
-    			    <div onclick="shopcartToggle(this)" class="shop-cartfooter" ng-click="shopCart.toggleCart()">
-    			        <span class="icon-cart shop-carticon"></span>
-    			        <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ {{ $ob->givemoney }}</div>
-    			        <button  class="shop-cartfooter-checkout ng-binding disabled" ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
-    			ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" 
-    			ng-click="checkout($event)" >购物车是空的</button>
-                    </div>
-                    @elseif( $shopcart['total'] < $shopcart['givemoney'] )
-                    <div onclick="shopcartToggle(this)" class="shop-cartfooter" ng-click="shopCart.toggleCart()">
-    			        <span class="icon-cart shop-carticon"></span>
-                        <p class="shop-cartfooter-text price ng-binding ng-scope" ng-if="shopCart.vm.quantity > 0" ng-bind="shopCart.vm.total | number">{{ $shopcart['total'] }}</p>
-    			        <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ {{ $ob->givemoney }}</div>
-    			        <button  class="shop-cartfooter-checkout ng-binding disabled" ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
-    			ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" 
-    			ng-click="checkout($event)" >还差{{ $shopcart['givemoney'] - $shopcart['total'] }}元起送</button>
-                    </div>
-                    @else
-                    <div onclick="shopcartToggle(this)" class="shop-cartfooter" ng-click="shopCart.toggleCart()">
-   			            <span class="icon-cart shop-carticon"></span>
-                        <p class="shop-cartfooter-text price ng-binding ng-scope" ng-if="shopCart.vm.quantity > 0" ng-bind="shopCart.vm.total | number">{{ $shopcart['total'] }}</p>
-   			            <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ {{ $ob->givemoney }}</div>
-   			            <button onclick="javascrip:window.location.href='/checkout'" class="shop-cartfooter-checkout ng-binding " ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
-   			ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" 
-   			ng-click="checkout($event)" >去结算</button>
-                   </div>
-                   @endif
-
-
-    			    <div class="shop-carthelper-opener" ng-class="{show: shopCart.cartHelper.show}" ng-click="showCartHelper()"></div>
-    			    <div class="shop-carthelper ng-isolate-scope" id="shophelper" shop-cart-helper="" group="shopCart.cartHelper.group" cart="shopCart">
-    			        <div class="shopcarhelper-title clearfix">
-                            <span>凑一凑</span>
-    			            <em>轻松凑满起送价</em>
-                            <a href="javascript:" ng-click="closeCartHelper()">[ 关闭 ]</a>
-                        </div>
-    			        <div class="shopcarthelper-container ui-scrollbar-light"></div>
-                    </div>
-    			    <div class="shop-flyitem"></div>
-                </div>
-			</div>
 			
-			<script>
-                function shopcartToggle(e){
-                    if($(e).prev().css("top") == "0px"){
-                        $(e).prev().attr("style","top:-208px; height: auto;");
-                    }else{
-                        $(e).prev().attr("style","top:0px; height: auto;")
-                    }
-                }
-                
-                function addShopcart(e,m){
-                    var foodid = e.getAttribute('foodid');
-                    $.ajax({
-                        url:"/addtocart/"+ {{ $ob->shopid }} + "/" + foodid,
-                        type:"get",
-                        data:"m=" + m,
-                        datatype:"json",
-                        success:function(data){
-                            var data = $.parseJSON(data);
-                            var select = "div[foodid='" + foodid + "']";
-                            if(data.num<=0 && data.status==1){
-        			            $aps = "<div id='emptycart' class=\"shop-cartbasket-empty ng-scope\" ng-if=\"!shopCart.vm.groups[shopCart.currentGroupIndex].length\"><div class=\"icon-cart\"></div><p>购物车是空的，赶紧选购吧</p></div>"
-                                $(select).parent().append($aps);
-                                $(select).remove();
-                            }else if(data.status==1){
-                                var select_2 = select + " input";
-                                $(select_2).val(data.num);
-                                $(select).parent().children("div.itemtotal").html("¥"+(data.num*data.price));
-                            }else if(data.status==0){
-                                var item = "<div foodid=\""+data.id+"\" ng-repeat=\"item in shopCart.vm.groups[shopCart.currentGroupIndex]\" class=\"shop-cartbasket-tablerow ng-scope\" entityid=\"547033283\"><div class=\"cell itemname ng-binding\" ng-bind=\"item.name\" title=\""+ data.title +"\">"+ data.title +"</div><div class=\"cell itemquantity\"><button onclick=\"addShopcart(this,-1)\" ng-click=\"shopCart.subEntity(item, $event)\"  foodid='"+ data.id +"'  >-</button><input ng-model=\"item.quantity\" ng-blur=\"shopCart.updateFromInput(item, item.quantity)\" class=\"ng-pristine ng-valid\" value=\"" + data.num + "\"><button foodid='"+ data.id +"' onclick=\"addShopcart(this,1)\" ng-click=\"shopCart.addEntity(item, $event)\">+</button></div><div class=\"cell itemtotal ng-binding\" ng-bind=\"'¥' + ((item.price * item.quantity).toFixed(2) | number)\">￥"+ data.price * data.num +"</div></div>";
-                                $("#emptycart").remove();
-                                $("#shopbasket").append(item);
-                            }
-                        },
-                        error:function(){
-                            alert("失败了");
-                        }
-                    });
-                }
-            </script>
 			
 			<div class="dialog" role="dialog" dialog="ITEMINFO" style="display: none;">
 			<div class="dialog-close icon-close"></div><div class="dialog-content" ng-transclude="">
@@ -409,7 +313,7 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 	<div class="shopmain-right ng-isolate-scope" shop-bulletin="" data="shop">
 	<div class="shopbulletin"><div class="shopbulletin-section">
 	<h3 class="shopbulletin-section-title">商家公告</h3>
-	<p class="shopbulletin-content ng-binding">{{ $ob->desc }}</p>
+	<p class="shopbulletin-content ng-binding"><?php echo e($ob->desc); ?></p>
 	<div class="shopbulletin-delivery"><h4>配送说明：</h4>
 	<p class="ng-binding">配送费￥ ???</p></div>
 	<ul class="shopbulletin-supports"><li ng-repeat="support in shop.supports" class="ng-binding ng-scope">

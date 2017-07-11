@@ -21,7 +21,7 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
-				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchantopen/edit')}}/{{ $merchant->id }}'">编 辑 商 家 营 业 信 息</button>
+				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchant/edit')}}/{{ $merchant->id }}'">编 辑 商 家 信 息</button>
                   <div class="box-tools">
                    
                   </div>
@@ -31,75 +31,56 @@
 				
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">营业时间：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">商家名字：</label>
 						<div class="col-sm-4">
-							{{ $merchant->opentime }}
+							{{ $merchant->shopname }}
 						</div>
 						</div>
 					</div> 
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">服务评分：</label>
 						<div class="col-sm-4">
-							{{ $merchant->closetime }}
+							{{ $merchant->rate }}
 						</div>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">起送价：</label>
-						<div class="col-sm-4">
-							{{ $merchant->givemoney }}
+						<label for="inputPassword3" class="col-sm-2 control-label">logo：</label>
 						</div>
-						</div>
-						
+						<div id="preview" class=
+						"col-sm-2 control-label"><img src='http://osltbib18.bkt.clouddn.com/wang/image_{{$merchant->logo }}'/></div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">配送费：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">地址：</label>
 						<div class="col-sm-4">
-							{{ $merchant->money }}
-						</div>
-						</div>
-					</div>
-					
-					<div class="box-body">
-						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">配送方式：</label>
-						<div class="col-sm-4">
-							{{ $merchant->method }}
+							{{ $merchant->address }}
 						</div>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">平均配送：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">商家电话：</label>
 						<div class="col-sm-4">
-							{{ $merchant->service_time }} 分钟
+							{{ $merchant->phone }}
 						</div>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">月销量：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">商家介绍：</label>
 						<div class="col-sm-4">
-							{{ $merchant->month_num }}
+							{{ $merchant->descr }}
 						</div>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">总销量：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">商家承诺：</label>
 						<div class="col-sm-4">
-							{{ $merchant->time }}
-						</div>
-						</div>
-					</div>
-					<div class="box-body">
-						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
-						<div class="col-sm-4">
-							{{ $merchant->state }}
+							{{ $merchant->commit }}
 						</div>
 						</div>
 					</div>

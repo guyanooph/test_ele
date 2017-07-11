@@ -20,7 +20,7 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
-				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchantopen/edit')); ?>/<?php echo e($merchant->id); ?>'">编 辑 商 家 营 业 信 息</button>
+				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchant/edit')); ?>/<?php echo e($merchant->id); ?>'">编 辑 商 家 信 息</button>
                   <div class="box-tools">
                    
                   </div>
@@ -30,82 +30,61 @@
 				
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">营业时间：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">商家名字：</label>
 						<div class="col-sm-4">
-							<?php echo e($merchant->opentime); ?>
+							<?php echo e($merchant->shopname); ?>
 
 						</div>
 						</div>
 					</div> 
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">服务评分：</label>
 						<div class="col-sm-4">
-							<?php echo e($merchant->closetime); ?>
+							<?php echo e($merchant->rate); ?>
 
 						</div>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">起送价：</label>
-						<div class="col-sm-4">
-							<?php echo e($merchant->givemoney); ?>
-
+						<label for="inputPassword3" class="col-sm-2 control-label">logo：</label>
 						</div>
-						</div>
-						
+						<div id="preview" class=
+						"col-sm-2 control-label"><img src='http://osltbib18.bkt.clouddn.com/wang/image_<?php echo e($merchant->logo); ?>'/></div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">配送费：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">地址：</label>
 						<div class="col-sm-4">
-							<?php echo e($merchant->money); ?>
-
-						</div>
-						</div>
-					</div>
-					
-					<div class="box-body">
-						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">配送方式：</label>
-						<div class="col-sm-4">
-							<?php echo e($merchant->method); ?>
+							<?php echo e($merchant->address); ?>
 
 						</div>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">平均配送：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">商家电话：</label>
 						<div class="col-sm-4">
-							<?php echo e($merchant->service_time); ?> 分钟
-						</div>
-						</div>
-					</div>
-					<div class="box-body">
-						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">月销量：</label>
-						<div class="col-sm-4">
-							<?php echo e($merchant->month_num); ?>
+							<?php echo e($merchant->phone); ?>
 
 						</div>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">总销量：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">商家介绍：</label>
 						<div class="col-sm-4">
-							<?php echo e($merchant->time); ?>
+							<?php echo e($merchant->descr); ?>
 
 						</div>
 						</div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
+						<label for="inputEmail3" class="col-sm-2 control-label">商家承诺：</label>
 						<div class="col-sm-4">
-							<?php echo e($merchant->state); ?>
+							<?php echo e($merchant->commit); ?>
 
 						</div>
 						</div>
