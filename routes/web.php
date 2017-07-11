@@ -19,10 +19,12 @@ Route::get("/home", "Home\LocationController@location");
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
 
   //购物车
-Route::get('/addProduct/{productId}', 'CartController@addItem');
-Route::get('/removeItem/{productId}', 'CartController@removeItem');
-Route::get('/cart', 'CartController@showCart');
-
+//Route::get('/addProduct/{productId}', 'CartController@addItem');
+//Route::get('/removeItem/{productId}', 'CartController@removeItem');
+//Route::get('/cart', 'CartController@showCart');
+//购物车
+Route::get('/addtocart/{shopid}/{foodid}', 'Home\ShopcartController_2@addCart');
+Route::get('/clearcart/{shopid}', 'Home\ShopcartController_2@clearCart');
 
 Route::get('/register',"Home\RegisterController@index");//用户注册认证
 Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
@@ -234,3 +236,4 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 });
 //短息测试
 Route::get("/merchants/sendSms" , "Merchants\RegisterController@sendSms");
+Route::get("/testsession", "Home\ShopcartController_2@test");
