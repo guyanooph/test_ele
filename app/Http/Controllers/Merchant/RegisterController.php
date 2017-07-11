@@ -16,10 +16,8 @@ use iscms\Alisms\SendsmsPusher as Sms;
 use Qiniu\Auth;
 use Qiniu\Storage\BucketManager;
 use Qiniu\Storage\UploadManager;
-use zgldh\QiniuStorage\QiniuStorage;
-
+use App\Org\Geohash;
 use App\Models\Mer_sid;
-use Log;
 
 class RegisterController extends Controller
 {
@@ -178,8 +176,10 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        \DB::beginTransaction();    // 事物开始
-        try {
+        $geohash = new Geohash();
+
+//        \DB::beginTransaction();    // 事物开始
+//        try {
             // 密码处理
             $password = trim($request['password']);
             // 俩次密码判断
@@ -228,23 +228,18 @@ class RegisterController extends Controller
                 }
 
                 //商家注册表
-                $input = $request->only(['mername', 'password', 'shoptitle', 'phone', 'identity', 'username','typeid']);
-                //dd($input);
-                //$password = md5($input['password']);
-                //$password = md5(substr_replace($password, $input['phone'], 0, 4));
-                //$password = Crypt::encrypt($input['password']);
-                //dd($password);
+                $input = $request->only(['mername', 'password', 'city','address','longitude_latitude','shoptitle', 'phone', 'identity', 'username','typeid']);
+                dd($input);
                 $password = HASH::make($input['password']);
-                //die();
                 $input['password'] = $password;
                 $input['first_ip'] = $request->getClientIp();
                 $input['register_time'] = date("Y-m-d H:i:s", time());
                 $input['logoname'] = $filename2;
                 $input['picname'] = $filename;
-                //dd($input);
+                $lati_long = explode(',',$request->input('longitude_latitude'));
+                $input['position'] = $geohash->encode($lati_long[1],$lati_long[0]);
                 $res1 = \DB::table('mer_register')->InsertGetId($input);
-                Log::info('input',['res1'=>$res1]);
-
+                dd($input);dd($res1);
 
                  //商家登录表
                 $info['shopid'] = $res1;
@@ -252,30 +247,33 @@ class RegisterController extends Controller
                 $info['password'] = $input['password'];
                 $info['shopname'] = $input['shoptitle'];
                 $res2 = \DB::table('mer_login')->InsertGetId($info);
+                dd($info);dd($res2);
 
 
 
 
-                //商家表
+        //商家表
                 $data['shopid'] = $info['shopid'];
                 $data['shopname'] = $info['shopname'];
                 $data['logo'] = $input['logoname'];
                 $data['phone'] = $input['phone'];
                 $data['typeid'] = $input['typeid'];
+                $data['address'] =$input['address'];
                 $res3 = \DB::table('merchant')->InsertGetId($data);
-                //dd($res3);
+
+                dd($data);dd($res3);
 
                 $res = $res1 && $res2 && $res3;
-                if ($res) {
-                    \DB::commit();
-                }
-            }
-        catch(\PDOException $e) {
-                \DB::rollback();
-                $list = "有点问题，再来注册吧(其实是事务回滚)";
-                return view('errors.503', compact('list'));
-            };
-        $list = "恭喜您！旺铺正在审核中，请等待!";
+//                if ($res) {
+//                    \DB::commit();
+//                }
+//            }
+//        catch(\PDOException $e) {
+//                \DB::rollback();
+//                $list = "有点问题，再来注册吧(其实是事务回滚)";
+//                return view('errors.503', compact('list'));
+//            };
+//        $list = "恭喜您！旺铺正在审核中，请等待!";
         return view('errors.503', compact('list'));
     }
 

@@ -12,9 +12,9 @@ var iden = false;
         //alert(phone);
         //alert(title);
         //alert(iden);
-        //return checkMername() && checkPass() && checkRepass() && checkPhone() && checkShoptitle() && checkIdentity ;
+        return checkMername() && checkPass() && checkRepass() && checkPhone() && checkShoptitle() && checkIdentity ;
         //return checkMername() && false;
-        return mername && pass && repass && phone && title && iden;
+        //return mername && pass && repass && phone && title && iden;
         //return true;
 
 
