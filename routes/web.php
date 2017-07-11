@@ -197,8 +197,10 @@ Route::post('/test','Merchant\RegisterController@test');
 //商家后台管理
 Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
-	Route::get("/create","Merchant\IndexController@create");//管理首页
-	Route::post("/store","Merchant\IndexController@store");//管理首页
+	
+	Route::get("/merchant","Merchant\MerchantController@index");//商家信息首页
+	Route::get("/merchant/edit/{id}","Merchant\MerchantController@edit");//编辑商家信息
+	Route::put("/merchant/update/{id}","Merchant\MerchantController@update");//执行修改商家信息
 	
 	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
 	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
@@ -225,5 +227,4 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
 	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
 });
-//短息测试
-Route::get("/merchants/sendSms" , "Merchants\RegisterController@sendSms");
+
