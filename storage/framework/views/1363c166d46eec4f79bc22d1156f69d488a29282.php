@@ -41,7 +41,6 @@
                       <th>菜价格</th>
                       <th>月销量</th>
                       <th>菜评分</th>
-                      <th>规格</th>
                       <th>状态</th>
                       <th>添加时间</th>
                       <th style="width: 100px">操作</th>
@@ -56,7 +55,6 @@
                       <td><?php echo e($v->price); ?></td>
                       <td><?php echo e($v->num); ?></td>
                       <td><?php echo e($v->food_rate); ?></td>
-                      <td><?php echo e($v->norms); ?></td>
                       <td><?php echo e($v->stutas); ?></td>
                       <td><?php echo e($v->create_time); ?></td>
                       <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/food/edit')); ?>/<?php echo e($v->id); ?>'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>

@@ -208,12 +208,12 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
 	
 	Route::get("/merchant","Merchant\MerchantController@index");//商家信息首页
-	Route::get("/merchant/edit/{id}","Merchant\MerchantController@edit");//编辑商家信息
-	Route::put("/merchant/update/{id}","Merchant\MerchantController@update");//执行修改商家信息
+	Route::get("/merchant/edit/{shopid}","Merchant\MerchantController@edit");//编辑商家信息
+	Route::put("/merchant/update/{shopid}","Merchant\MerchantController@update");//执行修改商家信息
 	
 	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
-	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
-	Route::put('/merchantopen/update/{id}', "Merchant\MerchantopenController@update");//执行修改
+	Route::get('/merchantopen/edit/{shopid}', "Merchant\MerchantopenController@edit");//修改营业信息
+	Route::put('/merchantopen/update/{shopid}', "Merchant\MerchantopenController@update");//执行修改
 
 	Route::get('/order', "Merchant\OrderController@index");//订单信息管理
 	Route::get('/order/create', "Merchant\OrderController@create");//添加订单

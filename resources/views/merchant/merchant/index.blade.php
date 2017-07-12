@@ -21,7 +21,7 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
-				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchant/edit')}}/{{ $merchant->id }}'">编 辑 商 家 信 息</button>
+				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchant/edit')}}/{{ $merchant->shopid }}'">编 辑 商 家 信 息</button>
                   <div class="box-tools">
                    
                   </div>
@@ -50,7 +50,7 @@
 						<label for="inputPassword3" class="col-sm-2 control-label">logo：</label>
 						</div>
 						<div id="preview" class=
-						"col-sm-2 control-label"><img src='http://osltbib18.bkt.clouddn.com/wang/image_{{$merchant->logo }}'/></div>
+						"col-sm-2 control-label"><img src='http://oslsovx4q.bkt.clouddn.com/upload/image{{$merchant->logo }}'/></div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
@@ -72,7 +72,7 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">商家介绍：</label>
 						<div class="col-sm-4">
-							{{ $merchant->descr }}
+							{{ $merchant->desc }}
 						</div>
 						</div>
 					</div>

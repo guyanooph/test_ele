@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-		$table = order::all();//查询所有数据
+		$table = Order::where('shopid', session('merchantname')->shopid)->paginate(10);//查询所有数据
 		/* //判断并封装搜索条件
         $params = array();
         if(!empty($_GET['name'])){

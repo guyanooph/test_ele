@@ -22,7 +22,7 @@
 					<h3 class="box-title"><i class="fa fa-plus"></i> 修改商家信息页面</h3>
 			    </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="<?php echo e(URL('/merchant/merchant/update')); ?>/<?php echo e($merchant->id); ?>" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action="<?php echo e(URL('/merchant/merchant/update')); ?>/<?php echo e($merchant->shopid); ?>" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                   <input type="hidden" name="_method" value="put">
 
@@ -61,7 +61,7 @@
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">商家介绍：</label>
                       <div class="col-sm-4">
-                         <input type="text" class="form-control" id="inputPassword3"  name="desc" value="<?php echo e($merchant->descr); ?>">
+                         <input type="text" class="form-control" id="inputPassword3"  name="desc" value="<?php echo e($merchant->desc); ?>">
                       </div>
                     </div>
 					<div class="form-group">

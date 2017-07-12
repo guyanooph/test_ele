@@ -70,8 +70,7 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">配送方式：</label>
 						<div class="col-sm-4">
-							<?php echo e($merchant->method); ?>
-
+							<?php if($merchant->method=="1"): ?>商家自送 <?php elseif($merchant->method=="2"): ?>第三方配送 <?php endif; ?>
 						</div>
 						</div>
 					</div>
@@ -105,8 +104,7 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
 						<div class="col-sm-4">
-							<?php echo e($merchant->state); ?>
-
+							<?php if($merchant->state=="1"): ?>营业 <?php elseif($merchant->state=="2"): ?>停业 <?php endif; ?>
 						</div>
 						</div>
 					</div>

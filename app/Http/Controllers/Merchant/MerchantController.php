@@ -18,8 +18,8 @@ class MerchantController extends Controller
 		//$table = Merchant::all()->where('shopid','=',1);//查询所有参数
 
 		//$list = merchantopen::all();
-		$info = Merchant::all()->where('shopid',1);//
-
+		$info = Merchant::all()->where('shopid',session('merchantname')->shopid);//
+		//dd($info);
         /* //判断并封装搜索条件
         $params = array();
 		$list = merchantopen::all();//查询所有参数
@@ -77,12 +77,12 @@ class MerchantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($shopid)
     {
         //加载修改页面
 		//return "你的厚爱！";
-		$table = merchant::where("id",$id)->first();//获取单条信息参数
-		
+		$table = merchant::where("shopid",$shopid)->first();//获取单条信息参数
+		//dd($table);
 		return view("merchant.merchant.edit",['merchant'=>$table]);//加载页面
     }
 
@@ -93,7 +93,7 @@ class MerchantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $shopid)
     {
 		//dd($id);
         //执行修改
@@ -119,11 +119,11 @@ class MerchantController extends Controller
             //exit();
         }
 			//dd($data);
-        $table = Merchant::where("id",$id)->update($data);
+        $table = Merchant::where("shopid",$shopid)->update($data);
 		
         //dd($data);
-        if($table>0){
-            return redirect('merchant/merchant');
+        if($table>=0){
+            return redirect('merchant/merchant/');
         }else{
             return back()->with("err","修改失败!");
         }

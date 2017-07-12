@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Gregwar\Captcha\CaptchaBuilder;
+use App\Models\Merchant\Mer_login;
+use App\Models\Merchant\Mer_register;
 use Session;
 
 class LoginController extends Controller
@@ -32,17 +34,31 @@ class LoginController extends Controller
         $phone = $request->input("phone");
         $password = $request->input("password");
         //获取对应用户信息
-        $user = \DB::table("mer_login")->where("phone",$phone)->first();
-        if(!empty($user)){
-            //判断密码
-            if(Hash::check($password, $user->password)){
-                //存储session跳转页面
-                session()->put("merchantname",$user);
-                return redirect("merchant");
-                //echo "测试成功!";
-            }
-        }
-        return back()->with("msg","账号或密码错误！");
+        $user = Mer_login::where("phone",$phone)->first();
+        $state = Mer_register::where("phone",$phone)->first();
+		//dd($state->state);
+		if($state->state != 1){
+			if(!empty($user)){
+			//判断密码
+				if(Hash::check($password, $user->password)){
+					//存储session跳转页面
+					session()->put("merchantname",$user);
+					
+					$data['last_login_ip'] = $request->getClientIp();
+					$data['last_login_time'] = date('Y-m-d');
+					$id = \DB::table('mer_login')->where("shopid",$user->shopid)->update($data);
+					
+					return redirect("merchant");
+					//echo "测试成功!";
+				}
+			}
+			return back()->with("msg","账号或密码错误！");
+		}else{
+			$list = "账号正在审核！如有疑问，请拨打：7417417474741";
+			return view('errors.503',compact('list'));
+			//return "账号正在审核！";
+		}
+        
 		
    }
    

@@ -1,17 +1,17 @@
 
     <!-- form start -->
-    <form action="{{url('merchant/foodtype/store')}}" method="post" id="myaddform" class="form-horizontal">
+    <form action="<?php echo e(url('merchant/foodtype/store')); ?>" method="post" id="myaddform" class="form-horizontal">
       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-      <input type="hidden" name="shopid" value="{{session('merchantname')->shopid}}">
+      <input type="hidden" name="shopid" value="<?php echo e(session('merchantname')->shopid); ?>">
       <div class="box-body">
         <div class="form-group">
           <label for="inputEmail3" class="col-sm-3 control-label">父类别名：</label>
           <div class="col-sm-4">
             <select name="pid">
                 <option value="0">根类别</option>
-					@foreach($list as $v)
-                    <option value="{{$v->id}}">{{$v->title}}</option>
-					@endforeach
+					<?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($v->id); ?>"><?php echo e($v->title); ?></option>
+					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
           </div>
         </div>

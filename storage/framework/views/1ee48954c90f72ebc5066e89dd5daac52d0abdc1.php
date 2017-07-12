@@ -25,9 +25,7 @@
                 <!-- form start -->
                 <form action="<?php echo e(url('merchant/food/store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-				  <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				  <input type="hidden" name="shopid" value="<?php echo e($v->shopid); ?>">
-				  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				  <input type="hidden" name="shopid" value="<?php echo e(session('merchantname')->shopid); ?>">
                   <div class="box-body">
 					<div class="form-group">
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>

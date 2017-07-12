@@ -26,9 +26,7 @@
                 <!-- form start -->
                 <form action="{{url('merchant/food/store')}}" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-				  @foreach($list as $v)
-				  <input type="hidden" name="shopid" value="{{$v->shopid}}">
-				  @endforeach
+				  <input type="hidden" name="shopid" value="{{ session('merchantname')->shopid }}">
                   <div class="box-body">
 					<div class="form-group">
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>

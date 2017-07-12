@@ -36,7 +36,7 @@
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
                       <div class="col-sm-4">
-                       <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="<?php echo e($merchantopen->overtime); ?>">
+                       <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="<?php echo e($merchantopen->closetime); ?>">
                       </div>
                     </div>
 					<div class="form-group">
@@ -49,10 +49,10 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">配送方式：</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 1)?"checked":""); ?> value="0">自营快送  &nbsp; &nbsp;
+                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 1)?"checked":""); ?> value="1">自营快送  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 2)?"checked":""); ?> value="1">蜂鸟快送 
+                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 2)?"checked":""); ?> value="2">蜂鸟快送 
                         </label>
                       </div>
                     </div>
@@ -70,10 +70,10 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 1)?"checked":""); ?> value="0">营业  &nbsp; &nbsp;
+                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 1)?"checked":""); ?> value="1">营业  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 2)?"checked":""); ?> value="1">歇业 
+                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 2)?"checked":""); ?> value="2">歇业 
                         </label>
                       </div>
                     </div>

@@ -19,28 +19,23 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 操作订单信息管理</h3>
-                  <button class="btn btn-primary" onclick="window.location='<?php echo e(URL('merchant/order')); ?>'">添加订单信息</button
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table class="table table-bordered">
                     <tr>
-                      <th style="width:20px">id号</th>
                       <th>订单号</th>
-                      <th>用户id</th>
-                      <th>商家id</th>
                       <th>商家名称</th>
                       <th>商家电话</th>
                       <th>商品数量</th>
-					  <th>订单创建时间</th>
-					  <th>送（收）货地址</th>
+					  <th>创建时间</th>
+					  <th>收货地址</th>
 					  <th>金额</th>
 					  <th>订单状态</th>
 					  <th>订单描述</th>
-					  <th>订单结束时间</th>
+					  <th>结束时间</th>
 					  <th>配送费</th>
 					  <th>餐盒费</th>
 					  <th>送达时间</th>
-					  <th>使用红包id</th>
 					  <th>支付方式</th>
 					  <th>配送方式</th>
 					  <th>发票信息</th>
@@ -49,30 +44,25 @@
                     </tr>
                     <?php $__currentLoopData = $table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td><?php echo e($order->id); ?></td> 
                             <td><?php echo e($order->orderid); ?></td>
-                            <td><?php echo e($order->userid); ?></td>
-                            <td><?php echo e($order->shopid); ?></td>
                             <td><?php echo e($order->shop_name); ?></td>
 							<td><?php echo e($order->shop_phone); ?></td>
 							<td><?php echo e($order->goods_num); ?></td>
 							<td><?php echo e($order->create_time); ?></td>
 							<td><?php echo e($order->addressid); ?></td>
 							<td><?php echo e($order->amount); ?></td>
-							<td><?php if($order->status=="0"): ?>已发货 <?php elseif($order->status=="1"): ?>正在配送 <?php else: ?>未配送 <?php endif; ?></td>
+							<td><?php if($order->status=="1"): ?>已发货 <?php elseif($order->status=="2"): ?>正在配送 <?php else: ?>未配送 <?php endif; ?></td>
 							<td><?php echo e($order->order_description); ?></td>
 							<td><?php echo e($order->over_times); ?></td>
 							<td><?php echo e($order->delivery_fee); ?></td>
 							<td><?php echo e($order->lunch_box_fee); ?></td>
 							<td><?php echo e($order->service_time); ?></td>
-							<td><?php echo e($order->packet_id); ?></td>
 							<td><?php echo e($order->pay); ?></td>
 							<td><?php echo e($order->distribution); ?></td>
 							<td><?php echo e($order->invoice_info); ?></td>
 							<td><?php echo e($order->remark); ?></td>
                             <td>
                                <button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/order/edit')); ?>/<?php echo e($order->id); ?>'">编辑</button>
-                               <button class="btn btn-xs btn-danger" onclick="doDel(<?php echo e($order->id); ?>)">删除</button>
                             </td>							   
 							</tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -67,7 +67,7 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">配送方式：</label>
 						<div class="col-sm-4">
-							{{ $merchant->method }}
+							@if ($merchant->method=="1")商家自送 @elseif ($merchant->method=="2")第三方配送 @endif
 						</div>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
 						<div class="col-sm-4">
-							{{ $merchant->state }}
+							@if ($merchant->state=="1")营业 @elseif ($merchant->state=="2")停业 @endif
 						</div>
 						</div>
 					</div>

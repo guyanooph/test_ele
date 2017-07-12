@@ -15,8 +15,8 @@ class FoodtypeController extends Controller
      */
     public function index()
     {
-		$list = \DB::select("select * from food_type order by concat(path,id) asc");
-        //$list = food_type::all();
+		//$list = \DB::select("select * from food_type where shopid order by concat(path,id) asc");
+        $list = Food_type::where("shopid",session('merchantname')->shopid)->get();
         //处理信息
         foreach($list as &$v){
             $m = substr_count($v->path,","); //获取path中的逗号
@@ -33,7 +33,7 @@ class FoodtypeController extends Controller
      */
     public function create()
     {
-        $list = \DB::select("select * from food_type order by concat(path,id) asc");
+        $list = Food_type::where("shopid",session('merchantname')->shopid)->get();
         //$list = Food_type::all();
         //处理信息
         foreach($list as &$v){
@@ -116,7 +116,7 @@ class FoodtypeController extends Controller
         //$data['updated_at'] = time();
         $id = \DB::table("food_type")->where("id",$id)->update($data);
         
-        if($id>0){
+        if($id>=0){
             return redirect('merchant/foodtype');
         }else{
             return back()->with("err","修改失败!");

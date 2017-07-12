@@ -42,7 +42,6 @@
                       <th>菜价格</th>
                       <th>月销量</th>
                       <th>菜评分</th>
-                      <th>规格</th>
                       <th>状态</th>
                       <th>添加时间</th>
                       <th style="width: 100px">操作</th>
@@ -57,8 +56,7 @@
                       <td>{{$v->price}}</td>
                       <td>{{$v->num}}</td>
                       <td>{{$v->food_rate}}</td>
-                      <td>{{$v->norms}}</td>
-                      <td>{{$v->stutas}}</td>
+                      <td>@if($v->stutas == 1)在售 @elseif ($v->stutas == 2)售完 @elseif ($v->stutas == 3)下架 @endif</td>
                       <td>{{$v->create_time}}</td>
                       <td><button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/food/edit')}}/{{ $v->id }}'">编辑</button> <button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> </td>
                       
