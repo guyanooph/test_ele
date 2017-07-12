@@ -249,7 +249,7 @@
 							<a href="/profile/info" class="profile-edit">编辑资料</a></div>
 						<div class="profile-perosondata">
 						
-						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">{{ $user->username }}</strong></h3>
+						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">???</strong></h3>
 							<p class="profile-tips ng-binding" ng-bind="timeSection.tipText">祝你一天好心情！</p>
 							<p class="profile-security">账户安全：<span
 										ng-class="{'low': level === 0, 'mid': level === 1, 'high': level ===2 || level ===3}"
@@ -271,14 +271,16 @@
 					<div class="profile-infoitem"><a class="inherit" href="/profile/hongbao"><p>我的红包</p>
 					
 							<p class="profile-infoitem-number hongbao">
-                      <span class="number ng-binding" ng-bind="hongbaocount">{{ $list->red_packet }}</span>个</p></a>
+                      <span class="number ng-binding" ng-bind="hongbaocount">{{ $info->red_packet }}</span>个</p></a>
 					</div>
+					
 					<div class="profile-infoitem"><a class="inherit" href="/profile/points"><p>我的积分</p>
-							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point">{{ $list->score }}</span>分</p></a>
+							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point">{{ $info->score }}</span>分</p></a>
 					</div>
+				
 					<div class="profile-infoitem"><a class="inherit" href="/profile/balance"><p>账户余额</p>
 							<p class="profile-infoitem-number balance"><span class="number ng-binding"
-							                                                 ng-bind="user.balance| number : 2">{{ $list->balance }}</span>元
+							                                                 ng-bind="user.balance| number : 2">{{ $info->balance }}</span>元
 							</p></a>
 					</div>
 					
@@ -298,11 +300,13 @@
 		
 		<!-- ngRepeat: order in recentOrder -->
 		<div class="orderblock ng-isolate-scope" ng-repeat="order in recentOrder" data="{ $order: order }">
-			<div class="orderblock-item orderblock-rstinfo clearfix">
-			<a class="logo" ng-href="/shop/895073" href="/shop/895073">
-			<img ng-src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85" alt="商家 LOGO" src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"></a>
-		  <h3 class="name">
-		  <a class="inherit ng-binding" ng-bind="order.restaurant_name"ng-href="/shop/895073" href="/shop/895073">麻辣火龙虾</a></h3>
+		<div class="orderblock-item orderblock-rstinfo clearfix">
+		<a class="logo" ng-href="/shop/895073" href="/shop/895073">
+		<img ng-src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85" alt="商家 LOGO" src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"></a>
+		 @foreach( $order as $ob )
+		 <h3 class="name">
+		 <a class="inherit ng-binding" ng-bind="order.restaurant_name"
+		 ng-href="/shop/895073" href="/shop/895073">麻辣火龙虾</a></h3>
 			<p class="product ng-binding" ng-bind="order.product">麻辣花蛤（500g）2份 / 麻辣蛏子（500g）1份</p>
 			<a class="productnum" ng-href="order/id/1209253485556894798" href="order/id/1209253485556894798">共
 			<i class="count ng-binding" ng-bind="order.productnum">6</i>个菜品&gt;</a>
@@ -317,7 +321,10 @@
 			 <a class="statuslink ng-binding" ng-href="order/id/1209253485556894798"
 				ng-bind="order.realStatus === 4 ? '立即评价' : '订单详情'"
 				href="order/id/1209253485556894798">订单详情</a></div>
+		@endforeach
 		</div>
+		
+		
 		<!-- ngIf: !recentOrder.length && !orderLoading --></div>
 				</div>
 				<div class="profile-footprint ng-scope">

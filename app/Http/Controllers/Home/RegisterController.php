@@ -65,8 +65,8 @@ class RegisterController extends Controller
             } else {
                 $name = rand(100000, 9999999);
 
-                $id = Login_user::insertGetId(['phone' => $phone, 'username' => $name, 'last_login_time' => date("Y-m-d H:i:s",time()), 'last_ip' => $request->getClientIp()]);
-                $res = User_info::insert(['userid' => $id, 'name_status' => 0, 'picname' => 'test_ele.jpg', 'register_time' => date("Y-m-d H:i:s",time()), 'phone' => $phone, 'username' => $name, 'first_login_time' => date("Y-m-d H:i:s",time()), 'status' => 0]);
+                $id = Login_user::insertGetId(['phone' => $phone, 'username' => $name, 'last_login_time' => date("Y-m-d H:i:s",time()), 'last_ip' => $request->getClientIp(), 'status' => 0]);
+                $res = User_info::insert(['userid' => $id, 'name_status' => 0, 'picname' => 'test_ele.jpg', 'register_time' => date("Y-m-d H:i:s",time()), 'phone' => $phone, 'username' => $name, 'first_login_time' => date("Y-m-d H:i:s",time())]);
                 $info = Login_user::find($id);
                 $request->session()->put('user',$info);
                 return redirect("/shoplist");
