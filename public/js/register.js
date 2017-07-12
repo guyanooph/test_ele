@@ -1,5 +1,23 @@
+var mername = false;
+var pass = false;
+var repass = false;
+var phone =false;
+var title = false;
+var iden = false;
+
     function doSubmit(){
-        return checkMername() && checkPass() && checkRepass() && checkPhone() && checkShoptitle() && checkIdentity;
+        //alert(mername);
+        //alert(pass);
+        //alert(repass);
+        //alert(phone);
+        //alert(title);
+        //alert(iden);
+        //return checkMername() && checkPass() && checkRepass() && checkPhone() && checkShoptitle() && checkIdentity ;
+        //return checkMername() && false;
+        return mername && pass && repass && phone && title && iden;
+        //return true;
+
+
 
     }
 
@@ -29,17 +47,19 @@
                     headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
                     success:function(data){
                         //alert(data);
-                        if(data =='y'){
+                        if(data ==1){
                             $("<span>已经被使用</span>").insertAfter("input[name='mername']");
-                            document.storeForm.mername.value = "";//只return false拦不住，把这个值变成空，上面的判断拦住它
+                            // document.storeForm.mername.value = "";//只return false拦不住，把这个值变成空，上面的判断拦住它
                             return false;
                         }else{
                             $("<span>该账户未被注册，可用</span>").insertAfter("input[name='mername']");
+                            mername = true;
+                            //alert(mername);
                         }
                     }
                 })
             }
-            return true;
+            mername = true;
         }
 
         //验证密码
@@ -57,7 +77,7 @@
                     $('#div_password').append('<span>可用</span>')
                     //$("#div_mername").empty();
                 }
-            return true;
+            pass = true;
         }
 
         //密码确认
@@ -75,7 +95,11 @@
                 return false;
                 //$("#div_mername").empty();
             }
+            repass = true;
         }
+
+        //验证详细地址
+
         //验证店铺名称
         function checkShoptitle (){
             //alert('ok');
@@ -112,6 +136,7 @@
                     }
                 })
             }
+            title = true;
         }
 
     //验证手机号码
@@ -144,11 +169,14 @@
                             return false;
                         }else{
                             $("<span>该手机号码可用</span>").insertAfter("input[name='phone']");
-                            alert(data);
+                            //alert(data);
+                            phone = true;
+                            //alert(phone);
                         }
                     }
                 })
             }
+            phone = true;
         }
         //验证身份证号码
         function checkIdentity (){
@@ -186,6 +214,7 @@
                     }
                 })
             }
+            iden = true;
         }
 
         function checkUsername(){
@@ -200,6 +229,7 @@
                 $('#div_username').append('<span>可用</span>')
                 //$("#div_mername").empty();
             }
+            return true;
         }
 
         //第一个图片显示
@@ -239,66 +269,34 @@
         }
     }
 
-    //手机端注册验证手机号码重复性
-    function checkTel()
-    {
-        //alert('ok');
-        var tel = $("input[name='tel']").val();
-        //alert(tel);
-        if (($('input[name =\'tel\']').val()).match(/^(((1[0-9]{2}))+\d{8})$/) == null) {
 
-            $('#div_tel').empty();
-
-            $('#div_tel').append('<span>请输入正确格式的手机号码</span>');
-            return false;
-            //alert('ok');
-        } else {
-            //$('#div_shoptitle').empty()
-            //$('#div_shoptitle').append('<span>可用</span>')
-            //$("#div_mername").empty();
-            //alert('ok');
-            $("#div_tel").empty();
-            $("input[name = 'tel']").nextAll('span').remove();
-            //alert('ok');
+    //加载商家分类
+    $(function(){
+        $("#mid").change(function(){
+            var midValue = $(this).val();
+            myLoad(midValue);
+            //alert(midValue);
+        });
+    });
+        function myLoad(id){
+            $("#sid option").remove();
+            //alert(id);
             $.ajax({
-                url: 'merchent/ver_tel',
-                type:"post",
-                data:'tel='+tel,
-                dataType:'text',
-                headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
-                success:function(data){
-                    alert(success);
-                    if(data == 1){
-                        $("<span>该手机号码已经被使用</span>").insertAfter("input[name='phone']");
-                        //alert(data);
-                        return false;
-                    }else{
-                        $("<span>该手机号码可用</span>").insertAfter("input[name='phone']");
+                url:'sid/'+id,
+                //url:'sid/',
+                //type:'get',
+                //data:'id='+id,
+                dataType:"json",
+                success:function(data) {
+                    for(var sid in data){
+                        //alert(sid);
+                        var s = "<option value='"+data[sid].id+"'>"+data[sid].title+"</option>";
+                        //alert(s);
+                        $("#sid").append(s);
                     }
-                }
-            })
+                },
+                 error:function(){
+                     alert('error');
+                 }
+            });
         }
-
-    }
-
-    function sendMobileCode()
-    {
-        var tel = $("input[name='tel']").val();
-        alert(tel);
-        $.ajax({
-            url: 'merchant/register/sendMobileCode',
-            type:"",
-            data:'tel='+tel,
-            dataType:'json',
-            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
-            success:function(response){
-                if(data == 1){
-                    $("<span>该手机号码已经被使用</span>").insertAfter("input[name='phone']");
-                    //alert(data);
-                    return false;
-                }else{
-                    $("<span>该手机号码可用</span>").insertAfter("input[name='phone']");
-                }
-            }
-        })
-    }

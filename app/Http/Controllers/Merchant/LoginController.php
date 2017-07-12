@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Merchant;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Gregwar\Captcha\CaptchaBuilder;
 use Session;
 
@@ -28,13 +29,13 @@ class LoginController extends Controller
         }
         
         //执行登陆判断
-        $email = $request->input("email");
+        $phone = $request->input("phone");
         $password = $request->input("password");
         //获取对应用户信息
-        $user = \DB::table("mer_login")->where("email",$email)->first();
+        $user = \DB::table("mer_login")->where("phone",$phone)->first();
         if(!empty($user)){
             //判断密码
-            if(($password)==$user->password){
+            if(Hash::check($password, $user->password)){
                 //存储session跳转页面
                 session()->put("merchantname",$user);
                 return redirect("merchant");

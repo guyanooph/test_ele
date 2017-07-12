@@ -311,7 +311,7 @@
             -webkit-transition: 0s ease-in-out left;
             transition: 0s ease-in-out left
         }</style>
-    <style type="text/css">@charset  "UTF-8";
+    <style type="text/css">
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
             display: none !important;
         }
@@ -328,7 +328,7 @@
             position: absolute;
         }</style>
     <meta charset="utf-8">
-    <meta name="_token" content="<?php echo e(csrf_token()); ?>"/>
+    
     <title>吃货-开店申请</title>
     <meta name="description" content="吃货-开店申请">
     <meta id="viewport" name="viewport"
@@ -372,51 +372,6 @@
             <!-- end ngIf: !showUser -->
         </div>
     </header>
-    <div class="steps ng-scope ng-isolate-scope" index="step" isrequireactivity="isRequireActivity">
-        <ul> <!-- ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope active">
-                <!-- ngIf: $index --> <i class="index ng-binding">1</i>
-                门店信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">2</i>
-                资质信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">3</i>
-                合作方案
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">4</i>
-                配送方案
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">5</i>
-                结算信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">6</i>
-                商品内容
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">7</i>
-                活动信息
-            </li><!-- end ngRepeat: step in steps --> </ul>
-    </div> <!-- uiView: -->
-
-
     <div class="main-container ng-scope" ui-view="" autoscroll="true">
         <div class="store-info step-container ng-scope">
             <form name="storeForm" id="storeFormID" novalidate="" action="<?php echo e(url('merchant/register')); ?>" method="post"
@@ -498,482 +453,259 @@
                     </div>
                 </div>
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                    
-
-                    
-                        
-                        
-                            
-                                   
-                        
-                        
-                            
-                                   
-                        
-                                                                 
-                                    
-                                    
-                        
-                                                                 
-                                    
-                                    
-                        
-                                                                 
-                                    
-                                    
-                        
-                                                                 
-                                    
-                                    
-                        
-                        
-                                                                 
-                                    
-                                    
-                        
-                    
-                
-                
-                
-                    
-                    
-                        
-                             
+                <div class="form-group flex">
+                <label class="control-label"> <b class="required">*</b>门店分类 </label>
+                    <div class="control-content">
+                        <div id="categories">
+                            <div  class=""  name="categories">
+                                <select style="width:100px;"  id="mid">
+                                    <option>店铺分类</option>
+                                    <?php $__currentLoopData = $mids; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mid): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option  style="width:150px;" value="<?php echo e($mid->id); ?>"><?php echo e($mid->title); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <select id="sid" name="typeid"></select>
                             
                                 
-                                    
-                                           
-                                           
-                                           
                                 
-                                
-                                    
-                                           
-                                           
-                                           
-                                    
-                                
-                                
-                                    
-                                    
-                                         
-                                        
-                                               
-                                               
-                                               
-                                        
-                                        
-                                            
-                                            
-                                        
                                 
                             
-                        
-                    
+                            <div class="select-content ng-hide" ng-show="showContent" style="">
+                            <!-- ngRepeat: item in items -->
+                                <div ng-repeat="item in items" class="clearfix ng-scope">
+                                <span class="select-nav ng-binding">异国料理</span>
+                                <div class="select-sub-content">
+                                <!-- ngRepeat: sons in item.sons track by $id(sons) -->
+                                <label ng-repeat="sons in item.sons track by $id(sons)" ng-class="{'active': sons.checked}" class="ng-scope">
+                                <input type="checkbox" style="display:none" ng-model="sons.checked" ng-change="onCheckChange(sons)" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                <span class="item-label ng-binding">披萨意面</span>
+                                </label>
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                <label ng-repeat="sons in item.sons track by $id(sons)"
+                                ng-class="{'active': sons.checked}" class="ng-scope">
+                                <input type="checkbox" name="type" style="display:none" ng-model="sons.checked"
+                                ng-change="onCheckChange(sons)"
+                                class="ng-pristine ng-untouched ng-valid ng-empty">
+                                <span class="item-label ng-binding">日韩料理</span>
+                                </label>
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                </div>
+                                </div><!-- end ngRepeat: item in items --> </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
                 
 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+                <div class="form-group flex">
+                <label class="control-label"> <b class="required">*</b>城市 </label>
+                <div class="control-content city-group">
+<span>
 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+<div onclick="show_pro(this)" id_code="" code="" id="pro_div" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
+<div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-省-" style="display:none">
+</div>
+<input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-省-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
+
+</div>
+</span>
+
+<span>
+
+<div onclick="show_pro(this)" id_code="" code="" id="city_div" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
+<div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-市-" style="display:none">
+</div>
+<input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-市-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
+
+</div>
+</span>
+
+<span>
+
+<div onclick="show_pro(this)"  id_code="" code="" id="county_div" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
+<div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-区/县-" style="display:none">
+</div>
+<input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-区/县-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
+
+</div>
+</span>
+
+
+
+</div>
+</div>
+<script>
+    var pro_str = "";
+    var pro_str_1 = "<ul id='pro_list' class='ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope' role='listbox' ng-show='$select.open &amp;&amp; $select.items.length > 0' repeat='item.id as item in data.provinces | filter: { name: $select.search }' style='opacity: 1; position: absolute; top: -200px;display:block;";
+    var pro_str_2 = "<li onclick='select(this)' ";
+    var pro_str_3= "class='ui-select-choices-group' id='ui-select-choices-0'>        <div class='divider ng-hide' ng-show='$select.isGrouped &amp;&amp; $index > 0'></div>        <div ng-show='$select.isGrouped' class='ui-select-choices-group-label dropdown-header ng-binding ng-hide' ng-bind='$group.name'></div>        <!-- ngRepeat: item in $select.items --><!-- ngIf: $select.open -->        <div ng-attr-id='ui-select-choices-row-' class='ui-select-choices-row ng-scope active' ng-class='{active: $select.isActive(this), disabled: $select.isDisabled(this)}' role='option' ng-repeat='item in $select.items' ng-if='$select.open' ng-click='$select.select(item,$select.skipFocusser,$event)' id='ui-select-choices-row-0-0' style=''>            <a href='javascript:void()' class='ui-select-choices-row-inner' uis-transclude-append=''>            <span class='ng-binding ng-scope'>";
+    var pro_str_4 = "</span>             </a>        </div>        <!-- end ngIf: $select.open --><!-- end ngRepeat: item in $select.items --><!-- ngIf: $select.open -->        <!-- end ngIf: $select.open --><!-- end ngRepeat: item in $select.items -->    </li>";
+    function show_pro(e){
+        if(e.id == "pro_div"){
+            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/provinces";
+            var ex = "'>";
+            pro_str = "";
+            sendAjax(url);
+            pro_str += (pro_str_1 + ex);
+            for(var i in pro_data){
+                for(var j in pro_data[i].list){
+                    //alert(pro_data[i].list[j].area_code);
+                    pro_str += (pro_str_2 +  " id_code='" + pro_data[i].list[j].id + "'" + " code='" + pro_data[i].list[j].area_code + "' " + pro_str_3 + pro_data[i].list[j].name + pro_str_4);
+                }
+            }
+            pro_str += "</ul>";
+            if(document.getElementById("pro_div").getElementsByTagName("ul").length){
+                $("#pro_div ul").remove();
+            }else{
+                $("#pro_div").append(pro_str);
+            }
+      }else if(e.id == "city_div"){
+            var t = document.getElementById("pro_div").attributes.id_code.value;
+            alert(document.getElementById("pro_div").attributes.id_code.value);
+            if(!t){
+                return;
+            }            
+            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/cities_by_province?province_id=" + document.getElementById("pro_div").attributes.id_code.value;  
+            var ex = "left:0;'>";
+            pro_str = "";
+            sendAjax(url);
+            pro_str += (pro_str_1 + ex);
+            for(var i in pro_data){
+                pro_str += (pro_str_2 + " id_code='" + pro_data[i].id + "'" + " code='" + pro_data[i].area_code + "' " + pro_str_3 + pro_data[i].name + pro_str_4);
+            }
+            pro_str += "</ul>";
+            if(document.getElementById("city_div").getElementsByTagName("ul").length){
+                $("#city_div ul").remove();
+            }else{
+                $("#city_div").append(pro_str);
+            }
+       }else if(e.id == "county_div"){
+            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/district_by_city?city_id=" + document.getElementById("city_div").attributes.id_code.value;  
+            var ex = "left:0;'>";
+            pro_str = "";
+            sendAjax(url);
+            pro_str += (pro_str_1 + ex);
+            for(var i in pro_data){
+                pro_str += (pro_str_2 +  " id_code='" + pro_data[i].id + "'" + " code='" + pro_data[i].area_code + "' " + pro_str_3 + pro_data[i].name + pro_str_4);
+            }
+            pro_str += "</ul>";
+            if(document.getElementById("county_div").getElementsByTagName("ul").length){
+                $("#county_div ul").remove();
+            }else{
+                $("#county_div").append(pro_str);
+            }
+       }
+    }
+    var pro_data = null;
+     
+    function select(e){
+        alert("a");
+        e.parentNode.parentNode.attributes.code.value = e.attributes.code.value;
+        e.parentNode.parentNode.attributes.id_code.value = e.attributes.id_code.value;
+        //e.parentNode.parentNode.getElementsByTagName('input')[0].value = $(e).find("span").html();
+        e.parentNode.previousSibling.previousSibling.value = $(e).find("span").html();
+        alert(e.parentNode.previousSibling.previousSibling.tagName);
+        map.setCity($(e).find("span").html());
+    }
+
+    function sendAjax(url) {
+        $.ajax({
+            url:url,    
+            datatype:"json",
+            async:false,
+            success:function(data){
+                pro_data = data;
+            },
+        });
+    }
+</script>
+
+
+
+
+
+                <div class="form-group flex">
+                <label class="control-label"> <b class="required">*</b>详细地址 </label>
+                    <input type="text" name="address" style="width:300px" onblur="checkAddress()"/>
+                    <small class="control-label">
+                        <div id="div_address"></div>
+                
+                
+                <br>
+                </div>
+                </div>
+                地图定位
+                <div class="form-group flex">
+                <div class="control-label"></div>
+                <div class="control-content">
+                <div class="amap-position-pick flex ng-isolate-scope" points="data.searchResults"
+                area="data.area" position="form.address_info">
+                <div id="search-results" ng-show="points" class="ng-hide">
+                <div class="count">请选择门店位置</div>
+                <ul ng-show="points.length" class="ng-hide"> <!-- ngRepeat: result in points --> </ul>
+                <p class="empty" ng-show="!points.length"> 未搜索到您输入的地址，请重新输入地址或者直接在右侧地图中<span
+                class="blue">标记位置</span>！ </p></div>
+                <div id="map-container" class="amap-container" style="position: relative; background: rgb(252, 249, 242); cursor: url(&quot;https://webapi.amap.com/theme/v1.3/openhand.cur&quot;), default;">
+                    <!-- 地图显示区 -->
+                </div>
+                    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=c55b1b7a9e38ece1bea89c9f424078b7"></script>
+                    <script type="text/javascript">
+                        var map = new AMap.Map('map-container',{
+                            resizeEnable: true,
+                            zoom: 13,
+                            center: [116.39,39.9]
+                        });
+                        AMap.plugin('AMap.Geocoder',function(){
+                            var geocoder = new AMap.Geocoder({
+                                city: "010"//城市，默认：“全国”
+                            });
+                            var marker = new AMap.Marker({
+                                map:map,
+                                bubble:true
+                            })
+                            var input = document.getElementById('input');
+                            var message = document.getElementById('message');
+                            map.on('click',function(e){
+                                $("#longitude_latitude").remove();
+                                var str = "<input id='longitude_latitude'' type='hidden' name='longitude_latitude' value='" +  e.lnglat + "' >";
+                                $("#toreFormID").prepend(str);
+                                marker.setPosition(e.lnglat);
+                                geocoder.getAddress(e.lnglat,function(status,result){
+                                    if(status=='complete'){
+                                        input.value = result.regeocode.formattedAddress
+                                        message.innerHTML = ''
+                                    }else{
+                                        alert(result);
+                                        message.innerHTML = '无法获取地址'
+                                    }
+                                })
+                            })
+
+                            input.onchange = function(e){
+                                var address = input.value;
+                                geocoder.getLocation(address,function(status,result){
+                                    if(status=='complete'&&result.geocodes.length){
+                                        marker.setPosition(result.geocodes[0].location);
+                                        map.setCenter(marker.getPosition())
+                                        message.innerHTML = ''
+                                    }else{
+                                        message.innerHTML = '无法获取位置'
+                                    }
+                                })
+                            }
+
+                        });
+                    </script>
+                    <script type="text/javascript" src="https://webapi.amap.com/demos/js/liteToolbar.js"></script>
+
+                </div>
+                <small class="red ng-hide"
+                ng-show="!form.address_info.longitude &amp;&amp; storeForm.$submitted" style="">
+                请点击[去定位]，并在地图上选择准确的地址
+                </small>
+                </div>
+                </div>
 
                 
                 <div class="form-group flex"><label class="control-label">
@@ -987,7 +719,7 @@
                                      name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
                                     <div id="preview" ></div>
                                     <input type="file" accept="image/*"  onchange="preview(this)" id="inputPassword3" name="logoname">
-                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img<br>
+                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1">
                                         点击上传 </p>
                                 </div>
                             </ng-transclude>

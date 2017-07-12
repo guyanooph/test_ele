@@ -353,7 +353,7 @@
             
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-bomb"></i> <span> 菜品分类管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-bomb"></i> <span> 商家分类管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('admin/ftype')}}"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>

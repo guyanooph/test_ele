@@ -19,10 +19,12 @@ Route::get("/home", "Home\LocationController@location");
 //Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
 
   //购物车
-Route::get('/addProduct/{productId}', 'CartController@addItem');
-Route::get('/removeItem/{productId}', 'CartController@removeItem');
-Route::get('/cart', 'CartController@showCart');
-
+//Route::get('/addProduct/{productId}', 'CartController@addItem');
+//Route::get('/removeItem/{productId}', 'CartController@removeItem');
+//Route::get('/cart', 'CartController@showCart');
+//购物车
+Route::get('/addtocart/{shopid}/{foodid}', 'Home\ShopcartController_2@addCart');
+Route::get('/clearcart/{shopid}', 'Home\ShopcartController_2@clearCart');
 
 Route::get('/register',"Home\RegisterController@index");//用户注册认证
 Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
@@ -179,6 +181,9 @@ Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商�
 Route::get("merchant/phone","Merchant\RegisterController@index");//加载商家手机注册页面
 Route::post("merchant/ver_tel","Merchant\RegisterController@ver_tel");//手机验证码验证手机号是否已经被用
 Route::post("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
+Route::get("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
+//Route::get("sid","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
+Route::get("sid/{id}","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
 Route::get("/sendMobileCode","Merchant\RegisterController@sendMobileCode");//发送手机验证码
 
 
@@ -201,8 +206,10 @@ Route::post('/test','Merchant\RegisterController@test');
 //商家后台管理
 Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
-	Route::get("/create","Merchant\IndexController@create");//管理首页
-	Route::post("/store","Merchant\IndexController@store");//管理首页
+	
+	Route::get("/merchant","Merchant\MerchantController@index");//商家信息首页
+	Route::get("/merchant/edit/{id}","Merchant\MerchantController@edit");//编辑商家信息
+	Route::put("/merchant/update/{id}","Merchant\MerchantController@update");//执行修改商家信息
 	
 	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
 	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
@@ -229,5 +236,3 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
 	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
 });
-//短息测试
-Route::get("/merchants/sendSms" , "Merchants\RegisterController@sendSms");

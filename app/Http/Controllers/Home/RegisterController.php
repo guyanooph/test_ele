@@ -8,6 +8,7 @@ use App\Models\Login_user;
 use App\Models\User_info;
 use iscms\Alisms\SendsmsPusher as Sms;
 use Session;
+use Illuminate\Support\Facades\Redis;
 
 class RegisterController extends Controller
 {

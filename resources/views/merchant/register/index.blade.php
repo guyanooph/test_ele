@@ -311,7 +311,7 @@
             -webkit-transition: 0s ease-in-out left;
             transition: 0s ease-in-out left
         }</style>
-    <style type="text/css">@charset "UTF-8";
+    <style type="text/css">
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
             display: none !important;
         }
@@ -328,7 +328,7 @@
             position: absolute;
         }</style>
     <meta charset="utf-8">
-    <meta name="_token" content="{{ csrf_token() }}"/>
+    {{--<meta name="_token" content="{{ csrf_token() }}"/>--}}
     <title>吃货-开店申请</title>
     <meta name="description" content="吃货-开店申请">
     <meta id="viewport" name="viewport"
@@ -372,51 +372,6 @@
             <!-- end ngIf: !showUser -->
         </div>
     </header>
-    <div class="steps ng-scope ng-isolate-scope" index="step" isrequireactivity="isRequireActivity">
-        <ul> <!-- ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope active">
-                <!-- ngIf: $index --> <i class="index ng-binding">1</i>
-                门店信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">2</i>
-                资质信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">3</i>
-                合作方案
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">4</i>
-                配送方案
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">5</i>
-                结算信息
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">6</i>
-                商品内容
-            </li><!-- end ngRepeat: step in steps -->
-            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
-                <!-- ngIf: $index -->
-                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
-                        class="index ng-binding">7</i>
-                活动信息
-            </li><!-- end ngRepeat: step in steps --> </ul>
-    </div> <!-- uiView: -->
-
-
     <div class="main-container ng-scope" ui-view="" autoscroll="true">
         <div class="store-info step-container ng-scope">
             <form name="storeForm" id="storeFormID" novalidate="" action="{{ url('merchant/register') }}" method="post"
@@ -497,125 +452,51 @@
                     </div>
                 </div>
                 {{--从分类表遍历出来--}}
-                {{--<div class="form-group flex">--}}
-                {{--<label class="control-label"> <b class="required">*</b>门店分类 </label>--}}
-                {{--<div class="control-content">--}}
-                {{--<div id="categories">--}}
-                {{--<div id="nevSelect" class="need-validate ng-isolate-scope ng-invalid-require ng-not-empty"--}}
-                {{--name="categories" items="categories" ng-model="form.store_classification_list"--}}
-                {{--selected-items="form.store_classification_list">--}}
-                {{--<ul class="select-choices" ng-click="toggleContent()">--}}
-                {{--<li class="tips" ng-show="!selectedItems.length">最多2个</li>--}}
-                {{--<!-- ngRepeat: item in selectedItems track by $index -->--}}
-                {{--<li class="icon"><i class="caret" ng-class="{'rotate': showContent}" style=""></i>--}}
-                {{--</li>--}}
-                {{--</ul>--}}
-                {{--<div class="select-content ng-hide" ng-show="showContent" style="">--}}
-                {{--<!-- ngRepeat: item in items -->--}}
-                {{--<div ng-repeat="item in items" class="clearfix ng-scope">--}}
-                {{--<span class="select-nav ng-binding">异国料理</span>--}}
-                {{--<div class="select-sub-content">--}}
-                {{--<!-- ngRepeat: sons in item.sons track by $id(sons) -->--}}
-                {{--<label--}}
-                {{--ng-repeat="sons in item.sons track by $id(sons)"--}}
-                {{--ng-class="{'active': sons.checked}" class="ng-scope">--}}
-                {{--<input type="checkbox" style="display:none" ng-model="sons.checked"--}}
-                {{--ng-change="onCheckChange(sons)"--}}
-                {{--class="ng-pristine ng-untouched ng-valid ng-empty">--}}
-                {{--<span class="item-label ng-binding">披萨意面</span> </label>--}}
-                {{--<!-- end ngRepeat: sons in item.sons track by $id(sons) -->--}}
-                {{--<label ng-repeat="sons in item.sons track by $id(sons)"--}}
-                {{--ng-class="{'active': sons.checked}" class="ng-scope">--}}
-                {{--<input type="checkbox" name="type" style="display:none" ng-model="sons.checked"--}}
-                {{--ng-change="onCheckChange(sons)"--}}
-                {{--class="ng-pristine ng-untouched ng-valid ng-empty">--}}
-                {{--<span class="item-label ng-binding">日韩料理</span>--}}
-                {{--</label>--}}
-                {{--<!-- end ngRepeat: sons in item.sons track by $id(sons) -->--}}
-                {{--<!-- end ngRepeat: sons in item.sons track by $id(sons) -->--}}
-                {{--</div>--}}
-                {{--</div><!-- end ngRepeat: item in items --> </div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--{{ 营业日期 }}--}}
-                {{--<div class="form-grop flex">--}}
-                    {{--<label class="control-label"><b class="required">*</b>营业日期 </label>--}}
+                <div class="form-group flex">
+                <label class="control-label"> <b class="required">*</b>门店分类 </label>
+                    <div class="control-content">
+                        <div id="categories">
+                            <div  class=""  name="categories">
+                                <select style="width:100px;"  id="mid">
+                                    <option>店铺分类</option>
+                                    @foreach($mids as $mid)
+                                        <option  style="width:150px;" value="{{$mid->id}}">{{$mid->title}}</option>
+                                    @endforeach
+                                </select>
+                                <select id="sid" name="typeid"></select>
+                            {{--<ul>--}}
+                                {{--@foreach($mids as $mid)--}}
+                                {{--<li class="tips" ng-show="!selectedItems.length">{{ $mid->title }}</li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                            <div class="select-content ng-hide" ng-show="showContent" style="">
+                            <!-- ngRepeat: item in items -->
+                                <div ng-repeat="item in items" class="clearfix ng-scope">
+                                <span class="select-nav ng-binding">异国料理</span>
+                                <div class="select-sub-content">
+                                <!-- ngRepeat: sons in item.sons track by $id(sons) -->
+                                <label ng-repeat="sons in item.sons track by $id(sons)" ng-class="{'active': sons.checked}" class="ng-scope">
+                                <input type="checkbox" style="display:none" ng-model="sons.checked" ng-change="onCheckChange(sons)" class="ng-pristine ng-untouched ng-valid ng-empty">
+                                <span class="item-label ng-binding">披萨意面</span>
+                                </label>
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                <label ng-repeat="sons in item.sons track by $id(sons)"
+                                ng-class="{'active': sons.checked}" class="ng-scope">
+                                <input type="checkbox" name="type" style="display:none" ng-model="sons.checked"
+                                ng-change="onCheckChange(sons)"
+                                class="ng-pristine ng-untouched ng-valid ng-empty">
+                                <span class="item-label ng-binding">日韩料理</span>
+                                </label>
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
+                                </div>
+                                </div><!-- end ngRepeat: item in items --> </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
 
-                    {{--<div class="day-panel">--}}
-                        {{--<label class="title">营业日期</label><!-- ngRepeat: day in days -->--}}
-                        {{--<label ng-repeat="day in days" class="ng-binding ng-scope">--}}
-                            {{--<input type="checkbox" name="openday" value="1" ng-model="day.selected" ng-click="select()"--}}
-                                   {{--class="ng-pristine ng-untouched ng-valid ng-empty">周一</label>--}}
-                        {{--<!-- end ngRepeat: day in days -->--}}
-                        {{--<label ng-repeat="day in days" class="ng-binding ng-scope">--}}
-                            {{--<input type="checkbox" name="openday" value="2" ng-model="day.selected" ng-click="select()"--}}
-                                   {{--class="ng-pristine ng-untouched ng-valid ng-empty"> 周二 </label>--}}
-                        {{--<!-- end ngRepeat: day in days --><label ng-repeat="day in days"--}}
-                                                                 {{--class="ng-binding ng-scope"> <input--}}
-                                    {{--type="checkbox" name="openday" value="3" ng-model="day.selected" ng-click="select()"--}}
-                                    {{--class="ng-pristine ng-untouched ng-valid ng-empty"> 周三 </label>--}}
-                        {{--<!-- end ngRepeat: day in days --><label ng-repeat="day in days"--}}
-                                                                 {{--class="ng-binding ng-scope"> <input--}}
-                                    {{--type="checkbox" name="openday" value="4" ng-model="day.selected" ng-click="select()"--}}
-                                    {{--class="ng-pristine ng-untouched ng-valid ng-empty"> 周四 </label>--}}
-                        {{--<!-- end ngRepeat: day in days --><label ng-repeat="day in days"--}}
-                                                                 {{--class="ng-binding ng-scope"> <input--}}
-                                    {{--type="checkbox" name="openday" value="5" ng-model="day.selected" ng-click="select()"--}}
-                                    {{--class="ng-pristine ng-untouched ng-valid ng-empty"> 周五 </label>--}}
-                        {{--<!-- end ngRepeat: day in days --><label ng-repeat="day in days"--}}
-                                                                 {{--class="ng-binding ng-scope"> <input--}}
-                                    {{--type="checkbox" name="openday" value="6" ng-model="day.selected" ng-click="select()"--}}
-                                    {{--class="ng-pristine name=" openday" value="6" ng-untouched ng-valid ng-empty"> 周六--}}
-                        {{--</label>--}}
-                        {{--<!-- end ngRepeat: day in days --><label ng-repeat="day in days"--}}
-                                                                 {{--class="ng-binding ng-scope"> <input--}}
-                                    {{--type="checkbox" name="openday" value="7" ng-model="day.selected" ng-click="select()"--}}
-                                    {{--class="ng-pristine ng-untouched ng-valid ng-empty"> 周日 </label>--}}
-                        {{--<!-- end ngRepeat: day in days -->--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--营业时间--}}
-                {{--<div class="form-group flex">--}}
-                    {{--<label class="control-label"><b class="required">*</b>营业时间 </label>--}}
-                    {{--<div class="control-content">--}}
-                        {{--<div class="open-period-directive ng-isolate-scope" value="form.open_period"--}}
-                             {{--locked="uiNeedLock">--}}
-                            {{--<div class="time-panel"> <!-- ngIf: -->--}}
-                                {{--<label class="padding-left-0">--}}
-                                    {{--<input type="radio" name="openTime" value="full" ng-model="openTime.type"--}}
-                                           {{--ng-change="changeType()"--}}
-                                           {{--ng-disabled="locked" class="ng-valid ng-not-empty ng-dirty ng-touched"--}}
-                                           {{--style=""> 24小时--}}
-                                {{--</label>--}}
-                                {{--<label>--}}
-                                    {{--<input type="radio" name="openTime" value="part" ng-model="openTime.type"--}}
-                                           {{--ng-change="changeType()"--}}
-                                           {{--ng-disabled="locked"--}}
-                                           {{--class="ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched" style="">--}}
-                                    {{--自定义--}}
-                                {{--</label>--}}
-                                {{--<div class="part-content" ng-show="openTime.type === 'part'" style="">--}}
-                                    {{--<!-- ngRepeat: time in openTime.partTime -->--}}
-                                    {{--<div class="other-time ng-scope" ng-repeat="time in openTime.partTime"--}}
-                                         {{--id="other-time-0">--}}
-                                        {{--<input type="text" class="form-control input-sm" placeholder="其他时段"--}}
-                                               {{--ng-click="showSelector(time, $index)"--}}
-                                               {{--ng-value="time._open.hour + ':' + time._open.minute + ' - ' + time._close.hour + ':' + time._close.minute"--}}
-                                               {{--ng-keydown="cancelInput($event)" value="10:00 - 22:00">--}}
-                                        {{--<i class="icon-clock"></i>--}}
-                                        {{--<div class="selector ng-hide" ng-show="time.selectorIsVisible" style="">--}}
-                                            {{--<div class="title">开始时间</div>--}}
-                                            {{--<div class="title">结束时间</div>--}}
-                                        {{--</div> <!-- ngIf: openTime.partTime.length > 1 --> </div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                {{--城市级联--}}
                 <div class="form-group flex">
                 <label class="control-label"> <b class="required">*</b>城市 </label>
                 <div class="control-content city-group">
@@ -745,17 +626,12 @@
 
                 <div class="form-group flex">
                 <label class="control-label"> <b class="required">*</b>详细地址 </label>
-                <div class="form-inline"><input id="input" type="text" name="address"
-                class="form-control address-detail mr-10 ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-touched"
-                ng-model="form.address_info.address" placeholder="详细至门牌号，请与执照地址一致"
-                maxlength="255" required="" style="">
-                <button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位
-                </button>
+                    <input type="text" name="address" style="width:300px" onblur="checkAddress()"/>
+                    <small class="control-label">
+                        <div id="div_address"></div>
+                {{--<button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位--}}
+                {{--</button>--}}
                 <br>
-                <small class="red"
-                ng-show="storeForm.address.$invalid &amp;&amp; (storeForm.address.$dirty || storeForm.$submitted || storeForm.address._searched)"
-                style=""> 详细地址不能为空
-                </small>
                 </div>
                 </div>
                 地图定位
@@ -790,6 +666,9 @@
                             var input = document.getElementById('input');
                             var message = document.getElementById('message');
                             map.on('click',function(e){
+                                $("#longitude_latitude").remove();
+                                var str = "<input id='longitude_latitude'' type='hidden' name='longitude_latitude' value='" +  e.lnglat + "' >";
+                                $("#toreFormID").prepend(str);
                                 marker.setPosition(e.lnglat);
                                 geocoder.getAddress(e.lnglat,function(status,result){
                                     if(status=='complete'){
@@ -839,7 +718,7 @@
                                      name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
                                     <div id="preview" ></div>
                                     <input type="file" accept="image/*"  onchange="preview(this)" id="inputPassword3" name="logoname">
-                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img<br>
+                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1">
                                         点击上传 </p>
                                 </div>
                             </ng-transclude>

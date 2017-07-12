@@ -18,6 +18,8 @@ use Qiniu\Storage\BucketManager;
 use Qiniu\Storage\UploadManager;
 use zgldh\QiniuStorage\QiniuStorage;
 
+use App\Models\Mer_sid;
+use Log;
 
 class RegisterController extends Controller
 {
@@ -52,12 +54,22 @@ class RegisterController extends Controller
        $Rcode = \Redis::get($phone);
        //对比用户输入的验证码与REDIS存储的验证码
        if($request ->input('code') == $Rcode){
-           //删除用过的验证码
-            \Redis::delete($phone);
-            //加载商家注册信息页
-           return view('merchant.register.index');
+          $mids = \DB::table('mer_mid')->get();
+          //dd($mids);
+           return view('merchant.register.index',['mids'=>$mids]);
+       }else{
+           echo "code_error";
        }
 
+    }
+
+    public function sids($id)
+    {
+        //$id = $request->input('id');
+        //dd($id);
+        $sid = Mer_sid::where('mid',$id)->get();
+        $sids = $sid->toJson();
+        return  $sids;
     }
 
 
@@ -131,7 +143,6 @@ class RegisterController extends Controller
 
     //检验手机号码验证码
     public function ver_tel(Request $request){
-        dd('a');
         $tel = $request->input('tel');
         $res= \DB::table('mer_register')->where('phone',$tel)->first();
         if($res){
@@ -217,7 +228,8 @@ class RegisterController extends Controller
                 }
 
                 //商家注册表
-                $input = $request->only(['mername', 'password', 'shoptitle', 'phone', 'identity', 'username']);
+                $input = $request->only(['mername', 'password', 'shoptitle', 'phone', 'identity', 'username','typeid']);
+                //dd($input);
                 //$password = md5($input['password']);
                 //$password = md5(substr_replace($password, $input['phone'], 0, 4));
                 //$password = Crypt::encrypt($input['password']);
@@ -229,8 +241,9 @@ class RegisterController extends Controller
                 $input['register_time'] = date("Y-m-d H:i:s", time());
                 $input['logoname'] = $filename2;
                 $input['picname'] = $filename;
+                //dd($input);
                 $res1 = \DB::table('mer_register')->InsertGetId($input);
-                //dd($res1);
+                Log::info('input',['res1'=>$res1]);
 
 
                  //商家登录表
@@ -241,12 +254,16 @@ class RegisterController extends Controller
                 $res2 = \DB::table('mer_login')->InsertGetId($info);
 
 
+
+
                 //商家表
                 $data['shopid'] = $info['shopid'];
                 $data['shopname'] = $info['shopname'];
                 $data['logo'] = $input['logoname'];
                 $data['phone'] = $input['phone'];
+                $data['typeid'] = $input['typeid'];
                 $res3 = \DB::table('merchant')->InsertGetId($data);
+                //dd($res3);
 
                 $res = $res1 && $res2 && $res3;
                 if ($res) {

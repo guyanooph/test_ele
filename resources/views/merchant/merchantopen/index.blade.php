@@ -3,78 +3,116 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            信息输出表
-            <small>preview of simple tables</small>
+            商家信息表
+            <small>请填写完整，有利于买家查看</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li><a href="#">营业信息</a></li>
+            <li><a href="#">商家信息</a></li>
             <li class="active">列表</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
-          <div class="row">
-            <div class="col-md-12">
+			@foreach ($info as $merchant)
+			<div class="row">
+            <div style="font-size:18px;" class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
+				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchantopen/edit')}}/{{ $merchant->id }}'">编 辑 商 家 营 业 信 息</button>
                   <div class="box-tools">
-                    <form action="{{url('merchant/merchantopen')}}" method="get">
-                    <div class="input-group" style="width: 150px;">
-                      <input type="text" name="name" class="form-control input-sm pull-right" placeholder="商家"/>
-                      <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                      </div>
-                    </div>
-                    </form>
+                   
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table class="table table-bordered">
-                    <tr>
-                      <th style="width:60px">Id号</th>
-                      <th>商家Id</th>
-                      <th>商家名称</th>
-                      <th>营业时间</th>
-					  <th>结束时间</th>
-                      <th>起送价</th>
-					  <th>配送方式</th>
-					  <th>配送费</th>
-					  <th>总销量</th>
-					  <th>状态</th>
-                      <th style="width: 100px">操作</th>
-                    </tr>
-                    @foreach ($list as $merchantopen)
-					   <tr>
-					       <td>{{ $merchantopen->id }}</td>
-						   <td>{{ $merchantopen->shopid }}</td>
-						   <td>{{ $merchantopen->name }}</td>
-						   <td>{{ $merchantopen->opentime }}</td>
-						   <td>{{ $merchantopen->overtime }}</td>
-						   <td>{{ $merchantopen->givemoney }}</td>
-						   <td>@if ($merchantopen->method=="0")自营快送 @else ($merchantopen->method=="1")蜂鸟快送 @endif</td>
-						   <td>{{ $merchantopen->money }}</td>
-						   <td>{{ $merchantopen->num }}</td>
-						   <td>@if ($merchantopen->state=="0")营业 @else ($merchantopen->state=="1")歇业 @endif</td>
-						   <td><button class="btn btn-xs btn-primary" onclick="window.location='{{ URL('/merchant/merchantopen/edit') }}/{{ $merchantopen->id }}'">编辑</button> 
-                            <button class="btn btn-xs btn-danger" onclick="javascript:doDel({{ $merchantopen->id }})">删除</button></td>
-                       </tr>
-                   @endforeach
-                  </table>
-                </div><!-- /.box-body -->
-               
-              </div><!-- /.box -->
 
-             
-              
-            </div><!-- /.col onclick="/merchantopen/{{ $merchantopen->id }}/edit"-->
+				
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">营业时间：</label>
+						<div class="col-sm-4">
+							{{ $merchant->opentime }}
+						</div>
+						</div>
+					</div> 
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
+						<div class="col-sm-4">
+							{{ $merchant->closetime }}
+						</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">起送价：</label>
+						<div class="col-sm-4">
+							{{ $merchant->givemoney }}
+						</div>
+						</div>
+						
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">配送费：</label>
+						<div class="col-sm-4">
+							{{ $merchant->money }}
+						</div>
+						</div>
+					</div>
+					
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">配送方式：</label>
+						<div class="col-sm-4">
+							{{ $merchant->method }}
+						</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">平均配送：</label>
+						<div class="col-sm-4">
+							{{ $merchant->service_time }} 分钟
+						</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">月销量：</label>
+						<div class="col-sm-4">
+							{{ $merchant->month_num }}
+						</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">总销量：</label>
+						<div class="col-sm-4">
+							{{ $merchant->time }}
+						</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
+						<div class="col-sm-4">
+							{{ $merchant->state }}
+						</div>
+						</div>
+					</div>
+                   @endforeach
+                </div><!-- /.box-body -->
+				</div><!-- /.box -->
+				
+            </div><!-- /.col onclick="/merchant/{{ $merchant->id }}/edit"-->
             
           </div><!-- /.row -->
          
         </section><!-- /.content -->
-        <form action="{{url('merchant/merchantopen')}}" style="display:none;" id="mydeleteform" name="myform" method="post">
+        <form action="{{url('merchant/merchant')}}" style="display:none;" id="mydeleteform" name="myform" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="_method" value="delete">
         </form>
@@ -87,7 +125,7 @@
             Modal.confirm({msg: "是否删除信息？"}).on(function(e){
                 if(e){
                    var form = document.myform;
-                    form.action = "{{URL('merchant/merchantopen/destroy')}}/"+id;
+                    form.action = "{{URL('merchant/merchant/destroy')}}/"+id;
                     form.submit(); 
                 }
               });
