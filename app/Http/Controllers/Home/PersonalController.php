@@ -26,7 +26,7 @@ class PersonalController extends Controller
 	    $order = order::where('userid',$user->id)->orderBy('create_time','rsort')->get();
 		//dd($order);
 
-		$login_user = login_user::where('username',$login->id)->get();
+		//$login_user = login_user::where('username',$login->id)->get();
 		
 		
 		$info = personal::first();
@@ -43,22 +43,23 @@ class PersonalController extends Controller
 		return view('home.personal.personal' ,['userid'=>$userid , 'order'=>$order]);
 	} */
 	
-	public function order()
+	public function order(Request $request)
 	{
-		$userid = \Session::get("user")->id();
-
-		$order=Order::where('userid',$userid)->get();
+		//$userid = \Session::get("user")->id();
+        $userid = $request->session()->get('user');
+		$order=Order::where('userid',$userid->id)->get();
 		return view('home.personal.order',['order'=>$order]);
+		//return view('home.personal.order');
 	}
 
-     //未付款
+     //待评价订单
 	public function orderUnrated()
 	{
-		$orderUnrated=Order::where('status',1);
+		$orderUnrated=Order::where('status',1)->get();
 		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated]);
 	}
 
-     //订单退款
+     //退单记录
 	public function orderRefund()
 	{
 		$orderRefund=Order::where('status',2);
@@ -78,7 +79,7 @@ class PersonalController extends Controller
 		return view('home.personal.balance',['balance'=>$balance]);
 	}
 */
-    //评分/积分
+    //我的 评分/积分
 	public function score()
 	{
 		$score=score::where('userid',1);

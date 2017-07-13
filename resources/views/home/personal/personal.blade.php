@@ -109,7 +109,7 @@
 										href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F">登录/注册</a></span>
 							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
 							
-							<span class="topbar-profilebox-username ng-binding">{{ $login_user->username }}</span>
+							<span class="topbar-profilebox-username ng-binding">???</span>
 								<!-- ngIf: $root.topbarType === 'checkout' -->
 								<!-- ngIf: $root.topbarType !== 'checkout' --><span
 										class="topbar-profilebox-btn icon-arrow-down ng-scope"
