@@ -10,95 +10,59 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 //前台路由
-Route::get("/", "Home\ShopController@index");
-Route::get("/home", "Home\LocationController@location");
-//Route::get('/shop/add/{id}',"Home\CartController@add"); //放入购物车
-//Route::get('/shop/show',"Home\CartController@show"); //浏览购物车
-//Route::get('/shop/del/{id}',"Home\CartController@del"); //删除购物车中的某个商品
-//Route::get('/shop/clear',"Home\CartController@clear"); //清空购物车
-
-  //购物车
-//Route::get('/addProduct/{productId}', 'CartController@addItem');
-//Route::get('/removeItem/{productId}', 'CartController@removeItem');
-//Route::get('/cart', 'CartController@showCart');
-//购物车
-Route::get('/addtocart/{shopid}/{foodid}', 'Home\ShopcartController_2@addCart');
-Route::get('/clearcart/{shopid}', 'Home\ShopcartController_2@clearCart');
-
-Route::get('/register',"Home\RegisterController@index");//用户注册认证
-Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
-
-
-Route::post('/doregister',"Home\RegisterController@doRegister");//用户登录认证
-
-
-Route::get('/login',"Home\LoginController@index"); //加载前台登录界面
-Route::post('/dologin',"Home\LoginController@doLogin"); //执行前台登录
-Route::get('/logout',"Home\LoginController@logout"); //执行退出
-Route::get('/getcode',"Home\LoginController@getCode"); //加载验证码
-
-Route::get('/shoplist','Home\ShopController@index'); //商家信息列表
-
-Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
-//Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
-
-
-Route::group(["prefix" => "personal","middlware" => "personal"], function () {
-	
-Route::get('/','Home\PersonalController@index'); //个人中心
-
-Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
-Route::get('/order/unrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
-Route::get('/order/refund','Home\PersonalController@orderRefund'); //个人中心/个人订单/退单记录
-Route::get('/red_packet','Home\PersonalController@red_packet'); //个人中心/个人资产/我的红包
-Route::get('/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
-Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
-Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
-Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
-Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
-
+Route::get("/home", "Home\LocationController@location");  //定位页面
+Route::get("/setlocationsession", "Home\LocationController@setLocationSession");  //定位页面
+ROute::get("/personal/test", "Home\PersonalController@test"); //test
+//以下所有前台路由均经过一个定位中间件,在中间件里检测session是否有定位信息，没有就重定向到定位页面
+Route::group(['middleware'=>'location'], function(){
+    Route::get("/", "Home\ShopController@index"); //前台主页，附近商家列表
+    //购物车,
+    Route::get('/addtocart/{shopid}/{foodid}', 'Home\ShopcartController_2@addCart')->middleware("shopcart");
+    Route::get('/clearcart/{shopid}', 'Home\ShopcartController_2@clearCart')->middleware("shopcart");
+    Route::get("/{shopid}/ordercheckout", "Home\OrderController@index")->middleware("personal","shopcart");
+    
+    Route::get('/register',"Home\RegisterController@index");//用户注册认证
+    Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
+    
+    
+    Route::post('/doregister',"Home\RegisterController@doRegister");//用户登录认证
+    
+    
+    Route::get('/login',"Home\LoginController@index"); //加载前台登录界面
+    Route::post('/dologin',"Home\LoginController@doLogin"); //执行前台登录
+    Route::get('/logout',"Home\LoginController@logout"); //执行退出
+    Route::get('/getcode',"Home\LoginController@getCode"); //加载验证码
+    Route::get('/shoplist','Home\ShopController@index'); //附近商家信息列表，同/
+    Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
+    
+    //个人中心
+    Route::group(["prefix" => "personal","middlware" => "personal"], function () {
+    	Route::get('/','Home\PersonalController@index'); //个人中心
+    	Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
+    	Route::get('/order/unrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
+    	Route::get('/order/refund','Home\PersonalController@orderRefund'); //个人中心/个人订单/退单记录
+    	Route::get('/red_packet','Home\PersonalController@red_packet'); //个人中心/个人资产/我的红包
+    	Route::get('/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
+    	Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
+    	Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
+    	Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
+    	Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
+    	Route::get('/security','Home\PersonalController@security'); //安全设置
+    	Route::get('/logout','Home\PersonalController@logout'); //安全设置
+    
+    });
 });
 
 
-
-
-Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
-
-//Route::get('/foodlist/fooddetail','Home\FoodController@list'); //菜品详情
-
-
-
-
-
-Route::get('/personal/collect','Home\PersonalController@collect'); //个人中心/个人收藏
-
-Route::group(["prefix" => "personal","middlware" => "personal"], function () {
-	
-	Route::get('/','Home\PersonalController@index'); //个人中心
-
-	Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
-	Route::get('/order/unrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
-	Route::get('/order/refund','Home\PersonalController@orderRefund'); //个人中心/个人订单/退单记录
-	Route::get('/red_packet','Home\PersonalController@red_packet'); //个人中心/个人资产/我的红包
-	Route::get('/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
-	Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
-	Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
-	Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
-	Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
-
-});
-
-
-
-    //后台路由组
-    Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
-    Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
-    Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
-    Route::get("admin/login/logOut","Admin\LoginController@loginOut");//退出
-
-    Route::get("/admin/login/verify/{pho}","Admin\LoginController@Verify");//发送手机验证信息
-    Route::post("/ad/plogin","Admin\LoginController@plogin");//执行手机验证
+//后台路由组
+Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
+Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
+Route::post('/ad/dologin',"Admin\LoginController@doLogin");//执行登录判断
+Route::get("admin/login/logOut","Admin\LoginController@loginOut");//退出
+Route::get("/admin/login/verify/{pho}","Admin\LoginController@Verify");//发送手机验证信息
+Route::post("/ad/plogin","Admin\LoginController@plogin");//执行手机验证
 
 
 Route::group(["prefix" => "admin","middleware" => "admin"], function () {
@@ -109,7 +73,7 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	//Route::resource("user","Admin\UserController");//普通管理员
 	Route::get("user","Admin\UserController@index");//普通管理员首页
 	Route::get("user/create","Admin\UserController@create");//普通管理员添加模板
-   Route::post("user","Admin\UserController@store");//普通管理员执行添加
+    Route::post("user","Admin\UserController@store");//普通管理员执行添加
 
 	Route::get("user/edit/{id}","Admin\UserController@edit");//普通管理员添加编辑模板
 	Route::put("user/{id}","Admin\UserController@update");//执行普通管理员修改
@@ -206,10 +170,8 @@ Route::post('/test','Merchant\RegisterController@test');
 //商家后台管理
 Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
-	
-	Route::get("/merchant","Merchant\MerchantController@index");//商家信息首页
-	Route::get("/merchant/edit/{id}","Merchant\MerchantController@edit");//编辑商家信息
-	Route::put("/merchant/update/{id}","Merchant\MerchantController@update");//执行修改商家信息
+	Route::get("/create","Merchant\IndexController@create");//管理首页
+	Route::post("/store","Merchant\IndexController@store");//管理首页
 	
 	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
 	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
@@ -236,3 +198,4 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
 	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
 });
+

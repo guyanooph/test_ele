@@ -89,12 +89,13 @@
 					</div>
 					<div map-search="" hide-search-result="hideSearchResult" current-city="currentCity"
 					     map-mode="mapMode" class="map-search ng-isolate-scope">
-						<form action="/" method="get" id="search_form" class="mapsearch-inputbar ng-valid ng-dirty" ng-submit="search.showSuggests($event, search.keyword)">
-							<input name="address" id="position_search"
+						<form action="/setlocationsession" method="get" id="search_form" class="mapsearch-inputbar ng-valid ng-dirty" ng-submit="search.showSuggests($event, search.keyword)">
+							<input  id="position_search"
 									placeholder="请输入你的收货地址（写字楼，小区，街道或者学校）" ng-model="search.keyword"
 									ng-keyup="search.showSuggests($event, search.keyword)"
 									ng-keydown="search.chooseSuggest($event)" ng-click="search.showSuggests($event)"
 									ng-focus="search.showSuggests($event, search.keyword)" class="ng-valid ng-dirty">
+                            <input type="hidden" name="address" id="position_input">
 							<button class="btn-stress" type="submit">搜 索</button>
 						</form>
 						<div class="mapsearch-suggestlist ui-scrollbar-light" style="max-height: 348px;">
@@ -134,8 +135,8 @@
 
 <script>
     function select(ob) {
-        //document.getElementById("position_search").value = ob.firstChild.innerHTML;
-        $("#search_form").append("<input type='hidden' name='location' value='" + ob.firstChild.attributes[0].textContent + "' />");
+        document.getElementById("position_input").value = ob.firstChild.innerHTML;
+        $("#search_form").append("<input type='hidden' name='position' value='" + ob.firstChild.attributes[0].textContent + "' />");
         $("#search_form").append("<input type='hidden' name='address' value='" + ob.firstChild.attributes[1].textContent + "' />");
         $("div.mapsearch-suggestlist ul").remove();
         $("#search_form").submit();
