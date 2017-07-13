@@ -323,7 +323,7 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
    			            <span class="icon-cart shop-carticon"></span>
                         <p class="shop-cartfooter-text price ng-binding ng-scope" ng-if="shopCart.vm.quantity > 0" ng-bind="shopCart.vm.total | number">{{ $shopcart['total'] }}</p>
    			            <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ {{ $ob->givemoney }}</div>
-   			            <button onclick="javascrip:window.location.href='/checkout'" class="shop-cartfooter-checkout ng-binding " ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
+   			            <button onclick="javascrip:window.location.href='/{{ $ob->shopid }}/ordercheckout'" class="shop-cartfooter-checkout ng-binding " ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
    			ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" 
    			ng-click="checkout($event)" >去结算</button>
                    </div>

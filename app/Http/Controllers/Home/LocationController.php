@@ -21,7 +21,10 @@ class LocationController extends Controller
         dd($input);
     }    
     
-    public function upload()
+    public function setLocationSession(Request $request)
     {
+        $location = $request->only("address", "position");
+        $request->session()->put("location", $location);
+        return redirect("/");
     }
 }
