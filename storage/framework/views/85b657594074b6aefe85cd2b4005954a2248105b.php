@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="eleme" perf-error="desktop/profile/" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+<html ng-app="eleme" perf-error="desktop/profile/" class="ng-scope"><head><style type="text/css">@charset  "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
     
@@ -29,15 +29,15 @@
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
 
-    <link href="{{ asset('css/vendor.0cb970.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/vendor.0cb970.css')); ?>" rel="stylesheet">
     
-    <link href="{{ asset('css/profile.d8f427.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/profile.d8f427.css')); ?>" rel="stylesheet">
     
 
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
 
     <script src="//crayfish.elemecdn.com/www.ele.me@ref/api" data-ref="API_CONFIG"></script>
-	<script src={{ asset('js/jquery-1.8.3.min.js') }}></script>
+	<script src=<?php echo e(asset('js/jquery-1.8.3.min.js')); ?>></script>
     <base href="/profile/">
   <meta name="mobile-agent" content="undefined"><meta name="description" content="饿了么是中国专业的网上订餐平台，目前已覆盖北京、上海、杭州、广州等300多个城市，提供各类中式、日式、韩式、西式、下午茶、夜宵等优质美食，并提供送餐上门服务，让订餐更加轻松，叫外卖就上饿了么！"><meta name="keywords" content="饿了么，网上订餐，外卖，快餐外卖，外卖网"></head>
   <body cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" style="position: relative;">
