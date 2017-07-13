@@ -12,6 +12,8 @@ use App\Models\Collect;
 use App\Models\Packet;
 use App\Models\Score;
 use App\Models\Address;
+use App\Models\Login_user;
+use Session;
 
 class PersonalController extends Controller
 {
@@ -20,18 +22,32 @@ class PersonalController extends Controller
 		
 		//$list = Personal::find();		
         $user = $request->session()->get("user");
-		$order = order::where('userid',$user->userid)->orderBy('addtime','rsort');
+		//dd($user);
+	    $order = order::where('userid',$user->id)->orderBy('create_time','rsort')->get();
+		//dd($order);
+
+		$login_user = login_user::where('username',$login->id)->get();
 		
 		
 		$info = personal::first();
-		
-		return view('home.personal.personal' ,['user'=>$user,'order'=>$order , 'info'=>$info]);
+		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info]);
 	}
 
+ 
+    /* public function index($id)
+	{
+		$userid = user_info::where('userid',$id)->first();
+		
+		$order = order::where('userid',$id)->get();
+		
+		return view('home.personal.personal' ,['userid'=>$userid , 'order'=>$order]);
+	} */
 	
 	public function order()
 	{
-		$order=Order::where('userid',1)->get();
+		$userid = \Session::get("user")->id();
+
+		$order=Order::where('userid',$userid)->get();
 		return view('home.personal.order',['order'=>$order]);
 	}
 

@@ -40,7 +40,7 @@ class ShopController extends Controller
         //加载附近商家
         $geohash = new Geohash();
         $geo = $geohash->encode(explode(",",$location)[1],explode(",",$location)[0]);
-		$list = Shop_list::where('geohash', 'like', substr($geo,0,5).'%')->limit(10)->get();
+		$list = Shop_list::where('position', 'like', substr($geo,0,5).'%')->limit(10)->get();
 		//$list = Shop_list::where('position', 'like', substr($geo,0,5).'%')->paginate(15);
        	return $list;
     }
