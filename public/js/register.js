@@ -97,6 +97,9 @@ var iden = false;
             }
             repass = true;
         }
+
+        //验证详细地址
+
         //验证店铺名称
         function checkShoptitle (){
             //alert('ok');

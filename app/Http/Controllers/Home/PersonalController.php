@@ -12,39 +12,60 @@ use App\Models\Collect;
 use App\Models\Packet;
 use App\Models\Score;
 use App\Models\Address;
+use App\Models\Login_user;
+use Session;
 
 class PersonalController extends Controller
 {
     public function index(Request $request)
 	{
-		//$id=session['userid'];
-		//$list = Personal::find();
+		
+		//$list = Personal::find();		
         $user = $request->session()->get("user");
-		$order = order::where('userid',$user->userid)->orderBy('addtime','rsort');
-		return view('home.personal.personal' ,['user'=>$user,'order'=>$order]);
-        	
+		//dd($user);
+	    $order = order::where('userid',$user->id)->orderBy('create_time','rsort')->get();
+		//dd($order);
+
+		$login_user = login_user::where('username',$login->id)->get();
+		
+		
+		$info = personal::first();
+		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info]);
 	}
 
+ 
+    /* public function index($id)
+	{
+		$userid = user_info::where('userid',$id)->first();
+		
+		$order = order::where('userid',$id)->get();
+		
+		return view('home.personal.personal' ,['userid'=>$userid , 'order'=>$order]);
+	} */
+	
 	public function order()
 	{
-		$order=Order::where('userid',1)->get();
+		$userid = \Session::get("user")->id();
+
+		$order=Order::where('userid',$userid)->get();
 		return view('home.personal.order',['order'=>$order]);
 	}
 
-
+     //未付款
 	public function orderUnrated()
 	{
 		$orderUnrated=Order::where('status',1);
 		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated]);
 	}
 
-
+     //订单退款
 	public function orderRefund()
 	{
 		$orderRefund=Order::where('status',2);
 		return view('home.personal.orderRefund',['orderRefund'=>$orderRefund]);
 	}
 
+	//我的红包
 	public function red_packet()
 	{
 		$packet=packet::all();
@@ -57,13 +78,15 @@ class PersonalController extends Controller
 		return view('home.personal.balance',['balance'=>$balance]);
 	}
 */
+    //评分/积分
 	public function score()
 	{
 		$score=score::where('userid',1);
 		return view('home.personal.score',['score'=>$score]);
 	}
 
-	public function collect()
+	//收集
+	public function collect()  
 	{
 		$collect=Collect::all();
 		return view('home.personal.collect',['collect'=>$collect]);
@@ -85,6 +108,7 @@ class PersonalController extends Controller
 		return view('home.personal.userinfo',['userInfo'=>$userInfo]);
 	}
 
+	//地址
 	public function address()
 	{
 		$address=Address::all();

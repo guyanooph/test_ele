@@ -55,7 +55,7 @@
                       <td><?php echo e($v->price); ?></td>
                       <td><?php echo e($v->num); ?></td>
                       <td><?php echo e($v->food_rate); ?></td>
-                      <td><?php echo e($v->stutas); ?></td>
+                      <td><?php if($v->stutas == 1): ?>在售 <?php elseif($v->stutas == 2): ?>售完 <?php elseif($v->stutas == 3): ?>下架 <?php endif; ?></td>
                       <td><?php echo e($v->create_time); ?></td>
                       <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/food/edit')); ?>/<?php echo e($v->id); ?>'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>
                       

@@ -14,7 +14,6 @@ class ShopController extends Controller
 	{
         //当用户直接访问/或是/shoplist时(即使用get，且没带参数)，先判断是否存在session，及session中是否存在location
         //如果存在，就用这个location来加载附近商家
-        // 
         //当用户由/home(定位页面)完成定位，跳转到/时，
         //获取$request中的location信息，以被后面加载附近商家使用
         //在session中写入location信息

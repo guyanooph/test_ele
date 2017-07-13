@@ -26,7 +26,7 @@ class FoodController extends Controller
 		//$db = \DB::table("food");
 		//$list = $db->paginate(5); //5条每页浏览
        
-	   $list = Food::where('shopid', session('merchantname')->shopid)->paginate(1);
+	   $list = Food::where('shopid', session('merchantname')->shopid)->paginate(5);
         
        //遍历当前数据并添加商品类别名称
        foreach($list as $v){

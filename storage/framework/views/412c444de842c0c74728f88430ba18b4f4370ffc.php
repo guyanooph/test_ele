@@ -311,7 +311,7 @@
             -webkit-transition: 0s ease-in-out left;
             transition: 0s ease-in-out left
         }</style>
-    <style type="text/css">
+    <style type="text/css">@charset  "UTF-8";
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
             display: none !important;
         }
@@ -328,7 +328,7 @@
             position: absolute;
         }</style>
     <meta charset="utf-8">
-    
+    <meta name="_token" content="<?php echo e(csrf_token()); ?>"/>
     <title>吃货-开店申请</title>
     <meta name="description" content="吃货-开店申请">
     <meta id="viewport" name="viewport"
@@ -372,6 +372,51 @@
             <!-- end ngIf: !showUser -->
         </div>
     </header>
+    <div class="steps ng-scope ng-isolate-scope" index="step" isrequireactivity="isRequireActivity">
+        <ul> <!-- ngRepeat: step in steps -->
+            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope active">
+                <!-- ngIf: $index --> <i class="index ng-binding">1</i>
+                门店信息
+            </li><!-- end ngRepeat: step in steps -->
+            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
+                <!-- ngIf: $index -->
+                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
+                        class="index ng-binding">2</i>
+                资质信息
+            </li><!-- end ngRepeat: step in steps -->
+            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
+                <!-- ngIf: $index -->
+                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
+                        class="index ng-binding">3</i>
+                合作方案
+            </li><!-- end ngRepeat: step in steps -->
+            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
+                <!-- ngIf: $index -->
+                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
+                        class="index ng-binding">4</i>
+                配送方案
+            </li><!-- end ngRepeat: step in steps -->
+            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
+                <!-- ngIf: $index -->
+                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
+                        class="index ng-binding">5</i>
+                结算信息
+            </li><!-- end ngRepeat: step in steps -->
+            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
+                <!-- ngIf: $index -->
+                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
+                        class="index ng-binding">6</i>
+                商品内容
+            </li><!-- end ngRepeat: step in steps -->
+            <li ng-repeat="step in steps" ng-class="{active: step.index <= index}" class="ng-binding ng-scope">
+                <!-- ngIf: $index -->
+                <div ng-if="$index" class="split-line ng-scope"></div><!-- end ngIf: $index --> <i
+                        class="index ng-binding">7</i>
+                活动信息
+            </li><!-- end ngRepeat: step in steps --> </ul>
+    </div> <!-- uiView: -->
+
+
     <div class="main-container ng-scope" ui-view="" autoscroll="true">
         <div class="store-info step-container ng-scope">
             <form name="storeForm" id="storeFormID" novalidate="" action="<?php echo e(url('merchant/register')); ?>" method="post"
@@ -453,51 +498,125 @@
                     </div>
                 </div>
                 
-                <div class="form-group flex">
-                <label class="control-label"> <b class="required">*</b>门店分类 </label>
-                    <div class="control-content">
-                        <div id="categories">
-                            <div  class=""  name="categories">
-                                <select style="width:100px;"  id="mid">
-                                    <option>店铺分类</option>
-                                    <?php $__currentLoopData = $mids; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mid): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option  style="width:150px;" value="<?php echo e($mid->id); ?>"><?php echo e($mid->title); ?></option>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </select>
-                                <select id="sid" name="typeid"></select>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+
+                    
+                        
+                        
+                            
+                                   
+                        
+                        
+                            
+                                   
+                        
+                                                                 
+                                    
+                                    
+                        
+                                                                 
+                                    
+                                    
+                        
+                                                                 
+                                    
+                                    
+                        
+                                                                 
+                                    
+                                    
+                        
+                        
+                                                                 
+                                    
+                                    
+                        
+                    
+                
+                
+                
+                    
+                    
+                        
+                             
                             
                                 
+                                    
+                                           
+                                           
+                                           
                                 
+                                
+                                    
+                                           
+                                           
+                                           
+                                    
+                                
+                                
+                                    
+                                    
+                                         
+                                        
+                                               
+                                               
+                                               
+                                        
+                                        
+                                            
+                                            
+                                        
                                 
                             
-                            <div class="select-content ng-hide" ng-show="showContent" style="">
-                            <!-- ngRepeat: item in items -->
-                                <div ng-repeat="item in items" class="clearfix ng-scope">
-                                <span class="select-nav ng-binding">异国料理</span>
-                                <div class="select-sub-content">
-                                <!-- ngRepeat: sons in item.sons track by $id(sons) -->
-                                <label ng-repeat="sons in item.sons track by $id(sons)" ng-class="{'active': sons.checked}" class="ng-scope">
-                                <input type="checkbox" style="display:none" ng-model="sons.checked" ng-change="onCheckChange(sons)" class="ng-pristine ng-untouched ng-valid ng-empty">
-                                <span class="item-label ng-binding">披萨意面</span>
-                                </label>
-                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
-                                <label ng-repeat="sons in item.sons track by $id(sons)"
-                                ng-class="{'active': sons.checked}" class="ng-scope">
-                                <input type="checkbox" name="type" style="display:none" ng-model="sons.checked"
-                                ng-change="onCheckChange(sons)"
-                                class="ng-pristine ng-untouched ng-valid ng-empty">
-                                <span class="item-label ng-binding">日韩料理</span>
-                                </label>
-                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
-                                <!-- end ngRepeat: sons in item.sons track by $id(sons) -->
-                                </div>
-                                </div><!-- end ngRepeat: item in items --> </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                        
+                    
                 
 
+                
                 <div class="form-group flex">
                 <label class="control-label"> <b class="required">*</b>城市 </label>
                 <div class="control-content city-group">
@@ -627,12 +746,17 @@
 
                 <div class="form-group flex">
                 <label class="control-label"> <b class="required">*</b>详细地址 </label>
-                    <input type="text" name="address" style="width:300px" onblur="checkAddress()"/>
-                    <small class="control-label">
-                        <div id="div_address"></div>
-                
-                
+                <div class="form-inline"><input id="input" type="text" name="address"
+                class="form-control address-detail mr-10 ng-pristine ng-empty ng-invalid ng-invalid-required ng-valid-maxlength ng-touched"
+                ng-model="form.address_info.address" placeholder="详细至门牌号，请与执照地址一致"
+                maxlength="255" required="" style="">
+                <button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位
+                </button>
                 <br>
+                <small class="red"
+                ng-show="storeForm.address.$invalid &amp;&amp; (storeForm.address.$dirty || storeForm.$submitted || storeForm.address._searched)"
+                style=""> 详细地址不能为空
+                </small>
                 </div>
                 </div>
                 地图定位
@@ -667,9 +791,6 @@
                             var input = document.getElementById('input');
                             var message = document.getElementById('message');
                             map.on('click',function(e){
-                                $("#longitude_latitude").remove();
-                                var str = "<input id='longitude_latitude'' type='hidden' name='longitude_latitude' value='" +  e.lnglat + "' >";
-                                $("#toreFormID").prepend(str);
                                 marker.setPosition(e.lnglat);
                                 geocoder.getAddress(e.lnglat,function(status,result){
                                     if(status=='complete'){
@@ -719,7 +840,7 @@
                                      name="doorPicInput" ng-model="form.door_pic" mobile="18851457819">
                                     <div id="preview" ></div>
                                     <input type="file" accept="image/*"  onchange="preview(this)" id="inputPassword3" name="logoname">
-                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1">
+                                    <p class="tip" ng-hide="ngModel || isUploadStatus === 1"><img<br>
                                         点击上传 </p>
                                 </div>
                             </ng-transclude>
