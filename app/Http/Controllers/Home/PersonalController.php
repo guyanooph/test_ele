@@ -13,40 +13,44 @@ use App\Models\Packet;
 use App\Models\Score;
 use App\Models\Address;
 
+
 class PersonalController extends Controller
 {
+    public $id=\Session::get('user')->userid;
+    function __construct()
+    {
+    	$this->id=$id;
+    }
     public function index()
-	{
-		//$id=session['userid'];
-		$list = Personal::find(1);
-		$order=order::where('userid',1)->orderBy('addtime','rsort');
+    {
+		$list = Personal::where('userid',$this->id)->first();
+		$order=order::where(['userid','=',$this->id],['status','=','0'])->orderBy('addtime','rsort')->get();
 		return view('home.personal.personal' ,['list'=>$list,'order'=>$order]);
-        	
 	}
 
 	public function order()
 	{
-		$order=Order::where('userid',1);
+		$order=Order::where(['userid','=',$this->id],['status','=','0'])->first();
 		return view('home.personal.order',['order'=>$order]);
 	}
 
 
 	public function orderUnrated()
 	{
-		$orderUnrated=Order::where('status',1);
+		$orderUnrated=Order::where(['userid','=',$this->id],['status','=','1'])->get();
 		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated]);
 	}
 
 
 	public function orderRefund()
 	{
-		$orderRefund=Order::where('status',2);
+		$orderRefund=Order::where(['userid','=',$this->id],['status','=','2'])->get();
 		return view('home.personal.orderRefund',['orderRefund'=>$orderRefund]);
 	}
 
 	public function red_packet()
 	{
-		$packet=packet::all();
+		$packet=packet::where('userid',$this->id)->get();
 		return view('home.personal.packet',['packet'=>$packet]);
 	}
 
@@ -58,35 +62,25 @@ class PersonalController extends Controller
 */
 	public function score()
 	{
-		$score=score::where('userid',1);
+		$score=score::where('userid',$this->id)->get();
 		return view('home.personal.score',['score'=>$score]);
 	}
 
 	public function collect()
 	{
-		$collect=Collect::all();
+		$collect=Collect::where('userid',$this->id)->get();
 		return view('home.personal.collect',['collect'=>$collect]);
 	}
 
 	public function userInfo()
 	{
-
-		
-		//$userInfo=User_info::where('userid',1);
-		/*$id=session['user']['userid'];
-		$userInfo=User_info::find($id);
-		if(Input::has('name')){
-			$userInfo->username=input::("name");
-		}
-		$usrInfo->save();*/
-
-		$userInfo=User_info::find(1);
+		$userInfo=User_info::find('userid',$this->id)->first();
 		return view('home.personal.userinfo',['userInfo'=>$userInfo]);
 	}
 
 	public function address()
 	{
-		$address=Address::all();
+		$address=Address::where('userid',$this->id)->all();
 		return view('home.personal.address',['address'=>$address]);
 	}
 }
