@@ -206,17 +206,20 @@
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle active"
 			                                        ng-class="{ active: pageName === 'profile' }"><i
 							class="icon-line-home"></i><a href="/personal">个人中心</a></h2></li>
-			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-order"></i>我的订单
+			<li class="profile-sidebar-section">
+			<h2 class="profile-sidebar-sectiontitle">
+			<i class="icon-line-order"></i>我的订单
 				</h2>
 				<ul>
-					<li ng-class="{ active: pageName === 'order' }"><a href="/personal/order">近三个月订单</a></li>
+					<li ng-class="{ active: pageName === 'order' }"><a href="/order">近三个月订单</a></li>
 					<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/personal/order/unrated">待评价订单
 							<!-- ngIf: unratedNumber --></a></li>
 					<li ng-class="{ active: pageName === 'order-refunding' }"><a href="/personal/order/refund">退单记录</a>
 					</li>
 				</ul>
 			</li>
-			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-yen"></i>我的资产
+			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle">
+			<i class="icon-yen"></i>我的资产
 				</h2>
 				<ul>
 					<li ng-class="{ active: pageName === 'hongbao' }"><a href="/personal/red_packet">我的红包</a></li>
@@ -227,8 +230,8 @@
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i
 							class="icon-line-profile"></i>我的资料</h2>
 				<ul>
-					<li ng-class="{ active: pageName === 'info' }"><a href="/personal/info/">个人资料</a></li>
-					<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address/">地址管理</a></li>
+					<li ng-class="{ active: pageName === 'info' }"><a href="/personal/info">个人资料</a></li>
+					<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address">地址管理</a></li>
 					<li ng-class="{ active: pageName === 'security-center' }"><a href="">安全中心</a></li>
 					<li ng-class="{ active: pageName === 'changepassword' }"><a href="">修改密码</a>
 					</li>
@@ -269,17 +272,17 @@
 						
 					</div>
 				
-					<div class="profile-infoitem"><a class="inherit" href="/profile/hongbao"><p>我的红包</p>
+					<div class="profile-infoitem"><a class="inherit" href="/personal/red_packet"><p>我的红包</p>
 					
 							<p class="profile-infoitem-number hongbao">
                       <span class="number ng-binding" ng-bind="hongbaocount"><?php echo e($info->red_packet); ?></span>个</p></a>
 					</div>
 					
-					<div class="profile-infoitem"><a class="inherit" href="/profile/points"><p>我的积分</p>
+					<div class="profile-infoitem"><a class="inherit" href="/personal/score"><p>我的积分</p>
 							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point"><?php echo e($info->score); ?></span>分</p></a>
 					</div>
 				
-					<div class="profile-infoitem"><a class="inherit" href="/profile/balance"><p>账户余额</p>
+					<div class="profile-infoitem"><a class="inherit" href="/personal/balance"><p>账户余额</p>
 							<p class="profile-infoitem-number balance"><span class="number ng-binding"
 							                                                 ng-bind="user.balance| number : 2"><?php echo e($info->balance); ?></span>元
 							</p></a>
@@ -290,7 +293,7 @@
 			
 				<div class="profile-order ng-scope">
 					<div class="tabnavigation"><a class="tabnavigation-navitem active">最近订单</a> <a
-								class="tabnavigation-rightitem profile-allorder" href="/profile/order">查看全部订单&gt;</a>
+								class="tabnavigation-rightitem profile-allorder" href="/personal/order">查看全部订单&gt;</a>
 					</div>
 					<div class="profile-order-content">
 						<div class="loading ng-binding ng-isolate-scope ng-hide" loading="" content="正在载入最近订单..."
@@ -323,7 +326,7 @@
 			 ng-bind="order.statusText"><?php echo e($dd->status); ?></p>
 			 <a class="statuslink ng-binding" ng-href="order/id/1209253485556894798"
 				ng-bind="order.realStatus === 4 ? '立即评价' : '订单详情'"
-				href="order/id/1209253485556894798">订单详情</a></div>
+				href="order">订单详情</a></div>
 	   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		</div>
 		

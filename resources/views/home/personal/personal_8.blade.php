@@ -102,6 +102,8 @@
 			
 		}
 		*/
+		
+		
 		function mouseClick(ob){
 			//alert("a");
 			$(ob).parent().parent().attr("class","rate-star star level"+($(ob).index()+1));
@@ -132,6 +134,8 @@
 		}
 		
 		
+		
+		
 		function doSubmit(){
 		var PARAM = {
 			order_id:"",
@@ -154,6 +158,8 @@
 		}
 		
 		aa.submit();
+		
+		document.body.removeChild(aa);
 		}
 	</script>
 	

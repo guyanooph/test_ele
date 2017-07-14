@@ -19,33 +19,21 @@ class PersonalController extends Controller
 {
     public function index(Request $request)
 	{
-			
+		
 		//$list = Personal::find();		
         $user = $request->session()->get("user");
 		//dd($user);
 	    $order = order::where('userid',$user->id)->orderBy('create_time','rsort')->get();
 		//dd($order);
+
 		//$login_user = login_user::where('username',$login->id)->get();
+		
+		
 		$info = personal::first();
-		//var_dump($info);
 		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info]);
 	}
 
-	public function userInfo(Request $request)
-	{
-		$user=$request->session()->get('user');
-		$userInfo=User_info::where("userid",$user->id)->first();
-		return view('home.personal.userinfo',['userInfo'=>$userInfo]);
-	}
-	
-	//地址
-	public function address(Request $request)
-	{
-		$user=$request->session()->get('user');
-		$userInfo=User_info::where("userid",$user->id)->first();
-		$address=$userInfo->address;
-		return view('home.personal.address',['address'=>$address]);
-	}
+ 
     /* public function index($id)
 	{
 		$userid = user_info::where('userid',$id)->first();
@@ -55,7 +43,7 @@ class PersonalController extends Controller
 		return view('home.personal.personal' ,['userid'=>$userid , 'order'=>$order]);
 	} */
 	
-	 public function order(Request $request)
+	public function order(Request $request)
 	{
 		//$userid = \Session::get("user")->id();
         $userid = $request->session()->get('user');
@@ -85,7 +73,12 @@ class PersonalController extends Controller
 		return view('home.personal.red_packet',['packet'=>$packet]);
 	}
 
-	/*
+	/*public function balance()
+	{
+		$balance=Order::where('status',2);
+		return view('home.personal.balance',['balance'=>$balance]);
+	}
+*/
     //我的 评分/积分
 	public function score()
 	{
@@ -100,20 +93,31 @@ class PersonalController extends Controller
 		return view('home.personal.collect',['collect'=>$collect]);
 	}
 
-	
+	public function userInfo()
+	{
 
-	
+		
+		//$userInfo=User_info::where('userid',1);
+		/*$id=session['user']['userid'];
+		$userInfo=User_info::find($id);
+		if(Input::has('name')){
+			$userInfo->username=input::("name");
+		}
+		$usrInfo->save();*/
+
+		$userInfo=User_info::find(1);
+		return view('home.personal.userinfo',['userInfo'=>$userInfo]);
+	}
+
+	//地址
+	public function address()
+	{
+		$address=Address::all();
+		return view('home.personal.address',['address'=>$address]);
+	}
     
     public function test()
     {
         return view("home.personal.personal_8");
-    } */
-	
-	
-	public function balance()
-	{
-		$balance=Order::where('status',2);
-		return view('home.personal.balance',['balance'=>$balance]);
-	}
-	
+    }
 }

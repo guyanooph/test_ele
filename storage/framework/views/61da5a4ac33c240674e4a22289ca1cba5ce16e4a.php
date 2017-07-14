@@ -17,7 +17,8 @@
 
 		.ng-hide-add-active, .ng-hide-remove {
 			display: block !important;
-		}</style>
+		}
+	</style>
 	<meta charset="utf-8">
 	<meta name="renderer" content="webkit">
 
@@ -89,7 +90,7 @@
 									class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div>
 					</div>
 					<div topbar-profilebox="">
-						<?php if($user): ?>
+						
 						<div class="topbar-profilebox">
 							<!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --><img
 									class="topbar-profilebox-avatar ng-scope"
@@ -103,7 +104,7 @@
 										ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F"
 										target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a></span>
 							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> <span
-										class="topbar-profilebox-username ng-binding"><?php echo e($user->username); ?></span>
+										class="topbar-profilebox-username ng-binding">???</span>
 								<!-- ngIf: $root.topbarType === 'checkout' -->
 								<!-- ngIf: $root.topbarType !== 'checkout' --><span
 										class="topbar-profilebox-btn icon-arrow-down ng-scope"
@@ -119,7 +120,7 @@
 											ng-click="logout()">退出登录</a></div></span>
 					    </div>
 					
-						<?php else: ?>
+				
 							<div class="topbar-profilebox">
 					    <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span> 
 						<span ng-show="!$root.user.username" class="">
@@ -135,7 +136,7 @@
 						<a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
 					    </div></span>
 						 </div>
-						<?php endif; ?>
+					
 					</div>
 				</nav>
 			</div>

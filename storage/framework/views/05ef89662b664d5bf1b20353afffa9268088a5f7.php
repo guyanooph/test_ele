@@ -85,23 +85,23 @@
 	<div search-input=""></div></div>
 	<ul class="profile-sidebar" role="navigation" profile-sidebar=""><li class="profile-sidebar-section">
 	<h2 class="profile-sidebar-sectiontitle" ng-class="{ active: pageName === 'profile' }">
-	<i class="icon-line-home"></i><a href="/profile">个人中心</a></h2></li>
+	<i class="icon-line-home"></i><a href="/personal">个人中心</a></h2></li>
 	<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-order"></i>
 	我的订单</h2><ul><li ng-class="{ active: pageName === 'order' }" class="active">
-	<a href="/profile/order">近三个月订单</a></li>
-	<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/profile/order/unrated">待评价订单
+	<a href="/personal/order">近三个月订单</a></li>
+	<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/personal/">待评价订单
 	<span class="moreinfo ng-binding ng-scope" ng-if="unratedNumber" ng-bind="unratedNumber">1</span>
     </a></li><li ng-class="{ active: pageName === 'order-refunding' }">
-	<a href="/profile/order/refund">退单记录</a></li></ul></li>
+	<a href="/personal/order/refund">退单记录</a></li></ul></li>
 	<li class="profile-sidebar-section">
 	<h2 class="profile-sidebar-sectiontitle"><i class="icon-yen"></i>我的资产</h2>
-	<ul><li ng-class="{ active: pageName === 'hongbao' }"><a href="/profile/hongbao">我的红包</a></li>
-	<li ng-class="{ active: pageName === 'balance' }"><a href="/profile/balance">账户余额</a></li>
-	<li ng-class="{ active: pageName === 'points' }"><a href="/profile/points">我的积分</a></li></ul></li>
+	<ul><li ng-class="{ active: pageName === 'hongbao' }"><a href="/personal/red_packet">我的红包</a></li>
+	<li ng-class="{ active: pageName === 'balance' }"><a href="/personal/balance">账户余额</a></li>
+	<li ng-class="{ active: pageName === 'points' }"><a href="/personal/score">我的积分</a></li></ul></li>
 	<li class="profile-sidebar-section">
 	<h2 class="profile-sidebar-sectiontitle">
 	<i class="icon-line-profile"></i>我的资料</h2>
-	<ul><li ng-class="{ active: pageName === 'info' }"><a href="/profile/info">个人资料</a></li>
+	<ul><li ng-class="{ active: pageName === 'info' }"><a href="/personal/info">个人资料</a></li>
 	<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address">地址管理</a></li>
 	<li ng-class="{ active: pageName === 'security-center' }"><a href="/profile/security">安全中心</a></li>
 	<li ng-class="{ active: pageName === 'changepassword' }">
