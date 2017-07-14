@@ -255,14 +255,14 @@
 						<li class="dropdown user user-menu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
-								<span class="hidden-xs">亚力山大-皮尔斯</span>
+								<span class="hidden-xs">{{session("merchantname")->shopname}}</span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
 								<li class="user-header">
 									<img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
 									<p>
-										亚力山大-皮尔斯-网站开发
+										{{session("merchantname")->shopname}}-网站开发
 										<small>会员于2012-11</small>
 									</p>
 								</li>
@@ -304,7 +304,8 @@
 						<img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<a href="#"><i class="fa fa-circle text-success"></i>在线</a>
+						<p></p>
+						<p>{{session("merchantname")->shopname}}</p>
 						<a href="{{url('merchant/logout')}}"><i class="fa fa-circle text-success"></i>退出</a>
 					</div>
 				</div>
@@ -321,21 +322,11 @@
                 <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/mer')}}"><i class="fa fa-circle-o"></i>商家信息</a></li>
+                <li class="active"><a href="{{url('merchant/merchant')}}"><i class="fa fa-circle-o"></i>商家信息</a></li>
                 <li class="active"><a href="{{url('merchant/merchantopen')}}"><i class="fa fa-circle-o"></i>营业信息</a></li>
     
               </ul>
             </li>
-            
-			<li class="active treeview">
-              <a href="#">
-                <i class="fa fa-gittip"></i> <span> 营业信息管理</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/merchantopen')}}"><i class="fa fa-circle-o"></i>查看营业信息</a></li> </ul>  
-			</li>
-			
-			
 			
             <li class="active treeview">
               <a href="#">
@@ -354,11 +345,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('merchant/order')}}"><i class="fa fa-circle-o"></i> 浏览订单信息</a></li>
-<<<<<<< HEAD
                 <li><a href="{{url('merchant/order/create')}}"><i class="fa fa-circle-o"></i> 添加分类</a></li>
-=======
-                <li><a href="{{url('merchant/order/create')}}"><i class="fa fa-circle-o"></i> 添加订单</a></li>
->>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
               </ul>
             </li>
              <li class="active treeview">

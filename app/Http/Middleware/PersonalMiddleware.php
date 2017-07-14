@@ -16,7 +16,7 @@ class PersonalMiddleware
     public function handle($request, Closure $next)
     {
         if(!$request->session()->has('user')){
-            return redirect('home/login');
+            return redirect('/login');
         }
         return $next($request);
     }

@@ -62,8 +62,8 @@ return [
             'region' => env('AWS_REGION'),
             'bucket' => env('AWS_BUCKET'),
         ],
-
-		'qiniu' => [
+   
+        'qiniu' => [
             'driver'  => 'qiniu',
             'domains' => [
                 'default'   => env('QINIU_DEFAULT'), //你的七牛域名
@@ -74,21 +74,7 @@ return [
             'secret_key'=> env('QINIU_SK'),  //SecretKey
             'bucket'    => env('QINIU_BUCKET'),  //Bucket名字
             'notify_url'=> '',  //持久化处理回调地址
+            'access'    =>  '',//
         ],
     ],
-
-
-    'qiniu' => [
-        'driver'  => 'qiniu',
-        'domains' => [
-            'default'   => 'laravelacademy.com1.z0.glb.clouddn.com', //你的七牛域名
-            'https'     => 'dn-laravelacademy.qbox.me',         //你的HTTPS域名
-            'custom'    => 'static.laravelacademy.org',     //你的自定义域名
-        ],
-        'access_key'=> '',  //AccessKey
-        'secret_key'=> '',  //SecretKey
-        'bucket'    => '',  //Bucket名字
-        'notify_url'=> '',  //持久化处理回调地址
-    ],
-
 ];

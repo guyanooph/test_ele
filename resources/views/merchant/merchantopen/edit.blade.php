@@ -28,28 +28,8 @@
                 <form class="form-horizontal" action="{{ URL('/merchant/merchantopen/update') }}/{{ $merchantopen->id }}" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
-				  
-<<<<<<< HEAD
-                  <div class="box-body">
-<<<<<<< HEAD
-=======
-				   
-=======
+
                   <div class="box-body">  
->>>>>>> 5010fc82fee2d6f1543703b56517af92d70c0bd9
-                    <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">商家Id：</label>
-                      <div class="col-sm-4">
-                        <input type="text" name="shopid" class="form-control" id="inputEmail3" value="{{ $merchantopen->shopid }}">
-                      </div>
-                    </div>
->>>>>>> 19baee58d8caecc409d1d496bf8588d392d14304
-                    <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">商家名称：</label>
-                      <div class="col-sm-4">
-                        <input type="text" name="name" class="form-control" id="inputEmail3" value="{{ $merchantopen->name }}">
-                      </div>
-                    </div>
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">营业时间：</label>
                       <div class="col-sm-4">
@@ -59,7 +39,7 @@
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
                       <div class="col-sm-4">
-                       <input type="text" class="form-control" id="inputPassword3"  name="overtime" value="{{ $merchantopen->overtime }}">
+                       <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="{{ $merchantopen->overtime }}">
                       </div>
                     </div>
 					<div class="form-group">
@@ -72,10 +52,10 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">配送方式：</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="method" '{{ ($merchantopen->method == 0)?"checked":"" }}' value="0">自营快送  &nbsp; &nbsp;
+                           <input type="radio"  name="method" {{ ($merchantopen->method == 1)?"checked":"" }} value="0">自营快送  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="method" '{{ ($merchantopen->method == 1)?"checked":"" }}' value="1">蜂鸟快送 
+                           <input type="radio"  name="method" {{ ($merchantopen->method == 2)?"checked":"" }} value="1">蜂鸟快送 
                         </label>
                       </div>
                     </div>
@@ -89,20 +69,14 @@
                          <input type="text" class="form-control" id="inputPassword3"  name="money" value="{{ $merchantopen->money }}">
                       </div>
                     </div>
-					<div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">总销量：</label>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="总销量" name="num" value="{{ $merchantopen->num }}">
-                      </div>
-                    </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="state" {{ ($merchantopen->state == 0)?"checked":"" }} value="0">营业  &nbsp; &nbsp;
+                           <input type="radio"  name="state" {{ ($merchantopen->state == 1)?"checked":"" }} value="0">营业  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="state" {{ ($merchantopen->state == 1)?"checked":"" }} value="1">歇业 
+                           <input type="radio"  name="state" {{ ($merchantopen->state == 2)?"checked":"" }} value="1">歇业 
                         </label>
                       </div>
                     </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Merchant;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Merchantopen;
+use App\Models\Merchant\Merchant;
 
 class MerchantopenController extends Controller
 {
@@ -15,10 +15,10 @@ class MerchantopenController extends Controller
      */
     public function index()
     {
-		$table = Merchantopen::all()->where('shopid','=',1);//查询所有参数
+		//$table = Merchant::all()->where('shopid','=',1);//查询所有参数
 
 		//$list = merchantopen::all();
-		$list = merchantopen::all()->where('shopid',1);//
+		$info = Merchant::all()->where('shopid',1);//
 
         /* //判断并封装搜索条件
         $params = array();
@@ -35,7 +35,7 @@ class MerchantopenController extends Controller
         //$list = $table->paginate(1); //10条每页浏览
 		//dd($list); 
 		//return "你好！";
-        return view("merchant.merchantopen.index",["list"=>$list]);//加载商家管理
+        return view("merchant.merchantopen.index",["info"=>$info]);//加载商家管理
     }
 
     /**
@@ -81,7 +81,7 @@ class MerchantopenController extends Controller
     {
         //加载修改页面
 		//return "你的厚爱！";
-		$table = merchantopen::where("id",$id)->first();//获取单条信息参数
+		$table = merchant::where("id",$id)->first();//获取单条信息参数
 		
 		return view("merchant.merchantopen.edit",['merchantopen'=>$table]);//加载页面
     }
@@ -101,7 +101,7 @@ class MerchantopenController extends Controller
 		$data = $request->all();
         unset($data['_token']);//移除_token参数
         unset($data['_method']);//移除_token参数
-        $table = \DB::table("merchant_open")->where("id",$id)->update($data);
+        $table = Merchant::where("id",$id)->update($data);
         //dd($data);
         if($table>0){
             return redirect('merchant/merchantopen');
@@ -109,6 +109,7 @@ class MerchantopenController extends Controller
             return back()->with("err","修改失败!");
         }
     }
+	
 
     /**
      * Remove the specified resource from storage.
@@ -118,9 +119,6 @@ class MerchantopenController extends Controller
      */
     public function destroy($id)
     {
-        //执行删除
-		\DB::table("merchant_open")->where("id",$id)->delete();
-		//return "fuck";
-		return redirect('merchant/merchantopen')->with("err","删除成功");
+
     }
 }

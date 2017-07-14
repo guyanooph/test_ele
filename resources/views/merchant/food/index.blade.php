@@ -52,7 +52,7 @@
                       <td>{{$v->id}}</td>
                       <td>{{$v->typename}}</td>
                       <td>{{$v->title}}</td>
-                      <td><img style="width:50px;height:50px;" src='{{asset("upload/merchant/food/$v->picname")}}'/></td>
+                      <td><img style="width:50px;height:50px;" src='http://osltbib18.bkt.clouddn.com/wang/image_{{$v->picname}}'/></td>
                       <td>{{$v->descr}}</td>
                       <td>{{$v->price}}</td>
                       <td>{{$v->num}}</td>

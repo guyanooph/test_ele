@@ -141,4 +141,5 @@ class FoodtypeController extends Controller
         \DB::table('food_type')->delete($id);
         return redirect("merchant/foodtype")->with("err","删除成功！");
     }
+
 }
