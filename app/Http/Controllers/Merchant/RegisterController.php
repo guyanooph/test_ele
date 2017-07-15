@@ -500,11 +500,11 @@ class RegisterController extends Controller
             $list = "商家身份证号写入REDIS失败";
             return view('errors.503',compact('list'));
         }
-    */
+
         //商家总分类存入REDIS
         $mids = Mer_mid::all('id','title')->toArray();
         dd($mids);
-
+            */
         /*
          dd($mername);
         $res = \Redis::sadd("VER", $mername);
