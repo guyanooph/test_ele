@@ -1677,8 +1677,8 @@
         <form class="MessageLogin-2Z-d6" method="POST" action="{{ URL('code') }}">
             {{ csrf_field()  }}
             <section class="MessageLogin-FsPlX">
-                <input type="text" name="tel"  placeholder="请输入手机号码"/>
-                <input type="button" onclick="sendMobileCode()" class="CountButton-3e-kd" value="点击发送验证码"><br/>
+                <input type="text" name="tel" onblur="sendMobileCode()" placeholder="请输入手机号码"/>
+                <input type="button" onclick="sendMobileCode()" class="CountButton-3e-kd"  id="getcode" value="点击发送验证码"><br/>
             </section>
             <section class="MessageLogin-FsPlX">
                 <input type="text" name="code" placeholder="请输入验证码">
@@ -1690,24 +1690,46 @@
             {
                 //alert('ok')
                 var tel = $("input[name='tel']").val();
-                //alert(tel);
-                $.ajax({
-                    url:'/sendMobileCode',
-                    type:"get",
-                    data:'tel='+tel,
-                    dataType:'text',
-                    headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
-                    success:function(data){
-                        alert('已发送');
-                    },
-                    error:function(){
-                        alert('b');
-                    }
-                })
+                var ret = /^(((1[0-9]{2}))+\d{8})$/;
+                function time(){
+                    var i=60;
+                    name = setInterval(function(){
+                        $("#getcode").attr({"disabled":"disabled"});
+                        $("#getcode").val("还剩"+i+"秒");
+                        i--;
+                        if(i<0){
+                            $("#get-code").val("获取验证码");
+                            if(name != null){
+                                clearInterval(name);
+                                $("#getcode").removeAttr("disabled");
+                            }
+
+                        }
+                    },1000);
+
+                }
+                time();
+
+                    $.ajax({
+                        url:'/sendMobileCode',
+                        type:"get",
+                        data:'tel='+tel,
+                        dataType:'text',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
+                        success:function(data){
+                            //alert('已发送');
+                        },
+                        error:function(){
+                            alert('b');
+                        }
+                    })
+                // }
             }
+
+
         </script>
         <section class="MessageLogin-15xD9">
-            温馨提示：未注册饿了么帐号的手机号，登录时将自动注册，且代表您已同意<a href="//h5.ele.me/service/agreement/" target="_blank">《用户服务协议》</a>
+            温馨提示：未注册吃货帐号的手机号，登录时将自动注册，且代表您已同意<a href="//h5.ele.me/service/agreement/" target="_blank">《用户服务协议》</a>
         </section><!----></div>
     <div class="App-3T916"><span>关于我们</span></div>
 </div>

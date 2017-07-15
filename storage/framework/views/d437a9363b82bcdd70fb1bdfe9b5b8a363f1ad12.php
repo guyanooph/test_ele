@@ -658,8 +658,8 @@
                                 //$("#longitude_latitude").remove();
                                 //获取经纬度
                                 var str = "<input id='longitude_latitude'' type='hidden' name='longitude_latitude' value='" +  e.lnglat + "' >";
-                                alert(str);
-                                $("#toreFormID").prepend(str);
+                                //alert(str);
+                                $("#storeFormID").prepend(str);
                                 marker.setPosition(e.lnglat);
                                 geocoder.getAddress(e.lnglat,function(status,result){
                                     if(status=='complete'){

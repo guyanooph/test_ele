@@ -12,8 +12,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "predis/predis": "^1.1",
-        "zgldh/qiniu-laravel-storage": "^0.6.8",
-        "pusher/pusher-php-server": "^2.6"
+        "syscover/shoppingcart": "dev-master",
+        "zgldh/qiniu-laravel-storage": "^0.6.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

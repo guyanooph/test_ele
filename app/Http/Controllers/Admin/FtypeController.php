@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Response;
-
+use Illuminate\Redis;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -38,6 +38,8 @@ class FtypeController extends Controller
        $data['created_at']=date("Y-m-d H:i:s",time());
       
        if(\DB::table("mer_mid")->insert($data)){
+           \Redis::sadd();
+
          return back()->with("err","添加成功");
     }
         

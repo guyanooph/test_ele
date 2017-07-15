@@ -27,19 +27,6 @@
                   <input type="hidden" name="_method" value="put">
 
                   <div class="box-body">  
-
-                    <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">商家Id：</label>
-                      <div class="col-sm-4">
-                        <input type="text" name="shopid" class="form-control" id="inputEmail3" value="<?php echo e($merchantopen->shopid); ?>">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">商家名称：</label>
-                      <div class="col-sm-4">
-                        <input type="text" name="name" class="form-control" id="inputEmail3" value="<?php echo e($merchantopen->name); ?>">
-                      </div>
-                    </div>
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">营业时间：</label>
                       <div class="col-sm-4">
@@ -49,7 +36,7 @@
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
                       <div class="col-sm-4">
-                       <input type="text" class="form-control" id="inputPassword3"  name="overtime" value="<?php echo e($merchantopen->overtime); ?>">
+                       <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="<?php echo e($merchantopen->overtime); ?>">
                       </div>
                     </div>
 					<div class="form-group">
@@ -62,10 +49,10 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">配送方式：</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="method" '<?php echo e(($merchantopen->method == 0)?"checked":""); ?>' value="0">自营快送  &nbsp; &nbsp;
+                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 1)?"checked":""); ?> value="0">自营快送  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="method" '<?php echo e(($merchantopen->method == 1)?"checked":""); ?>' value="1">蜂鸟快送 
+                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 2)?"checked":""); ?> value="1">蜂鸟快送 
                         </label>
                       </div>
                     </div>
@@ -79,20 +66,14 @@
                          <input type="text" class="form-control" id="inputPassword3"  name="money" value="<?php echo e($merchantopen->money); ?>">
                       </div>
                     </div>
-					<div class="form-group">
-                      <label for="inputEmail3" class="col-sm-2 control-label">总销量：</label>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control" id="inputPassword3" placeholder="总销量" name="num" value="<?php echo e($merchantopen->num); ?>">
-                      </div>
-                    </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 0)?"checked":""); ?> value="0">营业  &nbsp; &nbsp;
+                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 1)?"checked":""); ?> value="0">营业  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 1)?"checked":""); ?> value="1">歇业 
+                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 2)?"checked":""); ?> value="1">歇业 
                         </label>
                       </div>
                     </div>

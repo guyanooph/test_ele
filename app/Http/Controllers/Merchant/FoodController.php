@@ -146,23 +146,22 @@ class FoodController extends Controller
 		
 		$data['create_time'] = date('Y-m-d');
 		//$path = "./upload/merchant/food/";
-        if($request->hasFile('picname')) {
+        if($request->hasFile('picnew')) {
             //获取文件，file对应的是前端表单上传input的name
-            $file =$request->file("picname");
+            $file =$request->file("picnew");
             //初始化
             $disk = \Storage::disk("qiniu");
  
             //重命名文件
             $fileName  =md5($file->getClientOriginalName().time().rand()).".".$file->getClientOriginalExtension();
-			if($fileName != null){
-				$bool = $disk->put('wang/image_'.$fileName,file_get_contents($file->getRealPath()));
-				//$pic['picnew'] = $filename;
-				//@unlink("./upload/merchant/food/".$data['picname']);//删除原有文件			
-				$data['picname'] = $fileName;  
-			}
-                          
+			// return 'd';
+			//上传到七牛
+            $bool = $disk->put('wang/image_'.$fileName,file_get_contents($file->getRealPath()));
+            $data['picname'] = $fileName;
+			
             //return response($filename); //输出
-            //exit();0
+            //exit();
+			//dd($data);
         }
 		//dd($data);
         $id = \DB::table("food")->where("id",$id)->update($data);
@@ -188,7 +187,7 @@ class FoodController extends Controller
             return back()->with("err","禁止删除");
         } */  
 		$food = Food::where("id",$id)->first();
-		@unlink("./upload/merchant/food/".$food['picname']);
+		//@unlink("./upload/merchant/food/".$food['picname']);
         \DB::table('food')->delete($id);
         return redirect("merchant/food")->with("err","删除成功！");
     }
