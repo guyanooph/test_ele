@@ -7,5 +7,5 @@ return [
     define('SETS_MERCHAN_PHONE','SETS:MERCHAN:PHONE'),//商家手机号集合
     define('SETS_MERCHAN_IDENTITY','SETS:MERCHAN:IDENTITY'),//商家身份证号集合
 
-    define('SETS_MERCHAN_TYPE','SETS:MERCHAN:TYPE'),//商家分类
+    define('SETS_MERCHAN_TYPE','SETS:MERCHAN:TYPE'),//商家分类7
 ];

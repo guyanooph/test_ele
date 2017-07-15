@@ -19,9 +19,9 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title"><i class="fa fa-th"></i> 审核已通过商家管理</h3>&nbsp;&nbsp;
+                        <h3 class="box-title"><i class="fa fa-th"></i> 已禁用商家管理</h3>&nbsp;&nbsp;
                         <div class="box-tools">
-                            <form action="{{url('admin/stu')}}" method="get">
+                            <form action='' method="get">
                                 <div class="input-group" style="width: 150px;">
                                     <input type="text" name="name" class="form-control input-sm pull-right" placeholder="管理员账号"/>
                                     <div class="input-group-btn">
@@ -52,7 +52,7 @@
                                     <td>{{$v->typeid}}</td>
                                     <td>{{$v->city}}</td>
                                     <td>{{$v->register_time}}</td>
-                                    <td><button onclick='window.location="{{url('admin/shop/detailCom')}}/{{$v->id}}"' class="btn btn-xs btn-danger">详情</button></td>
+                                    <td><button onclick='window.location="{{url('admin/disabled/detail')}}/{{$v->id}}"' class="btn btn-xs btn-danger">详情</button></td>
                                 </tr>
                             @endforeach
                         </table>

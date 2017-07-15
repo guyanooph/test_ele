@@ -5,12 +5,10 @@
         <li><h1>商家注册信息</h1> </li>
 
         <li class="list-group-item">商家表信息id: {{$list->id}}</li>
-        <li class="list-group-item">商家用户ID: {{$list->shopid}}</li>
         <li class="list-group-item">店面账户: {{$list->mername}}</li>
         <li class="list-group-item">商铺名称: {{$list->shoptitle}}</li>
-        <li class="list-group-item">店面照片: {{$list->picname}}</li>
-        <li class="list-group-item">执照照片: {{$list->license}}</li>
-        <li class="list-group-item">logo照片: {{$list->logoname}}</li>
+        <li class="list-group-item">店面照片: <img src="http://oslsovx4q.bkt.clouddn.com/upload/image{{ $list->picname}}"></li>
+        <li class="list-group-item">logo照片: <img src="http://oslsovx4q.bkt.clouddn.com/upload/image{{ $list->logoname}}"></li>
         <li class="list-group-item">店面分类: {{$list->typeid}}</li>
         <li class="list-group-item">商铺所有者姓名: {{$list->username}}</li>
         <li class="list-group-item">身份证: {{$list->identity}}</li>
@@ -23,7 +21,7 @@
         <li class="list-group-item">注册时的ip: {{$list->first_ip}}</li>
         <li><h1>商家店铺信息</h1> </li>
         <li class="list-group-item">商家名字: {{$merchant->shopname}}</li>
-        <li class="list-group-item">logo照片: {{$merchant->logo}}</li>
+        <li class="list-group-item">logo照片: <img src="http://oslsovx4q.bkt.clouddn.com/upload/image{{ $merchant->logo}}"></li>
         <li class="list-group-item">服务评分: {{$merchant->rate}}</li>
         <li class="list-group-item">商家地址: {{$merchant->address}}</li>
         <li class="list-group-item">电话: {{$merchant->phone}}</li>

@@ -18,8 +18,6 @@
         <li class="list-group-item">注册时间: {{$list->register_time}}</li>
         <li class="list-group-item">注册时的ip: {{$list->first_ip}}</li>
         <li class="list-group-item">
-            <button onclick="window.location='{{URL('admin/shop/check')}}/{{$list->id}}/{{2}}'"class="btn btn-ms btn-primary">注册信息合法，通过审核</button>
-            <button onclick="window.location='{{URL('admin/shop/check')}}/{{$list->id}}/{{3}}'" class="btn btn-ms btn-danger">注册信息不合法，不通过</button></li>
-
+            <button onclick="window.location='{{URL('admin/shop/checkFail')}}/{{$list->id}}/{{2}}'"class="btn btn-ms btn-primary">信息完整，通过审核</button>
     </ul>
 @endsection

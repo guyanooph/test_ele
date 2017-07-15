@@ -127,16 +127,15 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 		return "dd";
 	});//保存节点信息
 	
-	
-	//Route::resource("node","Admin\NodeController");//节点管理
+
 	Route::get("node","Admin\NodeController@index");//节点管理首页
 	Route::post("node","Admin\NodeController@store");//执行节点添加
 	Route::get("node/edit/{id}","Admin\NodeController@edit");//加载节点修改
-
 	Route::put("node/{id}","Admin\NodeController@update");//执行节点修改
-	
 	Route::delete("node/{id}","Admin\NodeController@destroy");//节点删除
-	Route::get("vip","Admin\VipController@index");//加载会员信息页面
+    
+    Route::get("vip","Admin\VipController@index");//加载会员信息页面
+
 	Route::get("shop/index","Admin\ShopController@index");//待审核商家管理页面
 	Route::get("shop/detail/{id}","Admin\ShopController@detail");//待审核商家详情
     Route::get("shop/check/{id}/{state}","Admin\ShopController@check");//商家审核操作
@@ -146,6 +145,13 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
     Route::get("shop/checkCom/{id}/{state}","Admin\ShopController@checkCom");//违规商家手动处理
 
 
+    Route::get("fail","Admin\ShopController@indexFail");//加载审核未通过商家信息
+    Route::get("fail/detail/{id}","Admin\ShopController@detailFail");//加载审核未通过商家详情信息
+    Route::get("shop/checkFail/{id}/{state}","Admin\ShopController@checkFail");//违规商家手动处理
+
+    Route::get("disabled","Admin\ShopController@indexDisabled");//加载禁用商家信息
+    Route::get("disabled/detail/{id}","Admin\ShopController@detailDisabled");//加载禁用商家详情信息
+    Route::get("shop/checkDisabled/{id}/{state}","Admin\ShopController@checkDisabled");//违规商家解禁
 
 	Route::get("ftype","Admin\FtypeController@index");//菜品分类加载页面
 	Route::post("ftype","Admin\FtypeController@store");//菜品分类执行添加
@@ -179,15 +185,12 @@ Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商�
 
 //商家注册
 Route::get("merchant/phone","Merchant\RegisterController@index");//加载商家手机注册页面
-Route::post("merchant/ver_tel","Merchant\RegisterController@ver_tel");//手机验证码验证手机号是否已经被用
 Route::post("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
 Route::get("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
-//Route::get("sid","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
 Route::get("sid/{id}","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
 Route::get("/sendMobileCode","Merchant\RegisterController@sendMobileCode");//发送手机验证码
 
 
-//Route::get('merchant/register/sendsms', 'Merchant\RegisterController@sendSms');//发送手机验证码
 Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
 Route::post("merchant/register","Merchant\RegisterController@store");////商家执行注册
 Route::post("merchant/ver","Merchant\RegisterController@ver");//注册用户名验证

@@ -223,9 +223,10 @@ class RegisterController extends Controller
     {
         $t1 = microtime();
         $geohash = new Geohash();
-
-        \DB::beginTransaction();    // 事物开始
-        try {
+        
+       /* \DB::beginTransaction();    // 事物开始
+        try {*/
+            
             // 密码处理
             $password = trim($request['password']);
             // 俩次密码判断
@@ -240,9 +241,10 @@ class RegisterController extends Controller
                 $disk = \Storage::disk('qiniu');
                 $filename = md5($file->getClientOriginalName() . time() . rand()). "." . $file->getClientOriginalExtension();
                 $bool = $disk->put('upload/image' . $filename, file_get_contents($file->getRealPath()));
-                //dd($bool);
+                //dd($filename);
                 if ($bool) {
-                    $path = $disk->downloadUrl('upload/image' . $filename);
+                    $path = $disk->downloadUrl('upload/image'. $filename);
+                    //dd($path);
                     //return "上传成功,图片UR:" . $path;
                 }else{
                     return "上传失败";
@@ -259,6 +261,7 @@ class RegisterController extends Controller
                 $bool = $disk->put('upload/image' . $filename2, file_get_contents($file->getRealPath()));
                 //dd($bool);
                 if ($bool) {
+                    //dd($filename2);
                     $path = $disk->downloadUrl('upload/image' . $filename2);
                     //return "上传成功,图片UR:" . $path;
                 }else{
@@ -321,8 +324,16 @@ class RegisterController extends Controller
             $data['logo'] = $input['logoname'];
             $data['phone'] = $input['phone'];
             $data['typeid'] = $input['typeid'];
+            //dd($input['typeid']);
+            $t = \DB::table('mer_sid')->where('id',$input['typeid'])->first();
+            //dd($t->mid);
+            $f = \DB::table('mer_mid')->where('id','=',$t->mid)->first();
+            //dd($f);
+            $data['f_typeid'] = $f->id;
+            //dd($data['f_typeid']);
             $data['position'] = $input['position'];
             $data['address'] = $input['address'];
+            $data['lati_long'] = $input['longitude_latitude'];
             $res3 = \DB::table('merchant')->InsertGetId($data);
 
             //dd($data);
@@ -341,11 +352,13 @@ class RegisterController extends Controller
                 }
                 $t2 = microtime();
             }
-        } catch (\PDOException $e) {
+            
+      /*  } catch (\PDOException $e) {
             \DB::rollback();
             $list = "有点问题，再来注册吧(其实是事务回滚)";
             return view('errors.503', compact('list'));
         };
+        */
         $list = "恭喜您！旺铺正在审核中，请等待!";
         return view('errors.503', compact('list'));
        //return ($t2-$t1);

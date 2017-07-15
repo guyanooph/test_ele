@@ -1,5 +1,4 @@
-@extends('admin.base')
-@section('content')
+<?php $__env->startSection('content'); ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -19,9 +18,9 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title"><i class="fa fa-th"></i> 审核已通过商家管理</h3>&nbsp;&nbsp;
+                        <h3 class="box-title"><i class="fa fa-th"></i> 待审核商家管理</h3>&nbsp;&nbsp;
                         <div class="box-tools">
-                            <form action="{{url('admin/stu')}}" method="get">
+                            <form action="<?php echo e(url('admin/stu')); ?>" method="get">
                                 <div class="input-group" style="width: 150px;">
                                     <input type="text" name="name" class="form-control input-sm pull-right" placeholder="管理员账号"/>
                                     <div class="input-group-btn">
@@ -43,22 +42,24 @@
                                 <th>注册时间</th>
                                 <th style="width: 100px">操作</th>
                             </tr>
-                            @foreach($list as $v)
+
+                            <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td>{{$v->id}}</td>
-                                    <td>{{$v->mername}}</td>
-                                    <td>{{$v->shoptitle}}</td>
-                                    <td>{{$v->username}}</td>
-                                    <td>{{$v->typeid}}</td>
-                                    <td>{{$v->city}}</td>
-                                    <td>{{$v->register_time}}</td>
-                                    <td><button onclick='window.location="{{url('admin/shop/detailCom')}}/{{$v->id}}"' class="btn btn-xs btn-danger">详情</button></td>
+                                    <td><?php echo e($v->id); ?></td>
+                                    <td><?php echo e($v->mername); ?></td>
+                                    <td><?php echo e($v->shoptitle); ?></td>
+                                    <td><?php echo e($v->username); ?></td>
+                                    <td><?php echo e($v->typeid); ?></td>
+                                    <td><?php echo e($v->city); ?></td>
+                                    <td><?php echo e($v->register_time); ?></td>
+                                    <td><button onclick='window.location="<?php echo e(url('admin/shop/detail')); ?>/<?php echo e($v->id); ?>"' class="btn btn-xs btn-danger">详情</button></td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </table>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        {{ $list->links() }}
+                        <?php echo e($list->links()); ?>
+
                     </div>
                 </div><!-- /.box -->
 
@@ -70,4 +71,5 @@
 
     </section><!-- /.content -->
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
