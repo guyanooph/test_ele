@@ -40,7 +40,6 @@ class RegisterController extends Controller
         $request->session()->put('num', $num);  // 存入session 后面做数据验证
         $result = $this->sms->send($phone, $name, $content, $code);
 
-        echo "<pre>";
         if (property_exists($request, 'result')) {            //？是否周全
             // 使用PHP函数json_encode方法将给定数组转化为JSON：
             return json_encode(['ResultData' => '发送成功', 'info' => '已发送']);

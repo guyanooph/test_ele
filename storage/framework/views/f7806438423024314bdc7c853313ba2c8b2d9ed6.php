@@ -6,20 +6,10 @@
 		<div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location="">
 			<span>当前位置:</span> <span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4sp1s1gff"
 			                                                     ubt-click="401" ng-bind="place.name || place.address"
-			                                                     href="/place/wx4sp1s1gff">昌平区回龙观云趣园一区(龙禧二街北160米)</a></span>
+			                                                     href="/?address=<?php echo e($location['address']); ?>&position=<?php echo e($location['position']); ?>"><?php echo e($location['address']); ?></a></span>
 			<span class="location-change location-hashistory"
 			      ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length > 0 }"><a
-						ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a><ul
-						class="dropbox location-dropbox" ubt-visit="398"><li class="arrow"></li>
-					<!-- ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-							ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4" class="ng-scope"><a
-								class="inherit ng-binding"
-								ng-href="/place/wx4sp1s1mpy0?latitude=40.086621&amp;longitude=116.328958"
-								ng-bind="userPlace.name" ubt-click="399"
-								href="/place/wx4sp1s1mpy0?latitude=40.086621&amp;longitude=116.328958">昌平区回龙观云趣园一区(龙禧二街北160米)</a></li>
-					<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-							class="changelocation"><a ng-href="/home" hardjump="" href="/home">修改收货地址<span
-									class="icon-location"></span></a></li></ul></span> <span ng-transclude=""></span>
+						ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a></span> <span ng-transclude=""></span>
 		</div>
 		<div class="place-search" role="search" search-input=""><label
 					for="globalsearch">搜索商家或美食</label><input id="globalsearch"
@@ -110,7 +100,7 @@
                             success:function(data){
                                 var str = "<div id=\"shoplistbody\" class=\"clearfix\" data=\"filteredRestaurants = (rstStream.restaurants | filter: rstStream.filter | filter: otherFilter | orderBy: [ '-is_opening', rstStream.orderBy || 'index' ])\" style=\"height: " + Math.ceil(data.length/4)*138 + "px\">";
                                 for(var i in data){
-                                    str += "<a href=\"/shoplist/" + data[i].shopid + "\" data-rst-id=\"1230868\" data-bidding=\"{'core':{'index':4,'target':{'restaurantId':1230868,'weight':170,'probability':170000.078125},'come_from':1,'next':{'restaurantId':147689928,'weight':100,'probability':100000.125}}}\" target=\"_blank\" class=\"rstblock\"><div class=\"rstblock-logo\"><img src=\"http://oslsovx4q.bkt.clouddn.com/upload/" + data[i].logo + "?imageMogr2/thumbnail/70x70\" width=\"70\" height=\"70\" alt=\""+ data[i].shopname +"\" class=\"rstblock-logo-icon\"><span class=\"rstblock-left-timeout\">" + data[i].service_time + " 分钟</span></div><div class=\"rstblock-content\"><div class=\"rstblock-title\">" + data[i].shopname + "</div><div class=\"starrating icon-star\"><span class=\"icon-star\" style=\"width:96%;\"></span></div><span class=\"rstblock-monthsales\">月售" + data[i].month_num + "单</span><div class=\"rstblock-cost\">配送费¥" + data[i].money + "</div><div class=\"rstblock-activity\"><i style=\"background:#fff;color:#999999;border:1px solid;padding:0;\">票</i></div></div></a>";
+                                    str += "<a href=\"/shoplist/" + data[i].shopid + "\" data-rst-id=\"1230868\" data-bidding=\"{'core':{'index':4,'target':{'restaurantId':1230868,'weight':170,'probability':170000.078125},'come_from':1,'next':{'restaurantId':147689928,'weight':100,'probability':100000.125}}}\" target=\"_blank\" class=\"rstblock\"><div class=\"rstblock-logo\"><img src=\"http://oslsovx4q.bkt.clouddn.com/upload/image" + data[i].logo + "?imageMogr2/thumbnail/70x70\" width=\"70\" height=\"70\" alt=\""+ data[i].shopname +"\" class=\"rstblock-logo-icon\"><span class=\"rstblock-left-timeout\">" + data[i].service_time + " 分钟</span></div><div class=\"rstblock-content\"><div class=\"rstblock-title\">" + data[i].shopname + "</div><div class=\"starrating icon-star\"><span class=\"icon-star\" style=\"width:96%;\"></span></div><span class=\"rstblock-monthsales\">月售" + data[i].month_num + "单</span><div class=\"rstblock-cost\">配送费¥" + data[i].money + "</div><div class=\"rstblock-activity\"><i style=\"background:#fff;color:#999999;border:1px solid;padding:0;\">票</i></div></div></a>";
                                 }
                                 str += "</div>";
                                 $("#shoplistcontainer").prepend(str);
@@ -142,9 +132,9 @@
 					</div>
 					<div class="rstblock-content">
 						<div class="rstblock-title"><?php echo e($vo->shopname); ?></div>
-						<div class="starrating icon-star"><span class="icon-star" style="width:100%;"></span></div>
+						<div class="starrating icon-star"><span class="icon-star" style="width:<?php echo e(($vo->rate/5)*100); ?>%;"></span></div>
 						<span class="rstblock-monthsales">月售<?php echo e($vo->month_num); ?>单</span>
-						<div class="rstblock-cost">配送费¥<?php echo e(5); ?></div>
+						<div class="rstblock-cost">配送费¥<?php echo e($vo->money); ?></div>
 						<div class="rstblock-cost">起送价¥<?php echo e($vo->givemoney); ?></div>
 						<div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
 									style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
