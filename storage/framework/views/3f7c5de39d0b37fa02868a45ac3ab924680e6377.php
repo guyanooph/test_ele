@@ -1727,7 +1727,7 @@
                 }else{
                     $("span.App-3Qabc").html("密码登录");
                     $("h1.ElemeHeader-center__Vl_mYE").html("短信登录");
-                    var login_div = "<form class=\"MessageLogin-2Z-d6\" action=\"doregister\" method=\"POST\"><section class=\"MessageLogin-FsPlX\"><input id=\"phone_num\" maxlength=\"11\" placeholder=\"手机号\" type=\"tel\"><button id=\"code_button\" disabled=\"disabled\" class=\"CountButton-3e-kd\">获取验证码</button></section><section class=\"MessageLogin-FsPlX\"><input maxlength=\"8\" placeholder=\"验证码\" type=\"tel\"></section></form><section class=\"MessageLogin-15xD9\">温馨提示：未注册饿了么帐号的手机号，登录时将自动注册，且代表您已同意<a href=\"//h5.ele.me/service/agreement/\" target=\"_blank\">《用户服务协议》</a></section><button onclick=\"submit(this)\" class=\"SubmitButton-2wG4T\">登录</button><!---->";
+                    var login_div = "<form class=\"MessageLogin-2Z-d6\" action=\"doregister\" method=\"POST\"><section class=\"MessageLogin-FsPlX\"><input id=\"phone_num\" maxlength=\"11\" placeholder=\"手机号\" type=\"tel\"><button id=\"code_button\" disabled=\"disabled\" class=\"CountButton-3e-kd\">获取验证码</button></section><section class=\"MessageLogin-FsPlX\"><input maxlength=\"8\" placeholder=\"验证码\" type=\"tel\"></section></form><section class=\"MessageLogin-15xD9\">温馨提示：未注册饿了么帐号的手机号，登录时将自动注册，且代表您已同意<a href=\"//h5.ele.me/service/agreement/\" target=\"_blank\">《用户服务协议》</a></section><button onclick=\"dosubmit(this)\" class=\"SubmitButton-2wG4T\">登录</button><!---->";
                     $("div.App-2KuIB").html(login_div);
                     $("div.App-2KuIB form").append(csrf);
                 };
@@ -1736,7 +1736,7 @@
         <section class="MessageLogin-15xD9">
             温馨提示：未注册饿了么帐号的手机号，登录时将自动注册，且代表您已同意<a href="//h5.ele.me/service/agreement/" target="_blank">《用户服务协议》</a>
         </section>
-        <button class="SubmitButton-2wG4T" onclick="dosubmit()">
+        <button class="SubmitButton-2wG4T" onclick="dosubmit(this)">
             登录
         </button><!----></div>
     <div class="App-3T916"><span>关于我们</span></div>
