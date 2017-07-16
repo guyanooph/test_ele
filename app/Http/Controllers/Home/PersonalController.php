@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Personal;
-use App\Models\Order;
+use App\Models\Orders;
 use App\Models\Order_details;
 use App\Models\User_info;
 use App\Models\Collect;
@@ -23,7 +23,7 @@ class PersonalController extends Controller
 		//$list = Personal::find();		
         $user = $request->session()->get("user");
 		//dd($user);
-	    $order = order::where('userid',$user->id)->orderBy('create_time','rsort')->get();
+	    $order = orders::where('userid',$user->id)->orderBy('create_time','rsort')->get();
 		//dd($order);
 		//$login_user = login_user::where('username',$login->id)->get();
 		$info = personal::first();
@@ -59,7 +59,7 @@ class PersonalController extends Controller
 	{
 		//$userid = \Session::get("user")->id();
         $userid = $request->session()->get('user');
-		$order=Order::where('userid',$userid->id)->get();
+		$order=Orders::where('userid',$userid->id)->get();
 		return view('home.personal.order',['order'=>$order]);
 		//return view('home.personal.order');
 	}
@@ -67,14 +67,14 @@ class PersonalController extends Controller
      //待评价订单
 	public function orderUnrated()
 	{
-		$orderUnrated=Order::where('status',1)->get();
+		$orderUnrated=Orders::where('status',1)->get();
 		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated]);
 	}
 
      //退单记录
 	public function orderRefund()
 	{
-		$orderRefund=Order::where('status',2);
+		$orderRefund=Orders::where('status',2);
 		return view('home.personal.orderRefund',['orderRefund'=>$orderRefund]);
 	}
 
@@ -116,6 +116,13 @@ class PersonalController extends Controller
 	} 
 	
 	
+	//账户余额
+	public function balance()
+	{
+		$balance=Orders::where('status',2);
+		return view('home.personal.balance',['balance'=>$balance]);
+	}
+	
 	/*
 	
     public function test()
@@ -123,11 +130,38 @@ class PersonalController extends Controller
         return view("home.personal.personal_8");
     } */
 	
-	//账户余额
-	public function balance()
+	
+	
+	//服务中心
+	public function fuwu()
 	{
-		$balance=Order::where('status',2);
-		return view('home.personal.balance',['balance'=>$balance]);
+		return view('home.personal.fuwu');
 	}
+	
+	//规则中心
+	public function guize()
+	{
+		return view('home.personal.guize');
+	}
+	
+	//常见问题
+	public function wenti()
+	{
+		return view('home.personal.wenti');
+	}
+	
+	//饿了么介绍
+	public function jieshao()
+	{
+		return view('home.personal.jieshao');
+	}
+	
+	//联系我们
+	public function lianxi()
+	{
+		return view('home.personal.lianxi');
+	}
+	
+	
 	
 }

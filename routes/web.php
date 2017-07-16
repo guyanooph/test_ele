@@ -64,10 +64,17 @@ Route::group(['middleware'=>'location'], function(){
 		Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
     	Route::get('/logout','Home\PersonalController@logout'); //退出登录
     
+	  
     });
 });
-
-
+ 
+  // 页头页尾小链接
+  Route::get("/guize" , "home\PersonalController@guize"); //规则中心
+  Route::get("/fuwu" , "home\PersonalController@fuwu"); //服务中心
+  Route::get("/weiti" , "home\PersonalController@wenti"); //常见问题
+  Route::get("/lianxi" , "home\PersonalController@lianxi"); //联系我们
+  Route::get("/jieshao" , "home\PersonalController@jieshao"); //饿了么介绍
+  
 //后台路由组
 Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
 Route::get('/ad/getcode',"Admin\LoginController@getCode");//加载验证码
