@@ -29,9 +29,9 @@
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
 
-    <link href="//faas.elemecdn.com/desktop/vendor.0cb970.css" rel="stylesheet">
+    <link href="{{ asset('css/vendor.0cb970.css') }}" rel="stylesheet">
     
-    <link href="//faas.elemecdn.com/desktop/main.5e33c3.css" rel="stylesheet">
+    <link href="{{ asset('css/main.5e33c3.css') }}" rel="stylesheet">
 
     <script src="{{ asset('js/jquery-1.8.3.min.js') }}" type="text/javascript" crossorigin="anonymous"></script>
     <base href="/">
@@ -62,21 +62,44 @@
  <div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用<div class="dropbox topbar-mobile-dropbox">
  <span>扫一扫, 手机订餐更方便</span>
  <img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div></div>
- <div topbar-profilebox=""><div class="topbar-profilebox">
- <img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26">
- <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span> 
- <span ng-show="!$root.user.username" class="ng-hide">
- <a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2F150045824" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fshop%2F150045824">登录/注册</a></span>
- <span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
- <span class="topbar-profilebox-username ng-binding">guyanooph</span>
- <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
- <div class="dropbox topbar-profilebox-dropbox">
- <a class="icon-profile" href="/personal" hardjump="">个人中心</a> 
- <a class="icon-star" href="/personal/collect" hardjump="">我的收藏</a>
- <a class="icon-location" href="/personal/address" hardjump="">我的地址</a>
- <a class="icon-setting" href=" " hardjump="">安全设置</a>
- <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
- </div></span></div></div></nav></div></header></div></div>
+ <div topbar-profilebox="">
+
+
+<div class="topbar-profilebox">
+
+@if(empty($user))
+                            <!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> 
+                                <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span> 
+                                <span ng-show="!$root.user.username" class="">
+                                    <a ng-href="{{ url('/login')}}" target="_blank" href="{{ url('/login') }}">登录/注册</a>
+                                </span>
+                                <span class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> 
+                                    <span class="topbar-profilebox-username ng-binding"></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
+                                    <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' -->
+                                    <div class="dropbox topbar-profilebox-dropbox">
+                                        <a class="icon-profile" href="/profile" hardjump="">个人中心</a>
+                                        <a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a>
+                                        <a class="icon-location" href="/profile/address" hardjump="">我的地址</a>
+                                        <a class="icon-setting" href="/profile/security" hardjump="">安全设置</a>
+                                        <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
+                                    </div>
+                                </span>
+                            @else
+                                <img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/26x26"><!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' -->
+                                <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span>
+                                <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a>
+                                </span>
+                                <span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' -->
+                                    <span class="topbar-profilebox-username ng-binding">{{ $user->username }}</span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
+                                    <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' -->
+                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="{{ url('/personal') }}" hardjump="">个人中心</a> <a class="icon-star" href="{{ url('/personal/col') }}" hardjump="">我的收藏</a> <a class="icon-location" href="{{ url('/personal/address') }}" hardjump="">我的地址</a> <a class="icon-setting" href="{{ url('/personal/security') }}" hardjump="">安全设置</a> <a class="icon-logout" href="{{ url('/logout') }}" ng-click="logout()">退出登录</a>
+                                    </div>
+                                </span>
+                            @endif
+
+
+</div>
+</div></nav></div></header></div></div>
 
 
 

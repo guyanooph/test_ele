@@ -13,6 +13,7 @@ class FoodController extends Controller
 	public function index(Request $request,$id)
 	{
 
+        $user = $request->session()->get('user');
 		$ob = Merchant::where("shopid",$id)->first();
         //添加购物车到session
         //dd($shopcart);
