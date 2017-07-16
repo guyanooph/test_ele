@@ -38,7 +38,7 @@ class ShopController extends Controller
             return view('home.shop.shoplist', compact('list','user','type','type_json','location'));
         }elseif($request->input("location")){
             $position = $request->input("location");
-            $request->session()->put("location", ['position' => $request->input("location"), 'address' => $request->input("address")]);
+            $request->session()->put("location", ['position' => $request->input("position"),'city' =>$request->input("city"),'address' => $request->input("address")]);
 
             //用私有方法加载附近商家
             $list = $this->loadShops($request, $position);

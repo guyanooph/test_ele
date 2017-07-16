@@ -57,7 +57,8 @@ Route::group(['middleware'=>'location'], function(){
     	Route::get('/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
     	Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
     	Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
-    	Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
+    	Route::get('/address','Home\PersonalController@address'); //个人中心/地址
+		ROute::get('/address/edit/{id}','Home\PersonalController@editAddress');
     	
     	Route::get('/security','Home\PersonalController@security'); //安全中心
 		Route::get('/changepassword','Home\PersonalController@changepassword');//修改密码

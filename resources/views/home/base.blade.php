@@ -75,7 +75,7 @@
 			                                                                                                 hardjump=""
 			                                                                                                 class="topbar-item topbar-homepage focus"
 			                                                                                                 ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
-	<a href="/profile/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> 
+	<a href="/posernal/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> 
 	<a href="" target="_blank" class="topbar-item cooperation">加盟合作</a>
 	<nav class="topbar-nav">
 	<a href="" hardjump="" class="topbar-nav-link" target="_blank">

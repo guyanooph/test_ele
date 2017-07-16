@@ -23,7 +23,7 @@ class LocationController extends Controller
     
     public function setLocationSession(Request $request)
     {
-        $location = $request->only("address", "position");
+        $location = $request->only("address","city", "position");
         $request->session()->put("location", $location);
         return redirect("/");
     }

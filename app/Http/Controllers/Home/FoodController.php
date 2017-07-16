@@ -38,7 +38,7 @@ class FoodController extends Controller
 		$shopcart = $request->session()->get("shopcart");
         //dd($shopcart);
         //unset($shopcart[1]['shopcart'][1]);
-		return view('home.food.foodlist', ['type_list'=>$food_type,'ob'=>$ob, 'shopcart'=>$shopcart[$id]]);
+		return view('home.food.foodlist', ['type_list'=>$food_type,'ob'=>$ob, 'shopcart'=>$shopcart[$id],'user' => $user]);
 	}
 
 	

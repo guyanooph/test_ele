@@ -109,7 +109,7 @@
 										href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F">登录/注册</a></span>
 							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
 							
-							<span class="topbar-profilebox-username ng-binding">???</span>
+							<span class="topbar-profilebox-username ng-binding">{{ $user->username }}</span>
 								<!-- ngIf: $root.topbarType === 'checkout' -->
 								<!-- ngIf: $root.topbarType !== 'checkout' --><span
 										class="topbar-profilebox-btn icon-arrow-down ng-scope"
@@ -166,38 +166,10 @@
 			<div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location=""><span>当前位置:</span>
 				<span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4sp1s1gff"
 				                                  ubt-click="401" ng-bind="place.name || place.address"
-				                                  href="/place/wx4sp1s1gff">昌平区回龙观云趣园一区(龙禧二街北160米)</a></span> <span
+				                                  href="/place/wx4sp1s1gff">{{ $location['address'] }}</a></span> <span
 						class="location-change location-hashistory"
 						ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length > 0 }"><a
-							ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a><ul
-							class="dropbox location-dropbox" ubt-visit="398"><li class="arrow"></li>
-						<!-- ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4"
-								class="ng-scope"><a class="inherit ng-binding"
-						                            ng-href="/place/wx4sp1s1mpy0?latitude=40.086621&amp;longitude=116.328958"
-						                            ng-bind="userPlace.name" ubt-click="399"
-						                            href="/place/wx4sp1s1mpy0?latitude=40.086621&amp;longitude=116.328958">昌平区回龙观云趣园一区(龙禧二街北160米)</a></li>
-						<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4"
-								class="ng-scope"><a class="inherit ng-binding"
-						                            ng-href="/place/wx4ffqcw2pk?latitude=39.89659&amp;longitude=116.46813"
-						                            ng-bind="userPlace.name" ubt-click="399"
-						                            href="/place/wx4ffqcw2pk?latitude=39.89659&amp;longitude=116.46813">朝阳区A派公寓(苹果社区西南90米)</a></li>
-						<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4"
-								class="ng-scope"><a class="inherit ng-binding"
-						                            ng-href="/place/wwf1kz9qs9x?latitude=38.2308&amp;longitude=115.52316"
-						                            ng-bind="userPlace.name" ubt-click="399"
-						                            href="/place/wwf1kz9qs9x?latitude=38.2308&amp;longitude=115.52316">安平县安平镇安盛小区(平安公园西120米)</a></li>
-						<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4"
-								class="ng-scope"><a class="inherit ng-binding"
-						                            ng-href="/place/wx4dygtmtbm?latitude=39.87857&amp;longitude=116.31972"
-						                            ng-bind="userPlace.name" ubt-click="399"
-						                            href="/place/wx4dygtmtbm?latitude=39.87857&amp;longitude=116.31972">丰台区六里桥首科花园(北京西站南路西)</a></li>
-						<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								class="changelocation"><a ng-href="/home" hardjump="" href="/home">修改收货地址<span
-										class="icon-location"></span></a></li></ul></span> <span ng-transclude=""><i
+							ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a></span> <span ng-transclude=""><i
 							class="icon-arrow-right ng-scope"></i><span class="ng-binding ng-scope">个人中心</span></span>
 			</div>
 			<div search-input=""></div>
@@ -253,7 +225,7 @@
 							<a href="/profile/info" class="profile-edit">编辑资料</a></div>
 						<div class="profile-perosondata">
 						
-						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">???</strong></h3>
+						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">{{ $user->username }}</strong></h3>
 							<p class="profile-tips ng-binding" ng-bind="timeSection.tipText">祝你一天好心情！</p>
 							<p class="profile-security">账户安全：<span
 										ng-class="{'low': level === 0, 'mid': level === 1, 'high': level ===2 || level ===3}"

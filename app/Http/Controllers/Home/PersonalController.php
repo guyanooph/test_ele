@@ -19,16 +19,16 @@ class PersonalController extends Controller
 {
     public function index(Request $request)
 	{
-			
+		$location = $request->session()->get('location');
 		//$list = Personal::find();		
         $user = $request->session()->get("user");
 		//dd($user);
 	    $order = orders::where('userid',$user->id)->orderBy('create_time','rsort')->get();
 		//dd($order);
 		//$login_user = login_user::where('username',$login->id)->get();
-		$info = personal::first();
+		$info = personal::where('userid',$user->id)->first();
 		//var_dump($info);
-		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info]);
+		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info, 'location' => $location]);
 	}
 
 	public function userInfo(Request $request)
@@ -41,11 +41,33 @@ class PersonalController extends Controller
 	//地址
 	public function address(Request $request)
 	{
-		$user=$request->session()->get('user');
+		$user = $request->session()->get('user');
 		$userInfo=User_info::where("userid",$user->id)->first();
-		$address=$userInfo->address;dd($user);
-		return view('home.personal.address',['address'=>$address]);
+		$location = $request->session()->get('location');
+		//$address=$userInfo->address;
+		$address = Address::where('userid', $user->id)->get();
+		//dd($user);
+		return view('home.personal.address',['address'=>$address,'user' => $user, 'location' => $location]);
 	}
+	
+	public function delAddress(){
+		
+	}
+	
+	public function addAddress(){
+		
+	}
+	
+	public function editAddress(Request $request, $id){
+		
+		$address = Address::findOrFail($id)->toArray();
+		if($address['userid'] != $request->session()->get('user')->id){
+			return "false";
+		}
+		
+		return json_encode($address);
+	}
+	
     /* public function index($id)
 	{
 		$userid = user_info::where('userid',$id)->first();

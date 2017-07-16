@@ -81,7 +81,7 @@
 				<div class="map-navbar clearfix hasuserinfo" ng-class="{hasuserinfo: $root.user.user_id}">
 					<div id="mapCityToggle" map-city="" hide-search-result="hideSearchResult" current-city="currentCity"
 					     class="map-city ng-isolate-scope" map-mode="mapMode">
-						<a onclick="showcity()" id="the_city"  class="mapcity-current ng-binding" href="javascript:" ng-bind="mapCity.current.name"
+						<a onclick="showcity()" id="the_city" city="北京"  class="mapcity-current ng-binding" href="javascript:" ng-bind="mapCity.current.name"
 						   ng-click="mapCity.toggle($event)">北京</a>
 						<!-- ngIf: mapCity.showCities -->
                         <!-- 这里放置城市列表，由js获取后台传过来的数据json后，再由js加工输出到这里大概有1万多行。。。 -->
@@ -137,6 +137,7 @@
     function select(ob) {
         document.getElementById("position_input").value = ob.firstChild.innerHTML;
         $("#search_form").append("<input type='hidden' name='position' value='" + ob.firstChild.attributes[0].textContent + "' />");
+        $("#search_form").append("<input type='hidden' name='city' value='" + $("#the_city").attr("city") + "' />");
         $("#search_form").append("<input type='hidden' name='address' value='" + ob.firstChild.attributes[1].textContent + "' />");
         $("div.mapsearch-suggestlist ul").remove();
         $("#search_form").submit();
@@ -173,6 +174,7 @@
 
     function select_city(obj) {
         document.getElementById("the_city").innerHTML = obj.innerHTML;
+		$("#the_city").attr("city", obj.innerHTML)
         $("#city_list").remove();
     }
 
