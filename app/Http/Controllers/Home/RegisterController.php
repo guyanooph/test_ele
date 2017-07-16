@@ -73,7 +73,7 @@ class RegisterController extends Controller
                 return redirect("/shoplist");
             }
         }else{
-            die("false");
+            die('false');
         }
         //2.比对成功则检查数据库是否存在本手机号
         //3.比对失败则提示验证码错误

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="eleme" perf-error="desktop/personal/" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+<html ng-app="eleme" perf-error="desktop/personal/" class="ng-scope"><head><style type="text/css">@charset  "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
     
@@ -29,20 +29,20 @@
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
 
-    <link href="{{ asset('css/vendor.0cb970.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/vendor.0cb970.css')); ?>" rel="stylesheet">
     
-    <link href="{{ asset('css/profile.d8f427.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/profile.d8f427.css')); ?>" rel="stylesheet">
     
 
     <!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
 
     <script src="//crayfish.elemecdn.com/www.ele.me@ref/api" data-ref="API_CONFIG"></script>
-	<script src={{ asset('js/jquery-1.8.3.min.js') }}></script>
+	<script src=<?php echo e(asset('js/jquery-1.8.3.min.js')); ?>></script>
     <base href="/profile/">
   <meta name="mobile-agent" content="undefined"><meta name="description" content="饿了么是中国专业的网上订餐平台，目前已覆盖北京、上海、杭州、广州等300多个城市，提供各类中式、日式、韩式、西式、下午茶、夜宵等优质美食，并提供送餐上门服务，让订餐更加轻松，叫外卖就上饿了么！"><meta name="keywords" content="饿了么，网上订餐，外卖，快餐外卖，外卖网"></head>
   <body cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" style="position: relative;">
   
-    <div ng-switch="state.type" state="layoutState" class="ng-isolate-scope"><!-- ngSwitchWhen: checkout --><!-- ngSwitchDefault:  --><div ng-switch-default="" topbar-default="" state="state" class="ng-scope ng-isolate-scope"><header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}"><div class="container clearfix"><h1><a href="/" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1><a href="/" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a> <a href="/profile/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> <a href="//h5.ele.me/service/cooperation/" target="_blank" class="topbar-item cooperation">加盟合作</a><nav class="topbar-nav"><a href="/support/center" hardjump="" class="topbar-nav-link" target="_blank"><i class="topbar-nav-icon icon-service"></i>服务中心</a> <a href="/support/rules/default" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a><div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span> <img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div></div><div topbar-profilebox=""><div class="topbar-profilebox"><!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --><img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="{{asset('img/1.jpg')}}"><!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span> <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2Forder%2Frate%2F1210298076154399882" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2Forder%2Frate%2F1210298076154399882">登录/注册</a></span> <span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> <span class="topbar-profilebox-username ng-binding">guyanooph</span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' --><span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' --><div class="dropbox topbar-profilebox-dropbox">
+    <div ng-switch="state.type" state="layoutState" class="ng-isolate-scope"><!-- ngSwitchWhen: checkout --><!-- ngSwitchDefault:  --><div ng-switch-default="" topbar-default="" state="state" class="ng-scope ng-isolate-scope"><header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}"><div class="container clearfix"><h1><a href="/" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1><a href="/" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a> <a href="/profile/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> <a href="//h5.ele.me/service/cooperation/" target="_blank" class="topbar-item cooperation">加盟合作</a><nav class="topbar-nav"><a href="/support/center" hardjump="" class="topbar-nav-link" target="_blank"><i class="topbar-nav-icon icon-service"></i>服务中心</a> <a href="/support/rules/default" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a><div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span> <img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div></div><div topbar-profilebox=""><div class="topbar-profilebox"><!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --><img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="<?php echo e(asset('img/1.jpg')); ?>"><!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span> <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2Forder%2Frate%2F1210298076154399882" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2Forder%2Frate%2F1210298076154399882">登录/注册</a></span> <span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> <span class="topbar-profilebox-username ng-binding">guyanooph</span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' --><span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' --><div class="dropbox topbar-profilebox-dropbox">
 	<a class="icon-profile" href="/personal" hardjump="">个人中心</a> 
 	<a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a> 
 	<a class="icon-location" href="/personal/address" hardjump="">我的地址</a>
@@ -98,9 +98,9 @@
   
   
   <div ng-view="" role="main" class="ng-scope">
-      @section('content')
+      <?php $__env->startSection('content'); ?>
             这是页面内容区。
-      @show
+      <?php echo $__env->yieldSection(); ?>
     </div>
   
   

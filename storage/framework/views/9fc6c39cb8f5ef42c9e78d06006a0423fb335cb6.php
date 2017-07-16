@@ -53,6 +53,7 @@
 	<link href="<?php echo e(asset('css/vendor.0cb970.css')); ?>" rel="stylesheet">
 
 	<link href="<?php echo e(asset('css/main.5e33c3.css')); ?>" rel="stylesheet">
+    <script src="<?php echo e(asset('js/jquery-1.8.3.min.js')); ?>"></script>
 
 
 	<!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
@@ -128,10 +129,10 @@
 						<span class="topbar-profilebox-username ng-binding"></span>
 						<span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span>
 						<div class="dropbox topbar-profilebox-dropbox">
-						<a class="icon-profile" href="/profile" hardjump="">个人中心</a>
-						<a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a>
-						<a class="icon-location" href="/profile/address" hardjump="">我的地址</a>
-						<a class="icon-setting" href="/profile/security" hardjump="">安全设置</a>
+						<a class="icon-profile" href="/personal" hardjump="">个人中心</a>
+						<a class="icon-star" href="/personal/collect" hardjump="">我的收藏</a>
+						<a class="icon-location" href="/personal/address" hardjump="">我的地址</a>
+						<a class="icon-setting" href="/personal/security" hardjump="">安全设置</a>
 						<a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
 					    </div></span>
 						 </div>

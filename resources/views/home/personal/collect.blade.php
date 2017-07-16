@@ -1,0 +1,18 @@
+@extends("home.index")
+ @section("content")
+ <div class="profile-panel" role="main">
+ <!-- ngIf: pageTitleVisible -->
+ <h3 ng-if="pageTitleVisible" class="profile-paneltitle ng-scope"><span ng-bind="pageTitle" class="ng-binding">我的收藏</span> <span class="subtitle ng-binding" ng-bind-html="pageSubtitle | toTrusted"></span></h3>
+ <!-- end ngIf: pageTitleVisible -->
+ <div class="profile-panelcontent" ng-transclude="">
+ <div class="loading ng-binding ng-isolate-scope ng-hide" loading="" content="正在载入商家信息..." ng-show="favorLoading">
+ <!-- ngIf: type==='profile' -->
+ <img ng-if="type==='profile'" src="//faas.elemecdn.com/desktop/media/img/profile-loading.4984fa.gif" alt="正在加载" class="ng-scope">
+ <!-- end ngIf: type==='profile' --> <!-- ngIf: type==='normal' -->
+ 正在载入商家信息...</div>
+ <div class="favor-restaurants ng-scope" ng-show="!favorLoading">
+ <h4 class="favor-title">当前区域共有<span ng-bind="inRegionFavors.length || 0" class="ng-binding">4</span>家可配送商家</h4>
+ <div class="clearfix"><div class="favor-rstblock" ng-class="{'outofregion':outofregion}" favor-rst-block="" ng-repeat="restaurant in inRegionFavors"><div class="favor-rstblock-header"><div class="favor-rstblock-headerbg" ng-style="{'background-image': 'url(' + backgroundUrl + ')'}" style="background-image: url(&quot;//faas.elemecdn.com/desktop/media/img/favor-rst-bg1.804470.jpg&quot;);"></div><a class="favor-rstblock-name ng-binding" ng-bind="restaurant.name" ng-href="/shop/1358369" title="前往食尚披萨" href="/shop/1358369">食尚披萨</a><!-- ngIf: !restaurant.is_opening && !outofregion --><!-- ngIf: restaurant.status === 5 && !outofregion --></div><a ng-href="/shop/1358369" title="前往食尚披萨" href="/shop/1358369"><img ng-src="//fuss10.elemecdn.com/6/ee/09cdd2445e1e26dbafe102104822ajpeg.jpeg?imageMogr2/thumbnail/78x78/format/webp/quality/85" class="favor-rstblock-logo" alt="商家 LOGO" src="//fuss10.elemecdn.com/6/ee/09cdd2445e1e26dbafe102104822ajpeg.jpeg?imageMogr2/thumbnail/78x78/format/webp/quality/85"></a><div class="favor-rstblock-starrating icon-star"><span class="icon-star" ng-style="{ width: (restaurant.rating * 20) + '%' }" style="width: 88%;"></span></div><span class="favor-rstblock-monthsales ng-binding" ng-bind="'月售' + restaurant.recent_order_num + '单'">月售558单</span><div class="favor-rstblock-content"><div class="favor-rstblock-item"><p>起送价</p><p class="value icon-yen ng-binding" ng-bind="restaurant.float_minimum_order_amount">0</p></div><div class="favor-rstblock-item"><p>送餐时间</p><p class="value time ng-binding" ng-bind="restaurant.order_lead_time_text ||  0">45+</p></div></div><div class="favor-rstblock-activity"><!-- ngRepeat: activity in restaurant.activities | limitTo: 8 --><i ng-repeat="activity in restaurant.activities | limitTo: 8" ng-bind="activity.icon_name" class="icon ng-binding ng-scope ng-isolate-scope" favor-activity-icon="" name="activity.icon_name" color="activity.icon_color" style="color: rgb(153, 153, 153); border: 1px solid rgb(153, 153, 153); background-color: transparent;">票</i><!-- end ngRepeat: activity in restaurant.activities | limitTo: 8 --> <i class="favor-rstblock-cancel icon-trash" ng-click="showRemoveMask($index)"></i></div></div></div></div>
+ <div class="favor-restaurants ng-scope" ng-show="!favorLoading"><h4 class="favor-title">当前区域不可配送的商家</h4><div class="clearfix"><!-- ngRepeat: restaurant in outOfRegionFavors --><!-- ngIf: !outOfRegionFavors.length --><div class="nodata ng-isolate-scope" ng-if="!outOfRegionFavors.length" nodatatip="" content="暂无不可配送商家"><p class="nodata-container ng-binding" ng-bind-html="content | toTrusted">暂无不可配送商家</p></div><!-- end ngIf: !outOfRegionFavors.length --></div></div></div></div>
+ @endsection 
+ 

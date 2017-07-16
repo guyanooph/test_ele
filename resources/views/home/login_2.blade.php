@@ -1710,7 +1710,7 @@
             }
 
             function dosubmit(ob){
-                $(ob).parent().children("form").submit();
+                    $(ob).parent().children("form").submit();
             }
 
             function togglePassMes(){
@@ -1735,7 +1735,7 @@
         <section class="MessageLogin-15xD9">
             温馨提示：未注册饿了么帐号的手机号，登录时将自动注册，且代表您已同意<a href="//h5.ele.me/service/agreement/" target="_blank">《用户服务协议》</a>
         </section>
-        <button class="SubmitButton-2wG4T" onclick="dosubmit()">
+        <button class="SubmitButton-2wG4T" onclick="dosubmit(this)">
             登录
         </button><!----></div>
     <div class="App-3T916"><span>关于我们</span></div>

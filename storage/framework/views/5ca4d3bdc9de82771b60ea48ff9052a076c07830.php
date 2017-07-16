@@ -232,6 +232,7 @@
 				<ul>
 					<li ng-class="{ active: pageName === 'info' }"><a href="/personal/info">个人资料</a></li>
 					<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address">地址管理</a></li>
+					<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address">地址管理</a></li>
 					<li ng-class="{ active: pageName === 'security-center' }"><a href="">安全中心</a></li>
 					<li ng-class="{ active: pageName === 'changepassword' }"><a href="">修改密码</a>
 					</li>
@@ -335,7 +336,7 @@
 				</div>
 				<div class="profile-footprint ng-scope">
 					<div class="tabnavigation"><a class="tabnavigation-navitem active">美食足迹</a> <a
-								class="tabnavigation-navitem" href="/profile/favor">我的收藏</a>
+								class="tabnavigation-navitem" href="/personal/collect">我的收藏</a>
 						<div class="tabnavigation-rightitem ng-scope ng-binding simplepagination" simplepagination=""
 						     pagination-context="restaurantContext" ng-show="restaurantContext.data.length">1/1 <span
 									class="pre-btn icon-profile-left-arrow disable"
