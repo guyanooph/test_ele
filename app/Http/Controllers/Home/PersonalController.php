@@ -33,8 +33,8 @@ class PersonalController extends Controller
 
 	public function userInfo(Request $request)
 	{
-		$user=$request->session()->get('user');
-		$userInfo=User_info::where("userid",$user->id)->first();
+		$user = $request->session()->get('user');
+		$userInfo = User_info::where("userid",$user->id)->first();
 		return view('home.personal.userinfo',['userInfo'=>$userInfo]);
 	}
 	
@@ -43,7 +43,7 @@ class PersonalController extends Controller
 	{
 		$user=$request->session()->get('user');
 		$userInfo=User_info::where("userid",$user->id)->first();
-		$address=$userInfo->address;
+		$address=$userInfo->address;dd($user);
 		return view('home.personal.address',['address'=>$address]);
 	}
     /* public function index($id)
@@ -84,32 +84,46 @@ class PersonalController extends Controller
 		$packet = packet::all();
 		return view('home.personal.red_packet',['packet'=>$packet]);
 	}
-
-	/*
+	
     //我的 评分/积分
 	public function score()
 	{
 		$score=score::where('userid',1);
 		return view('home.personal.score',['score'=>$score]);
 	}
-
-	//收集
+	
+	//安全中心
+	public function security()
+	{
+		
+		return view('home.personal.security');
+	}
+	
+	
+	// 修改密码
+	public function changepassword()
+	{
+		
+		return view('home.personal.changepassword');
+	}
+	
+	
+	// 个人收藏
 	public function collect()  
 	{
 		$collect=Collect::all();
 		return view('home.personal.collect',['collect'=>$collect]);
-	}
-
+	} 
 	
-
 	
-    
+	/*
+	
     public function test()
     {
         return view("home.personal.personal_8");
     } */
 	
-	
+	//账户余额
 	public function balance()
 	{
 		$balance=Order::where('status',2);

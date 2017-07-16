@@ -48,9 +48,11 @@ Route::group(['middleware'=>'location'], function(){
     	Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
     	Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
     	Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
-    	Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
-    	Route::get('/security','Home\PersonalController@security'); //安全设置
-    	Route::get('/logout','Home\PersonalController@logout'); //安全设置
+    	
+    	Route::get('/security','Home\PersonalController@security'); //安全中心
+		Route::get('/changepassword','Home\PersonalController@changepassword');//修改密码
+		Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
+    	Route::get('/logout','Home\PersonalController@logout'); //退出登录
     
     });
 });

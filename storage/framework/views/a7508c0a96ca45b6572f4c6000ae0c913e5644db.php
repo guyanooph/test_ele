@@ -211,7 +211,7 @@
 			<i class="icon-line-order"></i>我的订单
 				</h2>
 				<ul>
-					<li ng-class="{ active: pageName === 'order' }"><a href="/order">近三个月订单</a></li>
+				    <li ng-class="{ active: pageName === 'order' }"><a href="/personal/order">近三个月订单</a></li>
 					<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/personal/order/unrated">待评价订单
 							<!-- ngIf: unratedNumber --></a></li>
 					<li ng-class="{ active: pageName === 'order-refunding' }"><a href="/personal/order/refund">退单记录</a>
@@ -304,16 +304,18 @@
 		</div>
 		
 		<!-- ngRepeat: order in recentOrder -->
+		<?php $__currentLoopData = $order; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 		<div class="orderblock ng-isolate-scope" ng-repeat="order in recentOrder" data="{ $order: order }">
 		
 		<div class="orderblock-item orderblock-rstinfo clearfix">
+		
 		<a class="logo" ng-href="/shop/895073" href="/shop/895073">
 		<img ng-src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85" alt="商家 LOGO" src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"></a>
-		<?php $__currentLoopData = $order; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+		
 		 <h3 class="name">
 		 <a class="inherit ng-binding" ng-bind="order.restaurant_name"
 		 ng-href="/shop/895073" href=""><?php echo e($dd->shop_name); ?></a></h3>
-			<p class="product ng-binding" ng-bind="order.product">麻辣花蛤（500g）2份 / 麻辣蛏子（500g）1份</p>
+			<p class="product ng-binding" ng-bind="order.product"><?php echo e($dd->description); ?></p>
 			<a class="productnum" ng-href="order/id/1209253485556894798" href="order/id/1209253485556894798">共
 			<i class="count ng-binding" ng-bind="order.productnum"><?php echo e($dd->goods_num); ?></i>个菜品&gt;</a>
 			</div>
@@ -327,11 +329,13 @@
 			 <a class="statuslink ng-binding" ng-href="order/id/1209253485556894798"
 				ng-bind="order.realStatus === 4 ? '立即评价' : '订单详情'"
 				href="order">订单详情</a></div>
-	   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+	   
 		</div>
 		
+		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+		<!-- ngIf: !recentOrder.length && !orderLoading -->
+		</div>
 		
-		<!-- ngIf: !recentOrder.length && !orderLoading --></div>
 				</div>
 				<div class="profile-footprint ng-scope">
 					<div class="tabnavigation"><a class="tabnavigation-navitem active">美食足迹</a> <a

@@ -4,7 +4,7 @@
  <div class="profile-panelcontent" ng-transclude="">
  <div class="tabnavigation higher ng-scope">
  <a ng-class="{'active': index === 'effective'}" class="tabnavigation-navitem active" ng-click="changeTab('effective')">可用红包</a>
- <a ng-class="{'active': index === 'expired'}" class="tabnavigation-navitem" ng-click="changeTab('expired')">历史红包</a>
+ 
  <button class="btn-primary hongbao-exchangebtn" dialog-trigger="exchangehongbao">兑换红包</button>
  </div>
  

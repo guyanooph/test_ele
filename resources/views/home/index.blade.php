@@ -64,11 +64,15 @@
 	<li class="profile-sidebar-section">
 	<h2 class="profile-sidebar-sectiontitle"><i class="icon-line-order"></i>我的订单</h2>
 	<ul>
-	<li ng-class="{ active: pageName === 'order' }"><a href="/personal/order">近三个月订单</a></li>
+	<li ng-class="{ active: pageName === 'order' }">
+	<a href="/personal/order">近三个月订单</a></li>
+	
 	<li ng-class="{ active: pageName === 'order-unrated' }" class="active">
 	<a href="/personal/order">待评价订单</a></li>
+	
 	<li ng-class="{ active: pageName === 'order-refunding' }">
-	<a href="/personal/order/refund">退单记录</a></li></ul></li>
+	<a href="/personal/order/refund">退单记录</a></li>
+	</ul></li>
 	<li class="profile-sidebar-section">
 	<h2 class="profile-sidebar-sectiontitle">
 	<i class="icon-yen"></i>我的资产</h2>
@@ -77,7 +81,7 @@
 	<li ng-class="{ active: pageName === 'balance' }">
 	<a href="/personal/balance">账户余额</a></li>
 	<li ng-class="{ active: pageName === 'points' }">
-	<a href="/personal/points">我的积分</a></li></ul></li>
+	<a href="/personal/score">我的积分</a></li></ul></li>
 	<li class="profile-sidebar-section">
 	<h2 class="profile-sidebar-sectiontitle"><i class="icon-line-profile"></i>我的资料</h2>
 	<ul><li ng-class="{ active: pageName === 'info' }">
@@ -87,10 +91,10 @@
 	<li ng-class="{ active: pageName === 'security-center' }">
 	<a href="/personal/security">安全中心</a></li>
 	<li ng-class="{ active: pageName === 'changepassword' }">
-	<a href="/personal/security">修改密码</a></li></ul></li>
+	<a href="/personal/changepassword">修改密码</a></li></ul></li>
 	<li class="profile-sidebar-section">
 	<h2 class="profile-sidebar-sectiontitle" ng-class="{ active: pageName === 'favor' }">
-	<a href="/personal/favor"><i class="icon-order-favor"></i>我的收藏</a></h2>
+	<a href="/personal/collect"><i class="icon-order-favor"></i>我的收藏</a></h2>
 	</li>
   </ul>
 	  

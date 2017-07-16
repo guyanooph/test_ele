@@ -77,18 +77,17 @@
 			                                                                                                 hardjump=""
 			                                                                                                 class="topbar-item topbar-homepage focus"
 			                                                                                                 ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
-				<a href="/profile/order" hardjump="" class="topbar-item"
-				   ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> <a
-						href="//h5.ele.me/service/cooperation/" target="_blank" class="topbar-item cooperation">加盟合作</a>
-				<nav class="topbar-nav"><a href="/support/center" hardjump="" class="topbar-nav-link" target="_blank"><i
-								class="topbar-nav-icon icon-service"></i>服务中心</a> <a href="/support/rules/default"
-				                                                                     hardjump="" class="topbar-nav-link"
-				                                                                     target="_blank">规则中心</a>
-					<div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用
-						<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span> <img
-									src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png"
-									class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div>
-					</div>
+	<a href="/profile/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> 
+	<a href="" target="_blank" class="topbar-item cooperation">加盟合作</a>
+	<nav class="topbar-nav">
+	<a href="" hardjump="" class="topbar-nav-link" target="_blank">
+	<i class="topbar-nav-icon icon-service"></i>服务中心</a> 
+	<a href="" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a>
+	<div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用
+		<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span>
+		<img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png"
+			class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div>
+	</div>
 					<div topbar-profilebox="">
 						
 						<div class="topbar-profilebox">
@@ -103,22 +102,22 @@
 							                                                     class="ng-hide"><a
 										ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F"
 										target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a></span>
-							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> <span
-										class="topbar-profilebox-username ng-binding">???</span>
-								<!-- ngIf: $root.topbarType === 'checkout' -->
-								<!-- ngIf: $root.topbarType !== 'checkout' --><span
-										class="topbar-profilebox-btn icon-arrow-down ng-scope"
-										ng-if="$root.topbarType !== 'checkout'"></span>
-								<!-- end ngIf: $root.topbarType !== 'checkout' --><div
-										class="dropbox topbar-profilebox-dropbox"><a class="icon-profile"
-								                                                     href="/personal"
-								                                                     hardjump="">个人中心</a> <a
-											class="icon-star" href="/personal/collect" hardjump="">我的收藏</a> <a
-											class="icon-location" href="/personal/address" hardjump="">我的地址</a> <a
-											class="icon-setting" href="/shoplist" hardjump="">安全设置</a> <a
-											class="icon-logout" href="{{ url('/logout')  }}"
-											ng-click="logout()">退出登录</a></div></span>
-					    </div>
+							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
+							<span class="topbar-profilebox-username ng-binding">???</span>
+							
+							<span class="topbar-profilebox-btn icon-arrow-down ng-scope"ng-if="$root.topbarType !== 'checkout'">
+							</span>
+			
+					<div class="dropbox topbar-profilebox-dropbox">
+					<a class="icon-profile" href="/personal" hardjump="">个人中心</a>
+					<a class="icon-star" href="/personal/collect" hardjump="">我的收藏</a>
+					<a class="icon-location" href="/personal/address" hardjump="">我的地址</a> 
+					<a class="icon-setting" href="/personal/security" hardjump="">安全设置</a>
+					<a class="icon-logout" href="{{ url('/logout') }}" ng-click="logout()">退出登录</a>
+					</div>
+											
+						</span>
+					</div>
 					
 				
 							<div class="topbar-profilebox">
