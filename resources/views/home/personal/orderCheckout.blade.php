@@ -280,49 +280,104 @@
                     <span class="yen">¥</span>
                     <span class="total ng-binding" ng-bind="cartView.vm.total">30</span>
                 </span>
-                <button onclick="submitOrder(URL, PARAMS)" class="btn-stress btn-lg ng-binding" ng-disabled="orderButton.disabled" ng-bind="orderButton.text" ng-click="orderSubmit()">确认下单</button>
+                <button onclick="submitOrder()" class="btn-stress btn-lg ng-binding" ng-disabled="orderButton.disabled" ng-bind="orderButton.text" ng-click="orderSubmit()">确认下单</button>
             </div>
         </div>
     </div>
     <script typt="text/javascript">
-        var URL = "/addorder";
-        var PARAMS = {
-                     userid: {{ $user->userid }}, //用户id
-                     shopid: {{ $ob->shopid }}, //商家id
-                     shop_name: {{ $ob->shopname }}, //商家名
-                     shop_phone: {{ $ob->phone }}, //商家电话
-                     goods_num: {{  }}, //商品总数
-                     addressid: {{  }}, //收货地址
-                     amount: , //总金额
-                     status:'', //订单状态
-                     order_description:'', //订单描述
-                     description:'',//订单简介
-                     over_time:'', //订单结束时间
-                     delivery_fee:'', //配送费
-                     lunch_box_fee:'', //餐盒费
-                     service_time:'', //送达时间
-                     packetid:'', //红包id
-                     pay:'', //支付方式
-                     distribution:'', //配送方式
-                     invoice_info:'', //发票信息
-                     remark:'' //备注
-                    };
-        //alert(URL);
-        //alert(PARAMS);
+        //var  url = "/" + {{ $ob->shopid }} + "/addorder";
+        /*
+        var  url = "/addorder";
+        var  userid = {{ $user->id }}; //用户id
+        var  shopid = {{ $ob->shopid }}; //商家id
+        var  shop_name = "{{ $ob->shopname }}"; //商家名
+        var  shop_phone = "{{ $ob->phone }}"; //商家电话
+        var  goods_num = {{ $shopcart['num'] }}; //商品总数
+        var  addressid = 1; //收货地址
+        var  amount = {{ $shopcart['total'] }}; //总金额
+        var  status = 1; //订单状态
+        var  delivery_fee = {{ $shopcart['money'] }}; //配送费
+        var  lunch_box_fee = 5; //餐盒费
+        var  service_time = '18:00'; //送达时间
+        var  pay = 1; //支付方式
+        var  distribution = 1; //配送方式
+        var  invoice_info = '无'; //发票信息
+        var  remark = '备注'; //备注
+        var  _food_num_price_1 = "1_3_3_1";
+        var  _food_num_price_2 = "2_4_4_2";
+        */
         
+        var url = "/" + {{ $ob->shopid }} + "/addorder";
+        var addressid = 1;
+        var service_time = "18:30";
+        var pay = 1;
+        var remark = "备注";
+
+        var params = {addressid:addressid, service_time:service_time, pay:pay, remark:remark}
+ 
         function submitOrder(){
+            var n = 0;
             var temp = document.createElement("form");
-            temp.action = URL;
+            document.body.appendChild(temp);
+            temp.action = url;
             temp.method = "POST";
             temp.style.display = "none";
-            for(var i in PARAMS){
-                alert(i);
+            for(var i in params){
                 var input = document.createElement("input");
-                input.value = ;
-                input.type = ;
-                input.name = ;
+                input.value = params[i];
+                input.type = "text";
+                input.name = i;
+                temp.appendChild(input);
             }
+            alert(n);
+            var crsf = document.createElement("input");
+            crsf.name = "_token";
+            crsf.value = "{{ csrf_token() }}";
+            crsf.type = "hidden";
+            temp.appendChild(crsf);
+            temp.submit();
         }
+      
+        //var params = {userid: userid, shopid: shopid, shop_name: shop_name, shop_phone: shop_phone, goods_num: goods_num, addressid: addressid, amount: amount, status: status, order_description: order_description, description: description, delivery_fee: delivery_fee, lunch_box_fee: lunch_box_fee, service_time: service_time, pay: pay, distribution: distribution, invoice_info: invoice_info, remark: remark, _food_num_price_1:_food_num_price_1, _food_num_price_2:_food_num_price_2};
+        
+        /*        
+        var food_array = ["id","num","price"];
+
+        function submitOrder(){
+            var n = 0;
+            var temp = document.createElement("form");
+            document.body.appendChild(temp);
+            temp.action = url;
+            temp.method = "POST";
+            temp.style.display = "none";
+            for(var i in params){
+                var input = document.createElement("input");
+                if(i[0] == "_"){
+                    for(var j=0;j<3;j++){ //这儿要改
+                        alert("input");
+                        var input = document.createElement("input");
+                        input.name = "food[" + n + "][" + food_array[j] + "]";
+                        input.value = params[i].split("_")[j];
+                        input.type = "text";
+                        temp.appendChild(input);
+                    }
+                    n++;
+                    continue;
+                }
+                input.value = params[i];
+                input.type = "text";
+                input.name = i;
+                temp.appendChild(input);
+            }
+            alert(n);
+            var crsf = document.createElement("input");
+            crsf.name = "_token";
+            crsf.value = "{{ csrf_token() }}";
+            crsf.type = "hidden";
+            temp.appendChild(crsf);
+            temp.submit();
+        }
+    */
 
     </script>
     <script>
