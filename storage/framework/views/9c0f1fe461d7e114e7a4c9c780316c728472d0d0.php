@@ -26,16 +26,14 @@
                     <tr>
                       <th style="width:60px">id号</th>
                       <th>菜类名称</th>
-                      <th>父类ID</th>
-                      <th>路径</th>
+                      <th>创建时间</th>
                       <th style="width: 100px">操作</th>
                     </tr>
                     <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                       <td><?php echo e($v->id); ?></td>
                       <td><?php echo e($v->title); ?></td>
-                      <td><?php echo e($v->pid); ?></td>
-                      <td><?php echo e($v->path); ?></td>
+                      <td><?php echo e($v->create_time); ?></td>
                       <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/foodtype/edit')); ?>/<?php echo e($v->id); ?>'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>
                       
                     </tr>

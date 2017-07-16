@@ -67,7 +67,7 @@
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                 {{ $list->links() }}
+                 {!! $list->appends($params)->render() !!}
                 </div>
               </div><!-- /.box -->
 

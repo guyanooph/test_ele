@@ -14,13 +14,12 @@
 
         <!-- Main content -->
         <section class="content">
-			<?php $__currentLoopData = $info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $merchant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<div class="row">
             <div style="font-size:18px;" class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
-				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchantopen/edit')); ?>/<?php echo e($merchant->id); ?>'">编 辑 商 家 营 业 信 息</button>
+				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchantopen/edit')); ?>/<?php echo e($merchant->shopid); ?>'">编 辑 商 家 营 业 信 息</button>
                   <div class="box-tools">
                    
                   </div>
@@ -104,11 +103,10 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
 						<div class="col-sm-4">
-							<?php if($merchant->state=="1"): ?>营业 <?php elseif($merchant->state=="2"): ?>停业 <?php endif; ?>
+							<?php if($merchant->status=="1"): ?>营业 <?php elseif($merchant->status=="2"): ?>停业 <?php endif; ?>
 						</div>
 						</div>
 					</div>
-                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div><!-- /.box-body -->
 				</div><!-- /.box -->
 				

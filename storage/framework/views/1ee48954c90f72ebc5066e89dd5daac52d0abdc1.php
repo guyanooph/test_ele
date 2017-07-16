@@ -31,7 +31,6 @@
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>
 					  <div class="col-sm-4">
 						<select name="typeid">
-							<option value="0">请选择</option>
 								<?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 								<option value="<?php echo e($v->id); ?>"><?php echo e($v->title); ?></option>
 								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

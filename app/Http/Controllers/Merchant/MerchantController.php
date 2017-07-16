@@ -15,10 +15,7 @@ class MerchantController extends Controller
      */
     public function index()
     {
-		//$table = Merchant::all()->where('shopid','=',1);//查询所有参数
-
-		//$list = merchantopen::all();
-		$info = Merchant::all()->where('shopid',session('merchantname')->shopid);//
+		$info = Merchant::where('shopid',session('merchantname')->shopid)->first();//
 		//dd($info);
         /* //判断并封装搜索条件
         $params = array();
@@ -35,7 +32,7 @@ class MerchantController extends Controller
         //$list = $table->paginate(1); //10条每页浏览
 		//dd($list); 
 		//return "你好！";
-        return view("merchant.merchant.index",["info"=>$info]);//加载商家管理
+        return view("merchant.merchant.index",["merchant"=>$info]);//加载商家管理
     }
 
     /**

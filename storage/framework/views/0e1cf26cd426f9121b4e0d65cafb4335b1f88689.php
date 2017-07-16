@@ -14,7 +14,7 @@
 
         <!-- Main content -->
         <section class="content">
-			<?php $__currentLoopData = $info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $merchant): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			
 			<div class="row">
             <div style="font-size:18px;" class="col-md-12">
               <div class="box">
@@ -89,7 +89,7 @@
 						</div>
 						</div>
 					</div>
-                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                   
                 </div><!-- /.box-body -->
 				</div><!-- /.box -->
 				

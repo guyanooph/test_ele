@@ -15,7 +15,7 @@
 
         <!-- Main content -->
         <section class="content">
-			@foreach ($info as $merchant)
+			
 			<div class="row">
             <div style="font-size:18px;" class="col-md-12">
               <div class="box">
@@ -84,7 +84,7 @@
 						</div>
 						</div>
 					</div>
-                   @endforeach
+                   
                 </div><!-- /.box-body -->
 				</div><!-- /.box -->
 				

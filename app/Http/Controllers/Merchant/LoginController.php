@@ -37,29 +37,33 @@ class LoginController extends Controller
         $user = Mer_login::where("phone",$phone)->first();
         $state = Mer_register::where("phone",$phone)->first();
 		//dd($state->state);
-		if($state->state != 1){
-			if(!empty($user)){
+		if(!empty($user)){
+			if($state->state != 1 ){
 			//判断密码
 				if(Hash::check($password, $user->password)){
 					//存储session跳转页面
 					session()->put("merchantname",$user);
 					
 					$data['last_login_ip'] = $request->getClientIp();
-					$data['last_login_time'] = date('Y-m-d');
+					$data['last_login_time'] = date('Y-m-d H:i:s',time());
 					$id = \DB::table('mer_login')->where("shopid",$user->shopid)->update($data);
-					
+					//弥补注册表登录时间
+					$res = \DB::table('mer_register')->where('id',$user->shopid)->first();
+					//dd($res->first_login_time);
+					if(($res->first_login_time)==null){
+						$info['first_login_time'] = date('Y-m-d H:i:s',time());
+						$id2 = \DB::table('mer_register')->where("id",$user->shopid)->update($info);
+					}
 					return redirect("merchant");
 					//echo "测试成功!";
+				}else{
+				$list = "账号正在审核！如有疑问，请拨打：7417417474741";
+				return view('errors.503',compact('list'));
+				//return "账号正在审核！";
 				}
-			}
-			return back()->with("msg","账号或密码错误！");
-		}else{
-			$list = "账号正在审核！如有疑问，请拨打：7417417474741";
-			return view('errors.503',compact('list'));
-			//return "账号正在审核！";
+			}				
 		}
-        
-		
+		return back()->with("msg","账号或密码错误！");
    }
    
    //加载验证码

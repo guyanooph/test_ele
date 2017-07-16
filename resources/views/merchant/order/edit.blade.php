@@ -30,23 +30,23 @@
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">订单号</label>
 								<div class="col-sm-4">
-									<input type="text" name="orderid" class="form-control" placeholder="订单号" value="{{ $order->orderid }}">
+									<input type="text" name="id" readonly class="form-control" placeholder="订单号" value="{{ $order->id }}">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">用户id</label>
+								<label for="inputEmail3" readonly class="col-sm-2 control-label">用户id</label>
 								<div class="col-sm-4">
 									<input type="text" name="userid" class="form-control" placeholder="用户id" value="{{ $order->userid }}">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">商家id</label>
+								<label for="inputEmail3" readonly class="col-sm-2 control-label">商家id</label>
 								<div class="col-sm-4">
 									<input type="text" name="shopid" class="form-control" placeholder="商家id" value="{{ $order->shopid }}">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">商家名称</label>
+								<label for="inputEmail3" readonly class="col-sm-2 control-label">商家名称</label>
 								<div class="col-sm-4">
 									<input type="text" name="shop_name" class="form-control" placeholder="商家名称" value="{{ $order->shop_name }}">
 								</div>
@@ -91,7 +91,7 @@
 									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="1"> 正在配送
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="1"> 未配送
+									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="2"> 未配送
 								</label>
 								</div>
 							</div>
@@ -128,7 +128,7 @@
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">使用红包id</label>
 								<div class="col-sm-4">
-									<input type="text" name="packet_id" class="form-control" placeholder="使用红包id" value="{{ $order->packet_id }}">
+									<input type="text" name="packetid" class="form-control" placeholder="使用红包id" value="{{ $order->packetid }}">
 								</div>
 							</div>
 							<div class="form-group">

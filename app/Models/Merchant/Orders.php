@@ -4,9 +4,9 @@ namespace App\Models\Merchant;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Orders extends Model
 {
-	protected $table = "order";//订单表
+	protected $table = "orders";//订单表
 	
 	/**
      * 该模型是否被自动维护时间戳

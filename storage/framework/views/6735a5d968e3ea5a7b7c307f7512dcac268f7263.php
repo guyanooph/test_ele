@@ -51,7 +51,7 @@
 							<td><?php echo e($order->create_time); ?></td>
 							<td><?php echo e($order->addressid); ?></td>
 							<td><?php echo e($order->amount); ?></td>
-							<td><?php if($order->status=="1"): ?>已发货 <?php elseif($order->status=="2"): ?>正在配送 <?php else: ?>未配送 <?php endif; ?></td>
+							<td><?php if($order->status=="0"): ?>已发货 <?php elseif($order->status=="1"): ?>正在配送 <?php else: ?>未配送 <?php endif; ?></td>
 							<td><?php echo e($order->order_description); ?></td>
 							<td><?php echo e($order->over_times); ?></td>
 							<td><?php echo e($order->delivery_fee); ?></td>

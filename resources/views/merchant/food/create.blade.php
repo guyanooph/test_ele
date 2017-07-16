@@ -32,7 +32,6 @@
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>
 					  <div class="col-sm-4">
 						<select name="typeid">
-							<option value="0">请选择</option>
 								@foreach($list as $v)
 								<option value="{{$v->id}}">{{$v->title}}</option>
 								@endforeach

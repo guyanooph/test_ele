@@ -15,13 +15,12 @@
 
         <!-- Main content -->
         <section class="content">
-			@foreach ($info as $merchant)
 			<div class="row">
             <div style="font-size:18px;" class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
-				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchantopen/edit')}}/{{ $merchant->id }}'">编 辑 商 家 营 业 信 息</button>
+				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchantopen/edit')}}/{{ $merchant->shopid }}'">编 辑 商 家 营 业 信 息</button>
                   <div class="box-tools">
                    
                   </div>
@@ -99,11 +98,10 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
 						<div class="col-sm-4">
-							@if ($merchant->state=="1")营业 @elseif ($merchant->state=="2")停业 @endif
+							@if ($merchant->status=="1")营业 @elseif ($merchant->status=="2")停业 @endif
 						</div>
 						</div>
 					</div>
-                   @endforeach
                 </div><!-- /.box-body -->
 				</div><!-- /.box -->
 				

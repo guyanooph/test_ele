@@ -4,17 +4,7 @@
       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
       <input type="hidden" name="shopid" value="{{session('merchantname')->shopid}}">
       <div class="box-body">
-        <div class="form-group">
-          <label for="inputEmail3" class="col-sm-3 control-label">父类别名：</label>
-          <div class="col-sm-4">
-            <select name="pid">
-                <option value="0">根类别</option>
-					@foreach($list as $v)
-                    <option value="{{$v->id}}">{{$v->title}}</option>
-					@endforeach
-            </select>
-          </div>
-        </div>
+        
         <div class="form-group">
           <label for="inputPassword3" class="col-sm-3 control-label">类别名称：</label>
           <div class="col-sm-4">

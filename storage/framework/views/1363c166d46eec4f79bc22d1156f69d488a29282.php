@@ -66,7 +66,7 @@
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                 <?php echo e($list->links()); ?>
+                 <?php echo $list->appends($params)->render(); ?>
 
                 </div>
               </div><!-- /.box -->

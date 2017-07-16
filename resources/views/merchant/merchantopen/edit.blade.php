@@ -25,7 +25,7 @@
 					<h3 class="box-title"><i class="fa fa-plus"></i> 修改营业信息页面</h3>
 			    </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{ URL('/merchant/merchantopen/update') }}/{{ $merchantopen->id }}" method="post">
+                <form class="form-horizontal" action="{{ URL('/merchant/merchantopen/update') }}/{{ $merchantopen->shopid }}" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
 
@@ -59,10 +59,6 @@
                         </label>
                       </div>
                     </div>
-					
-					
-					
-					
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">配送费：</label>
                       <div class="col-sm-4">
@@ -73,10 +69,10 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="state" {{ ($merchantopen->state == 1)?"checked":"" }} value="1">营业  &nbsp; &nbsp;
+                           <input type="radio"  name="status" {{ ($merchantopen->status == 1)?"checked":"" }} value="1">营业  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="state" {{ ($merchantopen->state == 2)?"checked":"" }} value="2">歇业 
+                           <input type="radio"  name="status" {{ ($merchantopen->status == 2)?"checked":"" }} value="2">歇业 
                         </label>
                       </div>
                     </div>

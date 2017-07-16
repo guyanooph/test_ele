@@ -22,11 +22,7 @@ class FoodController extends Controller
      */
     public function index()
     {
-		//$db = \DB::select("select * from food order by concat(shopid,id) asc");
-		//$db = \DB::table("food");
-		//$list = $db->paginate(5); //5条每页浏览
-       
-	   $list = Food::where('shopid', session('merchantname')->shopid)->paginate(5);
+	   $list = Food::where('shopid', session('merchantname')->shopid)->orderBy("id",'desc')->paginate(5);
         
        //遍历当前数据并添加商品类别名称
        foreach($list as $v){
@@ -35,7 +31,12 @@ class FoodController extends Controller
            
        }
         
-       return view("merchant.food.index",['list'=>$list]);
+		$params = array();
+	    if(!empty($_GET['title'])){
+		   Food::all()->where("title","like","%{$_GET['title']}%");
+		   $params['title'] = $_GET['title']; //维持搜索条件
+	    }
+       return view("merchant.food.index",['list'=>$list],['params'=>$params]);
     }
 
     /**
@@ -46,12 +47,6 @@ class FoodController extends Controller
     public function create()
     {
         $list = Food_type::where("shopid",session('merchantname')->shopid)->get();
-        //处理信息
-        foreach($list as &$v){
-            $m = substr_count($v->path,","); //获取path中的逗号
-            //生成缩进
-            $v->title = str_repeat("&nbsp;",($m-1)*8)."|--".$v->title;
-        }
         return view("merchant.food.create",['list'=>$list]);
     }
 
