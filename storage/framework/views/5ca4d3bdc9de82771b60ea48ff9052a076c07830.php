@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="eleme" perf-error="desktop/profile/" class="ng-scope">
 <head>
-	<style type="text/css">@charset "UTF-8";
+	<style type="text/css">@charset  "UTF-8";
 		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
 			display: none !important;
 		}
@@ -50,9 +50,9 @@
 	<link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32">
 	<link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
 
-	<link href="{{asset('css/vendor.0cb970.css')}}" rel="stylesheet">
+	<link href="<?php echo e(asset('css/vendor.0cb970.css')); ?>" rel="stylesheet">
 
-	<link href="{{asset('css/profile.d8f427.css')}}" rel="stylesheet">
+	<link href="<?php echo e(asset('css/profile.d8f427.css')); ?>" rel="stylesheet">
 
 
 	<!--[if lte IE 8]>
@@ -275,16 +275,16 @@
 					<div class="profile-infoitem"><a class="inherit" href="/personal/red_packet"><p>我的红包</p>
 					
 							<p class="profile-infoitem-number hongbao">
-                      <span class="number ng-binding" ng-bind="hongbaocount">{{ $info->red_packet }}</span>个</p></a>
+                      <span class="number ng-binding" ng-bind="hongbaocount"><?php echo e($info->red_packet); ?></span>个</p></a>
 					</div>
 					
 					<div class="profile-infoitem"><a class="inherit" href="/personal/score"><p>我的积分</p>
-							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point">{{ $info->score }}</span>分</p></a>
+							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point"><?php echo e($info->score); ?></span>分</p></a>
 					</div>
 				
 					<div class="profile-infoitem"><a class="inherit" href="/personal/balance"><p>账户余额</p>
 							<p class="profile-infoitem-number balance"><span class="number ng-binding"
-							                                                 ng-bind="user.balance| number : 2">{{ $info->balance }}</span>元
+							                                                 ng-bind="user.balance| number : 2"><?php echo e($info->balance); ?></span>元
 							</p></a>
 					</div>
 				
@@ -309,25 +309,25 @@
 		<div class="orderblock-item orderblock-rstinfo clearfix">
 		<a class="logo" ng-href="/shop/895073" href="/shop/895073">
 		<img ng-src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85" alt="商家 LOGO" src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"></a>
-		@foreach( $order as $dd )
+		<?php $__currentLoopData = $order; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dd): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 		 <h3 class="name">
 		 <a class="inherit ng-binding" ng-bind="order.restaurant_name"
-		 ng-href="/shop/895073" href="">{{ $dd->shop_name }}</a></h3>
+		 ng-href="/shop/895073" href=""><?php echo e($dd->shop_name); ?></a></h3>
 			<p class="product ng-binding" ng-bind="order.product">麻辣花蛤（500g）2份 / 麻辣蛏子（500g）1份</p>
 			<a class="productnum" ng-href="order/id/1209253485556894798" href="order/id/1209253485556894798">共
-			<i class="count ng-binding" ng-bind="order.productnum">{{ $dd->goods_num }}</i>个菜品&gt;</a>
+			<i class="count ng-binding" ng-bind="order.productnum"><?php echo e($dd->goods_num); ?></i>个菜品&gt;</a>
 			</div>
-			<div class="orderblock-item orderblock-time ng-binding">{{ $dd->over_time }}</div>
+			<div class="orderblock-item orderblock-time ng-binding"><?php echo e($dd->over_time); ?></div>
 			<div class="orderblock-item orderblock-price">
-			<p class="total ng-binding" ng-bind="'￥' + (order.total | number:2)">￥{{ $dd->amount }}</p>	
-			<span class="ng-binding">{{ $dd->pay }}</span></div>
+			<p class="total ng-binding" ng-bind="'￥' + (order.total | number:2)">￥<?php echo e($dd->amount); ?></p>	
+			<span class="ng-binding"><?php echo e($dd->pay); ?></span></div>
 			<div class="orderblock-item orderblock-status">
 			<p class="status ng-binding end" ng-class="{'waitpay': (order.realStatus === 4),'end': (order.realStatus === 5)}"
-			 ng-bind="order.statusText">{{ $dd->status }}</p>
+			 ng-bind="order.statusText"><?php echo e($dd->status); ?></p>
 			 <a class="statuslink ng-binding" ng-href="order/id/1209253485556894798"
 				ng-bind="order.realStatus === 4 ? '立即评价' : '订单详情'"
 				href="order">订单详情</a></div>
-	   @endforeach
+	   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		</div>
 		
 		
