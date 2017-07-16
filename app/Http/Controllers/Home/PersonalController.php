@@ -114,4 +114,9 @@ class PersonalController extends Controller
 		$address=Address::all();
 		return view('home.personal.address',['address'=>$address]);
 	}
+    
+    public function test()
+    {
+        return view("home.personal.personal_8");
+    }
 }

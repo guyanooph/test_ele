@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class PersonalMiddleware
+class ShopcartMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,10 @@ class PersonalMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->session()->has('user')){
-            return redirect('/login');
+        //($request->route("shopid"));
+        $shopid = $request->shopid;
+        if(!isset($request->session()->get('shopcart')[$shopid])){
+            return redirect("/shoplist/".$shopid);
         }
         return $next($request);
     }

@@ -61,6 +61,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'merchant' => \App\Http\Middleware\MerchantMiddleware::class,
-        'personal'=>\App\Http\Middleware\PersonalMiddleware::class,
+        'personal' => \App\Http\Middleware\PersonalMiddleware::class,
+        'shopcart' => \App\Http\Middleware\ShopcartMiddleware::class,
+        'location' => \App\Http\Middleware\LocationMiddleware::class,
     ];
 }

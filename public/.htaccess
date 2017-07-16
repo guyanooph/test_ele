@@ -14,6 +14,10 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
+    # test_ele.com -> www.test_ele.com
+    RewriteCond %{HTTP_HOST} ^test_ele.com [NC]
+    RewriteRule ^(.*)$ http://www.test_ele.com/$1 [L,R=301]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

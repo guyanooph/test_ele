@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class PersonalMiddleware
+class LocationMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,8 @@ class PersonalMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->session()->has('user')){
-            return redirect('/login');
+        if(!$request->session()->has("location")){
+            return redirect("/home");
         }
         return $next($request);
     }

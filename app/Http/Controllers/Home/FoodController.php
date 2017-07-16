@@ -23,7 +23,8 @@ class FoodController extends Controller
                     'shopcart' => [],
                     'givemoney' => $ob->givemoney,
                     'total' => 0,
-                    'money' => $ob->money
+                    'money' => $ob->money,
+                    'num' => 0
                 ]
             ];
             $request->session()->put("shopcart", $shopcart);
