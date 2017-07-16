@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Shop_list;
+use App\Models\Mer_mid;
+use App\Models\Mer_sid;
 use App\Org\Geohash;
 use Session;
 
@@ -12,8 +14,16 @@ class ShopController extends Controller
 {
 	public function index(Request $request)
 	{
-        //$request->session()->forget("location");
-        //$request->session()->forget("position");
+
+        $merType = Mer_mid::all()->toArray();       
+        foreach($merType as $k => $v){
+            $merType[$k]['sid'] = Mer_sid::where("mid",$v['id'])->get()->toArray();
+        }
+        $merTypeJson = json_encode($merType);
+        //dd($merType);
+
+
+ 
         //当用户直接访问/或是/shoplist时(即使用get，且没带参数)，先判断是否存在session，及session中是否存在location
         //如果存在，就用这个location来加载附近商家
         //当用户由/home(定位页面)完成定位，跳转到/时，
@@ -23,27 +33,57 @@ class ShopController extends Controller
             $location = $request->session()->get("location")['position'];
 
             //用私有方法加载附近商家
-            $list = $this->loadShops($location);
-            return view('home.shop.shoplist', ['list'=>$list, 'user'=>\Session::get('user')]);
+            $list = $this->loadShops($request, $location);
+            return view('home.shop.shoplist', ['list'=>$list, 'user'=>\Session::get('user'), 'type' =>$merType, 'type_json' => $merTypeJson]);
         }elseif($request->input("location")){
             $location = $request->input("location");
             $request->session()->put("location", ['position' => $request->input("location"), 'address' => $request->input("address")]);
 
             //用私有方法加载附近商家
-            $list = $this->loadShops($location);
-       	    return view('home.shop.shoplist',['list'=>$list, 'user'=>\Session::get('user')]);
-            //$this->loadShops($location);
+            $list = $this->loadShops($request, $location);
+       	    return view('home.shop.shoplist',['list'=>$list, 'user'=>\Session::get('user'), 'type' => $merType,]);
         }else{
             return redirect("/home");
         }
 	}
     
-    private function loadShops($location){
+    public function getMerType()
+    {
+        $merType = Mer_mid::all()->toArray();       
+        foreach($merType as $k => $v){
+            $merType[$k]['sid'] = Mer_sid::where("mid",$v['id'])->get()->toArray();
+        }
+        $merTypeJson = json_encode($merType);
+        return $merTypeJson;
+    }
+
+
+    public function loadShops(Request $request, $location=null, $type=null)
+    {
+        if($location === null){
+            $location = $request->session()->get("location")["position"];
+        }
         //加载附近商家
         $geohash = new Geohash();
         $geo = $geohash->encode(explode(",",$location)[1],explode(",",$location)[0]);
-		$list = Shop_list::where('position', 'like', substr($geo,0,5).'%')->limit(10)->get();
-		//$list = Shop_list::where('position', 'like', substr($geo,0,5).'%')->paginate(15);
-       	return $list;
+        //dd($geo);
+
+        $where = [];
+
+        if($request->input("typeid")){
+            $typeid = $request->input("typeid");
+            if($typeid[0]=="f"){
+                $where = ["f_typeid" => substr($typeid,1)];
+            }else{
+                $where = ["typeid" => $typeid];
+            }
+        }
+
+        //dd(QINIU_PREFIX);
+        if($request->method =="post"){
+       	    return json_encode(Shop_list::where('position', 'like', substr($geo,0,4).'%')->where($where)->limit(10)->get()->toArray());
+        }else{
+            return Shop_list::where('position', 'like', substr($geo,0,4).'%')->where($where)->limit(10)->get();
+        }
     }
 }

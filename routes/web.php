@@ -14,27 +14,37 @@
 //前台路由
 Route::get("/home", "Home\LocationController@location");  //定位页面
 Route::get("/setlocationsession", "Home\LocationController@setLocationSession");  //定位页面
-ROute::get("/personal/test", "Home\PersonalController@test"); //test
+Route::get("/personal/test", "Home\PersonalController@test"); //test
+
 //以下所有前台路由均经过一个定位中间件,在中间件里检测session是否有定位信息，没有就重定向到定位页面
 Route::group(['middleware'=>'location'], function(){
-    Route::get("/", "Home\ShopController@index"); //前台主页，附近商家列表
+
+    //前台主页，附近商家列表，同/shoplist
+    Route::get("/", "Home\ShopController@index"); 
+
     //购物车,
     Route::get('/addtocart/{shopid}/{foodid}', 'Home\ShopcartController_2@addCart')->middleware("shopcart");
     Route::get('/clearcart/{shopid}', 'Home\ShopcartController_2@clearCart')->middleware("shopcart");
+
+    //订单
     Route::get("/{shopid}/ordercheckout", "Home\OrderController@index")->middleware("personal","shopcart");
+    Route::post("/{shopid}/addorder", "Home\OrderController@addOrder")->middleware("personal","shopcart"); //下单
+    //Route::get()->middleware();
     
+    //用户注册
     Route::get('/register',"Home\RegisterController@index");//用户注册认证
     Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
     
-    
+    //用户登录
     Route::post('/doregister',"Home\RegisterController@doRegister");//用户登录认证
-    
-    
     Route::get('/login',"Home\LoginController@index"); //加载前台登录界面
     Route::post('/dologin',"Home\LoginController@doLogin"); //执行前台登录
     Route::get('/logout',"Home\LoginController@logout"); //执行退出
     Route::get('/getcode',"Home\LoginController@getCode"); //加载验证码
+
+    //附近商家列表及商家详情（菜品列表）
     Route::get('/shoplist','Home\ShopController@index'); //附近商家信息列表，同/
+    Route::post('/shoplist','Home\ShopController@loadShops'); //附近商家信息列表，同/
     Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
     
     //个人中心
@@ -201,3 +211,4 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
 });
 
+Route::get("/getmertype", "Home\ShopController@getMerType");
