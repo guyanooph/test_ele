@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Merchant;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Order;
+use App\Models\Merchant\Orders;
 
 class OrderController extends Controller
 {
@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-		$table = order::all();//查询所有数据
+		$table = Orders::where('shopid', session('merchantname')->shopid)->paginate(10);//查询所有数据
 		/* //判断并封装搜索条件
         $params = array();
         if(!empty($_GET['name'])){
@@ -87,7 +87,7 @@ class OrderController extends Controller
     {
         //加载修改页面
 		//return "good";
-		$table = order::where('id',$id)->first();//获取单条信息参数
+		$table = Orders::where('id',$id)->first();//获取单条信息参数
 		return view("merchant.order.edit",['order'=>$table]);//加载页面
     }
 
@@ -103,7 +103,8 @@ class OrderController extends Controller
         //执行修改
 		$data = $request->all();//获取提交的参数
 		unset($data['_token']);//移除提交的_token
-		$table =\DB::table("order")->where("id",$id)->update($data);
+		//dd($data);
+		$table =\DB::table("orders")->where("id",$id)->update($data);
 		if($table>0){
             return redirect('merchant/order');
         }else{

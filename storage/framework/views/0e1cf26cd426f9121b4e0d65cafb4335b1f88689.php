@@ -1,5 +1,4 @@
-@extends('merchant.base')
-    @section('content')
+    <?php $__env->startSection('content'); ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -21,7 +20,7 @@
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
-				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchant/edit')}}/{{ $merchant->shopid }}'">编 辑 商 家 信 息</button>
+				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='<?php echo e(URL('/merchant/merchant/edit')); ?>/<?php echo e($merchant->shopid); ?>'">编 辑 商 家 信 息</button>
                   <div class="box-tools">
                    
                   </div>
@@ -33,7 +32,8 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">商家名字：</label>
 						<div class="col-sm-4">
-							{{ $merchant->shopname }}
+							<?php echo e($merchant->shopname); ?>
+
 						</div>
 						</div>
 					</div> 
@@ -41,7 +41,8 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">服务评分：</label>
 						<div class="col-sm-4">
-							{{ $merchant->rate }}
+							<?php echo e($merchant->rate); ?>
+
 						</div>
 						</div>
 					</div>
@@ -50,13 +51,14 @@
 						<label for="inputPassword3" class="col-sm-2 control-label">logo：</label>
 						</div>
 						<div id="preview" class=
-						"col-sm-2 control-label"><img src='http://oslsovx4q.bkt.clouddn.com/upload/image{{$merchant->logo }}'/></div>
+						"col-sm-2 control-label"><img src='http://oslsovx4q.bkt.clouddn.com/upload/image<?php echo e($merchant->logo); ?>'/></div>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">地址：</label>
 						<div class="col-sm-4">
-							{{ $merchant->address }}
+							<?php echo e($merchant->address); ?>
+
 						</div>
 						</div>
 					</div>
@@ -64,7 +66,8 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">商家电话：</label>
 						<div class="col-sm-4">
-							{{ $merchant->phone }}
+							<?php echo e($merchant->phone); ?>
+
 						</div>
 						</div>
 					</div>
@@ -72,7 +75,8 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">商家介绍：</label>
 						<div class="col-sm-4">
-							{{ $merchant->desc }}
+							<?php echo e($merchant->desc); ?>
+
 						</div>
 						</div>
 					</div>
@@ -80,7 +84,8 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">商家承诺：</label>
 						<div class="col-sm-4">
-							{{ $merchant->commit }}
+							<?php echo e($merchant->commit); ?>
+
 						</div>
 						</div>
 					</div>
@@ -88,28 +93,29 @@
                 </div><!-- /.box-body -->
 				</div><!-- /.box -->
 				
-            </div><!-- /.col onclick="/merchant/{{ $merchant->id }}/edit"-->
+            </div><!-- /.col onclick="/merchant/<?php echo e($merchant->id); ?>/edit"-->
             
           </div><!-- /.row -->
          
         </section><!-- /.content -->
-        <form action="{{url('merchant/merchant')}}" style="display:none;" id="mydeleteform" name="myform" method="post">
+        <form action="<?php echo e(url('merchant/merchant')); ?>" style="display:none;" id="mydeleteform" name="myform" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="_method" value="delete">
         </form>
-    @endsection
+    <?php $__env->stopSection(); ?>
     
     
-    @section("myscript")
+    <?php $__env->startSection("myscript"); ?>
       <script type="text/javascript">
             function doDel(id){
             Modal.confirm({msg: "是否删除信息？"}).on(function(e){
                 if(e){
                    var form = document.myform;
-                    form.action = "{{URL('merchant/merchant/destroy')}}/"+id;
+                    form.action = "<?php echo e(URL('merchant/merchant/destroy')); ?>/"+id;
                     form.submit(); 
                 }
               });
         }
       </script>
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('merchant.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

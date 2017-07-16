@@ -1,5 +1,4 @@
-@extends('merchant.base')
-    @section('content')
+    <?php $__env->startSection('content'); ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -21,7 +20,7 @@
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 菜单信息管理</h3>
                   <div class="box-tools">
-                    <form action="{{url('merchant/food')}}" method="get">
+                    <form action="<?php echo e(url('merchant/food')); ?>" method="get">
                     <div class="input-group" style="width: 150px;">
                       <input type="text" name="title" class="form-control input-sm pull-right" placeholder="菜名"/>
                       <div class="input-group-btn">
@@ -42,32 +41,35 @@
                       <th>菜价格</th>
                       <th>月销量</th>
                       <th>菜评分</th>
+                      <th>规格</th>
                       <th>状态</th>
                       <th>添加时间</th>
                       <th style="width: 100px">操作</th>
                     </tr>
-                    @foreach($list as $v)
+                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                      <td>{{$v->id}}</td>
-                      <td>{{$v->typename}}</td>
-                      <td>{{$v->title}}</td>
-                      <td><img style="width:50px;height:50px;" src='http://osltbib18.bkt.clouddn.com/wang/image_{{$v->picname}}'/></td>
-                      <td>{{$v->descr}}</td>
-                      <td>{{$v->price}}</td>
-                      <td>{{$v->num}}</td>
-                      <td>{{$v->food_rate}}</td>
-                      <td>@if($v->stutas == 1)在售 @elseif ($v->stutas == 2)售完 @elseif ($v->stutas == 3)下架 @endif</td>
-                      <td>{{$v->create_time}}</td>
-                      <td><button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/food/edit')}}/{{ $v->id }}'">编辑</button> <button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> </td>
+                      <td><?php echo e($v->id); ?></td>
+                      <td><?php echo e($v->typename); ?></td>
+                      <td><?php echo e($v->title); ?></td>
+                      <td><img style="width:50px;height:50px;" src='http://osltbib18.bkt.clouddn.com/wang/image_<?php echo e($v->picname); ?>'/></td>
+                      <td><?php echo e($v->descr); ?></td>
+                      <td><?php echo e($v->price); ?></td>
+                      <td><?php echo e($v->num); ?></td>
+                      <td><?php echo e($v->food_rate); ?></td>
+                      <td><?php echo e($v->norms); ?></td>
+                      <td><?php echo e($v->stutas); ?></td>
+                      <td><?php echo e($v->create_time); ?></td>
+                      <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/food/edit')); ?>/<?php echo e($v->id); ?>'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>
                       
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   
                    
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                 {!! $list->appends($params)->render() !!}
+                 <?php echo e($list->links()); ?>
+
                 </div>
               </div><!-- /.box -->
 
@@ -82,15 +84,16 @@
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="_method" value="DELETE">
         </form>
-    @endsection
+    <?php $__env->stopSection(); ?>
     
     
-    @section("myscript")
+    <?php $__env->startSection("myscript"); ?>
       <script type="text/javascript">
             function doDel(id){
                 if(confirm('确定要删除吗？')){
-                    $("#mydeleteform").attr("action","{{url('merchant/food/destroy')}}/"+id).submit(); 
+                    $("#mydeleteform").attr("action","<?php echo e(url('merchant/food/destroy')); ?>/"+id).submit(); 
                 }
             }
       </script>
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('merchant.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

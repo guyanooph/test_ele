@@ -1,8 +1,8 @@
 
     <!-- form start -->
-    <form action="{{url('merchant/foodtype/store')}}" method="post" id="myaddform" class="form-horizontal">
+    <form action="<?php echo e(url('merchant/foodtype/store')); ?>" method="post" id="myaddform" class="form-horizontal">
       <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-      <input type="hidden" name="shopid" value="{{session('merchantname')->shopid}}">
+      <input type="hidden" name="shopid" value="<?php echo e(session('merchantname')->shopid); ?>">
       <div class="box-body">
         
         <div class="form-group">

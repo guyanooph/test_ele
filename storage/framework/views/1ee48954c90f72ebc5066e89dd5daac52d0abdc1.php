@@ -1,5 +1,4 @@
-@extends('merchant.base')
-    @section('content')
+    <?php $__env->startSection('content'); ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -24,17 +23,17 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i> 添加菜单信息</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form action="{{url('merchant/food/store')}}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <form action="<?php echo e(url('merchant/food/store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                   <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-				  <input type="hidden" name="shopid" value="{{ session('merchantname')->shopid }}">
+				  <input type="hidden" name="shopid" value="<?php echo e(session('merchantname')->shopid); ?>">
                   <div class="box-body">
 					<div class="form-group">
 					  <label for="inputEmail3" class="col-sm-2 control-label">菜类别：</label>
 					  <div class="col-sm-4">
 						<select name="typeid">
-								@foreach($list as $v)
-								<option value="{{$v->id}}">{{$v->title}}</option>
-								@endforeach
+								<?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<option value="<?php echo e($v->id); ?>"><?php echo e($v->title); ?></option>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 						</select>
 					  </div>
 					</div>
@@ -87,4 +86,5 @@
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('merchant.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

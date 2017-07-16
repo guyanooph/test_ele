@@ -22,20 +22,21 @@ class FoodController extends Controller
      */
     public function index()
     {
-		//$db = \DB::select("select * from food order by concat(shopid,id) asc");
-		//$db = \DB::table("food");
-		//$list = $db->paginate(5); //5条每页浏览
-       
-	   $list = Food::where('shopid', '=', 1)->paginate(1);
+	   $list = Food::where('shopid', session('merchantname')->shopid)->orderBy("id",'desc')->paginate(5);
         
        //遍历当前数据并添加商品类别名称
        foreach($list as $v){
-           $name = \DB::table("food_type")->where("id",$v->typeid)->value("title");
+           $name = Food_type::where("id",$v->typeid)->value("title");
            $v->typename = $name; //放置进去
            
        }
         
-       return view("merchant.food.index",['list'=>$list]);
+		$params = array();
+	    if(!empty($_GET['title'])){
+		   Food::all()->where("title","like","%{$_GET['title']}%");
+		   $params['title'] = $_GET['title']; //维持搜索条件
+	    }
+       return view("merchant.food.index",['list'=>$list],['params'=>$params]);
     }
 
     /**
@@ -45,13 +46,7 @@ class FoodController extends Controller
      */
     public function create()
     {
-        $list = \DB::select("select * from food_type order by concat(path,id) asc");
-        //处理信息
-        foreach($list as &$v){
-            $m = substr_count($v->path,","); //获取path中的逗号
-            //生成缩进
-            $v->title = str_repeat("&nbsp;",($m-1)*8)."|--".$v->title;
-        }
+        $list = Food_type::where("shopid",session('merchantname')->shopid)->get();
         return view("merchant.food.create",['list'=>$list]);
     }
 
@@ -120,7 +115,7 @@ class FoodController extends Controller
 		//dd($shu);
 		//dd($find);
 		$food['typeid'] = $find['title'];
-		$info = \DB::select("select * from food_type order by concat(path,id) asc");
+		$info = Food_type::where("shopid",session('merchantname')->shopid)->get();
         //处理信息
         foreach($info as &$v){
             $m = substr_count($v->path,","); //获取path中的逗号
@@ -181,13 +176,6 @@ class FoodController extends Controller
      */
     public function destroy($id)
     {
-        //先判断当前类别下是否存在子类别
-        /* $m = \DB::table('food')->where('pid',$id)->count();
-        if($m>0){
-            return back()->with("err","禁止删除");
-        } */  
-		$food = Food::where("id",$id)->first();
-		//@unlink("./upload/merchant/food/".$food['picname']);
         \DB::table('food')->delete($id);
         return redirect("merchant/food")->with("err","删除成功！");
     }
