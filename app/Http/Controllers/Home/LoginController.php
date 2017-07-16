@@ -41,6 +41,9 @@ class LoginController extends Controller
                 if (!(Hash::check($pass,$upass))) {
                     return back()->with("msg", "密码错误!");
                 } else {
+                    $m->last_login_time = date("Y-m-d H:i:s",time());
+                    $m->last_ip = $request->getClientIp();
+                    $m->save();
                     \Session::put('user', $m);
                     return redirect("shoplist");
                 }
@@ -55,6 +58,9 @@ class LoginController extends Controller
                 if (!(Hash::check($pass,$upass))) {
                     return back()->with("msg", "密码错误!");
                 } else {
+                    $n->last_login_time = date("Y-m-d H:i:s",time());
+                    $n->last_ip = $request->getClientIp();
+                    $n->save();
                     \Session::put('user', $n);
                     return redirect("shoplist");
                 }
@@ -69,6 +75,9 @@ class LoginController extends Controller
                 if (!(Hash::check($pass,$upass))) {
                     return back()->with("msg", "密码错误!");
                 } else {
+                    $o->last_login_time = date("Y-m-d H:i:s",time());
+                    $o->last_ip = $request->getClientIp();
+                    $o->save();
                     \Session::put('user', $o);
                     return redirect("shoplist");
                 }
