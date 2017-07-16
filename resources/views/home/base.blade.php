@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="eleme" perf-error="desktop/" class="ng-scope">
 <head>
-	<style type="text/css">@charset  "UTF-8";
+	<style type="text/css">@charset "UTF-8";
 		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
 			display: none !important;
 		}
@@ -48,10 +48,10 @@
 	<link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32">
 	<link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
 
-	<link href="<?php echo e(asset('css/vendor.0cb970.css')); ?>" rel="stylesheet">
+	<link href="{{asset('css/vendor.0cb970.css')}}" rel="stylesheet">
 
-	<link href="<?php echo e(asset('css/main.5e33c3.css')); ?>" rel="stylesheet">
-    <script src="<?php echo e(asset('js/jquery-1.8.3.min.js')); ?>"></script>
+	<link href="{{asset('css/main.5e33c3.css')}}" rel="stylesheet">
+    <script src="{{ asset('js/jquery-1.8.3.min.js') }}"></script>
 
 
 	<!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
@@ -89,11 +89,11 @@
 					<div topbar-profilebox="">
 						
 						<div class="topbar-profilebox">
-                            <?php if(empty($user)): ?>
+                            @if(empty($user))
                             <!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> 
                                 <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span> 
                                 <span ng-show="!$root.user.username" class="">
-                                    <a ng-href="<?php echo e(url('/login')); ?>" target="_blank" href="<?php echo e(url('/login')); ?>">登录/注册</a>
+                                    <a ng-href="{{ url('/login')}}" target="_blank" href="{{ url('/login') }}">登录/注册</a>
                                 </span>
                                 <span class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> 
                                     <span class="topbar-profilebox-username ng-binding"></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
@@ -106,18 +106,18 @@
                                         <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
                                     </div>
                                 </span>
-                            <?php else: ?>
-                                <img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="<?php echo e(QINIU_PREFIX); ?><?php echo e($user->picname); ?>?imageMogr2/thumbnail/26x26"><!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' -->
+                            @else
+                                <img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/26x26"><!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' -->
                                 <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span>
                                 <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a>
                                 </span>
                                 <span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' -->
-                                    <span class="topbar-profilebox-username ng-binding"><?php echo e($user->username); ?></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
+                                    <span class="topbar-profilebox-username ng-binding">{{ $user->username }}</span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
                                     <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' -->
-                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="<?php echo e(url('/personal')); ?>" hardjump="">个人中心</a> <a class="icon-star" href="<?php echo e(url('/personal/col')); ?>" hardjump="">我的收藏</a> <a class="icon-location" href="<?php echo e(url('/personal/address')); ?>" hardjump="">我的地址</a> <a class="icon-setting" href="<?php echo e(url('/personal/security')); ?>" hardjump="">安全设置</a> <a class="icon-logout" href="<?php echo e(url('/logout')); ?>" ng-click="logout()">退出登录</a>
+                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="{{ url('/personal') }}" hardjump="">个人中心</a> <a class="icon-star" href="{{ url('/personal/col') }}" hardjump="">我的收藏</a> <a class="icon-location" href="{{ url('/personal/address') }}" hardjump="">我的地址</a> <a class="icon-setting" href="{{ url('/personal/security') }}" hardjump="">安全设置</a> <a class="icon-logout" href="{{ url('/logout') }}" ng-click="logout()">退出登录</a>
                                     </div>
                                 </span>
-                            <?php endif; ?>
+                            @endif
                         </div>
 					</div>
 				</nav>
@@ -159,9 +159,9 @@
 
 
     <div ng-view="" role="main" class="ng-scope">
-      <?php $__env->startSection('content'); ?>
+      @section('content')
             这是页面内容区。
-      <?php echo $__env->yieldSection(); ?>
+      @show
     </div>
 
 	
