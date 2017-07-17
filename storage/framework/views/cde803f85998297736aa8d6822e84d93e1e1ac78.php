@@ -13,8 +13,8 @@
 	<?php $__currentLoopData = $order; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $or): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 	<tr class="timeline" order-timeline="" ng-repeat="item in orderList">
 	<td class="ordertimeline-time">
-	<p class="ordertimeline-title ng-binding" ng-bind="item.created_at | parseDate"><?php echo e($or->create_time); ?></p>
-	<p ng-bind="item.created_at | date:'HH:mm'" class="ng-binding"><?php echo e($or->create_time); ?></p>
+	<p class="ordertimeline-title ng-binding" ng-bind="item.created_at | parseDate"><?php echo e(substr($or->create_time,5,5)); ?></p>
+	<p ng-bind="item.created_at | date:'HH:mm'" class="ng-binding"><?php echo e(substr($or->create_time,10,6)); ?></p>
 	<!-- ngIf: item.realStatus !== 5 --> <!-- ngIf: item.realStatus === 5 -->
 	<i class="ordertimeline-time-icon icon-uniE65E finish ng-scope" ng-if="item.realStatus === 5"></i>
 	<!-- end ngIf: item.realStatus === 5 --></td>
@@ -36,7 +36,7 @@
 	  <h3 class="ordertimeline-title ordertimeline-price ui-arial ng-binding" ng-bind="item.total_amount.toFixed(2)"><?php echo e($or->amount); ?></h3>
 	  <p ng-bind="item.is_online_paid ? '在线支付' : '货到付款'" class="ng-binding">在线支付</p></td>
 	  <td class="ordertimeline-status">
-	  <h3 ng-bind="item.statusText" ng-class="{'waitpay': (item.realStatus === 1), 'end': (item.realStatus === 5)}" class="ng-binding end">订单已取消</h3>
+	  <h3 ng-bind="item.statusText" ng-class="{'waitpay': (item.realStatus === 1), 'end': (item.realStatus === 5)}" class="ng-binding end"><?php echo e(['未付款','已付款','已取消'][$or->status]); ?></h3>
 	  <p class="ordertimeline-status-time ng-binding ordertimeline-status-warning" ng-class="{'ordertimeline-status-warning' : item.realStatus !== 1}" ng-bind="statusText"></p></td>
 	  <td class="ordertimeline-handle"><a class="ordertimeline-handle-detail" ng-href="perosnal/order/id/<?php echo e($or->id); ?>" href="personal/order/id/<?php echo e($or->id); ?>">订单详情</a> 
 	  <!-- ngIf: item.realStatus === 1 --> <!-- ngIf: item.realStatus === 2 --> <!-- ngIf: item.realStatus === 3 --> <!-- ngIf: item.realStatus === 4 --> <!-- ngIf: item.realStatus === 5 -->

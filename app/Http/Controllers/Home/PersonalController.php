@@ -19,7 +19,7 @@ class PersonalController extends Controller
 {
     public function index(Request $request)
 	{
-			
+		$staus=[];
 		//$list = Personal::find();		
         $user = $request->session()->get("user");
 		//dd($user);
@@ -27,8 +27,10 @@ class PersonalController extends Controller
 		//dd($order);
 		//$login_user = login_user::where('username',$login->id)->get();
 		$info = personal::first();
+		//$status=['未付款','已付款','已取消'];
+		//var_dump($status);die;
 		//var_dump($info);
-		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info]);
+		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info,'status'=>$status]);
 	}
 
 	public function userInfo(Request $request)
@@ -52,7 +54,7 @@ class PersonalController extends Controller
 		//$userid = \Session::get("user")->id();
         $user = $request->session()->get('user');
 		$order=Orders::where('userid',$user->id)->get();
-		
+		//$s[$order->status]=['未付款','已付款','已取消'];
 		return view('home.personal.order',['order'=>$order]);
 		//return view('home.personal.order');
 	}
