@@ -49,7 +49,7 @@
                     <tr>
                       <td>{{$v->id}}</td>
                       <td>{{$v->name}}</td>
-                      <td><img src="http://oslfm4pmj.bkt.clouddn.com/iwanli/image_{{$v->picname}}" width="50px" height="50px"></td>
+                      <td><img src="http://oslsovx4q.bkt.clouddn.com/upload/image{{$v->picname}}" width="50px" height="50px"></td>
                       <td>{{$v->phone}}</td>
                       <td>{{$v->role}}</td>
                       <td>{{$v->logtime}}</td>

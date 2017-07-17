@@ -1,4 +1,10 @@
         <?php $__env->startSection('content'); ?>
+
+          <?php if(session("msg")): ?>
+            <p class="login-box-msg" style="color:red;"><?php echo e(session("msg")); ?></p >
+          <?php else: ?>
+            <p class="login-box-msg"></p >
+          <?php endif; ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>

@@ -17,7 +17,11 @@ class FtypebController extends Controller
     public function index()
     {
         $list=\DB::table('mer_sid')->simplePaginate(10);
-
+        foreach($list as $v){
+            //dd($v->mid);
+            //我想把父类名称塞进去去首页展示，但是不用$v已有字段无法弥补，所以暂用状态字段去传递
+             $v->status = \DB::table('mer_mid')->where('id',$v->mid)->first()->title;
+        }
        return view("admin.ftypeb.index",["list"=>$list]);
     }
 

@@ -108,33 +108,35 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 
 	//Route::resource("user","Admin\UserController");//普通管理员
 	Route::get("user","Admin\UserController@index");//普通管理员首页
-	Route::get("user/create","Admin\UserController@create");//普通管理员添加模板
-   Route::post("user","Admin\UserController@store");//普通管理员执行添加
+    Route::get("role","Admin\RoleController@index");//角色管理首页
 
-	Route::get("user/edit/{id}","Admin\UserController@edit");//普通管理员添加编辑模板
-	Route::put("user/{id}","Admin\UserController@update");//执行普通管理员修改
-	Route::resource("user","Admin\UserController");//执行普通管理员删除
+    //权限分配
+    Route::group(["middleware" => "role"],function(){
+        Route::get("user/create","Admin\UserController@create");//普通管理员添加模板
+        Route::post("user","Admin\UserController@store");//普通管理员执行添加
+        Route::get("user/edit/{id}","Admin\UserController@edit");//普通管理员添加编辑模板
+        Route::put("user/{id}","Admin\UserController@update");//执行普通管理员修改
+        Route::delete("user/{id}","Admin\UserController@destroy");//执行普通管理员删除
 
-	Route::get("role","Admin\RoleController@index");//角色管理首页
-	Route::get("role/create","Admin\RoleController@create");//角色加载添加页
-	Route::post("role","Admin\RoleController@store");//角色执行添加
-	Route::get("role/edit/{id}","Admin\RoleController@edit");//加载角色编辑模板
-	Route::put("role/{id}","Admin\RoleController@update");//执行角色修改
-	Route::delete('/role/destroy/{id}',"Admin\RoleController@destroy");//角色删除操作
-	Route::get("role/loadNode/{id}","Admin\RoleController@loadNode");//加载节点分配模板	
-	//Route::post("role/saveNode","Admin\RoteController@saveNode");//保存节点信息
-	Route::post("role/saveNode",function(){
-		return "dd";
-	});//保存节点信息
-	
+        Route::get("role/create","Admin\RoleController@create");//角色加载添加页
+        Route::post("role","Admin\RoleController@store");//角色执行添加
+        Route::get("role/edit/{id}","Admin\RoleController@edit");//加载角色编辑模板
+        Route::put("role/{id}","Admin\RoleController@update");//执行角色修改
+        Route::delete('/role/destroy/{id}',"Admin\RoleController@destroy");//角色删除操作
+        Route::get("role/loadNode/{id}","Admin\RoleController@loadNode");//加载节点分配模板
+        Route::post("role/saveNode","Admin\RoleController@saveNode");//保存节点信息
+    });
+
 
 	Route::get("node","Admin\NodeController@index");//节点管理首页
 	Route::post("node","Admin\NodeController@store");//执行节点添加
 	Route::get("node/edit/{id}","Admin\NodeController@edit");//加载节点修改
 	Route::put("node/{id}","Admin\NodeController@update");//执行节点修改
 	Route::delete("node/{id}","Admin\NodeController@destroy");//节点删除
-    
+
     Route::get("vip","Admin\VipController@index");//加载会员信息页面
+    Route::get('vip/edit/{id}',"Admin\VipController@edit");//加载修改会员状态修改
+    Route::put("vip/{id}","Admin\VipController@update");//执行会员修改
 
 	Route::get("shop/index","Admin\ShopController@index");//待审核商家管理页面
 	Route::get("shop/detail/{id}","Admin\ShopController@detail");//待审核商家详情
@@ -157,10 +159,7 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::post("ftype","Admin\FtypeController@store");//菜品分类执行添加
 	Route::get("ftype/edit/{id}","Admin\FtypeController@edit");//菜品分类加载模板
 	//Route::put("ftype/{id}","Admin\FtypeController@update");//菜品分类执行修改
-	Route::put("ftype/{id}",function(){
-		return "dd";
-	});//菜品分类执行修改
-	
+    Route::delete("/ftype/{id}","Admin\FtypeController@destroy");//菜品子分类删除
 	
 	Route::post('ftype/storyEr',"Admin\FtypeController@storyEr");//执行子类别添加
 	

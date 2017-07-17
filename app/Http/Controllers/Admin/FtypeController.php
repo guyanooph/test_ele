@@ -18,6 +18,7 @@ class FtypeController extends Controller
     {
         $list=\DB::table('mer_mid')->simplePaginate(10);
 
+
        return view("admin.ftype.index",["list"=>$list]);
     }
 
@@ -84,7 +85,14 @@ class FtypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "Dd";
+        $data['title'] = $request->title;
+        $data['status'] = $request->status;
+        $res = \DB::table('mer_mid')->where('id',$id)->update($dara);
+        if($res){
+            return redirect('admin/ftype')->with('msg','分类修改成功');
+        }else{
+            return redirect('admin/ftype')->with('msg','分类修改失败');
+        }
     }
 
     /**
@@ -93,16 +101,22 @@ class FtypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //分类删除操作
     public function destroy($id)
     {
-        
-        $a=\DB::table("mer_mid")->delete($id);
-        if($a>0){
-            $info="删除成功";
+        $b = \DB::table('mer_sid')->where('mid',$id)->first();
+        //dd($b);
+        if($b == null) {
+            $a = \DB::table("mer_mid")->delete($id);
+            if ($a > 0) {
+                $info = "删除成功";
+            } else {
+                $info = "删除失败";
+            }
         }else{
-            $info="删除失败";
+            $info = "请先删除子分类再执行操作";
         }
-
 
         return back()->with("err",$info);
     }

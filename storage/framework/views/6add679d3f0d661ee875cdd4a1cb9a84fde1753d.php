@@ -1,4 +1,9 @@
     <?php $__env->startSection('content'); ?>
+      <?php if(session("msg")): ?>
+        <p class="login-box-msg" style="color:red;"><?php echo e(session("msg")); ?></p >
+      <?php else: ?>
+        <p class="login-box-msg"></p >
+      <?php endif; ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -7,7 +12,7 @@
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li><a href="#">普通管理员信息</a></li>
+            <li><a href="#">会员信息</a></li>
             <li class="active">列表</li>
           </ol>
         </section>
@@ -44,7 +49,7 @@
                     </tr>
                     <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                      <td><?php echo e($v->userid); ?></td>
+                      <td><?php echo e($v->id); ?></td>
                       <td><?php echo e($v->username); ?></td>
                       <td><?php echo e($v->email); ?></td>
                       <td><?php echo e($v->phone); ?></td>
@@ -52,7 +57,7 @@
                       <td><?php echo e($v->last_ip); ?></td>
                       <td><?php echo e($v->last_login_time); ?></td>
                       <td>
-                      <button onclick="window.location='<?php echo e(URL('admin/user/edit')); ?>/<?php echo e($v->id); ?>'"class="btn btn-xs btn-primary">编辑</button><button onclick="window.location='<?php echo e(URL('admin/user/detail')); ?>/<?php echo e($v->id); ?>'"class="btn btn-xs btn-primary">详情</button> </td>
+                      <button onclick="window.location='<?php echo e(URL('admin/vip/edit')); ?>/<?php echo e($v->id); ?>'"class="btn btn-xs btn-primary">编辑 </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   

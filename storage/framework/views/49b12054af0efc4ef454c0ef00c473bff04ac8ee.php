@@ -48,7 +48,7 @@
                     <tr>
                       <td><?php echo e($v->id); ?></td>
                       <td><?php echo e($v->name); ?></td>
-                      <td><img src="http://oslfm4pmj.bkt.clouddn.com/iwanli/image_<?php echo e($v->picname); ?>" width="50px" height="50px"></td>
+                      <td><img src="http://oslsovx4q.bkt.clouddn.com/upload/image<?php echo e($v->picname); ?>" width="50px" height="50px"></td>
                       <td><?php echo e($v->phone); ?></td>
                       <td><?php echo e($v->role); ?></td>
                       <td><?php echo e($v->logtime); ?></td>

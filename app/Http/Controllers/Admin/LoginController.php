@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gregwar\Captcha\CaptchaBuilder;
@@ -58,7 +58,8 @@ class LoginController extends Controller
 		$user =\DB::table("admin_user")->where("name",$name)->first();
 		if(!empty($user)){
 			//判断密码
-			if(md5($password)==$user->password){
+//			if(md5($password)==$user->password){
+			if(HASH::check($password,$user->password)){
                 //更新登录时间
                 $user->log_time=date("Y-m-d H:i:s",time());
                 //更新表字段中的admin_user字段

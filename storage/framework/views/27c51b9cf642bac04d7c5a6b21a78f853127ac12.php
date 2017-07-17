@@ -347,7 +347,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php echo e(URL('admin/shop/index')); ?>"><i class="fa fa-circle-o"></i> 待审核商家</a></li>
-                <li><a href="<?php echo e(url('admin/shopCom')); ?>"><i class="fa fa-circle-o"></i> 审核已通过商家</a></li>
+                <li><a href="<?php echo e(url('admin/shopCom')); ?>"><i class="fa fa-circle-o"></i> 已审核商家</a></li>
                 <li><a href="<?php echo e(url('admin/fail')); ?>"><i class="fa fa-circle-o"></i> 审核未通过商家</a></li>
                 <li><a href="<?php echo e(url('admin/disabled')); ?>"><i class="fa fa-circle-o"></i> 已禁用商家</a></li>
               </ul>

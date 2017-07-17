@@ -2,6 +2,11 @@
 
 
 @section('content')
+    @if(session("msg"))
+        <p class="login-box-msg" style="color:red;">{{session("msg")}}</p >
+    @else
+        <p class="login-box-msg"></p >
+    @endif
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -81,7 +86,6 @@
                                 <tr>
                                     <th >id号</th>
                                     <th>商家父类名称</th>
-                                    <th>状态</th>
                                     <th>添加时间</th>
 
                                     <th>操作</th>
@@ -90,12 +94,6 @@
                                     <tr>
                                         <td>{{ $vo->id }}</td>
                                         <td>{{ $vo->title }}</td>
-                                        <td>@if($vo->status==1)
-                                                <b>有效</b>
-                                            @else
-                                                <b> 无效</b>
-                                            @endif
-                                        </td>
                                         <td>{{$vo->created_at }}</td>
 
                                         <td><button class="btn btn-xs btn-danger" onclick="doDel({{ $vo->id }})">删除</button>
@@ -147,8 +145,6 @@
                                                     </div>
                                                 </div>
                                             </div><!-- /.box-header -->
-                        </div>
-                        <button class="btn btn-xs btn-primary" onclick="">查看子分类</button>
                         <button class="btn btn-xs btn-primary" onclick="window.location='{{URL('admin/ftype/edit')}}/{{$vo->id}}'">编辑</button>
 
 
@@ -175,7 +171,7 @@
 @section('myscript')
     <form action="" style="display:none;" id="mydeleteform" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_method" value="delete">
     </form>
 
 

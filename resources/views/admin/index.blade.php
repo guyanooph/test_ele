@@ -1,6 +1,12 @@
 @extends('admin.base')
 
         @section('content')
+
+          @if(session("msg"))
+            <p class="login-box-msg" style="color:red;">{{session("msg")}}</p >
+          @else
+            <p class="login-box-msg"></p >
+          @endif
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>

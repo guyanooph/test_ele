@@ -44,8 +44,8 @@
                     <tr>
                       <th >id号</th>
                       <th>分类名称</th>
-                      <th>父类id</th>
-                      <th>状态</th>
+                        <th>父类id</th>
+                        <th>父类名称</th>
                       <th>添加时间</th>
 
                       <th>操作</th>
@@ -55,18 +55,13 @@
                             <td><?php echo e($vo->id); ?></td>
                             <td><?php echo e($vo->title); ?></td>
                             <td><?php echo e($vo->mid); ?></td>
-                            <td><?php if($vo->status==1): ?>
-                                <b>有效</b>
-                                  <?php else: ?>
-                                 <b> 无效</b>
-                                  <?php endif; ?>
-                            </td>
+                            <td><?php echo e($vo->status); ?></td>
                             <td><?php echo e($vo->created_at); ?></td>
                             
                             <td><button class="btn btn-xs btn-danger" data-target="#myModal" onclick="doDel(<?php echo e($vo->id); ?>)">删除</button> 
                             
                               
-                     <button class="btn btn-xs btn-primary" data-toggle="modal"  onclick="doEdit()">编辑</button>
+                     
                      <script type="text/javascript">
                         function doEdit(mid){
                          // alert(mid);
@@ -76,7 +71,7 @@
                                         dataType:'text',
                                         async:true,
                                         success:function(data){
-                                           alert(data);
+                                           //alert(data);
                                         },
                                       });
                         }
@@ -110,16 +105,6 @@
                             <input type="text" name="title" value="<?php echo e($vo->title); ?>" readonly class="form-control" id="inputEmail3" placeholder="商家子分类名">
                           </div>
                         </div>
-                      <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">状态：</label>
-                           <div class="col-sm-4">
-                              <label class="radio-inline">
-                                <input type="radio" name="status" id="inlineRadio1" value="1"> 启用
-                              </label>
-                              <label class="radio-inline">
-                                <input type="radio" name="status" id="inlineRadio2" value="0"> 禁用
-                              </label>
-                          </div>
                
                         </div>
                 </div>

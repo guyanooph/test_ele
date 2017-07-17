@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Login_user;
 class VipController extends Controller
 {
     /**
@@ -48,6 +48,7 @@ class VipController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -58,7 +59,10 @@ class VipController extends Controller
      */
     public function edit($id)
     {
-        //
+        //加载编辑页面
+        $v = Login_user::find($id);
+        //dd($v);
+        return view('admin.vip.edit',compact('v'));
     }
 
     /**
@@ -70,7 +74,18 @@ class VipController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($id);
+        //执行会员修改
+        $data['username'] = $request->username;
+        $data['phone'] = $request->phone;
+        $data['status'] = $request->status;
+        //dd($data);
+        $res = \DB::table('login_user')->where('id',$id)->update($data);
+        if($res){
+            return redirect('admin/vip')->with('msg','修改会员状态成功');
+        }else{
+            return redirect('admin/vip')->with('msg','修改会员状态失败');
+        }
     }
 
     /**

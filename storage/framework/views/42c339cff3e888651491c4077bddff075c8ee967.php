@@ -1,4 +1,9 @@
 <?php $__env->startSection('content'); ?>
+    <?php if(session("msg")): ?>
+        <p class="login-box-msg" style="color:red;"><?php echo e(session("msg")); ?></p >
+    <?php else: ?>
+        <p class="login-box-msg"></p >
+    <?php endif; ?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -78,7 +83,6 @@
                                 <tr>
                                     <th >id号</th>
                                     <th>商家父类名称</th>
-                                    <th>状态</th>
                                     <th>添加时间</th>
 
                                     <th>操作</th>
@@ -87,12 +91,6 @@
                                     <tr>
                                         <td><?php echo e($vo->id); ?></td>
                                         <td><?php echo e($vo->title); ?></td>
-                                        <td><?php if($vo->status==1): ?>
-                                                <b>有效</b>
-                                            <?php else: ?>
-                                                <b> 无效</b>
-                                            <?php endif; ?>
-                                        </td>
                                         <td><?php echo e($vo->created_at); ?></td>
 
                                         <td><button class="btn btn-xs btn-danger" onclick="doDel(<?php echo e($vo->id); ?>)">删除</button>
@@ -144,8 +142,6 @@
                                                     </div>
                                                 </div>
                                             </div><!-- /.box-header -->
-                        </div>
-                        <button class="btn btn-xs btn-primary" onclick="">查看子分类</button>
                         <button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('admin/ftype/edit')); ?>/<?php echo e($vo->id); ?>'">编辑</button>
 
 
@@ -173,7 +169,7 @@
 <?php $__env->startSection('myscript'); ?>
     <form action="" style="display:none;" id="mydeleteform" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_method" value="delete">
     </form>
 
 

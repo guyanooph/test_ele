@@ -128,17 +128,21 @@
 
       //保存节点信息
       function saveNode(){
- $.ajax({
+          //alert('ok');
+          $.ajax({
           url:"<?php echo e(URL('admin/role/saveNode')); ?>",
           type:"post",
           dataType:"text",
-          //data:$("#nodelistform").serialize(),
+          data:$("#nodelistform").serialize(),
           async:true,
           success:function(data){
-           // $('#exampleModal').modal('hide');
-           // Modal.alert({msg:data,titel:'信息提示',btnok:'确定',btncl:'取消'});
-           alert("ss");
+            $('#exampleModal').modal('hide');
+            Modal.alert({msg:data,titel:'信息提示',btnok:'确定',btncl:'取消'});
+           //alert(data);
           },
+        error:function(){
+              return "error";
+        }
         });
       }
 
