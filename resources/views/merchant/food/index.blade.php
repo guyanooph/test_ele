@@ -55,7 +55,7 @@
                       <td>{{$v->descr}}</td>
                       <td>{{$v->price}}</td>
                       <td>{{$v->num}}</td>
-                      <td>{{$v->food_rate}}</td>
+                      <td>{{$v->foodrate}}</td>
                       <td>@if($v->stutas == 1)在售 @elseif ($v->stutas == 2)售完 @elseif ($v->stutas == 3)下架 @endif</td>
                       <td>{{$v->create_time}}</td>
                       <td><button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/food/edit')}}/{{ $v->id }}'">编辑</button> <button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> </td>

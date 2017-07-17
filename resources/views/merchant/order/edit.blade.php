@@ -26,6 +26,7 @@
 					<!-- form start -->
 					<form class="form-horizontal" action="{{URL('merchant/order/update')}}/{{ $order->id }}" method="post">
 						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+						<input type="hidden" name="_method" value="put">
 						<div class="box-body">
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">订单号</label>
@@ -37,12 +38,6 @@
 								<label for="inputEmail3" readonly class="col-sm-2 control-label">用户id</label>
 								<div class="col-sm-4">
 									<input type="text" name="userid" class="form-control" placeholder="用户id" value="{{ $order->userid }}">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputEmail3" readonly class="col-sm-2 control-label">商家id</label>
-								<div class="col-sm-4">
-									<input type="text" name="shopid" class="form-control" placeholder="商家id" value="{{ $order->shopid }}">
 								</div>
 							</div>
 							<div class="form-group">
@@ -85,13 +80,13 @@
 								<label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
 								<div class="col-sm-4">
 								<label class="radio-inline">
-									<input type="radio" name="status" id="inlineRadio1" {{ $order->status }} value="0"> 已发货
+									<input type="radio" name="status" id="inlineRadio1" {{ $order->status }} value="1"> 未配送
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="1"> 正在配送
+									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="2">  已发货
 								</label>
 								<label class="radio-inline">
-									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="2"> 未配送
+									<input type="radio" name="status" id="inlineRadio2" {{ $order->status }} value="3"> 确认收货
 								</label>
 								</div>
 							</div>
@@ -132,16 +127,26 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
-								<div class="col-sm-4">
-									<input type="text" name="pay" class="form-control" placeholder="支付方式" value="{{ $order->pay }}">
-								</div>
+							  <label for="inputPassword3" class="col-sm-2 control-label">支付方式：</label>
+							  <div class="col-sm-4">
+								<label class="radio-inline">
+								   <input type="radio"  name="pay" {{ ($order->pay == 1)?"checked":"" }} value="1">货到付款  &nbsp; &nbsp;
+								</label>
+								<label class="radio-inline">
+								   <input type="radio"  name="pay" {{ ($order->pay == 2)?"checked":"" }} value="2">在线支付
+								</label>
+							  </div>
 							</div>
 							<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">配送方式</label>
-								<div class="col-sm-4">
-									<input type="text" name="distribution" class="form-control" placeholder="配送方式" value="{{ $order->distribution }}">
-								</div>
+							  <label for="inputPassword3" class="col-sm-2 control-label">配送方式：</label>
+							  <div class="col-sm-4">
+								<label class="radio-inline">
+								   <input type="radio"  name="distribution" {{ ($order->distribution == 1)?"checked":"" }} value="1">自营快送  &nbsp; &nbsp;
+								</label>
+								<label class="radio-inline">
+								   <input type="radio"  name="distribution" {{ ($order->distribution == 2)?"checked":"" }} value="2">蜂鸟快送 
+								</label>
+							  </div>
 							</div>
 							<div class="form-group">
 								<label for="inputEmail3" class="col-sm-2 control-label">发票信息</label>

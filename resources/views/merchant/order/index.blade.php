@@ -54,7 +54,7 @@
 							<td>{{ $order->create_time }}</td>
 							<td>{{ $order->addressid }}</td>
 							<td>{{ $order->amount }}</td>
-							<td>@if ($order->status=="0")已发货 @elseif ($order->status=="1")正在配送 @else ($order->status=="2")未配送 @endif</td>
+							<td>@if ($order->status=="1")已发货 @elseif ($order->status=="2")正在配送 @else ($order->status=="3")未配送 @endif</td>
 							<td>{{ $order->order_description }}</td>
 							<td>{{ $order->over_times }}</td>
 							<td>{{ $order->delivery_fee }}</td>

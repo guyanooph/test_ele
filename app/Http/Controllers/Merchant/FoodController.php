@@ -115,13 +115,7 @@ class FoodController extends Controller
 		//dd($shu);
 		//dd($find);
 		$food['typeid'] = $find['title'];
-		$info = Food_type::where("shopid",session('merchantname')->shopid)->get();
-        //处理信息
-        foreach($info as &$v){
-            $m = substr_count($v->path,","); //获取path中的逗号
-            //生成缩进
-            $v->title = str_repeat("&nbsp;",($m-1)*4)."|--".$v->title;			 
-        }	
+		$info = Food_type::where("shopid",session('merchantname')->shopid)->get();	
         return view("merchant.food.edit",["type"=>$food],["info"=>$info]); 
     }
 

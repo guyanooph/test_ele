@@ -194,7 +194,7 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::post('/order', "Merchant\OrderController@store");//执行添加
 	Route::delete('/order/destroy/{id}', "Merchant\OrderController@destroy");//执行删除
 	Route::get('/order/edit/{id}', "Merchant\OrderController@edit");//修改订单信息页
-	Route::post('/order/update/{id}', "Merchant\OrderController@update");//执行修改
+	Route::put('/order/update/{id}', "Merchant\OrderController@update");//执行修改
 	
 	Route::get("/foodtype","Merchant\FoodtypeController@index");//管理菜单分类首页
 	Route::get("/foodtype/create","Merchant\FoodtypeController@create");//添加菜单分类

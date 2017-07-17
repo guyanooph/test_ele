@@ -53,6 +53,7 @@
 	<link href="<?php echo e(asset('css/vendor.0cb970.css')); ?>" rel="stylesheet">
 
 	<link href="<?php echo e(asset('css/main.5e33c3.css')); ?>" rel="stylesheet">
+    <script src="<?php echo e(asset('js/jquery-1.8.3.min.js')); ?>"></script>
 
 
 	<!--[if lte IE 8]><script>window.location.href='https://h.ele.me/activities/landing';</script><![endif]-->
