@@ -34,14 +34,26 @@
                         <input type="phone" class="form-control" id="inputPassword3" placeholder="手机号" name="phone">
                       </div>
                     </div>
-               <div class="form-group">
+                 <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">头像：</label>
                       <div class="col-sm-4">
                         <input type="file" class="form-control" name="picname">
                       </div>
                     </div>
 
-                  </div><!-- /.box-body -->
+                  </div>
+                   <div class="form-group">
+                       <label for="inputEmail3" class="col-sm-2 control-label">角色：</label>
+                       <div class="col-sm-4">
+                           <select style="width:100px;"  id="role" name="role">
+                               <option>角色</option>
+                               @foreach($roles as $role)
+                                   <option  style="width:150px;" value="{{$role->id}}">{{$role->role}}</option>
+                               @endforeach
+                           </select>
+                       </div>
+                   </div>
+                   <!-- /.box-body -->
                   <div class="box-footer">
 				    <div class="col-sm-offset-2 col-sm-1">
 						<button type="submit" class="btn btn-primary">添加</button>

@@ -64,5 +64,6 @@ class Kernel extends HttpKernel
         'personal' => \App\Http\Middleware\PersonalMiddleware::class,
         'shopcart' => \App\Http\Middleware\ShopcartMiddleware::class,
         'location' => \App\Http\Middleware\LocationMiddleware::class,
+        'role'=>\App\Http\Middleware\RoleMiddleware::class,
     ];
 }

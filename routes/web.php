@@ -11,6 +11,7 @@
 |
 */
 
+
 //前台路由
 Route::get("/home", "Home\LocationController@location");  //定位页面
 Route::get("/setlocationsession", "Home\LocationController@setLocationSession");  //定位页面
@@ -95,35 +96,36 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 
 	//Route::resource("user","Admin\UserController");//普通管理员
 	Route::get("user","Admin\UserController@index");//普通管理员首页
-	Route::get("user/create","Admin\UserController@create");//普通管理员添加模板
-    Route::post("user","Admin\UserController@store");//普通管理员执行添加
+    Route::get("role","Admin\RoleController@index");//角色管理首页
 
-	Route::get("user/edit/{id}","Admin\UserController@edit");//普通管理员添加编辑模板
-	Route::put("user/{id}","Admin\UserController@update");//执行普通管理员修改
-	Route::resource("user","Admin\UserController");//执行普通管理员删除
+    //权限分配
+    Route::group(["middleware" => "role"],function(){
+        Route::get("user/create","Admin\UserController@create");//普通管理员添加模板
+        Route::post("user","Admin\UserController@store");//普通管理员执行添加
+        Route::get("user/edit/{id}","Admin\UserController@edit");//普通管理员添加编辑模板
+        Route::put("user/{id}","Admin\UserController@update");//执行普通管理员修改
+        Route::delete("user/{id}","Admin\UserController@destroy");//执行普通管理员删除
 
-	Route::get("role","Admin\RoleController@index");//角色管理首页
-	Route::get("role/create","Admin\RoleController@create");//角色加载添加页
-	Route::post("role","Admin\RoleController@store");//角色执行添加
-	Route::get("role/edit/{id}","Admin\RoleController@edit");//加载角色编辑模板
-	Route::put("role/{id}","Admin\RoleController@update");//执行角色修改
-	Route::delete('/role/destroy/{id}',"Admin\RoleController@destroy");//角色删除操作
-	Route::get("role/loadNode/{id}","Admin\RoleController@loadNode");//加载节点分配模板	
-	//Route::post("role/saveNode","Admin\RoteController@saveNode");//保存节点信息
-	Route::post("role/saveNode",function(){
-		return "dd";
-	});//保存节点信息
-	
-	
-	//Route::resource("node","Admin\NodeController");//节点管理
+        Route::get("role/create","Admin\RoleController@create");//角色加载添加页
+        Route::post("role","Admin\RoleController@store");//角色执行添加
+        Route::get("role/edit/{id}","Admin\RoleController@edit");//加载角色编辑模板
+        Route::put("role/{id}","Admin\RoleController@update");//执行角色修改
+        Route::delete('/role/destroy/{id}',"Admin\RoleController@destroy");//角色删除操作
+        Route::get("role/loadNode/{id}","Admin\RoleController@loadNode");//加载节点分配模板
+        Route::post("role/saveNode","Admin\RoleController@saveNode");//保存节点信息
+    });
+
+
 	Route::get("node","Admin\NodeController@index");//节点管理首页
 	Route::post("node","Admin\NodeController@store");//执行节点添加
 	Route::get("node/edit/{id}","Admin\NodeController@edit");//加载节点修改
-
 	Route::put("node/{id}","Admin\NodeController@update");//执行节点修改
-	
 	Route::delete("node/{id}","Admin\NodeController@destroy");//节点删除
-	Route::get("vip","Admin\VipController@index");//加载会员信息页面
+
+    Route::get("vip","Admin\VipController@index");//加载会员信息页面
+    Route::get('vip/edit/{id}',"Admin\VipController@edit");//加载修改会员状态修改
+    Route::put("vip/{id}","Admin\VipController@update");//执行会员修改
+
 	Route::get("shop/index","Admin\ShopController@index");//待审核商家管理页面
 	Route::get("shop/detail/{id}","Admin\ShopController@detail");//待审核商家详情
     Route::get("shop/check/{id}/{state}","Admin\ShopController@check");//商家审核操作
@@ -133,15 +135,19 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
     Route::get("shop/checkCom/{id}/{state}","Admin\ShopController@checkCom");//违规商家手动处理
 
 
+    Route::get("fail","Admin\ShopController@indexFail");//加载审核未通过商家信息
+    Route::get("fail/detail/{id}","Admin\ShopController@detailFail");//加载审核未通过商家详情信息
+    Route::get("shop/checkFail/{id}/{state}","Admin\ShopController@checkFail");//违规商家手动处理
+
+    Route::get("disabled","Admin\ShopController@indexDisabled");//加载禁用商家信息
+    Route::get("disabled/detail/{id}","Admin\ShopController@detailDisabled");//加载禁用商家详情信息
+    Route::get("shop/checkDisabled/{id}/{state}","Admin\ShopController@checkDisabled");//违规商家解禁
 
 	Route::get("ftype","Admin\FtypeController@index");//菜品分类加载页面
 	Route::post("ftype","Admin\FtypeController@store");//菜品分类执行添加
 	Route::get("ftype/edit/{id}","Admin\FtypeController@edit");//菜品分类加载模板
 	//Route::put("ftype/{id}","Admin\FtypeController@update");//菜品分类执行修改
-	Route::put("ftype/{id}",function(){
-		return "dd";
-	});//菜品分类执行修改
-	
+    Route::delete("/ftype/{id}","Admin\FtypeController@destroy");//菜品子分类删除
 	
 	Route::post('ftype/storyEr',"Admin\FtypeController@storyEr");//执行子类别添加
 	
@@ -166,15 +172,12 @@ Route::get('/merchant/getcode',"Merchant\LoginController@getCode"); //加载商�
 
 //商家注册
 Route::get("merchant/phone","Merchant\RegisterController@index");//加载商家手机注册页面
-Route::post("merchant/ver_tel","Merchant\RegisterController@ver_tel");//手机验证码验证手机号是否已经被用
 Route::post("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
 Route::get("code","Merchant\RegisterController@code");//验证code并返回详细商家注册页
-//Route::get("sid","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
 Route::get("sid/{id}","Merchant\RegisterController@sids");//验证code并返回详细商家注册页
 Route::get("/sendMobileCode","Merchant\RegisterController@sendMobileCode");//发送手机验证码
 
 
-//Route::get('merchant/register/sendsms', 'Merchant\RegisterController@sendSms');//发送手机验证码
 Route::get('merchant/register','Merchant\RegisterController@register');//加载详细注册信息
 Route::post("merchant/register","Merchant\RegisterController@store");////商家执行注册
 Route::post("merchant/ver","Merchant\RegisterController@ver");//注册用户名验证
@@ -193,8 +196,10 @@ Route::post('/test','Merchant\RegisterController@test');
 //商家后台管理
 Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/","Merchant\IndexController@index");//管理首页
-	Route::get("/create","Merchant\IndexController@create");//管理首页
-	Route::post("/store","Merchant\IndexController@store");//管理首页
+	
+	Route::get("/merchant","Merchant\MerchantController@index");//商家信息首页
+	Route::get("/merchant/edit/{id}","Merchant\MerchantController@edit");//编辑商家信息
+	Route::put("/merchant/update/{id}","Merchant\MerchantController@update");//执行修改商家信息
 	
 	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
 	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
@@ -223,3 +228,4 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 });
 
 Route::get("/getmertype", "Home\ShopController@getMerType");
+Route::get('/test_redis', "Merchant\RegisterController@test_redis");

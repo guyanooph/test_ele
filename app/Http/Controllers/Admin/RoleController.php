@@ -140,7 +140,7 @@ class RoleController extends Controller
     //保存角色节点信息
     public function saveNode(Request $request)
     {
-        return "dd";die;
+        //dd($request);
         $rid = $request->input("rid");
         //清除数据
         \DB::table("r_n")->where("rid",$rid)->delete();

@@ -1,5 +1,10 @@
 @extends('admin.base')
     @section('content')
+      @if(session("msg"))
+        <p class="login-box-msg" style="color:red;">{{session("msg")}}</p >
+      @else
+        <p class="login-box-msg"></p >
+      @endif
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -8,7 +13,7 @@
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-            <li><a href="#">普通管理员信息</a></li>
+            <li><a href="#">会员信息</a></li>
             <li class="active">列表</li>
           </ol>
         </section>
@@ -45,7 +50,7 @@
                     </tr>
                     @foreach($list as $v)
                     <tr>
-                      <td>{{$v->userid}}</td>
+                      <td>{{$v->id}}</td>
                       <td>{{$v->username}}</td>
                       <td>{{$v->email}}</td>
                       <td>{{$v->phone}}</td>
@@ -53,7 +58,7 @@
                       <td>{{$v->last_ip}}</td>
                       <td>{{$v->last_login_time}}</td>
                       <td>
-                      <button onclick="window.location='{{ URL('admin/user/edit')}}/{{ $v->id}}'"class="btn btn-xs btn-primary">编辑</button><button onclick="window.location='{{ URL('admin/user/detail')}}/{{ $v->id}}'"class="btn btn-xs btn-primary">详情</button> </td>
+                      <button onclick="window.location='{{ URL('admin/vip/edit')}}/{{ $v->id}}'"class="btn btn-xs btn-primary">编辑 </td>
                     </tr>
                     @endforeach
                   

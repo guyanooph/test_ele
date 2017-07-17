@@ -23,7 +23,28 @@
                         <input type="text" name="name" class="form-control" id="inputEmail3"  value="{{ $v->name }}">
                       </div>
                     </div>
-                   
+                      {{--<div class="form-group">--}}
+                          {{--<label for="inputEmail3" class="col-sm-2 control-label">角色：</label>--}}
+                          {{--<div class="col-sm-4">--}}
+                              {{--<select style="width:100px;"  id="role" name="role">--}}
+                                      {{--<option  style="width:150px;" value="{{$v->role}}">{{$v->role}}</option>--}}
+                              {{--</select>--}}
+                          {{--</div>--}}
+                      {{--</div>--}}
+
+                      <div class="form-group">
+                          <label for="inputEmail3" class="col-sm-2 control-label">角色：</label>
+                          <div class="col-sm-4">
+                              <select style="width:100px;"  id="role" name="role">
+                                  {{--<option  style="width:150px;" value="{{$v->role}}" selected = "selected">{{$v->role}}</option>--}}
+                                  @foreach($roles as $role)
+                                      <option  style="width:150px;" @if ($v->role==$role->role)selected @endif
+                                      value="{{$role->role}}">{{$role->role}}</option>
+                                  @endforeach
+                              </select>
+                          </div>
+                      </div>
+
                 <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">新密码：</label>
                       <div class="col-sm-4">

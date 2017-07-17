@@ -328,7 +328,7 @@
             position: absolute;
         }</style>
     <meta charset="utf-8">
-    {{--<meta name="_token" content="{{ csrf_token() }}"/>--}}
+    <meta name="_token" content="{{ csrf_token() }}"/>
     <title>吃货-开店申请</title>
     <meta name="description" content="吃货-开店申请">
     <meta id="viewport" name="viewport"
@@ -495,28 +495,22 @@
                     </div>
                     </div>
                 </div>
-                
-
-                <div class="form-group flex">
-                <label class="control-label"> <b class="required">*</b>城市 </label>
-                <div class="control-content city-group">
+                {{--城市级联--}}
+<div class="form-group flex">
+    <label class="control-label"> <b class="required">*</b>城市 </label>
+<div class="control-content city-group">
 <span>
-
 <div onclick="show_pro(this)" id_code="" code="" id="pro_div" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
 <div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-省-" style="display:none">
 </div>
 <input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-省-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
-
 </div>
 </span>
-
 <span>
-
 <div onclick="show_pro(this)" id_code="" code="" id="city_div" class="city-select ui-select-container ui-select-bootstrap dropdown ng-empty ng-invalid ng-invalid-required ng-touched open direction-up" ng-class="{open: $select.open}" name="province" ng-model="form.pcd_region.province_id" ng-change="methods.provinceChange($select.selected)" style="">
 <div class="ui-select-match ng-scope ng-hide" ng-hide="$select.open &amp;&amp; $select.searchEnabled" ng-disabled="$select.disabled" ng-class="{'btn-default-focus':$select.focus}" placeholder="-市-" style="display:none">
 </div>
-<input id="input_pro" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-市-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
-
+<input id="input_pro"  name="city" autocomplete="off" tabindex="-1" aria-expanded="true" aria-label="Select box" aria-owns="ui-select-choices-0" aria-activedescendant="ui-select-choices-row-0-0" class="form-control ui-select-search ng-pristine ng-valid ng-empty ng-touched" placeholder="-市-" ng-model="$select.search" ng-show="$select.searchEnabled &amp;&amp; $select.open" style="width: 160px;" type="search">
 </div>
 </span>
 
@@ -561,11 +555,11 @@
             }
       }else if(e.id == "city_div"){
             var t = document.getElementById("pro_div").attributes.id_code.value;
-            alert(document.getElementById("pro_div").attributes.id_code.value);
+            //alert(document.getElementById("pro_div").attributes.id_code.value);
             if(!t){
                 return;
-            }            
-            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/cities_by_province?province_id=" + document.getElementById("pro_div").attributes.id_code.value;  
+            }
+            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/cities_by_province?province_id=" + document.getElementById("pro_div").attributes.id_code.value;
             var ex = "left:0;'>";
             pro_str = "";
             sendAjax(url);
@@ -580,7 +574,7 @@
                 $("#city_div").append(pro_str);
             }
        }else if(e.id == "county_div"){
-            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/district_by_city?city_id=" + document.getElementById("city_div").attributes.id_code.value;  
+            var url = "https://kaidian.ele.me/runshop-svr/webapi/runshops/district_by_city?city_id=" + document.getElementById("city_div").attributes.id_code.value;
             var ex = "left:0;'>";
             pro_str = "";
             sendAjax(url);
@@ -597,20 +591,20 @@
        }
     }
     var pro_data = null;
-     
+
     function select(e){
-        alert("a");
+        //alert("a");
         e.parentNode.parentNode.attributes.code.value = e.attributes.code.value;
         e.parentNode.parentNode.attributes.id_code.value = e.attributes.id_code.value;
         //e.parentNode.parentNode.getElementsByTagName('input')[0].value = $(e).find("span").html();
         e.parentNode.previousSibling.previousSibling.value = $(e).find("span").html();
-        alert(e.parentNode.previousSibling.previousSibling.tagName);
+        //alert(e.parentNode.previousSibling.previousSibling.tagName);
         map.setCity($(e).find("span").html());
     }
 
     function sendAjax(url) {
         $.ajax({
-            url:url,    
+            url:url,
             datatype:"json",
             async:false,
             success:function(data){
@@ -620,17 +614,11 @@
     }
 </script>
 
-
-
-
-
                 <div class="form-group flex">
                 <label class="control-label"> <b class="required">*</b>详细地址 </label>
-                    <input type="text" name="address" style="width:300px" onblur="checkAddress()"/>
-                    <small class="control-label">
-                        <div id="div_address"></div>
-                {{--<button type="button" class="btn btn-primary loca-btn" ng-click="methods.searchPlace()"> 去定位--}}
-                {{--</button>--}}
+                <div class="form-inline">
+                    <input id="input" onblur="checkAddress()" type="text" name="address" style="width:300px" maxlength="255" required="" style="">
+                    <div id="div_address"></div>
                 <br>
                 </div>
                 </div>
@@ -666,16 +654,18 @@
                             var input = document.getElementById('input');
                             var message = document.getElementById('message');
                             map.on('click',function(e){
-                                $("#longitude_latitude").remove();
+                                //$("#longitude_latitude").remove();
+                                //获取经纬度
                                 var str = "<input id='longitude_latitude'' type='hidden' name='longitude_latitude' value='" +  e.lnglat + "' >";
-                                $("#toreFormID").prepend(str);
+                                //alert(str);
+                                $("#storeFormID").prepend(str);
                                 marker.setPosition(e.lnglat);
                                 geocoder.getAddress(e.lnglat,function(status,result){
                                     if(status=='complete'){
                                         input.value = result.regeocode.formattedAddress
                                         message.innerHTML = ''
                                     }else{
-                                        alert(result);
+                                        //alert(result);
                                         message.innerHTML = '无法获取地址'
                                     }
                                 })

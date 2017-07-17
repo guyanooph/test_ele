@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin_user;
+use App\Models\Admin_role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Query\Builder;
 use zgldh\QiniuStorage\QiniuStorage;
-
+use Illuminate\Support\Facades\Hash;
 //use zgldh\QiniuStorage\QiniuFilesystemServiceProvider;
 class UserController extends Controller
 {
@@ -15,13 +16,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //普通管理员信息
     public function index()
     {
 
 
-        $list= \DB::table("admin_user")->paginate(3);
-        return view("admin.user.index",["list"=>$list]);
-        
+        $list = \DB::table("admin_user")->paginate(10);
+        //管理员表里的role字段替换成文本
+        foreach($list as $v){
+            $aa = \DB::table('admin_role')->where('id',$v->role)->first();
+            $v->role = isset($aa->role)?$aa->role:"尚未分配";
+        }
+        //dd($list);
+        return view("admin.user.index", ["list" => $list]);
+
     }
 
     /**
@@ -31,76 +39,66 @@ class UserController extends Controller
      */
     public function create()
     {
-       return view("admin.user.create");
+
+        $roles = Admin_role::all();
+        //dd($roles);
+        return view("admin.user.create",compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function vstore(Request $request)
-    { 
-            // $data=$request->only('name','password');
-             $data['name']=$request->input('name');
-           
-            $pass=$request->input("password");
-         
-            $data['password']=md5($pass);
-
-            $data['addtime']=date("Y-m-d H:i:s",time());
-            //$data['addtime']=time();
-
-           
-                $id=\DB::table('Admin_user')->insertGetId($data);
-                if($id>0){
-                    $info="添加管理员成功";
-                }else{
-                    $info="添加信息失败";
-                }
-
-
-            return redirect('admin/user')->with("err",$info);
-    }
-    //文件上传到七牛
-    //public function uploadFile(Request $request)
+    //执行普通管理员添加
     public function store(Request $request)
     {
+        //dd($_FILES);
 
         //判断是否有文件上传
-        if($request->hasFile('picname')) {
+        if ($request->hasFile('picname')) {
             //获取文件，file对应的是前端表单上传input的name
-            $file =$request->file("picname");
+            $file = $request->file("picname");
             //初始化
-            $disk =QiniuStorage::disk("qiniu");
+            $disk = QiniuStorage::disk("qiniu");
             //重命名文件
-            $fileName  =md5($file->getClientOriginalName().time().rand()).".".$file->getClientOriginalExtension();
-            //将文件名放入数组$data中
-            $data['picname']=$fileName;
-             //获取表单中的姓名和密码
-             $data['name']=$request->input('name');
-             $data['password'] = encrypt($request->input('password'));
-             $data['phone'] = $request->input('phone');
-             $data['addtime'] = date("Y-m-d H:i:s",time());         
-            //执行添加
-            if(\DB::table('Admin_user')->insert($data)){
-            //上传到七牛
-            $bool = $disk->put('iwanli/image_'.$fileName,file_get_contents($file->getRealPath()));
+            $filename = md5($file->getClientOriginalName() . time() . rand()) . "." . $file->getClientOriginalExtension();
             //判断是否上传成功
-          if($bool){
-              // $path = $disk->downloadUrl('iwanli/image_'.$fileName);
-            // print_r($path);die;
-            
-              return redirect("admin/user")->with('err',"添加成功");
+            $bool = $disk->put('upload/image' . $filename, file_get_contents($file->getRealPath()));
+            if ($bool) {
+                // $path = $disk->downloadUrl('iwanli/image_'.$fileName);
+                // print_r($path);die;
+                $path = $disk->downloadUrl('upload/image'. $filename);
+            } else {
+                return '上传失败';
             }
-            return '上传失败';
-        }
-    }
+
+        }else{
         return '没有文件';
     }
 
 
+        $data['picname'] = $filename;
+        //获取表单中的姓名和密码
+        $data['name'] = $request->input('name');
+        $data['password'] = HASH::make($request->input('password'));
+        $data['phone'] = $request->input('phone');
+        //dd($request->input('role'));
+        $data['role'] = $request->input('role');
+        //dd($data['role']);
+        $data['addtime'] = date("Y-m-d H:i:s", time());
+            //执行添加
+        //dd($data);
+        $res1 = \DB::table('admin_user')->insertGetId($data);
+        $info['uid'] = $res1;
+        $info['rid'] = $data['role'];
+        $res2 = \DB::table('u_r')->insertGetId($info);
+        if ($res1 && $res2) {
+        return redirect("admin/user")->with('err', "添加成功");
+    }
+
+        }
     /**
      * Display the specified resource.
      *
@@ -121,8 +119,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $a=Admin_user::find($id);
-
-        return view("admin.user.edit",["v"=>$a]);
+        //dd($a);
+        $a ->role = \DB::table('admin_role')->where('id',$a->role)->first()->role;
+        //dd($a);
+        $roles = Admin_role::all();
+        return view("admin.user.edit",["v"=>$a,'roles'=>$roles]);
     }
     /**
      * Update the specified resource in storage.
@@ -134,15 +135,19 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {  
 
+        //dd($request->role);
+        $rid = \DB::table('admin_role')->where('role',$request->role)->first()->id;
+        //dd($rid);
+        $data['name']=$request->name;
 
-        
-         $data['name']=$request->input("name");
-
-       $data['password']=md5($request->input("password"));
+       $data['password']=HASH::make($request->password);
        $data['updated_at']=date("Y-m-d H:i:s",time());
-       
+       $data['role'] = $rid;
+       $res1 = \DB::table("admin_user")->where("id",$id)->update($data);
+       $info['rid'] =  $rid;
+       $res2 = \DB::table("u_r")->where("uid",$id)->update($info);
       
-       if(\DB::table("admin_user")->where("id",$id)->update($data)){
+       if($res1 && $res2){
 
        return redirect("admin/user")->with("err","修改成功");
    }
@@ -159,9 +164,10 @@ class UserController extends Controller
         $a =Admin_user::destroy($id);
         //$a = $b->delete($id);
        // $a=\DB::table("admin_user")->delete($id);
-       
+        $id2 = \DB::table('u_r')->where('uid',$id)->first()->id;
+        $b = \DB::table('u_r')->delete($id2);
 
-        if($a){
+        if($a && $b){
             $info="删除成功";
         }else{
             $info="删除失败";

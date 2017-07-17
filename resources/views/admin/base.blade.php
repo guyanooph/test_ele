@@ -347,7 +347,9 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{URL('admin/shop/index')}}"><i class="fa fa-circle-o"></i> 待审核商家</a></li>
-                <li><a href="{{url('admin/shopCom')}}"><i class="fa fa-circle-o"></i> 普通商家</a></li>
+                <li><a href="{{url('admin/shopCom')}}"><i class="fa fa-circle-o"></i> 已审核商家</a></li>
+                <li><a href="{{url('admin/fail')}}"><i class="fa fa-circle-o"></i> 审核未通过商家</a></li>
+                <li><a href="{{url('admin/disabled')}}"><i class="fa fa-circle-o"></i> 已禁用商家</a></li>
               </ul>
             </li>
             
@@ -360,7 +362,7 @@
                 <li><a href="{{url('admin/ftypeb')}}"><i class="fa fa-circle-o"></i> 子分类管理</a></li>
               </ul>
             </li>
-             <li class="active treeview">
+            <!--  <li class="active treeview">
               <a href="#">
                 <i class="fa fa-gittip"></i> <span>投诉建议管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -368,7 +370,7 @@
                 <li class="active"><a href="{{url('admin/letter')}}"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
                 <li><a href="{{url('admin/offer')}}"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
               </ul>
-            </li>
+            </li> -->
 
              <li class="treeview">
               <a href="#">
