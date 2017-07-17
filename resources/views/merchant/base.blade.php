@@ -345,6 +345,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('merchant/order')}}"><i class="fa fa-circle-o"></i> 浏览订单信息</a></li>
+
               </ul>
             </li>
              <li class="active treeview">
@@ -352,15 +353,11 @@
                 <i class="fa fa-gittip"></i> <span>用户评价</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/letter')}}"><i class="fa fa-circle-o"></i> 浏览用户评价</a></li>
+
+                <li class="active"><a href="{{url('merchant/evaluate')}}"><i class="fa fa-circle-o"></i> 浏览用户评价</a></li>
                 
               </ul>
             </li>
-
-
-
-
-
              <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>

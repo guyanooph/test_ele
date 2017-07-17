@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
+| routes are loaded by  the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
 */
@@ -58,9 +58,11 @@ Route::group(['middleware'=>'location'], function(){
     	Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
     	Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
     	Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
-    	Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
-    	Route::get('/security','Home\PersonalController@security'); //安全设置
-    	Route::get('/logout','Home\PersonalController@logout'); //安全设置
+    	
+    	Route::get('/security','Home\PersonalController@security'); //安全中心
+		Route::get('/changepassword','Home\PersonalController@changepassword');//修改密码
+		Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
+    	Route::get('/logout','Home\PersonalController@logout'); //退出登录
     
     });
 });
@@ -184,7 +186,7 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/merchant","Merchant\MerchantController@index");//商家信息首页
 	Route::get("/merchant/edit/{shopid}","Merchant\MerchantController@edit");//编辑商家信息
 	Route::put("/merchant/update/{shopid}","Merchant\MerchantController@update");//执行修改商家信息
-	
+
 	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
 	Route::get('/merchantopen/edit/{shopid}', "Merchant\MerchantopenController@edit");//修改营业信息
 	Route::put('/merchantopen/update/{shopid}', "Merchant\MerchantopenController@update");//执行修改
@@ -209,6 +211,10 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/food/edit/{id}","Merchant\FoodController@edit");//修改菜单
 	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
 	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
+	
+	Route::get("/evaluate","Merchant\EvaluateController@index");//浏览评价信息
+	Route::get("/evaluate/edit/{id}","Merchant\EvaluateController@edit");//商家回复评价
+	Route::put("/evaluate/update/{id}","Merchant\EvaluateController@update");//执行商家对用户的评价
 });
 
 Route::get("/getmertype", "Home\ShopController@getMerType");

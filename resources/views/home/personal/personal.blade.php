@@ -109,7 +109,7 @@
 										href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F">登录/注册</a></span>
 							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
 							
-							<span class="topbar-profilebox-username ng-binding">{{ $login_user->username }}</span>
+							<span class="topbar-profilebox-username ng-binding">???</span>
 								<!-- ngIf: $root.topbarType === 'checkout' -->
 								<!-- ngIf: $root.topbarType !== 'checkout' --><span
 										class="topbar-profilebox-btn icon-arrow-down ng-scope"
@@ -206,17 +206,20 @@
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle active"
 			                                        ng-class="{ active: pageName === 'profile' }"><i
 							class="icon-line-home"></i><a href="/personal">个人中心</a></h2></li>
-			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-line-order"></i>我的订单
+			<li class="profile-sidebar-section">
+			<h2 class="profile-sidebar-sectiontitle">
+			<i class="icon-line-order"></i>我的订单
 				</h2>
 				<ul>
-					<li ng-class="{ active: pageName === 'order' }"><a href="/personal/order">近三个月订单</a></li>
+				    <li ng-class="{ active: pageName === 'order' }"><a href="/personal/order">近三个月订单</a></li>
 					<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/personal/order/unrated">待评价订单
 							<!-- ngIf: unratedNumber --></a></li>
 					<li ng-class="{ active: pageName === 'order-refunding' }"><a href="/personal/order/refund">退单记录</a>
 					</li>
 				</ul>
 			</li>
-			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i class="icon-yen"></i>我的资产
+			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle">
+			<i class="icon-yen"></i>我的资产
 				</h2>
 				<ul>
 					<li ng-class="{ active: pageName === 'hongbao' }"><a href="/personal/red_packet">我的红包</a></li>
@@ -227,8 +230,8 @@
 			<li class="profile-sidebar-section"><h2 class="profile-sidebar-sectiontitle"><i
 							class="icon-line-profile"></i>我的资料</h2>
 				<ul>
-					<li ng-class="{ active: pageName === 'info' }"><a href="/personal/info/">个人资料</a></li>
-					<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address/">地址管理</a></li>
+					<li ng-class="{ active: pageName === 'info' }"><a href="/personal/info">个人资料</a></li>
+					<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address">地址管理</a></li>
 					<li ng-class="{ active: pageName === 'security-center' }"><a href="">安全中心</a></li>
 					<li ng-class="{ active: pageName === 'changepassword' }"><a href="">修改密码</a>
 					</li>
@@ -269,17 +272,17 @@
 						
 					</div>
 				
-					<div class="profile-infoitem"><a class="inherit" href="/profile/hongbao"><p>我的红包</p>
+					<div class="profile-infoitem"><a class="inherit" href="/personal/red_packet"><p>我的红包</p>
 					
 							<p class="profile-infoitem-number hongbao">
                       <span class="number ng-binding" ng-bind="hongbaocount">{{ $info->red_packet }}</span>个</p></a>
 					</div>
 					
-					<div class="profile-infoitem"><a class="inherit" href="/profile/points"><p>我的积分</p>
+					<div class="profile-infoitem"><a class="inherit" href="/personal/score"><p>我的积分</p>
 							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point">{{ $info->score }}</span>分</p></a>
 					</div>
 				
-					<div class="profile-infoitem"><a class="inherit" href="/profile/balance"><p>账户余额</p>
+					<div class="profile-infoitem"><a class="inherit" href="/personal/balance"><p>账户余额</p>
 							<p class="profile-infoitem-number balance"><span class="number ng-binding"
 							                                                 ng-bind="user.balance| number : 2">{{ $info->balance }}</span>元
 							</p></a>
@@ -290,7 +293,7 @@
 			
 				<div class="profile-order ng-scope">
 					<div class="tabnavigation"><a class="tabnavigation-navitem active">最近订单</a> <a
-								class="tabnavigation-rightitem profile-allorder" href="/profile/order">查看全部订单&gt;</a>
+								class="tabnavigation-rightitem profile-allorder" href="/personal/order">查看全部订单&gt;</a>
 					</div>
 					<div class="profile-order-content">
 						<div class="loading ng-binding ng-isolate-scope ng-hide" loading="" content="正在载入最近订单..."
@@ -301,16 +304,18 @@
 		</div>
 		
 		<!-- ngRepeat: order in recentOrder -->
+		@foreach( $order as $dd )
 		<div class="orderblock ng-isolate-scope" ng-repeat="order in recentOrder" data="{ $order: order }">
 		
 		<div class="orderblock-item orderblock-rstinfo clearfix">
+		
 		<a class="logo" ng-href="/shop/895073" href="/shop/895073">
 		<img ng-src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85" alt="商家 LOGO" src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"></a>
-		@foreach( $order as $dd )
+		
 		 <h3 class="name">
 		 <a class="inherit ng-binding" ng-bind="order.restaurant_name"
 		 ng-href="/shop/895073" href="">{{ $dd->shop_name }}</a></h3>
-			<p class="product ng-binding" ng-bind="order.product">麻辣花蛤（500g）2份 / 麻辣蛏子（500g）1份</p>
+			<p class="product ng-binding" ng-bind="order.product">{{ $dd->description }}</p>
 			<a class="productnum" ng-href="order/id/1209253485556894798" href="order/id/1209253485556894798">共
 			<i class="count ng-binding" ng-bind="order.productnum">{{ $dd->goods_num }}</i>个菜品&gt;</a>
 			</div>
@@ -323,12 +328,14 @@
 			 ng-bind="order.statusText">{{ $dd->status }}</p>
 			 <a class="statuslink ng-binding" ng-href="order/id/1209253485556894798"
 				ng-bind="order.realStatus === 4 ? '立即评价' : '订单详情'"
-				href="order/id/1209253485556894798">订单详情</a></div>
-	   @endforeach
+				href="order">订单详情</a></div>
+	   
 		</div>
 		
+		@endforeach
+		<!-- ngIf: !recentOrder.length && !orderLoading -->
+		</div>
 		
-		<!-- ngIf: !recentOrder.length && !orderLoading --></div>
 				</div>
 				<div class="profile-footprint ng-scope">
 					<div class="tabnavigation"><a class="tabnavigation-navitem active">美食足迹</a> <a

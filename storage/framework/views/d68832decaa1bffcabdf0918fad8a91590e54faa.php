@@ -23,18 +23,18 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="#"><b>管理员登陆页</b></a>
+        <a href="#"><b>商家登陆页</b></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <?php if(session("msg")): ?>
             <p class="login-box-msg" style="color:red;"><?php echo e(session("msg")); ?></p>
         <?php else: ?>
-            <p class="login-box-msg">请输入您的邮箱账号</p>
+            <p class="login-box-msg">请输入您的账号</p>
         <?php endif; ?>
         <form action="<?php echo e(url('merchant/dologin')); ?>" method="post">
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" name="email" placeholder="Email"/>
+            <input type="text" class="form-control" name="phone" placeholder="Phone"/>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
@@ -67,7 +67,7 @@
         </form>
 
         <a href="#" style="font-size:12px;">忘记密码</a>&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="register.html" class="text-center" style="font-size:12px;">注册会员</a>
+        <a href="<?php echo e(url('merchant/phone')); ?>" class="text-center" style="font-size:12px;">商家加盟</a>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
