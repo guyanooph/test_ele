@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Merchant;
-//use  Illuminate\Support\Facades\Redis as Redis;
-use Redis;
+use  Illuminate\Support\Facades\Redis;
+//use Redis;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Merchant\Mer_register;

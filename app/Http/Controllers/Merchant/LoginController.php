@@ -33,12 +33,24 @@ class LoginController extends Controller
         $password = $request->input("password");
         //获取对应用户信息
         $user = \DB::table("mer_login")->where("phone",$phone)->first();
+        $user2 = \DB::table("mer_register")->where("phone",$phone)->first();
         if(!empty($user)){
             //判断密码
             if(Hash::check($password, $user->password)){
                 //存储session跳转页面
-                session()->put("merchantname",$user);
-                return redirect("merchant");
+                if($user2->state == 2 ){
+                    session()->put("merchantname",$user);
+                    return redirect("merchant");
+                }elseif($user2->state == 1){
+                    $list = "您的店铺还未通过审核，敬请期待！";
+                    return view("errors.503", compact('list'));
+                }elseif($use2->state == 3){
+                    $list = "您的信息不合格，审核未通过！";
+                    return view("errors.503", compact('list'));
+                }else{
+                    $list = "您的店铺已被冻结！";
+                    return view("errors.503", compact('list'));
+                }
                 //echo "测试成功!";
             }
         }
