@@ -15,13 +15,12 @@
 
         <!-- Main content -->
         <section class="content">
-			@foreach ($info as $merchant)
 			<div class="row">
             <div style="font-size:18px;" class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title"><i class="fa fa-th"></i> 营业信息管理</h3>
-				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchantopen/edit')}}/{{ $merchant->id }}'">编 辑 商 家 营 业 信 息</button>
+				  <button style="font-size:15px;margin-left:50px;" class="btn btn-primary" onclick="window.location='{{URL('/merchant/merchantopen/edit')}}/{{ $merchant->shopid }}'">编 辑 商 家 营 业 信 息</button>
                   <div class="box-tools">
                    
                   </div>
@@ -67,7 +66,7 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">配送方式：</label>
 						<div class="col-sm-4">
-							{{ $merchant->method }}
+							@if ($merchant->method=="1")商家自送 @elseif ($merchant->method=="2")第三方配送 @endif
 						</div>
 						</div>
 					</div>
@@ -76,6 +75,14 @@
 						<label for="inputEmail3" class="col-sm-2 control-label">平均配送：</label>
 						<div class="col-sm-4">
 							{{ $merchant->service_time }} 分钟
+						</div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">餐盒费：</label>
+						<div class="col-sm-4">
+							{{ $merchant->lunch_box_fee }} 元
 						</div>
 						</div>
 					</div>
@@ -91,7 +98,7 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">总销量：</label>
 						<div class="col-sm-4">
-							{{ $merchant->time }}
+							{{ $merchant->num }}
 						</div>
 						</div>
 					</div>
@@ -99,11 +106,10 @@
 						<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">状态：</label>
 						<div class="col-sm-4">
-							{{ $merchant->state }}
+							@if ($merchant->status=="1")营业 @elseif ($merchant->status=="2")停业 @endif
 						</div>
 						</div>
 					</div>
-                   @endforeach
                 </div><!-- /.box-body -->
 				</div><!-- /.box -->
 				

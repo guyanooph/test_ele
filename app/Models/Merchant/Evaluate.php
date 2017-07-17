@@ -4,19 +4,19 @@ namespace App\Models\Merchant;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Evaluate extends Model
 {
-	protected $table = "order";//¶©µ¥±í
-	
+    //
+	protected $table = "evaluate";//è¯„åˆ†è¡¨
 	/**
-     * ¸ÃÄ£ĞÍÊÇ·ñ±»×Ô¶¯Î¬»¤Ê±¼ä´Á
+     * è¯¥æ¨¡å‹æ˜¯å¦è¢«è‡ªåŠ¨ç»´æŠ¤æ—¶é—´æˆ³
      *
      * @var bool
      */
 	public $timestamps = false;
 	
 	/**
-     * Ä£ĞÍµÄÈÕÆÚ×Ö¶Î±£´æ¸ñÊ½¡£
+     * æ¨¡å‹çš„æ—¥æœŸå­—æ®µä¿å­˜æ ¼å¼ã€‚
      *
      * @var string
      */

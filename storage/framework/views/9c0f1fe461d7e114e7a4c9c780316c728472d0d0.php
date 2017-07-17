@@ -1,5 +1,4 @@
-@extends('merchant.base')
-    @section('content')
+    <?php $__env->startSection('content'); ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -30,15 +29,15 @@
                       <th>创建时间</th>
                       <th style="width: 100px">操作</th>
                     </tr>
-                    @foreach($list as $v)
+                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                      <td>{{$v->id}}</td>
-                      <td>{{$v->title}}</td>
-                      <td>{{$v->create_time}}</td>
-                      <td><button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/foodtype/edit')}}/{{ $v->id }}'">编辑</button> <button onclick="doDel({{$v->id}})" class="btn btn-xs btn-danger">删除</button> </td>
+                      <td><?php echo e($v->id); ?></td>
+                      <td><?php echo e($v->title); ?></td>
+                      <td><?php echo e($v->create_time); ?></td>
+                      <td><button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/foodtype/edit')); ?>/<?php echo e($v->id); ?>'">编辑</button> <button onclick="doDel(<?php echo e($v->id); ?>)" class="btn btn-xs btn-danger">删除</button> </td>
                       
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   
                    
                   </table>
@@ -57,10 +56,10 @@
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <input type="hidden" name="_method" value="DELETE">
         </form>
-    @endsection
+    <?php $__env->stopSection(); ?>
     
     
-    @section("myscript")
+    <?php $__env->startSection("myscript"); ?>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -86,7 +85,7 @@
             Modal.confirm({msg:'是否删除此类别？'}).on(function (e){
                 if(e){
                     var form = document.getElementById("mydeleteform");
-                    form.action = "{{URL('/merchant/foodtype/destroy')}}/"+id;
+                    form.action = "<?php echo e(URL('/merchant/foodtype/destroy')); ?>/"+id;
                     form.submit(); 
                 }
             });
@@ -98,7 +97,7 @@
             $("#exampleModal").modal("show");
             
             $.ajax({
-                url:"{{URL('merchant/foodtype/create')}}",
+                url:"<?php echo e(URL('merchant/foodtype/create')); ?>",
                 type:"get",
                 dataType:"html",
                 async:true,
@@ -114,7 +113,7 @@
             $("#myaddform").submit();
             /*
             $.ajax({
-                url:"{{url('merchant/foodtype')}}",
+                url:"<?php echo e(url('merchant/foodtype')); ?>",
                 type:"post",
                 dataType:"html",
                 data:$("#myaddform").serialize() ,
@@ -129,4 +128,5 @@
         }
             
     </script>
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('merchant.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

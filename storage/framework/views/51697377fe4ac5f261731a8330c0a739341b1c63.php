@@ -22,11 +22,7 @@
 					<h3 class="box-title"><i class="fa fa-plus"></i> 修改营业信息页面</h3>
 			    </div><!-- /.box-header -->
                 <!-- form start -->
-<<<<<<< HEAD
-                <form class="form-horizontal" action="<?php echo e(URL('/merchant/merchantopen/update')); ?>/<?php echo e($merchantopen->id); ?>" method="post">
-=======
                 <form class="form-horizontal" action="<?php echo e(URL('/merchant/merchantopen/update')); ?>/<?php echo e($merchantopen->shopid); ?>" method="post">
->>>>>>> bf4a651f0a50a8c731e0d23b72e5a3014808da00
                   <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                   <input type="hidden" name="_method" value="put">
 
@@ -40,11 +36,7 @@
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
                       <div class="col-sm-4">
-<<<<<<< HEAD
-                       <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="<?php echo e($merchantopen->overtime); ?>">
-=======
                        <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="<?php echo e($merchantopen->closetime); ?>">
->>>>>>> bf4a651f0a50a8c731e0d23b72e5a3014808da00
                       </div>
                     </div>
 					<div class="form-group">
@@ -57,19 +49,6 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">配送方式：</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-<<<<<<< HEAD
-                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 1)?"checked":""); ?> value="0">自营快送  &nbsp; &nbsp;
-                        </label>
-                        <label class="radio-inline">
-                           <input type="radio"  name="method" <?php echo e(($merchantopen->method == 2)?"checked":""); ?> value="1">蜂鸟快送 
-                        </label>
-                      </div>
-                    </div>
-					
-					
-					
-					
-=======
                            <input type="radio"  name="method" <?php echo e(($merchantopen->method == 1)?"checked":""); ?> value="1">自营快送  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
@@ -77,7 +56,6 @@
                         </label>
                       </div>
                     </div>
->>>>>>> bf4a651f0a50a8c731e0d23b72e5a3014808da00
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">配送费：</label>
                       <div class="col-sm-4">
@@ -88,17 +66,10 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-<<<<<<< HEAD
-                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 1)?"checked":""); ?> value="0">营业  &nbsp; &nbsp;
-                        </label>
-                        <label class="radio-inline">
-                           <input type="radio"  name="state" <?php echo e(($merchantopen->state == 2)?"checked":""); ?> value="1">歇业 
-=======
                            <input type="radio"  name="status" <?php echo e(($merchantopen->status == 1)?"checked":""); ?> value="1">营业  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
                            <input type="radio"  name="status" <?php echo e(($merchantopen->status == 2)?"checked":""); ?> value="2">歇业 
->>>>>>> bf4a651f0a50a8c731e0d23b72e5a3014808da00
                         </label>
                       </div>
                     </div>

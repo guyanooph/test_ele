@@ -1,7 +1,4 @@
-@extends('merchant.base')
-
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- Content Header (Page header) -->
     <section class="content-header">
           <h1>
@@ -45,30 +42,30 @@
 					  <th>备注</th>
                       <th style="width: 50px">操作</th>
                     </tr>
-                    @foreach($table as $order)
+                    <?php $__currentLoopData = $table; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->shop_name }}</td>
-							<td>{{ $order->shop_phone }}</td>
-							<td>{{ $order->goods_num }}</td>
-							<td>{{ $order->create_time }}</td>
-							<td>{{ $order->addressid }}</td>
-							<td>{{ $order->amount }}</td>
-							<td>@if ($order->status=="1")未发货 @elseif ($order->status=="2")正在配送 @elseif ($order->status=="3")已签收 @endif</td>
-							<td>{{ $order->order_description }}</td>
-							<td>{{ $order->over_times }}</td>
-							<td>{{ $order->delivery_fee }}</td>
-							<td>{{ $order->lunch_box_fee }}</td>
-							<td>{{ $order->service_time }}</td>
-							<td>{{ ['支付宝','微信支付'][$order->pay] }}</td>
-							<td>{{ ['自送','蜂鸟快递'][$order->distribution] }}</td>
-							<td>{{ $order->invoice_info }}</td>
-							<td>{{ $order->remark }}</td>
+                            <td><?php echo e($order->orderid); ?></td>
+                            <td><?php echo e($order->shop_name); ?></td>
+							<td><?php echo e($order->shop_phone); ?></td>
+							<td><?php echo e($order->goods_num); ?></td>
+							<td><?php echo e($order->create_time); ?></td>
+							<td><?php echo e($order->addressid); ?></td>
+							<td><?php echo e($order->amount); ?></td>
+							<td><?php if($order->status=="0"): ?>已发货 <?php elseif($order->status=="1"): ?>正在配送 <?php else: ?>未配送 <?php endif; ?></td>
+							<td><?php echo e($order->order_description); ?></td>
+							<td><?php echo e($order->over_times); ?></td>
+							<td><?php echo e($order->delivery_fee); ?></td>
+							<td><?php echo e($order->lunch_box_fee); ?></td>
+							<td><?php echo e($order->service_time); ?></td>
+							<td><?php echo e($order->pay); ?></td>
+							<td><?php echo e($order->distribution); ?></td>
+							<td><?php echo e($order->invoice_info); ?></td>
+							<td><?php echo e($order->remark); ?></td>
                             <td>
-                               <button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/order/edit')}}/{{ $order->id }}'">编辑</button>
+                               <button class="btn btn-xs btn-primary" onclick="window.location='<?php echo e(URL('/merchant/order/edit')); ?>/<?php echo e($order->id); ?>'">编辑</button>
                             </td>							   
 							</tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     
                   </table>
                 </div><!-- /.box-body -->
@@ -79,11 +76,11 @@
           </div><!-- /.row -->
         </section><!-- /.content -->
         
-    @endsection
+    <?php $__env->stopSection(); ?>
     
-    @section('myscript')
-    <form action="{{URL('merchant/order')}}" method="post" name="myform" style="display:none;">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+    <?php $__env->startSection('myscript'); ?>
+    <form action="<?php echo e(URL('merchant/order')); ?>" method="post" name="myform" style="display:none;">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"/>
             <input type="hidden" name="_method" value="delete"/>
            
     </form>
@@ -92,10 +89,11 @@
             Modal.confirm({msg: "是否删除信息？"}).on(function(e){
                 if(e){
                    var form = document.myform;
-                    form.action = "{{URL('merchant/order/destroy')}}/"+id;
+                    form.action = "<?php echo e(URL('merchant/order/destroy')); ?>/"+id;
                     form.submit(); 
                 }
               });
         }
     </script>
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('merchant.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,6 +1,4 @@
 @extends('merchant.base')
-
-
 @section('content')
 <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -9,63 +7,54 @@
             <small>preview of simple tables</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li><a href="/merchant"><i class="fa fa-dashboard"></i> 首页</a></li>
             <li><a href="#">管理信息</a></li>
             <li class="active">列表</li>
           </ol>
         </section>
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><i class="fa fa-th"></i> 操作订单信息管理</h3>
+				@if(session('msg'))
+				<p style="color:red">{{session('msg')}}</p>
+				@else
+				@endif	
+                  <h3 class="box-title"><i class="fa fa-th"></i> 用户评价浏览</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table class="table table-bordered">
                     <tr>
-                      <th>订单号</th>
-                      <th>商家名称</th>
-                      <th>商家电话</th>
-                      <th>商品数量</th>
-					  <th>创建时间</th>
-					  <th>收货地址</th>
-					  <th>金额</th>
-					  <th>订单状态</th>
-					  <th>订单描述</th>
-					  <th>结束时间</th>
-					  <th>配送费</th>
-					  <th>餐盒费</th>
-					  <th>送达时间</th>
-					  <th>支付方式</th>
-					  <th>配送方式</th>
-					  <th>发票信息</th>
-					  <th>备注</th>
+                      <th>ID</th>
+                      <th>商家id</th>
+                      <th>用户id</th>
+                      <th>订单id</th>
+					  <th>是否匿名</th>
+					  <th>评论内容</th>
+					  <th>评星</th>
+					  <th>回复内容</th>
+					  <th>订单送达时间</th>
+					  <th>是否可见</th>
+					  <th>评论创建时间</th>
                       <th style="width: 50px">操作</th>
                     </tr>
-                    @foreach($table as $order)
-                        <tr>
-                            <td>{{ $order->id }}</td>
-                            <td>{{ $order->shop_name }}</td>
-							<td>{{ $order->shop_phone }}</td>
-							<td>{{ $order->goods_num }}</td>
-							<td>{{ $order->create_time }}</td>
-							<td>{{ $order->addressid }}</td>
-							<td>{{ $order->amount }}</td>
-							<td>@if ($order->status=="1")未发货 @elseif ($order->status=="2")正在配送 @elseif ($order->status=="3")已签收 @endif</td>
-							<td>{{ $order->order_description }}</td>
-							<td>{{ $order->over_times }}</td>
-							<td>{{ $order->delivery_fee }}</td>
-							<td>{{ $order->lunch_box_fee }}</td>
-							<td>{{ $order->service_time }}</td>
-							<td>{{ ['支付宝','微信支付'][$order->pay] }}</td>
-							<td>{{ ['自送','蜂鸟快递'][$order->distribution] }}</td>
-							<td>{{ $order->invoice_info }}</td>
-							<td>{{ $order->remark }}</td>
+                    @foreach($eva as $list)
+                        <tr> 
+						    <td>{{ $list->id }}</td>
+						    <td>{{ $list->shopid }}</td>
+                            <td>{{ $list->userid }}</td>
+                            <td>{{ $list->orderid }}</td>
+							<td>{{ $list->anonymous }}</td>
+							<td>{{ $list->content }}</td>
+							<td>{{ $list->shopg_rate }}</td>
+							<td>{{ $list->shop_content }}</td>
+							<td>{{ $list->service_time }}</td>
+							<td>{{ $list->status }}</td>
+							<td>{{ $list->create_time }}</td>
                             <td>
-                               <button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/order/edit')}}/{{ $order->id }}'">编辑</button>
+                               <button class="btn btn-xs btn-primary" onclick="window.location='{{URL('/merchant/evaluate/edit/')}}/{{ $list->id }}'">编辑</button> 
                             </td>							   
 							</tr>
                     @endforeach

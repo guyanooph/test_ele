@@ -49,11 +49,7 @@
       
 		<header class="main-header">
         <!-- Logo -->
-<<<<<<< HEAD
-			<a href="index2.html" class="logo">
-=======
 			<a href="" class="logo">
->>>>>>> bf4a651f0a50a8c731e0d23b72e5a3014808da00
 			  <!-- 对于侧边栏迷你50x50像素迷你标志 -->
 			  <span class="logo-mini"><b>A</b>LT</span>
 			  <!-- 正常状态和移动设备标识 -->
@@ -349,23 +345,18 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php echo e(url('merchant/order')); ?>"><i class="fa fa-circle-o"></i> 浏览订单信息</a></li>
-                <li><a href="<?php echo e(url('merchant/order/create')); ?>"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <!--<li><a href="<?php echo e(url('merchant/order/create')); ?>"><i class="fa fa-circle-o"></i> 添加分类</a></li>-->
               </ul>
             </li>
              <li class="active treeview">
               <a href="#">
-                <i class="fa fa-gittip"></i> <span>投诉建议管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gittip"></i> <span>用户评价</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo e(url('merchant/letter')); ?>"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
-                <li><a href="<?php echo e(url('merchant/type/offer')); ?>"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
+                <li class="active"><a href="<?php echo e(url('merchant/evaluate')); ?>"><i class="fa fa-circle-o"></i> 浏览用户评价</a></li>
+                
               </ul>
             </li>
-
-
-
-
-
              <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>

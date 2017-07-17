@@ -25,7 +25,7 @@
 					<h3 class="box-title"><i class="fa fa-plus"></i> 修改营业信息页面</h3>
 			    </div><!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" action="{{ URL('/merchant/merchantopen/update') }}/{{ $merchantopen->id }}" method="post">
+                <form class="form-horizontal" action="{{ URL('/merchant/merchantopen/update') }}/{{ $merchantopen->shopid }}" method="post">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="_method" value="put">
 
@@ -39,7 +39,7 @@
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">结束时间：</label>
                       <div class="col-sm-4">
-                       <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="{{ $merchantopen->overtime }}">
+                       <input type="text" class="form-control" id="inputPassword3"  name="closetime" value="{{ $merchantopen->closetime }}">
                       </div>
                     </div>
 					<div class="form-group">
@@ -52,31 +52,33 @@
                       <label for="inputPassword3" class="col-sm-2 control-label">配送方式：</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="method" {{ ($merchantopen->method == 1)?"checked":"" }} value="0">自营快送  &nbsp; &nbsp;
+                           <input type="radio"  name="method" {{ ($merchantopen->method == 1)?"checked":"" }} value="1">自营快送  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="method" {{ ($merchantopen->method == 2)?"checked":"" }} value="1">蜂鸟快送 
+                           <input type="radio"  name="method" {{ ($merchantopen->method == 2)?"checked":"" }} value="2">蜂鸟快送 
                         </label>
                       </div>
                     </div>
-					
-					
-					
-					
 					<div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">配送费：</label>
                       <div class="col-sm-4">
                          <input type="text" class="form-control" id="inputPassword3"  name="money" value="{{ $merchantopen->money }}">
                       </div>
                     </div>
+					<div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">餐盒费：</label>
+                      <div class="col-sm-4">
+                         <input type="text" class="form-control" id="inputPassword3"  name="lunch_box_fee" value="{{ $merchantopen->lunch_box_fee }}">
+                      </div>
+                    </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">当前状态</label>
                       <div class="col-sm-4">
                         <label class="radio-inline">
-                           <input type="radio"  name="state" {{ ($merchantopen->state == 1)?"checked":"" }} value="0">营业  &nbsp; &nbsp;
+                           <input type="radio"  name="status" {{ ($merchantopen->status == 1)?"checked":"" }} value="1">营业  &nbsp; &nbsp;
                         </label>
                         <label class="radio-inline">
-                           <input type="radio"  name="state" {{ ($merchantopen->state == 2)?"checked":"" }} value="1">歇业 
+                           <input type="radio"  name="status" {{ ($merchantopen->status == 2)?"checked":"" }} value="2">歇业 
                         </label>
                       </div>
                     </div>

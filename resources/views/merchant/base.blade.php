@@ -49,7 +49,7 @@
       
 		<header class="main-header">
         <!-- Logo -->
-			<a href="index2.html" class="logo">
+			<a href="" class="logo">
 			  <!-- 对于侧边栏迷你50x50像素迷你标志 -->
 			  <span class="logo-mini"><b>A</b>LT</span>
 			  <!-- 正常状态和移动设备标识 -->
@@ -317,7 +317,7 @@
                		
 			
 
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-gittip"></i> <span> 商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -328,7 +328,7 @@
               </ul>
             </li>
 			
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-gittip"></i> <span>菜单管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -339,29 +339,24 @@
               </ul>
             </li>
             
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-bomb"></i> <span>订单</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('merchant/order')}}"><i class="fa fa-circle-o"></i> 浏览订单信息</a></li>
-                <li><a href="{{url('merchant/order/create')}}"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <!--<li><a href="{{url('merchant/order/create')}}"><i class="fa fa-circle-o"></i> 添加分类</a></li>-->
               </ul>
             </li>
-             <li class="active treeview">
+             <li class="treeview">
               <a href="#">
-                <i class="fa fa-gittip"></i> <span>投诉建议管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-gittip"></i> <span>用户评价</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('merchant/letter')}}"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
-                <li><a href="{{url('merchant/type/offer')}}"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
+                <li class="active"><a href="{{url('merchant/evaluate')}}"><i class="fa fa-circle-o"></i> 浏览用户评价</a></li>
+                
               </ul>
             </li>
-
-
-
-
-
              <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>

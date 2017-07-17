@@ -18,7 +18,7 @@ class MerchantopenController extends Controller
 		//$table = Merchant::all()->where('shopid','=',1);//查询所有参数
 
 		//$list = merchantopen::all();
-		$info = Merchant::all()->where('shopid',1);//
+		$info = Merchant::where('shopid',session('merchantname')->shopid)->first();//
 
         /* //判断并封装搜索条件
         $params = array();
@@ -35,7 +35,7 @@ class MerchantopenController extends Controller
         //$list = $table->paginate(1); //10条每页浏览
 		//dd($list); 
 		//return "你好！";
-        return view("merchant.merchantopen.index",["info"=>$info]);//加载商家管理
+        return view("merchant.merchantopen.index",["merchant"=>$info]);//加载商家管理
     }
 
     /**
@@ -77,11 +77,11 @@ class MerchantopenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($shopid)
     {
         //加载修改页面
 		//return "你的厚爱！";
-		$table = merchant::where("id",$id)->first();//获取单条信息参数
+		$table = Merchant::where("shopid",$shopid)->first();//获取单条信息参数
 		
 		return view("merchant.merchantopen.edit",['merchantopen'=>$table]);//加载页面
     }
@@ -93,7 +93,7 @@ class MerchantopenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $shopid)
     {
 		//dd($id);
         //执行修改
@@ -101,7 +101,7 @@ class MerchantopenController extends Controller
 		$data = $request->all();
         unset($data['_token']);//移除_token参数
         unset($data['_method']);//移除_token参数
-        $table = Merchant::where("id",$id)->update($data);
+        $table = Merchant::where("shopid",$shopid)->update($data);
         //dd($data);
         if($table>0){
             return redirect('merchant/merchantopen');

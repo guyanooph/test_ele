@@ -15,14 +15,8 @@ class FoodtypeController extends Controller
      */
     public function index()
     {
-		$list = \DB::select("select * from food_type order by concat(path,id) asc");
-        //$list = food_type::all();
-        //处理信息
-        foreach($list as &$v){
-            $m = substr_count($v->path,","); //获取path中的逗号
-            //生成缩进
-            $v->title = str_repeat("&nbsp;",($m-1)*8)."|--".$v->title;
-        }
+		//$list = \DB::select("select * from food_type where shopid order by concat(path,id) asc");
+        $list = Food_type::where("shopid",session('merchantname')->shopid)->get();
         return view('merchant.foodtype.index',['list'=>$list]);
     }
 
@@ -33,14 +27,13 @@ class FoodtypeController extends Controller
      */
     public function create()
     {
-        $list = \DB::select("select * from food_type order by concat(path,id) asc");
-        //$list = Food_type::all();
+        $list = Food_type::where("shopid",session('merchantname')->shopid)->get();
         //处理信息
-        foreach($list as &$v){
+        /* foreach($list as &$v){
             $m = substr_count($v->path,","); //获取path中的逗号
             //生成缩进
             $v->title = str_repeat("&nbsp;",($m-1)*8)."|--".$v->title;
-        }
+        } */
         return view("merchant.foodtype.create",['list'=>$list]);
     }
 
@@ -53,15 +46,15 @@ class FoodtypeController extends Controller
     public function store(Request $request)
     {
         //获取要添加的数据
-        $data = $request->only("title",'pid','shopid');
-        $pid = $data['pid'];
+        $data = $request->only("title",'shopid');
+        /* $pid = $data['pid'];
         if($pid==0){
             $data['path']="0,";
         }else{
             $type = \DB::table("food_type")->where("id",$pid)->first();
             $data['path'] = $type->path.$pid.",";
             
-        }
+        } */
         
         //执行添加
         $id = Food_type::insertGetId($data);
@@ -116,7 +109,7 @@ class FoodtypeController extends Controller
         //$data['updated_at'] = time();
         $id = \DB::table("food_type")->where("id",$id)->update($data);
         
-        if($id>0){
+        if($id>=0){
             return redirect('merchant/foodtype');
         }else{
             return back()->with("err","修改失败!");
@@ -134,9 +127,9 @@ class FoodtypeController extends Controller
         
 		//dd("aaa");//先判断当前类别下是否存在子类别
         $m = \DB::table('food_type')->where('pid',$id)->count();
-        if($m>0){
+        /* if($m>0){
             return back()->with("err","禁止删除");
-        }  
+        }   */
       
         \DB::table('food_type')->delete($id);
         return redirect("merchant/foodtype")->with("err","删除成功！");

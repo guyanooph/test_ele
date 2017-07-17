@@ -200,10 +200,17 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/merchant","Merchant\MerchantController@index");//商家信息首页
 	Route::get("/merchant/edit/{id}","Merchant\MerchantController@edit");//编辑商家信息
 	Route::put("/merchant/update/{id}","Merchant\MerchantController@update");//执行修改商家信息
+	Route::get("/create","Merchant\IndexController@create");//管理首页
+	Route::post("/store","Merchant\IndexController@store");//管理首页
+
 	
+	Route::get("/merchant","Merchant\MerchantController@index");//商家信息首页
+	Route::get("/merchant/edit/{shopid}","Merchant\MerchantController@edit");//编辑商家信息
+	Route::put("/merchant/update/{shopid}","Merchant\MerchantController@update");//执行修改商家信息
+
 	Route::get('/merchantopen', "Merchant\MerchantopenController@index");//营业信息管理
-	Route::get('/merchantopen/edit/{id}', "Merchant\MerchantopenController@edit");//修改营业信息
-	Route::put('/merchantopen/update/{id}', "Merchant\MerchantopenController@update");//执行修改
+	Route::get('/merchantopen/edit/{shopid}', "Merchant\MerchantopenController@edit");//修改营业信息
+	Route::put('/merchantopen/update/{shopid}', "Merchant\MerchantopenController@update");//执行修改
 
 	Route::get('/order', "Merchant\OrderController@index");//订单信息管理
 	Route::get('/order/create', "Merchant\OrderController@create");//添加订单
@@ -225,6 +232,10 @@ Route::group(["prefix" => "merchant","middleware" => "merchant"], function () {
 	Route::get("/food/edit/{id}","Merchant\FoodController@edit");//修改菜单
 	Route::put("/food/update/{id}","Merchant\FoodController@update");//修改菜单
 	Route::delete("/food/destroy/{id}","Merchant\FoodController@destroy");//修改菜单
+	
+	Route::get("/evaluate","Merchant\EvaluateController@index");//浏览评价信息
+	Route::get("/evaluate/edit/{id}","Merchant\EvaluateController@edit");//商家回复评价
+	Route::put("/evaluate/update/{id}","Merchant\EvaluateController@update");//执行商家对用户的评价
 });
 
 Route::get("/getmertype", "Home\ShopController@getMerType");

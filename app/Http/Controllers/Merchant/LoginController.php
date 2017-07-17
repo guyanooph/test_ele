@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Gregwar\Captcha\CaptchaBuilder;
+use App\Models\Merchant\Mer_login;
+use App\Models\Merchant\Mer_register;
 use Session;
 
 class LoginController extends Controller
@@ -40,6 +42,16 @@ class LoginController extends Controller
                 //存储session跳转页面
                 if($user2->state == 2 ){
                     session()->put("merchantname",$user);
+ 					$data['last_login_ip'] = $request->getClientIp();
+					$data['last_login_time'] = date('Y-m-d H:i:s',time());
+					$id = \DB::table('mer_login')->where("shopid",$user->shopid)->update($data);
+					//弥补注册表登录时间
+					$res = \DB::table('mer_register')->where('id',$user->shopid)->first();
+					//dd($res->first_login_time);
+					if(($res->first_login_time)==null){
+						$info['first_login_time'] = date('Y-m-d H:i:s',time());
+						$id2 = \DB::table('mer_register')->where("id",$user->shopid)->update($info);
+					}
                     return redirect("merchant");
                 }elseif($user2->state == 1){
                     $list = "您的店铺还未通过审核，敬请期待！";
