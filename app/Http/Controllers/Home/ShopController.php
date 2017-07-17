@@ -69,14 +69,14 @@ class ShopController extends Controller
         $geo = $geohash->encode(explode(",",$location)[1],explode(",",$location)[0]);
         //dd($geo);
 
-        $where = [];
+        $where = ["state"=>2];
 
         if($request->input("typeid")){
             $typeid = $request->input("typeid");
             if($typeid[0]=="f"){
-                $where = ["f_typeid" => substr($typeid,1)];
+                $where["f_typeid"] = substr($typeid,1);
             }else{
-                $where = ["typeid" => $typeid];
+                $where["typeid"] = $typeid;
             }
         }
 
