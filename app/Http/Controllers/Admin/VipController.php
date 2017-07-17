@@ -1,5 +1,5 @@
 <?php
-
+//会员管理控制器
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -14,7 +14,8 @@ class VipController extends Controller
      */
     public function index()
     {
-        return view("admin.vip.index");
+        $list=\DB::table('login_user')->paginate(5);
+        return view("admin.vip.index",['list'=>$list]);
     }
 
     /**

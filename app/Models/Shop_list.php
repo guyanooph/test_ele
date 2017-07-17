@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Shop_list extends Model
 {
     //
-	protected $table = 'merchant'; //关联商家表
+	protected $table = 'merchant'; //商家列表
+	
+	/* public function food()
+	{
+		return $this->hasone('APP\food_list');
+	}	 */
 }

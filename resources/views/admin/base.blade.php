@@ -28,12 +28,15 @@
     <link href="{{asset('myadmin/plugins/daterangepicker/daterangepicker-bs3.css')}}" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="{{asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
-
+   <!-- jQuery 2.1.4 -->
+    <script src="{{asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="{{asset('myadmin/bootstrap/js/html5shiv.min.js')}}"></script>
         <script src="{{asset('myadmin/bootstrap/js/respond.min.js')}}"></script>
+        <script src="{{asset('js/Pregister.js')}}"></script>
+
     <![endif]-->
   </head>
   <body class="skin-blue sidebar-mini">
@@ -247,17 +250,18 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">亚力山大-皮尔斯</span>
+                  <span class="hidden-xs"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
                     <p>
-                     亚力山大-皮尔斯-网站开发
+                     1亚力山大-皮尔斯-网站开发
                       <small>会员于2012-11</small>
                     </p>
                   </li>
+
                   <!-- Menu Body -->
                   <li class="user-body">
                     <div class="col-xs-4 text-center">
@@ -298,7 +302,7 @@
             </div>
             <div class="pull-left info">
              
-              <a href="{{url('admin/logout')}}"><i class="fa fa-circle text-success"></i>退出</a>
+              <a href="{{url('admin/login/logOut')}}"><i class="fa fa-circle text-success"></i>退出</a>
             </div>
           </div>
 
@@ -311,15 +315,17 @@
                 <i class="fa fa-gittip"></i><span>超级管理员</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('admin/root')}}"><i class="fa fa-youtube-play"></i> 管理员资料</a></li>
+                <li class="active"><a href="{{ URL('admin/root') }}"><i class="fa fa-youtube-play"></i> 管理员资料</a></li>
               </ul>
             </li>
+
+                  
             <li class="active treeview">
               <a href="#">
                 <i class="fa fa-gittip"></i><span>权限管理</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('admin/com')}}"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
+                <li class="active"><a href="{{URL('admin/user')}}"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
                 <li class="active"><a href="{{URL('admin/role')}}"><i class="fa fa-youtube-play"></i> 角色管理</a></li>
                 <li class="active"><a href="{{URL('admin/node')}}"><i class="fa fa-youtube-play"></i> 节点管理</a></li>
               </ul>
@@ -340,18 +346,18 @@
                 <i class="fa fa-gittip"></i> <span>商家管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href=""><i class="fa fa-circle-o"></i> 待审核商家</a></li>
-                <li><a href="{{url('admin/shop')}}"><i class="fa fa-circle-o"></i> 普通商家</a></li>
+                <li class="active"><a href="{{URL('admin/shop/index')}}"><i class="fa fa-circle-o"></i> 待审核商家</a></li>
+                <li><a href="{{url('admin/shopCom')}}"><i class="fa fa-circle-o"></i> 普通商家</a></li>
               </ul>
             </li>
             
             <li class="active treeview">
               <a href="#">
-                <i class="fa fa-bomb"></i> <span> 菜品分类管理</span> <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-bomb"></i> <span> 商家分类管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('admin/ftype')}}"><i class="fa fa-circle-o"></i> 浏览分类信息</a></li>
-                <li><a href="{{url('admin/ftype/create')}}"><i class="fa fa-circle-o"></i> 添加分类</a></li>
+                <li><a href="{{url('admin/ftypeb')}}"><i class="fa fa-circle-o"></i> 子分类管理</a></li>
               </ul>
             </li>
              <li class="active treeview">
@@ -360,13 +366,9 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="{{url('admin/letter')}}"><i class="fa fa-circle-o"></i> 投诉信息管理</a></li>
-                <li><a href="{{url('admin/type/offer')}}"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
+                <li><a href="{{url('admin/offer')}}"><i class="fa fa-circle-o"></i> 建议信息管理</a></li>
               </ul>
             </li>
-
-
-
-
 
              <li class="treeview">
               <a href="#">
