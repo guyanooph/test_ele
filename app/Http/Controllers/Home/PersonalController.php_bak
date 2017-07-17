@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Personal;
-use App\Models\Orders;
+use App\Models\Order;
 use App\Models\Order_details;
 use App\Models\User_info;
 use App\Models\Collect;
@@ -23,7 +23,7 @@ class PersonalController extends Controller
 		//$list = Personal::find();		
         $user = $request->session()->get("user");
 		//dd($user);
-	    $order = orders::where('userid',$user->id)->orderBy('create_time','rsort')->get();
+	    $order = order::where('userid',$user->id)->orderBy('create_time','rsort')->get();
 		//dd($order);
 		//$login_user = login_user::where('username',$login->id)->get();
 		$info = personal::first();
@@ -43,16 +43,23 @@ class PersonalController extends Controller
 	{
 		$user=$request->session()->get('user');
 		$userInfo=User_info::where("userid",$user->id)->first();
-		$address=$userInfo->address;
+		$address=$userInfo->address;dd($user);
 		return view('home.personal.address',['address'=>$address]);
 	}
-   
+    /* public function index($id)
+	{
+		$userid = user_info::where('userid',$id)->first();
+		
+		$order = order::where('userid',$id)->get();
+		
+		return view('home.personal.personal' ,['userid'=>$userid , 'order'=>$order]);
+	} */
+	
 	 public function order(Request $request)
 	{
 		//$userid = \Session::get("user")->id();
-        $user = $request->session()->get('user');
-		$order=Orders::where('userid',$user->id)->get();
-		
+        $userid = $request->session()->get('user');
+		$order=Order::where('userid',$userid->id)->get();
 		return view('home.personal.order',['order'=>$order]);
 		//return view('home.personal.order');
 	}
@@ -60,14 +67,14 @@ class PersonalController extends Controller
      //待评价订单
 	public function orderUnrated()
 	{
-		$orderUnrated=Orders::where('status',1)->get();
+		$orderUnrated=Order::where('status',1)->get();
 		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated]);
 	}
 
      //退单记录
 	public function orderRefund()
 	{
-		$orderRefund=Orders::where('status',2);
+		$orderRefund=Order::where('status',2);
 		return view('home.personal.orderRefund',['orderRefund'=>$orderRefund]);
 	}
 
@@ -102,42 +109,12 @@ class PersonalController extends Controller
 	
 	
 	// 个人收藏
-	public function collect(Request $request)  
+	public function collect()  
 	{
-		$user = $request->session()->get('user');
-		$collect=Collect::where('userid',$user->id)->get();
+		$collect=Collect::all();
 		return view('home.personal.collect',['collect'=>$collect]);
 	} 
 	
-	
-	public function changeavatar(Request $request)  
-	{
-		//$user = $request->session()->get('user');
-		//$collect=Collect::where('userid',$user->id)->get();
-		return view('home.personal.changeavatar');
-	}
-
-	public function changemobile(Request $request)  
-	{
-		//$user = $request->session()->get('user');
-		//$collect=Collect::where('userid',$user->id)->get();
-		return view('home.personal.changemobile');
-	}
-
-	public function changeemail(Request $request)  
-	{
-		//$user = $request->session()->get('user');
-		//$collect=Collect::where('userid',$user->id)->get();
-		return view('home.personal.changeemail');
-	}
-
-	public function modifypay(Request $request)  
-	{
-		//$user = $request->session()->get('user');
-		//$collect=Collect::where('userid',$user->id)->get();
-		return view('home.personal.modifypay');
-	}
-
 	
 	/*
 	
@@ -149,7 +126,7 @@ class PersonalController extends Controller
 	//账户余额
 	public function balance()
 	{
-		$balance=Orders::where('status',2);
+		$balance=Order::where('status',2);
 		return view('home.personal.balance',['balance'=>$balance]);
 	}
 	
