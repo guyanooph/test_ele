@@ -178,10 +178,10 @@
                         @if( !count($addressList) )
                         <a onclick="" class="checkout-noaddress ng-scope" ng-if="!addressList.length" href="javascript:" ng-click="addAddress()">+ 添加新地址</a>
                         @else
-                        @foreach( $addresslist as $address )
-                        <li class="checkout-address ng-scope active" ng-repeat="item in addressList" ng-click="selectAddress($event, item)" ng-class="{active: address.id === item.id}" ng-mouseenter="selectAddress($event, item)"><i class="checkout-address-icon icon-location-line"></i>
+                        @foreach( $addressList as $address )
+                        <li class="checkout-address ng-scope" ng-repeat="item in addressList" ng-click="selectAddress($event, item)" ng-class="{active: address.id === item.id}" ng-mouseenter="selectAddress($event, item)"><i class="checkout-address-icon icon-location-line"></i>
                             <div class="checkout-address-info">
-                                <p ng-bind="item.name + [' ', ' 先生 ', ' 女士 '][item.sex] + item.phone" class="ng-binding">{{ $address['name']." ".[' 女士 ', ' 先生 '][$address['sex']]." ".address['phone'] }}</p>
+                                <p ng-bind="item.name + [' ', ' 先生 ', ' 女士 '][item.sex] + item.phone" class="ng-binding">{{ $address['name']." ".['', ' 先生 ', '女士 '][$address['sex']]." ".$address['phone'] }}</p>
                                 <p class="color-weak ng-binding" ng-bind="item.address + item.address_detail">{{ $address['address'] }}</p>
                             </div>
                             <div class="checkout-address-edit"><a href="javascript:" ng-click="editAddress($event, item)">修改</a> <a href="javascript:" ng-click="removeAddress($event, item)">×</a>
@@ -337,47 +337,7 @@
             temp.appendChild(crsf);
             temp.submit();
         }
-      
-        //var params = {userid: userid, shopid: shopid, shop_name: shop_name, shop_phone: shop_phone, goods_num: goods_num, addressid: addressid, amount: amount, status: status, order_description: order_description, description: description, delivery_fee: delivery_fee, lunch_box_fee: lunch_box_fee, service_time: service_time, pay: pay, distribution: distribution, invoice_info: invoice_info, remark: remark, _food_num_price_1:_food_num_price_1, _food_num_price_2:_food_num_price_2};
         
-        /*        
-        var food_array = ["id","num","price"];
-
-        function submitOrder(){
-            var n = 0;
-            var temp = document.createElement("form");
-            document.body.appendChild(temp);
-            temp.action = url;
-            temp.method = "POST";
-            temp.style.display = "none";
-            for(var i in params){
-                var input = document.createElement("input");
-                if(i[0] == "_"){
-                    for(var j=0;j<3;j++){ //这儿要改
-                        alert("input");
-                        var input = document.createElement("input");
-                        input.name = "food[" + n + "][" + food_array[j] + "]";
-                        input.value = params[i].split("_")[j];
-                        input.type = "text";
-                        temp.appendChild(input);
-                    }
-                    n++;
-                    continue;
-                }
-                input.value = params[i];
-                input.type = "text";
-                input.name = i;
-                temp.appendChild(input);
-            }
-            alert(n);
-            var crsf = document.createElement("input");
-            crsf.name = "_token";
-            crsf.value = "{{ csrf_token() }}";
-            crsf.type = "hidden";
-            temp.appendChild(crsf);
-            temp.submit();
-        }
-    */
 
     </script>
     <script>

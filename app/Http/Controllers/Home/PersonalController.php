@@ -13,6 +13,7 @@ use App\Models\Packet;
 use App\Models\Score;
 use App\Models\Address;
 use App\Models\Login_user;
+use App\Org\Geohash;
 use Session;
 
 class PersonalController extends Controller
@@ -50,15 +51,27 @@ class PersonalController extends Controller
 		return view('home.personal.address',['address'=>$address,'user' => $user, 'location' => $location]);
 	}
 	
-	public function delAddress(){
-		
+	public function delAddress(Request $request, $id)
+    {
+		$res = Address::where(["id"=>$id,"userid"=>$request->session()->get("user")->id])->forceDelete();
 	}
 	
-	public function addAddress(){
-		
+	public function addAddress(Request $request)
+    {
+
+        $geohash = new Geohash;
+        $location = $request->input('lati_long'); 
+        $geo = $geohash->encode(explode(",",$location)[1],explode(",",$location)[0]);
+        $input = $request->only("name","sex","address","address_details","phone","lati_long");
+        $input['userid'] = $request->session()->get("user")->id;
+        $input['created_at'] = date("Y-m-d H:i:s", time());
+        $input['position'] = $geo;
+        $res = Address::insert($input);
+        return json_encode([$res]);
 	}
 	
-	public function editAddress(Request $request, $id){
+	public function editAddress(Request $request, $id)
+    {
 		
 		$address = Address::findOrFail($id)->toArray();
 		if($address['userid'] != $request->session()->get('user')->id){
@@ -67,6 +80,15 @@ class PersonalController extends Controller
 		
 		return json_encode($address);
 	}
+
+    public function updateAddress(Request $request, $id)
+    {
+        //name:name,sex:sex,address:address,address_details:address_details,phone:phone,lati_long:lati_long
+        $update = $request->only("name","sex","address","address_details","phone","lati_long");
+        //$address = Adress::
+        $res = Address::where(['id'=> $id,'userid'=>$request->session()->get("user")->id])->update($update);
+        return $res;
+    }
 	
     /* public function index($id)
 	{
