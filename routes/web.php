@@ -46,6 +46,7 @@ Route::group(['middleware'=>'location'], function(){
     Route::get('/shoplist','Home\ShopController@index'); //附近商家信息列表，同/
     Route::post('/shoplist','Home\ShopController@loadShops'); //附近商家信息列表，同/
     Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
+    Route::get('/shoplist/{id}/rate','Home\ShopController@rate'); //菜品信息列表
     
     //个人中心
     Route::group(["prefix" => "personal","middlware" => "personal"], function () {
