@@ -1,5 +1,5 @@
- @extends("home.index")
-  @section("content")
+ 
+  <?php $__env->startSection("content"); ?>
   
   <div class="profile-panel" role="main">
   <h3 ng-if="pageTitleVisible" class="profile-paneltitle ng-scope">
@@ -81,6 +81,7 @@
   </div>
 </div>
 
-    @endsection 
+    <?php $__env->stopSection(); ?> 
 	
 	
+<?php echo $__env->make("home.index", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

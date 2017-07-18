@@ -19,6 +19,7 @@ class PersonalController extends Controller
 {
     public function index(Request $request)
 	{
+
 		$location = $request->session()->get('location');
 		//$list = Personal::find();		
         $user = $request->session()->get("user");
@@ -26,9 +27,11 @@ class PersonalController extends Controller
 	    $order = orders::where('userid',$user->id)->orderBy('create_time','rsort')->get();
 		//dd($order);
 		//$login_user = login_user::where('username',$login->id)->get();
+
 		$info = personal::where('userid',$user->id)->first();
 		//var_dump($info);
 		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info, 'location' => $location]);
+
 	}
 
 	public function userInfo(Request $request)
@@ -45,8 +48,7 @@ class PersonalController extends Controller
 		$user = $request->session()->get('user');
 		$location = $request->session()->get('location');
 		$userInfo=User_info::where("userid",$user->id)->first();
-		
-		//$address=$userInfo->address;
+
 		$address = Address::where('userid', $user->id)->get();
 		//dd($user);
 		return view('home.personal.address',['address'=>$address,'user' => $user, 'location' => $location]);
@@ -79,18 +81,20 @@ class PersonalController extends Controller
 		return view('home.personal.personal' ,['userid'=>$userid , 'order'=>$order]);
 	} */
 	
+	
+   
 	 public function order(Request $request)
 	{
 		//$userid = \Session::get("user")->id();
-        $userid = $request->session()->get('user');
-		$order=Orders::where('userid',$userid->id)->get();
+        $user = $request->session()->get('user');
+		$order=Orders::where('userid',$user->id)->get();
 		return view('home.personal.order',['order'=>$order]);
-		//return view('home.personal.order');
 	}
 
      //待评价订单
 	public function orderUnrated(Request $request)
 	{
+
 		$user = $request->session()->get("user");
 		$orderUnrated=Orders::where('status',1)->get();
 		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated , 'user'=>$user]);
@@ -138,9 +142,10 @@ class PersonalController extends Controller
 	// 个人收藏
 	public function collect(Request $request)  
 	{
-		$collect=Collect::all();
 		$location = $request->session()->get('location');
-		return view('home.personal.collect',['collect'=>$collect , 'location' => $location]);
+		$user = $request->session()->get('user');
+		$collect=Collect::where('userid',$user->id)->get();
+		return view('home.personal.collect',['collect'=>$collect,'location' => $location]);
 	} 
 	
 	
@@ -151,6 +156,38 @@ class PersonalController extends Controller
 		$location = $request->session()->get('location');
 		return view('home.personal.balance',['balance'=>$balance , 'location' => $location]);
 	}
+
+
+	
+	
+	public function changeavatar(Request $request)  
+	{
+		//$user = $request->session()->get('user');
+		//$collect=Collect::where('userid',$user->id)->get();
+		return view('home.personal.changeavatar');
+	}
+
+	public function changemobile(Request $request)  
+	{
+		//$user = $request->session()->get('user');
+		//$collect=Collect::where('userid',$user->id)->get();
+		return view('home.personal.changemobile');
+	}
+
+	public function changeemail(Request $request)  
+	{
+		//$user = $request->session()->get('user');
+		//$collect=Collect::where('userid',$user->id)->get();
+		return view('home.personal.changeemail');
+	}
+
+	public function modifypay(Request $request)  
+	{
+		//$user = $request->session()->get('user');
+		//$collect=Collect::where('userid',$user->id)->get();
+		return view('home.personal.modifypay');
+	}
+
 	
 	/*
 	

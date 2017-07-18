@@ -46,22 +46,36 @@ Route::group(['middleware'=>'location'], function(){
     Route::get('/shoplist','Home\ShopController@index'); //附近商家信息列表，同/
     Route::post('/shoplist','Home\ShopController@loadShops'); //附近商家信息列表，同/
     Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
+    Route::get('/shoplist/{id}/rate','Home\ShopController@rate'); //菜品信息列表
     
     //个人中心
     Route::group(["prefix" => "personal","middlware" => "personal"], function () {
     	Route::get('/','Home\PersonalController@index'); //个人中心
     	Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
+
     	Route::get('/orderunrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
+
+    	Route::get('/order/id/{id}','Home\OrderController@orderdetail'); //订单详情
+
     	Route::get('/order/refund','Home\PersonalController@orderRefund'); //个人中心/个人订单/退单记录
     	Route::get('/red_packet','Home\PersonalController@red_packet'); //个人中心/个人资产/我的红包
     	Route::get('/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
     	Route::get('/score','Home\PersonalController@score'); //个人中心/个人资产/我的积分
-    	Route::get('/info/','Home\PersonalController@userinfo'); //个人中心/个人资料
+
     	Route::get('/address','Home\PersonalController@address'); //个人中心/地址
 		ROute::get('/address/edit/{id}','Home\PersonalController@editAddress');
+
+    	Route::get('/info','Home\PersonalController@userInfo'); //个人中心/个人资料
+    	Route::get('/changeavatar','Home\PersonalController@changeavatar'); //头像编辑页面
+
     	
+
+    	Route::get('/address/','Home\PersonalController@address'); //个人中心/地址
     	Route::get('/security','Home\PersonalController@security'); //安全中心
 		Route::get('/changepassword','Home\PersonalController@changepassword');//修改密码
+		Route::get('/changemobile','Home\PersonalController@changemobile');//修改手机
+		Route::get('/changeemail','Home\PersonalController@changeemail');//修改邮箱
+		Route::get('/modifypay','Home\PersonalController@modifypay');//修改额度
 		Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
     	Route::get('/logout','Home\PersonalController@logout'); //退出登录
     
