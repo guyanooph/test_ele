@@ -42,7 +42,7 @@
   <meta name="mobile-agent" content="undefined"><meta name="description" content="饿了么是中国专业的网上订餐平台，目前已覆盖北京、上海、杭州、广州等300多个城市，提供各类中式、日式、韩式、西式、下午茶、夜宵等优质美食，并提供送餐上门服务，让订餐更加轻松，叫外卖就上饿了么！"><meta name="keywords" content="饿了么，网上订餐，外卖，快餐外卖，外卖网"></head>
   <body cute-title="" ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" style="position: relative;">
   
-    <div ng-switch="state.type" state="layoutState" class="ng-isolate-scope"><!-- ngSwitchWhen: checkout --><!-- ngSwitchDefault:  --><div ng-switch-default="" topbar-default="" state="state" class="ng-scope ng-isolate-scope"><header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}"><div class="container clearfix"><h1><a href="/" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1><a href="/" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a> <a href="/profile/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> <a href="//h5.ele.me/service/cooperation/" target="_blank" class="topbar-item cooperation">加盟合作</a><nav class="topbar-nav"><a href="/support/center" hardjump="" class="topbar-nav-link" target="_blank"><i class="topbar-nav-icon icon-service"></i>服务中心</a> <a href="/support/rules/default" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a><div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span> <img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div></div><div topbar-profilebox="">
+    <div ng-switch="state.type" state="layoutState" class="ng-isolate-scope"><!-- ngSwitchWhen: checkout --><!-- ngSwitchDefault:  --><div ng-switch-default="" topbar-default="" state="state" class="ng-scope ng-isolate-scope"><header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}"><div class="container clearfix"><h1><a href="/" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1><a href="/" hardjump="" class="topbar-item topbar-homepage" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a> <a href="/personal/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> <a href="" target="_blank" class="topbar-item cooperation">加盟合作</a><nav class="topbar-nav"><a href="/personal/wenti" hardjump="" class="topbar-nav-link" target="_blank"><i class="topbar-nav-icon icon-service"></i>服务中心</a> <a href="/personal/guize" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a><div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span> <img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" class="topbar-nav-qrcode" alt="扫一扫下载饿了么手机 App"></div></div><div topbar-profilebox="">
 	
 	
 	
@@ -90,11 +90,21 @@
 	</div></nav></div></header></div></div>
     <div class="importantnotification container" role="banner"><!-- ngIf: enable --></div>
     <div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar"><div class="sidebar-tabs"><div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="/profile/order" hardjump="" tooltip="我的订单" tooltip-placement="left" ubt-click="toolbar_order"><!-- ngIf: sidebarCount.uncompletedOrder > 0 --></a><div class="toolbar-separator"></div><a class="toolbar-cartbtn icon-cart toolbar-open toolbar-cartbtn-shownum" href="JavaScript:" template="cart" ng-class="{'focus': (activeTemplate === 'cart' &amp;&amp; isSidebarOpen), 'toolbar-cartbtn-shownum': foodCount.count}" ubt-click="390">购物车<!-- ngIf: foodCount.count --><i class="toolbar-cartnum ng-binding ng-scope" ng-if="foodCount.count" ng-bind="foodCount.count">4</i><!-- end ngIf: foodCount.count --></a><div class="toolbar-separator"></div><a class="toolbar-btn icon-notice toolbar-open modal-hide" href="JavaScript:" template="message" ng-class="{'focus': (activeTemplate === 'message' &amp;&amp; isSidebarOpen), 'toolbar-open': user, 'modal-hide': user}" tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div><div class="toolbar-tabs-bottom"><div class="toolbar-btn icon-QR-code"><div class="dropbox toolbar-tabs-dropbox"><a href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" alt="下载手机应用"><p>下载手机应用</p><p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div></div><a class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="JavaScript:" tooltip-placement="left" style="visibility: hidden;"></a></div></div><div class="sidebar-content"><!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div></div>
-    <!-- ngView:  --><div ng-view="" role="main" class="ng-scope"><div class="unrated profile-container container" profile-container="" page-name="order-unrated" page-title="待评价订单" page-subtitle="带(<span class='stress'>*</span>)标志为必填项"><div class="clearfix"><div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location=""><span>当前位置:</span> <span class="location-current"><a id="current_address" city="<?php echo e($location['city']); ?>" class="inherit ng-binding" ng-href="" ubt-click="401" ng-bind="place.name || place.address" href="/?position=<?php echo e($location['position']); ?>&address=<?php echo e($location['address']); ?>&city=<?php echo e($location['city']); ?>"><?php echo e($location['address']); ?></a></span> <span class="location-change location-hashistory" ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length > 0 }"><a ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a></span>
+    <!-- ngView:  --><div ng-view="" role="main" class="ng-scope"><div class="unrated profile-container container" profile-container="" page-name="order-unrated" page-title="待评价订单" page-subtitle="带(<span class='stress'>*</span>)标志为必填项">
+	<div class="clearfix">
+	<div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location="">
+	<span>当前位置:</span>
+	<span class="location-current">
+	<a id="current_address" city="<?php echo e($location['city']); ?>" class="inherit ng-binding" ng-href="" ubt-click="401" ng-bind="place.name || place.address" href="/?position=<?php echo e($location['position']); ?>&address=<?php echo e($location['address']); ?>&city=<?php echo e($location['city']); ?>"><?php echo e($location['address']); ?></a>
+	</span>
+	<span class="location-change location-hashistory" ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length > 0 }"><a ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a>
+	</span>
 	<span ng-transclude="">
 	<i class="icon-arrow-right ng-scope"></i>
 	<span class="ng-binding ng-scope">待评价订单</span>
-	</span></div><div search-input=""></div>
+	</span>
+	</div>
+	<div search-input=""></div>
 	</div>
 	<ul class="profile-sidebar" role="navigation" profile-sidebar="">
 	<li class="profile-sidebar-section">
@@ -108,7 +118,7 @@
 	<a href="/personal/order">近三个月订单</a></li>
 	
 	<li ng-class="{ active: pageName === 'order-unrated' }" class="active">
-	<a href="/personal/order">待评价订单</a></li>
+	<a href="/personal/orderunrated">待评价订单</a></li>
 	
 	<li ng-class="{ active: pageName === 'order-refunding' }">
 	<a href="/personal/order/refund">退单记录</a></li>
@@ -155,7 +165,7 @@
   <div class="container clearfix">
   <div class="footer-link">
   <h3 class="footer-link-title">用户帮助</h3>
-  <a class="footer-link-item" href="/personal/fuwu" target="_blank">服务中心</a>
+  <a class="footer-link-item" href="/personal/wenti" target="_blank">服务中心</a>
   <a class="footer-link-item" href="/personal/wenti" target="_blank">常见问题</a>
   </div>
   

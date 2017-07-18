@@ -51,7 +51,7 @@ Route::group(['middleware'=>'location'], function(){
     Route::group(["prefix" => "personal","middlware" => "personal"], function () {
     	Route::get('/','Home\PersonalController@index'); //个人中心
     	Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
-    	Route::get('/order/unrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
+    	Route::get('/orderunrated','Home\PersonalController@orderUnrated'); //个人中心/个人订单/未评价订单
     	Route::get('/order/refund','Home\PersonalController@orderRefund'); //个人中心/个人订单/退单记录
     	Route::get('/red_packet','Home\PersonalController@red_packet'); //个人中心/个人资产/我的红包
     	Route::get('/balance','Home\PersonalController@balance'); //个人中心/个人资产/账户余额
@@ -65,16 +65,15 @@ Route::group(['middleware'=>'location'], function(){
 		Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
     	Route::get('/logout','Home\PersonalController@logout'); //退出登录
     
-	  
+		  // 页头页尾小链接
+	   Route::get("/guize" , "home\PersonalController@guize"); //规则中心
+	   Route::get("/wenti" , "home\PersonalController@wenti"); //常见问题  服务
+	   Route::get("/lianxi" , "home\PersonalController@lianxi"); //联系我们
+	   Route::get("/jieshao" , "home\PersonalController@jieshao"); //饿了么介绍
+  
     });
 });
  
-  // 页头页尾小链接
-  Route::get("/guize" , "home\PersonalController@guize"); //规则中心
-  Route::get("/fuwu" , "home\PersonalController@fuwu"); //服务中心
-  Route::get("/weiti" , "home\PersonalController@wenti"); //常见问题
-  Route::get("/lianxi" , "home\PersonalController@lianxi"); //联系我们
-  Route::get("/jieshao" , "home\PersonalController@jieshao"); //饿了么介绍
   
 //后台路由组
 Route::get("/ad/login","Admin\LoginController@index");//加载登录页面
