@@ -5,13 +5,16 @@
 		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
 			display: none !important;
 		}
+
 		ng\:form {
 			display: block;
 		}
+
 		.ng-animate-block-transitions {
 			transition: 0s all !important;
 			-webkit-transition: 0s all !important;
 		}
+
 		.ng-hide-add-active, .ng-hide-remove {
 			display: block !important;
 		}
@@ -75,13 +78,12 @@
 			                                                                                                 hardjump=""
 			                                                                                                 class="topbar-item topbar-homepage focus"
 			                                                                                                 ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
-
 	<a href="/personal/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> 
 	<a href="" target="_blank" class="topbar-item cooperation">加盟合作</a>
 	<nav class="topbar-nav">
-	<a href="/personal/wenti" hardjump="" class="topbar-nav-link" target="_blank">
+	<a href="" hardjump="" class="topbar-nav-link" target="_blank">
 	<i class="topbar-nav-icon icon-service"></i>服务中心</a> 
-	<a href="/personal/guize" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a>
+	<a href="" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a>
 	<div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用
 		<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span>
 		<img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png"
@@ -170,17 +172,21 @@
 <footer class="footer" role="contentinfo">
 	<div class="container clearfix">
 		<div class="footer-link"><h3 class="footer-link-title">用户帮助</h3><a class="footer-link-item"
-		                                                                   href="/personal/fuwu"
+		                                                                   href="/support/center"
 		                                                                   target="_blank">服务中心</a> <a
-					class="footer-link-item" href="/personal/wenti" target="_blank">常见问题</a></div>
-		
-		
+					class="footer-link-item" href="/support/question/default" target="_blank">常见问题</a></div>
+		<div class="footer-link"><h3 class="footer-link-title">商务合作</h3><a class="footer-link-item"
+		                                                                   href="//kaidian.ele.me"
+		                                                                   target="_blank">我要开店</a> <a
+					class="footer-link-item" href="/support/about/jiameng" target="_blank">加盟指南</a> <a
+					class="footer-link-item" href="/support/about/contact" target="_blank">市场合作</a> <a
+					class="footer-link-item" href="http://openapi.eleme.io/" target="_blank">开放平台</a></div>
 		<div class="footer-link"><h3 class="footer-link-title">关于我们</h3><a class="footer-link-item"
-		                                                                   href="/personal/jieshao"
-		                                                                   target="_blank">饿了么介绍</a>
- 
-				         <a class="footer-link-item" href="/personal/lianxi" target="_blank">联系我们</a> 
-					     <a class="footer-link-item" href="/personal/guize" target="_blank">规则中心</a></div>
+		                                                                   href="/support/about"
+		                                                                   target="_blank">饿了么介绍</a> <a
+					class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a> <a
+					class="footer-link-item" href="/support/about/contact" target="_blank">联系我们</a> <a
+					class="footer-link-item" href="/support/rules/default" target="_blank">规则中心</a></div>
 		<div class="footer-contect">
 			<div class="footer-contect-item">24小时客服热线 : <a class="inherit" href="tel:10105757">10105757</a></div>
 			<div class="footer-contect-item">意见反馈 : <a class="inherit" href="mailto:feedback@ele.me">feedback@ele.me</a>
@@ -205,7 +211,7 @@
 			<p>增值电信业务许可证 : <a href="http://www.shca.gov.cn/" target="_blank">沪B2-20150033</a> | <a
 					href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备 09007032</a> | <a
 					href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&amp;entyId=20120305173227823"
-					target="_blank">上海工商行政管理</a> Copyright ?2008-2017 ele.me, All Rights Reserved.</p></div>
+					target="_blank">上海工商行政管理</a> Copyright ©2008-2017 ele.me, All Rights Reserved.</p></div>
 		<div class="footer-police container">
 		<a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow" target="_blank">
 		<img alt="已通过沪公网备案，备案号 310100103568" src="//faas.elemecdn.com/desktop/media/img/picp_bg.e373b3.jpg" height="30"></a>

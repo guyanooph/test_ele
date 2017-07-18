@@ -77,10 +77,11 @@
 			                                                                                                 ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
 	<a href="/personal/order" hardjump="" class="topbar-item" ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> 
 	<a href="/merchant/phone" target="_blank" class="topbar-item cooperation">加盟合作</a>
+
 	<nav class="topbar-nav">
-	<a href="" hardjump="" class="topbar-nav-link" target="_blank">
+	<a href="/personal/wenti" hardjump="" class="topbar-nav-link" target="_blank">
 	<i class="topbar-nav-icon icon-service"></i>服务中心</a> 
-	<a href="" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a>
+	<a href="/personal/guize" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a>
 	<div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用
 		<div class="dropbox topbar-mobile-dropbox"><span>扫一扫, 手机订餐更方便</span>
 		<img src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png"
@@ -99,10 +100,10 @@
                                     <span class="topbar-profilebox-username ng-binding"></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
                                     <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' -->
                                     <div class="dropbox topbar-profilebox-dropbox">
-                                        <a class="icon-profile" href="/profile" hardjump="">个人中心</a>
-                                        <a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a>
-                                        <a class="icon-location" href="/profile/address" hardjump="">我的地址</a>
-                                        <a class="icon-setting" href="/profile/security" hardjump="">安全设置</a>
+                                        <a class="icon-profile" href="/personal" hardjump="">个人中心</a>
+                                        <a class="icon-star" href="/personal/collect" hardjump="">我的收藏</a>
+                                        <a class="icon-location" href="/personal/address" hardjump="">我的地址</a>
+                                        <a class="icon-setting" href="/personal/security" hardjump="">安全设置</a>
                                         <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
                                     </div>
                                 </span>
@@ -114,7 +115,7 @@
                                 <span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' -->
                                     <span class="topbar-profilebox-username ng-binding">{{ $user->username }}</span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
                                     <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' -->
-                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="{{ url('/personal') }}" hardjump="">个人中心</a> <a class="icon-star" href="{{ url('/personal/col') }}" hardjump="">我的收藏</a> <a class="icon-location" href="{{ url('/personal/address') }}" hardjump="">我的地址</a> <a class="icon-setting" href="{{ url('/personal/security') }}" hardjump="">安全设置</a> <a class="icon-logout" href="{{ url('/logout') }}" ng-click="logout()">退出登录</a>
+                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="{{ url('/personal') }}" hardjump="">个人中心</a> <a class="icon-star" href="{{ url('/personal/collect') }}" hardjump="">我的收藏</a> <a class="icon-location" href="{{ url('/personal/address') }}" hardjump="">我的地址</a> <a class="icon-setting" href="{{ url('/personal/security') }}" hardjump="">安全设置</a> <a class="icon-logout" href="{{ url('/logout') }}" ng-click="logout()">退出登录</a>
                                     </div>
                                 </span>
                             @endif
@@ -266,21 +267,17 @@
 <footer class="footer" role="contentinfo">
 	<div class="container clearfix">
 		<div class="footer-link"><h3 class="footer-link-title">用户帮助</h3><a class="footer-link-item"
-		                                                                   href="/support/center"
+		                                                                   href="/personal/fuwu"
 		                                                                   target="_blank">服务中心</a> <a
-					class="footer-link-item" href="/support/question/default" target="_blank">常见问题</a></div>
-		<div class="footer-link"><h3 class="footer-link-title">商务合作</h3><a class="footer-link-item"
-		                                                                   href="//kaidian.ele.me"
-		                                                                   target="_blank">我要开店</a> <a
-					class="footer-link-item" href="/support/about/jiameng" target="_blank">加盟指南</a> <a
-					class="footer-link-item" href="/support/about/contact" target="_blank">市场合作</a> <a
-					class="footer-link-item" href="http://openapi.eleme.io/" target="_blank">开放平台</a></div>
+					class="footer-link-item" href="/personal/wenti" target="_blank">常见问题</a></div>
+		
+		
 		<div class="footer-link"><h3 class="footer-link-title">关于我们</h3><a class="footer-link-item"
-		                                                                   href="/support/about"
-		                                                                   target="_blank">饿了么介绍</a> <a
-					class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a> <a
-					class="footer-link-item" href="/support/about/contact" target="_blank">联系我们</a> <a
-					class="footer-link-item" href="/support/rules/default" target="_blank">规则中心</a></div>
+		                                                                   href="/personal/jieshao"
+		                                                                   target="_blank">饿了么介绍</a>
+ 
+				         <a class="footer-link-item" href="/personal/lianxi" target="_blank">联系我们</a> 
+					     <a class="footer-link-item" href="/personal/guize" target="_blank">规则中心</a></div>
 		<div class="footer-contect">
 			<div class="footer-contect-item">24小时客服热线 : <a class="inherit" href="tel:10105757">10105757</a></div>
 			<div class="footer-contect-item">意见反馈 : <a class="inherit" href="mailto:feedback@ele.me">feedback@ele.me</a>

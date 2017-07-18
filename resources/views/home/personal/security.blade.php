@@ -31,7 +31,7 @@
 	  <p ng-bind="item.text.text" class="ng-binding">互联网存在被盗风险，建议您定期更改密码以保护安全。</p>
 	  </div>
 	  <span class="child security-type-linkcon">
-	  <a class="security-type-link ng-binding btn-link" target="" ng-href="/profile/security/changepassword" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="/profile/security/changepassword">更改密码</a>
+	  <a class="security-type-link ng-binding btn-link" target="" ng-href="/personal/changepassword" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="/personal/changepassword">更改密码</a>
 	  </span>
 	</div>
 	  
@@ -45,7 +45,7 @@
 	  <p ng-bind="item.text.text" class="ng-binding">已绑定手机 137****6524</p>
 	  </div>
 	  <span class="child security-type-linkcon">
-	  <a class="security-type-link ng-binding btn-link" target="" ng-href="/profile/security/changemobile/" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="/profile/security/changemobile/">更改手机</a>
+	  <a class="security-type-link ng-binding btn-link" target="" ng-href="/personal/changemobile/" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="/personal/changemobile/">更改手机</a>
 	  </span>
 	  </div>
 	  
@@ -59,7 +59,7 @@
 	  <p ng-bind="item.text.text" class="ng-binding">已绑定邮箱 ht1***@163.com</p>
 	  <p class="security-type-tip-more ng-binding ng-scope" ng-if="item.text.textMore" ng-bind-html="item.text.textMore | toTrusted">验证后可用户快速找回密码，接受账户提醒邮件。</p>
 	  </div>
-	  <span class="child security-type-linkcon"><a class="security-type-link ng-binding btn-link" target="" ng-href="/profile/security/changeemail" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="/profile/security/changeemail">更改邮箱</a>
+	  <span class="child security-type-linkcon"><a class="security-type-link ng-binding btn-link" target="" ng-href="/personal/changeemail" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="/personal/changeemail">更改邮箱</a>
 	 </span>
    </div>
 	  
@@ -74,7 +74,7 @@
 	 <p class="security-type-tip-more ng-binding ng-scope" ng-if="item.text.textMore" ng-bind-html="item.text.textMore | toTrusted">如果当日在线订餐金额超出支付额度，手机验证后才可以付款。</p>
 	 </div>
 	 <span class="child security-type-linkcon">
-	 <a class="security-type-link ng-binding btn-link" target="" ng-href="/profile/security/modifypay" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="/profile/security/modifypay">更改额度</a>
+	 <a class="security-type-link ng-binding btn-link" target="" ng-href="/profile/security/modifypay" ng-class="item.status ? 'btn-link' : 'btn-stress'" ng-bind="item.text.link" href="/personal/modifypay">更改额度</a>
 	 </span>
 	 
 	</div>

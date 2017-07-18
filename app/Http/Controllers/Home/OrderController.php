@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Merchant;
+use App\Models\Food_list;
 use App\Models\Orders;
 use App\Models\Order_details;
 
@@ -77,5 +78,22 @@ class OrderController extends Controller
             return redirect("/".$shopid."/ordercheckout");
         }
 
+    }
+
+    public function orderdetail(Request $request,$id)
+    {
+        //
+        //var_dump($id);
+		$user = $request->session()->get("user");
+		$location = $request->session()->get('location');
+        $order=Order_details::where('orderid',$id)->get()->toArray();
+        //var_dump($order);
+        //$shop=Merchant::where('shopid',$order['shopid'])->first();
+        //dd($order);
+        foreach($order as $k=>$or){
+            $order[$k]['food']=Food_list::find($or['foodid'])->toArray();
+        }
+        //dd($order);
+        return view('home.order.orderdetail',['user'=>$user,'order'=>$order,'location'=>$location]);
     }
 }

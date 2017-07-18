@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shop_list;
 use App\Models\Mer_mid;
 use App\Models\Mer_sid;
+use App\Models\rate;
 use App\Org\Geohash;
 use Session;
 
@@ -88,5 +89,10 @@ class ShopController extends Controller
         }else{
             return Shop_list::where('position', 'like', substr($geo,0,4).'%')->where($where)->limit(10)->get();
         }
+    }
+
+    public function rate()
+    {
+        return view("home.shop.rate");
     }
 }
