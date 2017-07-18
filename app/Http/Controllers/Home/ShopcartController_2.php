@@ -20,15 +20,15 @@ class ShopcartController_2 extends Controller
                 $shopcart[$shopid]['shopcart'][$foodid]['total'] += $food->price * $m;
                 $shopcart[$shopid]['total'] += $food->price * $m;
                 $shopcart[$shopid]['num'] += $m;
-                if($shopcart[$shopid]['shopcart'][$foodid]['num'] <= 0){
+                if($shopcart[$shopid]['shopcart'][$foodid]['num'] = 0){
                     unset($shopcart[$shopid]['shopcart'][$foodid]);
                     $request->session()->put("shopcart", $shopcart);
                     $t2 = microtime(true);
-                    return json_encode(['num' => 0, 'price' => $food->price, 'status' => 1, 'time' => $t2-$t1]);
+                    return json_encode(['total_num' => $shopcart[$shopid]['num'], 'num' => 0, 'price' => $food->price, 'status' => 1, 'time' => $t2-$t1]);
                 }
                 $request->session()->put("shopcart", $shopcart);
                 $t2 = microtime(true);
-                return json_encode(['total' => $shopcart[$shopid]['total'],'num' => $shopcart[$shopid]['shopcart'][$foodid]['num'], 'price' => $food->price, 'status' => 1, 'time' => $t2-$t1]);
+                return json_encode(['total_num' => $shopcart[$shopid]['num'],'total' => $shopcart[$shopid]['total'],'num' => $shopcart[$shopid]['shopcart'][$foodid]['num'], 'price' => $food->price, 'status' => 1, 'time' => $t2-$t1]);
             }else{
                 $shopcart[$shopid]['shopcart'][$foodid]['num'] = 1;
                 $shopcart[$shopid]['shopcart'][$foodid]['total'] = $food->price;
@@ -37,7 +37,7 @@ class ShopcartController_2 extends Controller
                 $shopcart[$shopid]['num'] = 1;
                 $request->session()->put("shopcart", $shopcart);
                 $t2 = microtime(true);
-                return json_encode(['total' => $shopcart[$shopid]['total'], 'num' => $shopcart[$shopid]['shopcart'][$foodid]['num'], 'price' => $food->price, 'title' => $food->title, 'id' => $food->id, 'status' => 0, 'time' => $t2-$t1]);
+                return json_encode(['total_num' => $shopcart[$shopid]['num'], 'total' => $shopcart[$shopid]['total'], 'num' => $shopcart[$shopid]['shopcart'][$foodid]['num'], 'price' => $food->price, 'title' => $food->title, 'id' => $food->id, 'status' => 0, 'time' => $t2-$t1]);
             };
         }else{
             die(" 请正常访问我的网站");

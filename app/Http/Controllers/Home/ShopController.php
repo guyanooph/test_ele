@@ -25,6 +25,8 @@ class ShopController extends Controller
         $type = $merType;
         $type_json = $merTypeJson;
         $location = $request->session()->get("location");
+        $default = $request->session()->get("default_cart");
+        $shopcart = $request->session()->get("shopcart");
         //当用户直接访问/或是/shoplist时(即使用get，且没带参数)，先判断是否存在session，及session中是否存在location
         //如果存在，就用这个location来加载附近商家
         //当用户由/home(定位页面)完成定位，跳转到/时，
@@ -35,7 +37,7 @@ class ShopController extends Controller
 
             //用私有方法加载附近商家
             $list = $this->loadShops($request, $position);
-            return view('home.shop.shoplist', compact('list','user','type','type_json','location'));
+            return view('home.shop.shoplist', compact('list','user','type','type_json','location','shopcart','default'));
         }elseif($request->input("location")){
             $position = $request->input("location");
             $request->session()->put("location", ['position' => $request->input("position"),'city' =>$request->input("city"),'address' => $request->input("address")]);

@@ -131,7 +131,7 @@ class RoleController extends Controller
 
         //获取当前角色的节点ID
         //$nids = \DB::table("admin_node")->where("rid",$rid)->list;
-        $nids = \DB::select("select nid from r_n where rid={$rid}");//获取r_n表中的角色节点ID nid
+        $nids = \DB::select("select nid from r_n where rid={$rid}")->toArray();//获取r_n表中的角色节点ID nid
             
         //加载模板
         return view("admin.role.nodelist",["rid"=>$rid,"nodelist"=>$nodelist,"nids"=>$nids]);

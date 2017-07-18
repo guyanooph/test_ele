@@ -2,6 +2,7 @@
 <input type="hidden" name="rid" value="{{ $rid }}"/>
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 @foreach($nodelist as $vo)
+    {{ $nids[0] }}
 	<div class="checkbox" style="width:140px;height:35px;">
 		<label>
 			<input type="checkbox" name="nids[]" value="{{ $vo->id }}" {{ in_array($vo->id,$nids)?"checked":""}}> {{ $vo->name}}

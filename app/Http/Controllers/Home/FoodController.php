@@ -31,6 +31,8 @@ class FoodController extends Controller
             $request->session()->put("shopcart", $shopcart);
         }
 
+        $request->session()->put('default_cart', $id);
+
 		$food_type = Food_type::where("shopid",$id)->get();
 		foreach($food_type as &$v){
 			$v->food = Food_list::where('typeid',$v->id)->get();
