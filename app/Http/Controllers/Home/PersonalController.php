@@ -38,6 +38,7 @@ class PersonalController extends Controller
 	{
 		$user = $request->session()->get('user');
 		$userInfo = User_info::where("userid",$user->id)->first();
+		//dd($userInfo);
 		$location = $request->session()->get('location');
 		return view('home.personal.userinfo',['userInfo'=>$userInfo , 'location' => $location]);
 	}
@@ -87,17 +88,18 @@ class PersonalController extends Controller
 	{
 		//$userid = \Session::get("user")->id();
         $user = $request->session()->get('user');
+		$location = $request->session()->get('location');
 		$order=Orders::where('userid',$user->id)->get();
-		return view('home.personal.order',['order'=>$order]);
+		return view('home.personal.order',['order'=>$order, 'location'=>$location]);
 	}
 
      //待评价订单
 	public function orderUnrated(Request $request)
 	{
-
+		$location = $request->session()->get('location');
 		$user = $request->session()->get("user");
 		$orderUnrated=Orders::where('status',1)->get();
-		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated , 'user'=>$user]);
+		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated ,'location' =>$location, 'user'=>$user]);
 	}
 
      //退单记录
@@ -126,16 +128,18 @@ class PersonalController extends Controller
 	//安全中心
 	public function security(Request $request)
 	{
+		$user = $request->session()->get("user");
 		$location = $request->session()->get('location');
-		return view('home.personal.security', ['location' => $location]);
+		return view('home.personal.security', ['location' => $location, 'user' => $user]);
 	}
 	
 	
 	// 修改密码
 	public function changepassword(Request $request)
 	{
+		$user = $request->session()->get("user");
 		$location = $request->session()->get('location');
-		return view('home.personal.changepassword',['location' => $location]);
+		return view('home.personal.changepassword',['location' => $location, 'user' => $user]);
 	}
 	
 	
@@ -171,21 +175,27 @@ class PersonalController extends Controller
 	{
 		//$user = $request->session()->get('user');
 		//$collect=Collect::where('userid',$user->id)->get();
-		return view('home.personal.changemobile');
+		$location = $request->session()->get('location');
+		$user = $request->session()->get('user');
+		return view('home.personal.changemobile', ['location'=>$location, 'user'=>$user]);
 	}
 
 	public function changeemail(Request $request)  
 	{
 		//$user = $request->session()->get('user');
 		//$collect=Collect::where('userid',$user->id)->get();
-		return view('home.personal.changeemail');
+		$location = $request->session()->get('location');
+		$user = $request->session()->get('user');
+		return view('home.personal.changeemail', ['location'=>$location, 'user'=>$user]);
 	}
 
 	public function modifypay(Request $request)  
 	{
 		//$user = $request->session()->get('user');
 		//$collect=Collect::where('userid',$user->id)->get();
-		return view('home.personal.modifypay');
+		$location = $request->session()->get('location');
+		$user = $request->session()->get('user');
+		return view('home.personal.modifypay', ['location'=>$location, 'user'=>$user]);
 	}
 
 	
@@ -203,29 +213,33 @@ class PersonalController extends Controller
 	//规则中心
 	public function guize(Request $request)
 	{
+		$user = $request->session()->get("user");
 		$location = $request->session()->get('location');
-		return view('home.personal.guize' ,['location' => $location]);
+		return view('home.personal.guize' ,['location' => $location, 'user' => $user]);
 	}
 	
 	//常见问题  服务
 	public function wenti(Request $request)
 	{
+		$user = $request->session()->get("user");
 		$location = $request->session()->get('location');
-		return view('home.personal.wenti', ['location' => $location]);
+		return view('home.personal.wenti', ['location' => $location, 'user' => $user]);
 	}
 	
 	//饿了么介绍
 	public function jieshao(Request $request)
 	{
+		$user = $request->session()->get("user");
 		$location = $request->session()->get('location');
-		return view('home.personal.jieshao' , ['location' => $location]);
+		return view('home.personal.jieshao' , ['location' => $location, 'user' => $user]);
 	}
 	
 	//联系我们
 	public function lianxi(Request $request)
 	{
+		$user = $request->session()->get("user");
 		$location = $request->session()->get('location');
-		return view('home.personal.lianxi' , ['location' => $location]);
+		return view('home.personal.lianxi' , ['location' => $location, 'user' => $user]);
 	}
 	
 	

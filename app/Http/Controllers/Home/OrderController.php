@@ -80,10 +80,12 @@ class OrderController extends Controller
 
     }
 
-    public function orderdetail($id)
+    public function orderdetail(Request $request,$id)
     {
         //
         //var_dump($id);
+		$user = $request->session()->get("user");
+		$location = $request->session()->get('location');
         $order=Order_details::where('orderid',$id)->get()->toArray();
         //var_dump($order);
         //$shop=Merchant::where('shopid',$order['shopid'])->first();
@@ -92,6 +94,6 @@ class OrderController extends Controller
             $order[$k]['food']=Food_list::find($or['foodid'])->toArray();
         }
         //dd($order);
-        return view('home.order.orderdetail',['order'=>$order]);
+        return view('home.order.orderdetail',['user'=>$user,'order'=>$order,'location'=>$location]);
     }
 }
