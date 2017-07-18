@@ -84,6 +84,7 @@ class OrderController extends Controller
     {
         //
         //var_dump($id);
+        $location=$request->session()->get('location');
         $order=Order_details::where('orderid',$id)->get()->toArray();
         //var_dump($order);
         //$shop=Merchant::where('shopid',$order['shopid'])->first();
@@ -92,6 +93,6 @@ class OrderController extends Controller
             $order[$k]['food']=Food_list::find($or['foodid'])->toArray();
         }
         //dd($order);
-        return view('home.order.orderdetail',['order'=>$order]);
+        return view('home.order.orderdetail',['order'=>$order,'location'=>$location]);
     }
 }

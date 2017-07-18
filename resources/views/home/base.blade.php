@@ -129,7 +129,7 @@
 <div class="importantnotification container" role="banner"><!-- ngIf: enable --></div>
 <div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar">
 	<div class="sidebar-tabs">
-		<div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="/profile/order"
+		<div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="/personal/order"
 		                                    hardjump="" tooltip="我的订单" tooltip-placement="left"
 		                                    ubt-click="toolbar_order">
 				<!-- ngIf: sidebarCount.uncompletedOrder > 0 --></a>

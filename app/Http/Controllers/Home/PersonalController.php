@@ -28,7 +28,9 @@ class PersonalController extends Controller
 		//dd($order);
 		//$login_user = login_user::where('username',$login->id)->get();
 
-		$info = personal::first();
+		$info = personal::where('userid',$user->id)->first();
+		//var_dump($user->id);die;
+		//var_dump($info);die;
 		$status=['未付款','已付款','已取消'];
 		//var_dump($status);die;
 		$info = personal::where('userid',$user->id)->first();
@@ -90,9 +92,10 @@ class PersonalController extends Controller
 	 public function order(Request $request)
 	{
 		//$userid = \Session::get("user")->id();
+		$location = $request->session()->get('location');
         $user = $request->session()->get('user');
 		$order=Orders::where('userid',$user->id)->get();
-		return view('home.personal.order',['order'=>$order]);
+		return view('home.personal.order',['order'=>$order,'location'=>$location]);
 	}
 
      //待评价订单
@@ -105,9 +108,10 @@ class PersonalController extends Controller
 	}
 
      //退单记录
-	public function orderRefund()
+	public function orderRefund(Request $request)
 	{
-		$orderRefund=Orders::where('status',2);
+		$id=$request->session()->get('user')->id;
+		$orderRefund=Orders::where(['status'=>2,'id'=>$id])->get();
 		return view('home.personal.orderRefund',['orderRefund'=>$orderRefund]);
 	}
 
