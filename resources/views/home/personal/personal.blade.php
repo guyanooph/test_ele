@@ -264,7 +264,7 @@
 							<p class="profile-othermessage"><!-- ngIf: user.is_mobile_valid --><a
 										href="/profile/security" class="icon mobile icon-profile-phone ng-scope"
 										ng-if="user.is_mobile_valid"></a><!-- end ngIf: user.is_mobile_valid -->
-								<!-- ngIf: user.is_email_valid --><a href="/profile/security"
+								<!-- ngIf: user.is_email_valid --><a href="/personal/security"
 								                                     class="icon email icon-profile-email ng-scope"
 								                                     ng-if="user.is_email_valid"></a>
 								<!-- end ngIf: user.is_email_valid --> <!-- ngIf: !user.is_mobile_valid -->

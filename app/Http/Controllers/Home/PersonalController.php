@@ -27,7 +27,7 @@ class PersonalController extends Controller
 		//dd($order);
 		//$login_user = login_user::where('username',$login->id)->get();
 		$info = personal::first();
-		//$status=['未付款','已付款','已取消'];
+		$status=['未付款','已付款','已取消'];
 		//var_dump($status);die;
 		//var_dump($info);
 		return view('home.personal.personal' ,['user'=>$user,'order'=>$order ,'info'=>$info,'status'=>$status]);
