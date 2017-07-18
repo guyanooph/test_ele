@@ -78,14 +78,14 @@
 		<header class="topbar" role="navigation" ng-class="{shoptopbar: state.type === 'shop'}">
 			<div class="container clearfix"><h1><a href="/" hardjump=""
 			                                       class="topbar-logo icon-logo"><span>饿了么</span></a></h1><a href="/"
-			                                                                                                 hardjump=""
+			                                                                                                 hardjump="/shoplist"
 			                                                                                                 class="topbar-item topbar-homepage"
 			                                                                                                 ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
 				<a href="/personal/order" hardjump="" class="topbar-item"
 				   ng-class="{'focus': $root.locationpath[1] === 'order'}">我的订单</a> <a
 						href="" target="_blank" class="topbar-item cooperation">加盟合作</a>
-				<nav class="topbar-nav"><a href="/support/center" hardjump="" class="topbar-nav-link" target="_blank"><i
-								class="topbar-nav-icon icon-service"></i>服务中心</a> <a href="/support/rules/default"
+				<nav class="topbar-nav"><a href="/personal/wenti" hardjump="" class="topbar-nav-link" target="_blank"><i
+								class="topbar-nav-icon icon-service"></i>服务中心</a> <a href="/personal/guize"
 				                                                                     hardjump="" class="topbar-nav-link"
 				                                                                     target="_blank">规则中心</a>
 					<div class="topbar-nav-link"><i class="topbar-nav-icon icon-mobile"></i>手机应用
@@ -96,20 +96,20 @@
 					<div topbar-profilebox="">
 						<div class="topbar-profilebox">
 							<!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --><img
-									class="topbar-profilebox-avatar ng-scope"
-									ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85"
-									ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像"
-									src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85">
-							<!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> <span
-									class="topbar-profilebox-avatar icon-profile ng-hide"
-									ng-show="!$root.user.username"></span> <span ng-show="!$root.user.username"
+						class="topbar-profilebox-avatar ng-scope"
+						ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85"
+						ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像"
+						src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/26x26/format/webp/quality/85">
+				<!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> <span
+						class="topbar-profilebox-avatar icon-profile ng-hide"
+						ng-show="!$root.user.username"></span> <span ng-show="!$root.user.username"
 							                                                     class="ng-hide"><a
 										ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F"
 										target="_blank"
 										href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F">登录/注册</a></span>
 							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
 							
-							<span class="topbar-profilebox-username ng-binding">???</span>
+							<span class="topbar-profilebox-username ng-binding">{{ $user->username }}</span>
 								<!-- ngIf: $root.topbarType === 'checkout' -->
 								<!-- ngIf: $root.topbarType !== 'checkout' --><span
 										class="topbar-profilebox-btn icon-arrow-down ng-scope"
@@ -166,38 +166,10 @@
 			<div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location=""><span>当前位置:</span>
 				<span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4sp1s1gff"
 				                                  ubt-click="401" ng-bind="place.name || place.address"
-				                                  href="/place/wx4sp1s1gff">昌平区回龙观云趣园一区(龙禧二街北160米)</a></span> <span
+				                                  href="/place/wx4sp1s1gff">{{ $location['address'] }}</a></span> <span
 						class="location-change location-hashistory"
 						ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length > 0 }"><a
-							ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a><ul
-							class="dropbox location-dropbox" ubt-visit="398"><li class="arrow"></li>
-						<!-- ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4"
-								class="ng-scope"><a class="inherit ng-binding"
-						                            ng-href="/place/wx4sp1s1mpy0?latitude=40.086621&amp;longitude=116.328958"
-						                            ng-bind="userPlace.name" ubt-click="399"
-						                            href="/place/wx4sp1s1mpy0?latitude=40.086621&amp;longitude=116.328958">昌平区回龙观云趣园一区(龙禧二街北160米)</a></li>
-						<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4"
-								class="ng-scope"><a class="inherit ng-binding"
-						                            ng-href="/place/wx4ffqcw2pk?latitude=39.89659&amp;longitude=116.46813"
-						                            ng-bind="userPlace.name" ubt-click="399"
-						                            href="/place/wx4ffqcw2pk?latitude=39.89659&amp;longitude=116.46813">朝阳区A派公寓(苹果社区西南90米)</a></li>
-						<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4"
-								class="ng-scope"><a class="inherit ng-binding"
-						                            ng-href="/place/wwf1kz9qs9x?latitude=38.2308&amp;longitude=115.52316"
-						                            ng-bind="userPlace.name" ubt-click="399"
-						                            href="/place/wwf1kz9qs9x?latitude=38.2308&amp;longitude=115.52316">安平县安平镇安盛小区(平安公园西120米)</a></li>
-						<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								ng-repeat="userPlace in userPlaces | filter:filterPlace | limitTo: 4"
-								class="ng-scope"><a class="inherit ng-binding"
-						                            ng-href="/place/wx4dygtmtbm?latitude=39.87857&amp;longitude=116.31972"
-						                            ng-bind="userPlace.name" ubt-click="399"
-						                            href="/place/wx4dygtmtbm?latitude=39.87857&amp;longitude=116.31972">丰台区六里桥首科花园(北京西站南路西)</a></li>
-						<!-- end ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 --><li
-								class="changelocation"><a ng-href="/home" hardjump="" href="/home">修改收货地址<span
-										class="icon-location"></span></a></li></ul></span> <span ng-transclude=""><i
+							ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a></span> <span ng-transclude=""><i
 							class="icon-arrow-right ng-scope"></i><span class="ng-binding ng-scope">个人中心</span></span>
 			</div>
 			<div search-input=""></div>
@@ -212,7 +184,7 @@
 				</h2>
 				<ul>
 				    <li ng-class="{ active: pageName === 'order' }"><a href="/personal/order">近三个月订单</a></li>
-					<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/personal/order/unrated">待评价订单
+					<li ng-class="{ active: pageName === 'order-unrated' }"><a href="/personal/orderunrated">待评价订单
 							<!-- ngIf: unratedNumber --></a></li>
 					<li ng-class="{ active: pageName === 'order-refunding' }"><a href="/personal/order/refund">退单记录</a>
 					</li>
@@ -232,8 +204,8 @@
 				<ul>
 					<li ng-class="{ active: pageName === 'info' }"><a href="/personal/info">个人资料</a></li>
 					<li ng-class="{ active: pageName === 'address' }"><a href="/personal/address">地址管理</a></li>
-					<li ng-class="{ active: pageName === 'security-center' }"><a href="">安全中心</a></li>
-					<li ng-class="{ active: pageName === 'changepassword' }"><a href="">修改密码</a>
+					<li ng-class="{ active: pageName === 'security-center' }"><a href="/personal/security">安全中心</a></li>
+					<li ng-class="{ active: pageName === 'changepassword' }"><a href="/personal/changepassword">修改密码</a>
 					</li>
 				</ul>
 			</li>
@@ -249,20 +221,20 @@
 						<div class="profile-avatarwrap"><img ng-show="avatarUrl"
 						                                     ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/112x112/format/webp/quality/85"
 						                                     alt="guyanooph的头像" class="profile-avatar"
-						                                     src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/112x112/format/webp/quality/85">
-							<a href="/profile/info" class="profile-edit">编辑资料</a></div>
+						                                     src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/112x112/format/webp/quality/85">
+							<a href="/personal/info" class="profile-edit">编辑资料</a></div>
 						<div class="profile-perosondata">
 						
-						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">???</strong></h3>
+						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">{{ $user->username }}</strong></h3>
 							<p class="profile-tips ng-binding" ng-bind="timeSection.tipText">祝你一天好心情！</p>
 							<p class="profile-security">账户安全：<span
 										ng-class="{'low': level === 0, 'mid': level === 1, 'high': level ===2 || level ===3}"
-										ng-bind="levelText" class="ng-binding high">高</span> <a href="/profile/security"
+										ng-bind="levelText" class="ng-binding high">高</span> <a href="/personal/security"
 							                                                                    ng-bind="levelTip"
 							                                                                    class="ng-binding">查看详情</a>
 							</p>
 							<p class="profile-othermessage"><!-- ngIf: user.is_mobile_valid --><a
-										href="/profile/security" class="icon mobile icon-profile-phone ng-scope"
+										href="/personal/security" class="icon mobile icon-profile-phone ng-scope"
 										ng-if="user.is_mobile_valid"></a><!-- end ngIf: user.is_mobile_valid -->
 								<!-- ngIf: user.is_email_valid --><a href="/personal/security"
 								                                     class="icon email icon-profile-email ng-scope"
@@ -326,9 +298,7 @@
 			<div class="orderblock-item orderblock-status">
 			<p class="status ng-binding end" ng-class="{'waitpay': (order.realStatus === 4),'end': (order.realStatus === 5)}"
 			 ng-bind="order.statusText">{{ $dd->status }}</p>
-			 <a class="statuslink ng-binding" ng-href="order/id/1209253485556894798"
-				ng-bind="order.realStatus === 4 ? '立即评价' : '订单详情'"
-				href="order">订单详情</a></div>
+			 <a class="statuslink ng-binding" ng-href="/personal/order" ng-bind="order.realStatus === 4 ? '立即评价' : '订单详情'" href="/personal/order">订单详情</a></div>
 	   
 		</div>
 		
@@ -400,21 +370,17 @@
 <footer class="footer" role="contentinfo">
 	<div class="container clearfix">
 		<div class="footer-link"><h3 class="footer-link-title">用户帮助</h3><a class="footer-link-item"
-		                                                                   href="/support/center"
+		                                                                   href="/personal/wenti"
 		                                                                   target="_blank">服务中心</a> <a
-					class="footer-link-item" href="/support/question/default" target="_blank">常见问题</a></div>
-		<div class="footer-link"><h3 class="footer-link-title">商务合作</h3><a class="footer-link-item"
-		                                                                   href="//kaidian.ele.me"
-		                                                                   target="_blank">我要开店</a> <a
-					class="footer-link-item" href="/support/about/jiameng" target="_blank">加盟指南</a> <a
-					class="footer-link-item" href="/support/about/contact" target="_blank">市场合作</a> <a
-					class="footer-link-item" href="http://openapi.eleme.io/" target="_blank">开放平台</a></div>
+					class="footer-link-item" href="/personal/wenti" target="_blank">常见问题</a></div>
+		
+		
 		<div class="footer-link"><h3 class="footer-link-title">关于我们</h3><a class="footer-link-item"
-		                                                                   href="/support/about"
-		                                                                   target="_blank">饿了么介绍</a> <a
-					class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a> <a
-					class="footer-link-item" href="/support/about/contact" target="_blank">联系我们</a> <a
-					class="footer-link-item" href="/support/rules/default" target="_blank">规则中心</a></div>
+		                                                                   href="/personal/jieshao"
+		                                                                   target="_blank">饿了么介绍</a> 
+				    <a
+					class="footer-link-item" href="/personal/lianxi" target="_blank">联系我们</a> <a
+					class="footer-link-item" href="/personal/guize" target="_blank">规则中心</a></div>
 		<div class="footer-contect">
 			<div class="footer-contect-item">24小时客服热线 : <a class="inherit" href="tel:10105757">10105757</a></div>
 			<div class="footer-contect-item">意见反馈 : <a class="inherit" href="mailto:feedback@ele.me">feedback@ele.me</a>
