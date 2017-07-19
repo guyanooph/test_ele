@@ -329,7 +329,7 @@
                 input.name = i;
                 temp.appendChild(input);
             }
-            alert(n);
+            //alert(n);
             var crsf = document.createElement("input");
             crsf.name = "_token";
             crsf.value = "{{ csrf_token() }}";

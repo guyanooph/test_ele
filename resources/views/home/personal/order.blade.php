@@ -38,11 +38,15 @@
 	  <h3 class="ordertimeline-title ordertimeline-price ui-arial ng-binding" ng-bind="item.total_amount.toFixed(2)">{{$or->amount}}</h3>
 	  <p ng-bind="item.is_online_paid ? '在线支付' : '货到付款'" class="ng-binding">在线支付</p></td>
 	  <td class="ordertimeline-status">
-	  <h3 ng-bind="item.statusText" ng-class="{'waitpay': (item.realStatus === 1), 'end': (item.realStatus === 5)}" class="ng-binding end">{{['未付款','已付款','已取消'][$or->status]}}</h3>
+	  <h3 ng-bind="item.statusText" ng-class="{'waitpay': (item.realStatus === 1), 'end': (item.realStatus === 5)}" class="ng-binding end">{{['未付款','已接单','正在配送','已收货','已评论','已取消'][$or->status]}}</h3>
 	  <p class="ordertimeline-status-time ng-binding ordertimeline-status-warning" ng-class="{'ordertimeline-status-warning' : item.realStatus !== 1}" ng-bind="statusText"></p></td>
 	  <td class="ordertimeline-handle"><a class="ordertimeline-handle-detail" ng-href="perosnal/order/id/{{$or->id}}" href="personal/order/id/{{$or->id}}">订单详情</a> 
 	  <!-- ngIf: item.realStatus === 1 --> <!-- ngIf: item.realStatus === 2 --> <!-- ngIf: item.realStatus === 3 --> <!-- ngIf: item.realStatus === 4 --> <!-- ngIf: item.realStatus === 5 -->
+        @if($or->status == 3)
+	  <a ng-if="item.realStatus === 3" class="ordertimeline-handle-a ng-scope" href="/personal/rateorderform/{{ $or->id }}" ng-click="bundle.restore(item)">请评论</a>
+        @else
 	  <a ng-if="item.realStatus === 5" class="ordertimeline-handle-a ng-scope" href="javascript:" ng-click="bundle.restore(item)">再来一份</a>
+        @endif
 	  <!-- end ngIf: item.realStatus === 5 --> <!-- ngIf: item.realStatus === 6 --></td>
 	  </tr>
 	  @endforeach<!-- end ngRepeat: item in orderList -->

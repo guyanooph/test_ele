@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rate extends Model
+class Food_rate extends Model
 {
-    protected $table="evaluate";
+    protected $table="food_eva";
 }

@@ -19,35 +19,37 @@
 	    <!--  当前区域可配送的商家   -->
 	  <div class="favor-restaurants ng-scope" ng-show="!favorLoading">
 	  <h4 class="favor-title">当前区域共有
-	  <span ng-bind="inRegionFavors.length || 0" class="ng-binding">1</span>家可配送商家</h4>
+	  <span ng-bind="inRegionFavors.length || 0" class="ng-binding">{{ count($collect[0]) }}</span>家可配送商家</h4>
 	  
 	  <div class="clearfix">
+      @if(count($collect[0])>0)
+      @foreach($collect[0] as $shop)
 	  <div class="favor-rstblock" ng-class="{'outofregion':outofregion}" favor-rst-block="" ng-repeat="restaurant in inRegionFavors">
 	  <div class="favor-rstblock-header">
 	  <div class="favor-rstblock-headerbg" ng-style="{'background-image': 'url(' + backgroundUrl + ')'}" style="background-image: url(&quot;//faas.elemecdn.com/desktop/media/img/favor-rst-bg1.804470.jpg&quot;);"></div>
-	  <a class="favor-rstblock-name ng-binding" ng-bind="restaurant.name" ng-href="/shop/497788" title="前往粥立方（欢乐谷店）" href="/shop/497788">粥立方（欢乐谷店）</a>
+	  <a class="favor-rstblock-name ng-binding" ng-bind="restaurant.name" ng-href="/shop/497788" title="前往{{ $shop['shop']['shopname'] }}" href="/shoplist/{{ $shop['shopid'] }}">{{ $shop['shop']['shopname'] }}</a>
 	  </div>
 	  
-	 <a ng-href="/shop/497788" title="前往粥立方（欢乐谷店）" href="/shop/497788">
-	 <img ng-src="//fuss10.elemecdn.com/e/2b/e95fb11c801ca1d609eae91e226ebjpeg.jpeg?imageMogr2/thumbnail/78x78/format/webp/quality/85" class="favor-rstblock-logo" alt="商家 LOGO" src="//fuss10.elemecdn.com/e/2b/e95fb11c801ca1d609eae91e226ebjpeg.jpeg?imageMogr2/thumbnail/78x78/format/webp/quality/85">
+	 <a ng-href="/shoplist/{{ $shop['shopid'] }}" title="前往{{ $shop['shop']['shopname'] }}" href="/shop/497788">
+	 <img ng-src="{{ QINIU_PREFIX }}{{ $shop['shop']['logo'] }}?imageMogr2/thumbnail/78x78" class="favor-rstblock-logo" alt="商家 LOGO" src="{{ QINIU_PREFIX }}{{ $shop['shop']['logo'] }}?imageMogr2/thumbnail/78x78">
 	 </a>
 	  
 	  <div class="favor-rstblock-starrating icon-star">
-	  <span class="icon-star" ng-style="{ width: (restaurant.rating * 20) + '%' }" style="width: 94%;">
+	  <span class="icon-star" ng-style="{ width: (restaurant.rating * 20) + '%' }" style="width: {{ $shop['shop']['rate']/5*100 }}%;">
 	  </span>
 	  </div>
 	  
-	  <span class="favor-rstblock-monthsales ng-binding" ng-bind="'月售' + restaurant.recent_order_num + '单'">月售1457单</span>
+	  <span class="favor-rstblock-monthsales ng-binding" ng-bind="'月售' + restaurant.recent_order_num + '单'">月售{{ $shop['shop']['month_num'] }}单</span>
 	  
 	  <div class="favor-rstblock-content">
 	  <div class="favor-rstblock-item">
 	  <p>起送价</p>
-	  <p class="value icon-yen ng-binding" ng-bind="restaurant.float_minimum_order_amount">20</p>
+	  <p class="value icon-yen ng-binding" ng-bind="restaurant.float_minimum_order_amount">{{ $shop['shop']['givemoney'] }}</p>
 	  </div>
 	  
 	  <div class="favor-rstblock-item">
 	  <p>送餐时间</p>
-	  <p class="value time ng-binding" ng-bind="restaurant.order_lead_time_text ||  0">30</p></div>
+	  <p class="value time ng-binding" ng-bind="restaurant.order_lead_time_text ||  0">{{ $shop['shop']['service_time'] }}</p></div>
 	  </div>
 	  
 	  
@@ -60,6 +62,10 @@
 	  
 	  </div>
 	</div><!-- end ngRepeat: restaurant in inRegionFavors --><!-- ngIf: !inRegionFavors.length -->
+    @endforeach
+    @else
+    <div class="nodata ng-isolate-scope" ng-if="!inRegionFavors.length" nodatatip="" content="暂无可配送商家"><p class="nodata-container ng-binding" ng-bind-html="content | toTrusted">暂无可配送商家</p></div>
+    @endif
    </div>
  </div>
 	  
@@ -70,42 +76,49 @@
 	  <div class="favor-restaurants ng-scope" ng-show="!favorLoading">
 	  <h4 class="favor-title">当前区域不可配送的商家</h4>
 	  <div class="clearfix">
-	  <div class="favor-rstblock outofregion" ng-class="{'outofregion':outofregion}" favor-rst-block="" ng-repeat="restaurant in outOfRegionFavors" outofregion="true">
+
+      @foreach($collect[1] as $shop)
+	  <div class="favor-rstblock outofregion" ng-class="{'outofregion':outofregion}" favor-rst-block="" ng-repeat="restaurant in inRegionFavors">
 	  <div class="favor-rstblock-header">
-	 <div class="favor-rstblock-headerbg" ng-style="{'background-image': 'url(' + backgroundUrl + ')'}" style="background-image: url(&quot;//faas.elemecdn.com/desktop/media/img/favor-rst-bg1.804470.jpg&quot;);"></div>
-	  <a class="favor-rstblock-name ng-binding" ng-bind="restaurant.name" ng-href="/shop/305969" title="前往德克士（雅酷店）" href="/shop/305969">德克士（雅酷店）</a> 
-	 </div>
+	  <div class="favor-rstblock-headerbg" ng-style="{'background-image': 'url(' + backgroundUrl + ')'}" style="background-image: url(&quot;//faas.elemecdn.com/desktop/media/img/favor-rst-bg1.804470.jpg&quot;);"></div>
+	  <a class="favor-rstblock-name ng-binding" ng-bind="restaurant.name" ng-href="/shop/497788" title="前往{{ $shop['shop']['shopname'] }}" href="/shoplist/{{ $shop['shopid'] }}">{{ $shop['shop']['shopname'] }}</a>
+	  </div>
 	  
-	  
-	  <a ng-href="/shop/305969" title="前往德克士（雅酷店）" href="/shop/305969"><img ng-src="//fuss10.elemecdn.com/4/37/c63265e6d69161383973eb8eef609png.png?imageMogr2/thumbnail/78x78/format/webp/quality/85" class="favor-rstblock-logo" alt="商家 LOGO" src="//fuss10.elemecdn.com/4/37/c63265e6d69161383973eb8eef609png.png?imageMogr2/thumbnail/78x78/format/webp/quality/85">
-	  </a>
+	 <a ng-href="/shoplist/{{ $shop['shopid'] }}" title="前往{{ $shop['shop']['shopname'] }}" href="/shop/497788">
+	 <img ng-src="{{ QINIU_PREFIX }}{{ $shop['shop']['logo'] }}?imageMogr2/thumbnail/78x78" class="favor-rstblock-logo" alt="商家 LOGO" src="{{ QINIU_PREFIX }}{{ $shop['shop']['logo'] }}?imageMogr2/thumbnail/78x78">
+	 </a>
 	  
 	  <div class="favor-rstblock-starrating icon-star">
-	  <span class="icon-star" ng-style="{ width: (restaurant.rating * 20) + '%' }" style="width: 92%;">
+	  <span class="icon-star" ng-style="{ width: (restaurant.rating * 20) + '%' }" style="width: {{ $shop['shop']['rate']/5*100 }}%;">
 	  </span>
 	  </div>
 	  
-	  <span class="favor-rstblock-monthsales ng-binding" ng-bind="'月售' + restaurant.recent_order_num + '单'">月售1599单</span>
+	  <span class="favor-rstblock-monthsales ng-binding" ng-bind="'月售' + restaurant.recent_order_num + '单'">月售{{ $shop['shop']['month_num'] }}单</span>
 	  
 	  <div class="favor-rstblock-content">
 	  <div class="favor-rstblock-item">
 	  <p>起送价</p>
-	  <p class="value icon-yen ng-binding" ng-bind="restaurant.float_minimum_order_amount">20</p>
+	  <p class="value icon-yen ng-binding" ng-bind="restaurant.float_minimum_order_amount">{{ $shop['shop']['givemoney'] }}</p>
 	  </div>
+	  
 	  <div class="favor-rstblock-item">
 	  <p>送餐时间</p>
-	  <p class="value time ng-binding" ng-bind="restaurant.order_lead_time_text ||  0">45+</p>
+	  <p class="value time ng-binding" ng-bind="restaurant.order_lead_time_text ||  0">{{ $shop['shop']['service_time'] }}</p></div>
 	  </div>
-	  </div>
+	  
 	  
 	  <div class="favor-rstblock-activity">
 	  <i ng-repeat="activity in restaurant.activities | limitTo: 8" ng-bind="activity.icon_name" class="icon ng-binding ng-scope ng-isolate-scope" favor-activity-icon="" name="activity.icon_name" color="activity.icon_color" style="background-color: rgb(87, 169, 255); border: 1px solid rgb(87, 169, 255);">准</i>
 	  <i ng-repeat="activity in restaurant.activities | limitTo: 8" ng-bind="activity.icon_name" class="icon ng-binding ng-scope ng-isolate-scope" favor-activity-icon="" name="activity.icon_name" color="activity.icon_color" style="color: rgb(153, 153, 153); border: 1px solid rgb(153, 153, 153); background-color: transparent;">保</i>
+	  <i ng-repeat="activity in restaurant.activities | limitTo: 8" ng-bind="activity.icon_name" class="icon ng-binding ng-scope ng-isolate-scope" favor-activity-icon="" name="activity.icon_name" color="activity.icon_color" style="color: rgb(153, 153, 153); border: 1px solid rgb(153, 153, 153); background-color: transparent;">票</i>
 	  
 	  <i class="favor-rstblock-cancel icon-trash" ng-click="showRemoveMask($index)"></i>
-	   </div>
-	  </div><!--end ngRepeat: restaurant in outOfRegionFavors --><!-- ngIf: !outOfRegionFavors.length-->
-	</div>
+	  
+	  </div>
+	</div><!-- end ngRepeat: restaurant in inRegionFavors --><!-- ngIf: !inRegionFavors.length -->
+    @endforeach
+
+</div>
 	</div>
   </div>
 </div>

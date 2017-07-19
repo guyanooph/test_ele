@@ -77,11 +77,11 @@
                                     <span class="topbar-profilebox-username ng-binding"></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
                                     <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' -->
                                     <div class="dropbox topbar-profilebox-dropbox">
-                                        <a class="icon-profile" href="/profile" hardjump="">个人中心</a>
-                                        <a class="icon-star" href="/profile/favor" hardjump="">我的收藏</a>
-                                        <a class="icon-location" href="/profile/address" hardjump="">我的地址</a>
-                                        <a class="icon-setting" href="/profile/security" hardjump="">安全设置</a>
-                                        <a class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a>
+                                        <a class="icon-profile" href="/personal" hardjump="">个人中心</a>
+                                        <a class="icon-star" href="/personal/favor" hardjump="">我的收藏</a>
+                                        <a class="icon-location" href="/personal/address" hardjump="">我的地址</a>
+                                        <a class="icon-setting" href="/personal/security" hardjump="">安全设置</a>
+                                        <a class="icon-logout" href="/logout" ng-click="logout()">退出登录</a>
                                     </div>
                                 </span>
                             @else
@@ -92,7 +92,7 @@
                                 <span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' -->
                                     <span class="topbar-profilebox-username ng-binding">{{ $user->username }}</span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
                                     <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' -->
-                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="{{ url('/personal') }}" hardjump="">个人中心</a> <a class="icon-star" href="{{ url('/personal/col') }}" hardjump="">我的收藏</a> <a class="icon-location" href="{{ url('/personal/address') }}" hardjump="">我的地址</a> <a class="icon-setting" href="{{ url('/personal/security') }}" hardjump="">安全设置</a> <a class="icon-logout" href="{{ url('/logout') }}" ng-click="logout()">退出登录</a>
+                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="{{ url('/personal') }}" hardjump="">个人中心</a> <a class="icon-star" href="{{ url('/personal/collect') }}" hardjump="">我的收藏</a> <a class="icon-location" href="{{ url('/personal/address') }}" hardjump="">我的地址</a> <a class="icon-setting" href="{{ url('/personal/security') }}" hardjump="">安全设置</a> <a class="icon-logout" href="{{ url('/logout') }}" ng-click="logout()">退出登录</a>
                                     </div>
                                 </span>
                             @endif
@@ -193,10 +193,57 @@
  <span ng-hide="shop.id == 656683" class=""><em>平均送达速度</em> 
  <em class="shopguide-server-value ng-binding">{{ $ob->service_time }}分钟</em>
 </span></div>
- <a class="shopguide-favor" href="javascript:" ng-click="favor()">
+@if(!$collect)
+ <a class="shopguide-favor" onclick="addcollet(this,{{ $ob->shopid }})" href="javascript:" ng-click="favor()">
  <i ng-if="!isFavorShop" class="icon-favorite ng-scope"></i>
- <span ng-if="!isFavorShop" class="ng-scope">收藏</span></a></div></div>
-
+ <span ng-if="!isFavorShop"  class="ng-scope">收藏</span></a></div></div>
+@else
+ <a class="shopguide-favor" onclick="addcollet(this,{{ $ob->shopid }})" href="javascript:" ng-click="favor()">
+ <i ng-if="!isFavorShop" class="icon-unfavorite ng-scope"></i>
+ <span ng-if="!isFavorShop"  class="ng-scope">已收藏</span></a></div></div>
+@endif
+<script>
+    function addcollet(e,shopid){
+        if($(e).children("i").hasClass("icon-favorite")){
+            $.ajax({
+                url:"/personal/addcollect",
+                data:"shopid="+shopid,
+                type:"GET",
+                datatype:"json",
+                success:function(data){
+                    var data = $.parseJSON(data);
+                    if(data.res){
+                        alert("添加成功");
+                        $(e).children("i").removeClass("icon-favorite");
+                        $(e).children("i").addClass("icon-unfavorite");
+                        $(e).children("span.ng-scope").html("已收藏");
+                    }else{
+                        alert("添加失败");
+                    }
+                },
+            });
+        }else{
+             $.ajax({
+                url:"/personal/removecollect",
+                data:"shopid="+shopid,
+                type:"GET",
+                datatype:"json",
+                success:function(data){
+                    var data = $.parseJSON(data);
+                    if(data.res){
+                        $(e).children("i").removeClass("icon-unfavorite");
+                        $(e).children("i").addClass("icon-favorite");
+                        $(e).children("span.ng-scope").html("收藏");
+                        alert("取消收藏成功");
+                    }else{
+                        alert("取消失败");
+                    }
+                },
+            });
+           
+        }
+    }
+</script>
 
 
 <!-- 中间栏 -->
@@ -391,6 +438,7 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
                                 $(select).parent().append($aps);
                                 $(select).remove();
                             }else if(data.status==1){
+                                
                                 var select_2 = select + " input";
                                 $(select_2).val(data.num);
                                 $(select).parent().children("div.itemtotal").html("¥"+(data.num*data.price));
@@ -435,7 +483,7 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 	<h3 class="shopbulletin-section-title">商家公告</h3>
 	<p class="shopbulletin-content ng-binding">{{ $ob->desc }}</p>
 	<div class="shopbulletin-delivery"><h4>配送说明：</h4>
-	<p class="ng-binding">配送费￥ ???</p></div>
+	<p class="ng-binding">配送费￥ {{ $ob->money }}</p></div>
 	<ul class="shopbulletin-supports"><li ng-repeat="support in shop.supports" class="ng-binding ng-scope">
 	<span ng-style="{'background-color': '#' + support.icon_color}" class="ng-binding" 
 	style="background-color: rgb(153, 153, 153);">保</span> 

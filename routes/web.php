@@ -69,6 +69,10 @@ Route::group(['middleware'=>'location'], function(){
         Route::post('/addaddress','Home\PersonalController@addAddress');
         Route::get('/deladdress/{id}','Home\PersonalController@delAddress');
 
+
+        Route::get('/rateorderform/{orderid}','Home\PersonalController@rateOrderForm');
+        Route::post('/addratetoorder/{orderid}', 'Home\PersonalController@addRateToOrder');
+
     	Route::get('/info','Home\PersonalController@userInfo'); //个人中心/个人资料
     	Route::get('/changeavatar','Home\PersonalController@changeavatar'); //头像编辑页面
 
@@ -81,13 +85,15 @@ Route::group(['middleware'=>'location'], function(){
 		Route::get('/changeemail','Home\PersonalController@changeemail');//修改邮箱
 		Route::get('/modifypay','Home\PersonalController@modifypay');//修改额度
 		Route::get('/collect','Home\PersonalController@collect'); //个人中心/个人收藏
+        Route::get('/addcollect','Home\PersonalController@addcollect');
+        Route::get('/removecollect','Home\PersonalController@removecollect');
     	Route::get('/logout','Home\PersonalController@logout'); //退出登录
     
-		  // 页头页尾小链接
-	   Route::get("/guize" , "home\PersonalController@guize"); //规则中心
-	   Route::get("/wenti" , "home\PersonalController@wenti"); //常见问题  服务
-	   Route::get("/lianxi" , "home\PersonalController@lianxi"); //联系我们
-	   Route::get("/jieshao" , "home\PersonalController@jieshao"); //饿了么介绍
+	    // 页头页尾小链接
+	    Route::get("/guize" , "home\PersonalController@guize"); //规则中心
+	    Route::get("/wenti" , "home\PersonalController@wenti"); //常见问题  服务
+	    Route::get("/lianxi" , "home\PersonalController@lianxi"); //联系我们
+	    Route::get("/jieshao" , "home\PersonalController@jieshao"); //饿了么介绍
   
     });
 });

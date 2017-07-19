@@ -88,42 +88,134 @@
 	
 	
 	
-	<div class="profile-panel" role="main">
-
-<div class="profile-panelcontent" ng-transclude="">
-    <div class="profile-order ng-scope">
-        <div class="tabnavigation"><a class="tabnavigation-navitem active">未评价订单</a> <a class="tabnavigation-rightitem profile-allorder" href="/personal/order">查看全部订单&gt;</a>
-        </div>
-        <div class="profile-order-content">
-            <div class="loading ng-binding ng-isolate-scope ng-hide" loading="" content="正在载入最近订单..." ng-show="orderLoading"><!-- ngIf: type==='profile' -->
-                <img ng-if="type==='profile'" src="//faas.elemecdn.com/desktop/media/img/profile-loading.4984fa.gif" alt="正在加载" class="ng-scope"><!-- end ngIf: type==='profile' --> <!-- ngIf: type==='normal' -->正在载入最近订单...
-            </div><!-- ngRepeat: order in recentOrder --><!-- end ngRepeat: order in recentOrder --><!-- end ngRepeat: order in recentOrder -->
-            @foreach( $orderUnrated as $order )
-            <div class="orderblock ng-isolate-scope" ng-repeat="order in recentOrder" data="{ $order: order }">
-                <div class="orderblock-item orderblock-rstinfo clearfix"><a class="logo" ng-href="/shoplist/{{ $order->shopid }}" href="/shoplist/{{ $order->shopid }}"><img ng-src="{{ QINIU_PREFIX }}{{ $order->logo }}?imageMogr2/thumbnail/70x70" alt="商家 LOGO" src="{{ QINIU_PREFIX }}{{ $order->logo }}?imageMogr2/thumbnail/70x70"></a><h3 class="name"><a class="inherit ng-binding" ng-bind="order.restaurant_name" ng-href="/shop/1323302" href="/shoplist/{{ $order->shopid }}">{{ $order->shop_name }}</a></h3><p class="product ng-binding" ng-bind="order.product">{{ $order->description }}</p><a class="productnum" ng-href="order/id/1210332046988512428" href="order/id/1210332046988512428">共<i class="count ng-binding" ng-bind="order.productnum">{{ $order->goods_num }}</i>个菜品&gt;</a>
-                </div>
-                <div class="orderblock-item orderblock-time ng-binding">{{ substr($order->create_time,0,10) }}<br>{{substr($order->create_time,10,6)}}</div>
-                <div class="orderblock-item orderblock-price">
-                    <p class="total ng-binding" ng-bind="'¥' + (order.total | number:2)">¥{{ $order->amount }}</p><span class="ng-binding">在线支付</span></div><div class="orderblock-item orderblock-status"><p class="status ng-binding end" ng-class="{'waitpay': (order.realStatus === 4),'end': (order.realStatus === 5)}" ng-bind="order.statusText">{{['未支付','已接单','配送中','已收货','已评论','已取消',''][$order->status] }}</p><a class="statuslink ng-binding" ng-href="order/id/1210332046988512428" ng-bind="order.realStatus === 4 ? '立即评价' : '订单详情'" href="/personal/rateorderform/{{ $order->id }}">请评价</a>
-                </div>
-            </div><!-- end ngRepeat: order in recentOrder --><!-- ngIf: !recentOrder.length && !orderLoading -->
-            @endforeach
-        </div>
-    </div>
-</div>
+	<div class="profile-panel" role="main"><!-- ngIf: pageTitleVisible --><h3 ng-if="pageTitleVisible" class="profile-paneltitle ng-scope"><span ng-bind="pageTitle" class="ng-binding">待评价订单</span> <span class="subtitle ng-binding" ng-bind-html="pageSubtitle | toTrusted">带(<span class="stress">*</span>)标志为必填项</span></h3><!-- end ngIf: pageTitleVisible -->
 
 
+<div class="profile-panelcontent" ng-transclude=""><!-- ngIf: fetched && !unrated --><div class="loading ng-binding ng-isolate-scope ng-hide" loading="" content="正在载入未评价订单" ng-hide="fetched"><!-- ngIf: type==='profile' --><img ng-if="type==='profile'" src="//faas.elemecdn.com/desktop/media/img/profile-loading.4984fa.gif" alt="正在加载" class="ng-scope"><!-- end ngIf: type==='profile' --> <!-- ngIf: type==='normal' -->正在载入未评价订单</div><!-- ngIf: unrated -->
 
+<div ng-if="unrated" class="unrated-orderinfo ng-scope"><div class="unrated-orderinfo-item"><a id="shoplogo" shopid="{{ $order['shopid'] }}" ng-href="/shoplist/{{ $order['shopid'] }}" href="/shoplist/{{ $order['shopid'] }}"><img ng-src="{{ QINIU_PREFIX }}{{ $ob->logo }}?imageMogr2/thumbnail/48x48" alt="{{ $ob->shop_name }}" src="{{ QINIU_PREFIX }}{{ $ob->logo }}?imageMogr2/thumbnail/48x48"></a><div class="rstinfo"><h3><a class="color-normal ng-binding" ng-href="/shoplist/{{ $ob->shopid }}" ng-bind="unrated.rstName" href="/shoplist/{{ $ob->shopid }}">{{ $ob->shop_name }}</a></h3><p><span ng-bind="unrated.foodConcat" class="ng-binding">{{ $order['description'] }}等</span>共<span class="stress ng-binding" ng-bind="unrated.foodQuantity">{{ $order['goods_num'] }}</span>个菜品</p></div></div><span class="unrated-orderinfo-item ng-binding" ng-bind="'下单时间：' + (unrated.created_at | date:'yyyy-MM-dd HH:mm:ss')">下单时间：{{ $order['create_time'] }}</span> <a  class="unrated-orderinfo-item favor" href="javascript:" ng-click="favorRst()" ng-class="isFavor &amp;&amp; 'active'"><i class="icon-line-star"></i>收藏商家</a></div><!-- end ngIf: unrated --><!-- ngIf: unrated --><div ng-if="unrated" class="unrated-rate ng-scope">
 
-    </div>
+	
+	
+	
+	
+	<div class="unrated-ratelist">
+		<span class="unrated-ratelist-label">
+			<span>*</span>商家服务
+		</span>
+		<div class="unrated-ratelist-content rate ng-isolate-scope" rate="" config="rateServiceConfig" value="rate.service" isreadonly="stableRate.service.value">
+			<p class="rate-star star level0" ng-class="{readonly: isreadonly, star: starStyle}"><!-- ngIf: label --> 
+				<span id="shop_rate" ng-click="doRate($event)" ng-mouseover="doRate($event)" ng-mouseleave="doRate($event)" data-level="0">
+					<a onclick="mouseClick(this)" onmouseover="mouseOver(this)" onmouseout="mouseOut(this)" class="icon-star-rate" href="javascript:" data-level="1" ng-class="{active : rateLevel >= 1}"></a> 
+					<a onclick="mouseClick(this)" onmouseover="mouseOver(this)" onmouseout="mouseOut(this)" class="icon-star-rate" href="javascript:" data-level="2" ng-class="{active : rateLevel >= 2}"></a> 
+					<a onclick="mouseClick(this)" onmouseover="mouseOver(this)" onmouseout="mouseOut(this)" class="icon-star-rate" href="javascript:" data-level="3" ng-class="{active : rateLevel >= 3}"></a> 
+					<a onclick="mouseClick(this)" onmouseover="mouseOver(this)" onmouseout="mouseOut(this)" class="icon-star-rate" href="javascript:" data-level="4" ng-class="{active : rateLevel >= 4}"></a> 
+					<a onclick="mouseClick(this)" onmouseover="mouseOver(this)" onmouseout="mouseOut(this)" class="icon-star-rate" href="javascript:" data-level="5" ng-class="{active : rateLevel >= 5}"></a>
+				</span> <!-- ngIf: config.tipText --><span ng-if="config.tipText" class="active rate-star-text ng-binding ng-scope" ng-bind="config.tipText[rateLevel]">点击星星打分</span><!-- end ngIf: config.tipText -->
+			</p><!-- ngIf: config.mutiContent -->
+			<div id="shop_yijian" ng-if="config.mutiContent" class="rate-content ng-scope ng-hide" ng-show="config.mutiContent &amp;&amp; value.value > 0" ng-hide="copyVal.value || copyVal.text === ''">
+				<textarea id="shop_content" ng-attr-placeholder="config.placeholder[rateLevel - 1]" ng-model="value.text" class="ng-pristine ng-valid" placeholder="请说出你的意见，我们又不改。。。"></textarea>
+			</div><!-- end ngIf: config.mutiContent --><!-- ngIf: !config.mutiContent --><!-- ngIf: copyVal.text -->
+		</div>
+	</div>
+	<script>
+		var des = ["点击星星打分","极差","失望","一般","满意","惊喜"];
+		var index = 0;
+		/*
+		function mouseOver(ob){
+			//alert("a");
+			$(ob).parent().parent().attr("class","rate-star star level"+($(ob).index()+1));
+			$(ob).attr("class","icon-star-rate active");
+			var ind = $(ob).index();
+			$(ob).parent().next().html(des[ind+1]);
+			
+			
+			$(ob).prevAll().each(function(){
+				$(this).attr("class","icon-star-rate active");
+			});
+		}
+		
+		function mouseOut(ob){
+			$(ob).parent().parent().attr("class","rate-star star level0");
+			$(ob).attr("class","icon-star-rate");
+			$(ob).nextAll().each(function(){
+				$(this).attr("class","icon-star-rate");
+			});
+			$(ob).parent().next().html(des[0])
+			
+		}
+		*/
+		
+		
+		function mouseClick(ob){
+			//alert("a");
+			$(ob).parent().parent().attr("class","rate-star star level"+($(ob).index()+1));
+			$(ob).addClass("active");
+			var ind = $(ob).index();
+			$(ob).parent().next().html(des[ind+1]);
+			
+			
+			$(ob).prevAll().each(function(){
+				$(this).addClass("active");
+			});
+			
+			$(ob).nextAll().each(function(){
+				$(this).removeClass("active");
+			});
+			
+			//$(ob).parent().parent().next().attr("class", "rate-content ng-scope");
+			$(ob).parent().parent().next().removeClass("ng-hide");
+			
+			$(ob).parent().attr("data-level",ind+1)
+		}
+		
+		function rodertime(ob){
+			var span_index = $(ob).index();
+			$(ob).parent().parent().next().html(span_index * 30 + "分钟");
+			$("#tuo").css("left",span_index*25+"%");
+			$("#tuo2").css("width",span_index*25+"%");
+		}
+		
+		
+		
+		
+	</script>
+	
+	
+	<!-- ngIf: unrated.canRateCourier --><div class="unrated-ratelist divider"><span class="unrated-ratelist-label"><span>*</span>送餐速度</span><div class="unrated-ratelist-content timeslider ng-isolate-scope" timeslider="" time="rate.time" isreadonly="stableRate.time"><div class="timeslider-main"><div id="tuo2" class="timeslider-progress" ng-style="{width: percent + '%'}" style="width: 0%;"></div>
+	
+	<i id="tuo" class="icon-uniE003 timeslider-handle writeable" ng-style="{left: percent + '%'}" ng-class="{writeable: !isreadonly}" style="left: 0%;"></i>
+	
+	<p class="timeslider-part writeable" ng-class="{writeable: !isreadonly}">
+	<span onclick="rodertime(this)" ng-click="dealTime(0)">0</span> 
+	<span onclick="rodertime(this)" ng-click="dealTime(25)">0.5h</span> 
+	<span onclick="rodertime(this)" ng-click="dealTime(50)">1h</span> 
+	<span onclick="rodertime(this)" ng-click="dealTime(75)">1.5h</span> 
+	<span onclick="rodertime(this)" ng-click="dealTime(100)">2h</span>
+	</p>
+	</div>
+	<span id="service_time" class="timeslider-time ng-binding" ng-bind="time ? time + '分钟' : '请评价送餐速度'" ng-class="{notime: !time}">0分钟</span></div></div>
+	
+	
+	
+	<div class="unrated-ratelist food"><span class="unrated-ratelist-label">评价菜品</span>
+	
+	<div id="unrated-ratelist-content" class="unrated-ratelist-content"><!-- ngRepeat: food in rate.orderItems -->
 
-
-
-
-</div>
-
-
-</div>
+@foreach( $order_details as $item )
+<div foodid="{{ $item['food']['id'] }}" class="rate ng-isolate-scope" ng-repeat="food in rate.orderItems" rate="" label="food.name" config="rateFoodConfig" value="rate.orderItems[$index].rate" isreadonly="stableRate.orderItems[$index].rate.value"><p class="rate-star level0" ng-class="{readonly: isreadonly, star: starStyle}"><!-- ngIf: label --><span class="rate-name ng-binding ng-scope" ng-if="label" ng-bind="label">{{ $item['food']['title'] }}</span><!-- end ngIf: label --> 
+	
+	<span id="food_rate_{{ $item['food']['id'] }}" ng-click="doRate($event)" ng-mouseover="doRate($event)" ng-mouseleave="doRate($event)" data-level="0">
+	<a onclick="mouseClick(this)" class="icon-star-good" href="javascript:" data-level="1" ng-class="{active : rateLevel >= 1}"></a> 
+	<a onclick="mouseClick(this)" class="icon-star-good" href="javascript:" data-level="2" ng-class="{active : rateLevel >= 2}"></a> 
+	<a onclick="mouseClick(this)" class="icon-star-good" href="javascript:" data-level="3" ng-class="{active : rateLevel >= 3}"></a> 
+	<a onclick="mouseClick(this)" class="icon-star-good" href="javascript:" data-level="4" ng-class="{active : rateLevel >= 4}"></a> 
+	<a onclick="mouseClick(this)" class="icon-star-good" href="javascript:" data-level="5" ng-class="{active : rateLevel >= 5}"></a>
+	</span> <!-- ngIf: config.tipText --><span ng-if="config.tipText" class="active rate-star-text ng-binding ng-scope" ng-bind="config.tipText[rateLevel]">点击星星打分</span><!-- end ngIf: config.tipText --></p><!-- ngIf: config.mutiContent --><!-- ngIf: !config.mutiContent --><div ng-if="!config.mutiContent" class="rate-content simple ng-scope ng-hide" ng-show="!config.mutiContent &amp;&amp; value.value > 0" ng-hide="copyVal.value || value.value === 0"><textarea id="food_content_{{ $item['food']['id'] }}" ng-attr-placeholder="config.placeholder[rateLevel - 1]" ng-model="value.text" class="ng-pristine ng-valid" placeholder="把好吃的地方说出来，帮助小伙伴选择"></textarea></div><!-- end ngIf: !config.mutiContent --><!-- ngIf: copyVal.text --></div>
+@endforeach
+<!-- end ngRepeat: food in rate.orderItems -->
+	
+	<!-- end ngRepeat: food in rate.orderItems --><!-- end ngRepeat: food in rate.orderItems --><!-- end ngRepeat: food in rate.orderItems --></div></div><div class="unrated-ratelist offset"><button onclick="doSubmit()" class="btn-primary btn-lg" ng-click="rateSubmit()">提交评价</button> <!-- ngIf: !canotRateNext --><!-- ngIf: !unrated.rate_info.rated_point && unrated.rate_info.total_rating_point --><p class="unrated-intro ng-scope" ng-if="!unrated.rate_info.rated_point &amp;&amp; unrated.rate_info.total_rating_point">评价后可获得<span class="unrated-tip ng-binding" ng-bind="unrated.rate_info.total_rating_point">{{ $order['amount'] * 10 }}</span>积分哦</p><!-- end ngIf: !unrated.rate_info.rated_point && unrated.rate_info.total_rating_point --></div></div><!-- end ngIf: unrated --></div></div></div></div>
 	
 <script>
     function doSubmit(){

@@ -5,14 +5,18 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Personal;
+use App\Models\Merchant;
 use App\Models\Orders;
 use App\Models\Order_details;
 use App\Models\User_info;
+use App\Models\Food_rate;
+use App\Models\Rate;
 use App\Models\Collect;
 use App\Models\Packet;
 use App\Models\Score;
 use App\Models\Address;
 use App\Models\Login_user;
+use App\Models\Food_list;
 use App\Org\Geohash;
 use Session;
 
@@ -115,13 +119,85 @@ class PersonalController extends Controller
 		return view('home.personal.order',['order'=>$order, 'location'=>$location]);
 	}
 
-     //待评价订单
+    //待评价订单列表
 	public function orderUnrated(Request $request)
 	{
 		$location = $request->session()->get('location');
 		$user = $request->session()->get("user");
-		$orderUnrated=Orders::where('status',1)->get();
-		return view('home.personal.orderUnrate',['orderUnrated'=>$orderUnrated ,'location' =>$location, 'user'=>$user]);
+		$orderUnrated=Orders::where('status',3)->get();
+        foreach( $orderUnrated as $k=>$v ){
+            $orderUnrated[$k]->logo = Merchant::where("shopid", $v->shopid)->first()->logo; 
+        }
+		return view('home.personal.orderUnrate',['location' =>$location, 'user'=>$user, 'orderUnrated' => $orderUnrated]);
+	}
+
+    //订单评价表单
+	public function rateOrderForm(Request $request, $orderid)
+	{
+        //$order = Orders::find($orderid)->toArray();
+		$user = $request->session()->get("user");
+        $order = Orders::where(['id' => $orderid, 'userid' => $user->id, 'status' => 3])->first()->toArray();
+        $ob = Merchant::where("shopid",$order['shopid'])->first();
+		$location = $request->session()->get('location');
+        $order_details = Order_details::where('orderid', $order['id'])->get()->toArray();
+        foreach($order_details as $k => $vo){
+            $order_details[$k]['food'] = Food_list::find($vo['foodid'])->toArray();
+        }
+		return view('home.personal.orderrateform',['location' =>$location, 'user'=>$user, 'order' => $order, 'ob' => $ob, 'order_details' => $order_details]);
+	}
+
+
+    //评价订单
+	public function addRateToOrder(Request $request, $orderid)
+	{
+        //dd($request->input());
+		$user = $request->session()->get("user");
+        $order = Orders::where(['id'=> $orderid,'status'=>3,'userid' => $user->id])->toArray();
+		$location = $request->session()->get('location');
+
+        $theTime = date("Y-m-d H:i:s", time());
+        $shop_rate = $request->only('shopg_rate','content','service_time','shopid');
+        $shop_rate['userid'] = $user->id;
+        $shop_rate['service_time'] = substr($shop_rate['service_time'], 0, -6);
+        $shop_rate['orderid'] = $orderid;
+        $shop_rate['create_time'] = $theTime;
+        //dd($shop_rate);
+        \DB::beginTransaction();
+
+        $res_1 = Rate::insertGetId($shop_rate);
+        $res_2 = true;
+        foreach($request->input()['food'] as $vo){
+            if($vo['rate'] == 0){
+                $vo['rate'] = 5;
+            }
+            $vo['userid'] =  $user->id;
+            $vo['commentid'] = $res_1;
+            $vo['shopid'] = $request->input('shopid');
+            $res_2 = $res_2 && Food_rate::insert($vo);
+        }
+        
+        //更新商家评论数
+        $ob = Merchant::where('shopid',$request->input('shopid'))->first();
+        $ob->rate_num = $ob->rate_num + 1;
+        $res_3 = $ob->save();
+       
+        //更新积分
+        $personal = Personal::where("userid",$user->id)->first();
+        //dd($personal);
+        $personal->score+= ($order['amount'] * 10);
+        $res_4 = $personal->save();
+
+        $order->status = 4;
+        $res_5 = $order->save();
+         
+        if($res_1 && $res_2 && $res_3 && $res_4 && $res_5){
+            \DB::commit();
+            return "1";
+        }else{
+            \DB::rollBack();
+            return "0";
+        }
+        
 	}
 
      //退单记录
@@ -168,13 +244,53 @@ class PersonalController extends Controller
 	// 个人收藏
 	public function collect(Request $request)  
 	{
+        $geohash = new Geohash();
+		$location = $request->session()->get('location');
+        $geo = $geohash->encode(explode(',',$location['position'])[1],explode(',',$location['position'])[0]);
+		$user = $request->session()->get('user');
+		$res = Collect::where('userid',$user->id)->get()->toArray();
+        $collect = [[],[]];
+        foreach($res as $v){
+            $v['shop'] = Merchant::where("shopid",$v['shopid'])->first()->toArray();
+            if(substr($v['shop']['position'], 0, 4) == substr($geo, 0, 4)){
+                $collect[0][] = $v;
+            }else{
+                $collect[1][] = $v;
+            }
+        }
+
+		return view('home.personal.collect',['collect'=>$collect,'location' => $location, 'user' => $user]);
+	} 
+
+    //添加到 个人收藏
+	public function addcollect(Request $request)  
+	{
 		$location = $request->session()->get('location');
 		$user = $request->session()->get('user');
-		$collect=Collect::where('userid',$user->id)->get();
-		return view('home.personal.collect',['collect'=>$collect,'location' => $location]);
+        $input['shopid'] = $request->input("shopid");
+        $input["create_time"] = date("Y-m-d H:i:s", time());
+        $input['userid'] = $user->id;
+        $res = Collect::insert($input);
+        if($res){
+            return json_encode(["res"=>$res, "info"=>"添加成功"]);
+        }else{
+            return json_encode(["res"=>$res, "info"=>"添加失败"]);
+        }
 	} 
-	
-	
+	//取消 个人收藏
+	public function removecollect(Request $request)  
+	{
+		$location = $request->session()->get('location');
+		$user = $request->session()->get('user');
+        $shopid = $request->input("shopid");
+        $res = Collect::where(["userid"=>$user->id, "shopid"=>$shopid])->forceDelete();
+        if($res){
+            return json_encode(["res"=>$res, "info"=>"取消成功"]);
+        }else{
+            return json_encode(["res"=>$res, "info"=>"取消失败"]);
+        }
+	} 
+
 	//账户余额
 	public function balance(Request $request)
 	{
