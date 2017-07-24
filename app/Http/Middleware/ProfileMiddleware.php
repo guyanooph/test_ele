@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class PersonalMiddleware
+class ProfileMiddleware
 {
     /**
      * Handle an incoming request.

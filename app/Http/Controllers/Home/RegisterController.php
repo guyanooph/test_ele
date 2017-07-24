@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Login_user;
 use App\Models\User_info;
+use App\Models\Personal;
 use iscms\Alisms\SendsmsPusher as Sms;
 use Session;
 use Illuminate\Support\Facades\Redis;
@@ -14,8 +15,7 @@ class RegisterController extends Controller
 {
     public function __construct(Sms $sms)
     {
-        $this->sms = $sms;
-    }
+        $this->sms = $sms;}
 
     // 用户注册认证
     public function index()
@@ -61,12 +61,15 @@ class RegisterController extends Controller
             $result = Login_user::where('phone', $phone)->first();
             if ($result) {
                 $request->session()->put('user',$result);
+                //登录成功后删除session里面的验证码，测试时可以保留不删
+                //$request->session()->forget('num');
                 return redirect("/shoplist");
             } else {
                 $name = rand(100000, 9999999);
-
+                //这里要开启事务
                 $id = Login_user::insertGetId(['phone' => $phone, 'username' => $name, 'last_login_time' => date("Y-m-d H:i:s",time()), 'last_ip' => $request->getClientIp(), 'status' => 0]);
                 $res = User_info::insert(['userid' => $id, 'name_status' => 0, 'picname' => 'test_ele.jpg', 'register_time' => date("Y-m-d H:i:s",time()), 'phone' => $phone, 'username' => $name, 'first_login_time' => date("Y-m-d H:i:s",time())]);
+                $insertToPersonal = Personal::insert(['userid' => $id, 'score' => 0, 'red_packet' => 0, 'balance' => 0 ]);
                 $info = Login_user::find($id);
                 $request->session()->put('user',$info);
                 return redirect("/shoplist");
@@ -74,10 +77,6 @@ class RegisterController extends Controller
         }else{
             die("false");
         }
-        //2.比对成功则检查数据库是否存在本手机号
-        //3.比对失败则提示验证码错误
-        //4.如果手机号存在，则将用户信息写入session并跳转
-        //5.如果手机号不存在，则将手机号存入数据库，并生成随机用户名，将用户信息写入session跳转
     }
 
 

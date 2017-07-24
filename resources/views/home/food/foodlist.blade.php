@@ -432,19 +432,23 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
                         datatype:"json",
                         success:function(data){
                             var data = $.parseJSON(data);
+                            //$("#shopbasket").append("<p></p>");
                             var select = "div[foodid='" + foodid + "']";
                             if(data.num<=0 && data.status==1){
+                                alert("a");
         			            $aps = "<div id='emptycart' class=\"shop-cartbasket-empty ng-scope\" ng-if=\"!shopCart.vm.groups[shopCart.currentGroupIndex].length\"><div class=\"icon-cart\"></div><p>购物车是空的，赶紧选购吧</p></div>"
                                 $(select).parent().append($aps);
                                 $(select).remove();
                             }else if(data.status==1){
-                                
+                                alert("b");
                                 var select_2 = select + " input";
                                 $(select_2).val(data.num);
                                 $(select).parent().children("div.itemtotal").html("¥"+(data.num*data.price));
                             }else if(data.status==0){
+                                alert("c");
                                 var item = "<div foodid=\""+data.id+"\" ng-repeat=\"item in shopCart.vm.groups[shopCart.currentGroupIndex]\" class=\"shop-cartbasket-tablerow ng-scope\" entityid=\"547033283\"><div class=\"cell itemname ng-binding\" ng-bind=\"item.name\" title=\""+ data.title +"\">"+ data.title +"</div><div class=\"cell itemquantity\"><button onclick=\"addShopcart(this,-1)\" ng-click=\"shopCart.subEntity(item, $event)\"  foodid='"+ data.id +"'  >-</button><input ng-model=\"item.quantity\" ng-blur=\"shopCart.updateFromInput(item, item.quantity)\" class=\"ng-pristine ng-valid\" value=\"" + data.num + "\"><button foodid='"+ data.id +"' onclick=\"addShopcart(this,1)\" ng-click=\"shopCart.addEntity(item, $event)\">+</button></div><div class=\"cell itemtotal ng-binding\" ng-bind=\"'¥' + ((item.price * item.quantity).toFixed(2) | number)\">￥"+ data.price * data.num +"</div></div>";
-                                $("#emptycart").remove();
+                                alert(item);
+                                $("#emptycart").addClass("ng-hide");
                                 $("#shopbasket").append(item);
                             }
                         },

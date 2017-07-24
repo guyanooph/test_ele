@@ -56,7 +56,7 @@ class LoginController extends Controller
                 }elseif($user2->state == 1){
                     $list = "您的店铺还未通过审核，敬请期待！";
                     return view("errors.503", compact('list'));
-                }elseif($use2->state == 3){
+                }elseif($user2->state == 3){
                     $list = "您的信息不合格，审核未通过！";
                     return view("errors.503", compact('list'));
                 }else{

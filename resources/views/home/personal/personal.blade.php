@@ -99,7 +99,7 @@
 						class="topbar-profilebox-avatar ng-scope"
 						ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85"
 						ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像"
-						src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/26x26/format/webp/quality/85">
+						src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/26x26">
 				<!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> <span
 						class="topbar-profilebox-avatar icon-profile ng-hide"
 						ng-show="!$root.user.username"></span> <span ng-show="!$root.user.username"
@@ -108,7 +108,7 @@
 										target="_blank"
 										href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2Fprofile%2F">登录/注册</a></span>
 							<span class="topbar-profilebox-wrapper" ng-show="$root.user.username">
-							
+
 							<span class="topbar-profilebox-username ng-binding">{{ $user->username }}</span>
 								<!-- ngIf: $root.topbarType === 'checkout' -->
 								<!-- ngIf: $root.topbarType !== 'checkout' --><span
@@ -215,16 +215,16 @@
 		</ul>
 		<div class="profile-panel" role="main"><!-- ngIf: pageTitleVisible -->
 			<div class="profile-panelcontent" ng-transclude="">
-			 
+
 				<div class="profile-info ng-scope">
 					<div class="profile-infoitem">
 						<div class="profile-avatarwrap"><img ng-show="avatarUrl"
 						                                     ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/112x112/format/webp/quality/85"
-						                                     alt="guyanooph的头像" class="profile-avatar"
-						                                     src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/112x112/format/webp/quality/85">
+						                                     alt="{{ $user->name }}的头像" class="profile-avatar"
+						                                     src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/112x112">
 							<a href="/personal/info" class="profile-edit">编辑资料</a></div>
 						<div class="profile-perosondata">
-						
+
 						<h3 class="profile-name ng-binding">您好 , <strong class="ng-binding">{{ $user->username }}</strong></h3>
 							<p class="profile-tips ng-binding" ng-bind="timeSection.tipText">祝你一天好心情！</p>
 							<p class="profile-security">账户安全：<span
@@ -241,28 +241,28 @@
 								                                     ng-if="user.is_email_valid"></a>
 								<!-- end ngIf: user.is_email_valid --> <!-- ngIf: !user.is_mobile_valid -->
 								<!-- ngIf: !user.is_email_valid --></p></div>
-						
+
 					</div>
-				
+
 					<div class="profile-infoitem"><a class="inherit" href="/personal/red_packet"><p>我的红包</p>
-					
+
 							<p class="profile-infoitem-number hongbao">
                       <span class="number ng-binding" ng-bind="hongbaocount">{{ $info->red_packet }}</span>个</p></a>
 					</div>
-					
+
 					<div class="profile-infoitem"><a class="inherit" href="/personal/score"><p>我的积分</p>
 							<p class="profile-infoitem-number score"><span class="number ng-binding" ng-bind="user.point">{{ $info->score }}</span>分</p></a>
 					</div>
-				
+
 					<div class="profile-infoitem"><a class="inherit" href="/personal/balance"><p>账户余额</p>
 							<p class="profile-infoitem-number balance"><span class="number ng-binding"
 							                                                 ng-bind="user.balance| number : 2">{{ $info->balance }}</span>元
 							</p></a>
 					</div>
-				
-					
+
+
 				</div>
-			
+
 				<div class="profile-order ng-scope">
 					<div class="tabnavigation"><a class="tabnavigation-navitem active">最近订单</a> <a
 								class="tabnavigation-rightitem profile-allorder" href="/personal/order">查看全部订单&gt;</a>
@@ -274,16 +274,16 @@
 						                                                                alt="正在加载" class="ng-scope">
 			<!-- end ngIf: type==='profile' --> <!-- ngIf: type==='normal' -->正在载入最近订单...
 		</div>
-		
+
 		<!-- ngRepeat: order in recentOrder -->
 		@foreach( $order as $dd )
 		<div class="orderblock ng-isolate-scope" ng-repeat="order in recentOrder" data="{ $order: order }">
-		
+
 		<div class="orderblock-item orderblock-rstinfo clearfix">
-		
+
 		<a class="logo" ng-href="/shop/895073" href="/shop/895073">
-		<img ng-src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85" alt="商家 LOGO" src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"></a>
-		
+		<img ng-src="//fuss10.elemecdn.com/f/0b/d125b19f4e83cdd2f4294bcd11ee4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85" alt="商家 LOGO" src="{{ QINIU_PREFIX }}{{  }}?imageMogr2/thumbnail/70x70"></a>
+
 		 <h3 class="name">
 		 <a class="inherit ng-binding" ng-bind="order.restaurant_name"
 		 ng-href="/shop/895073" href="">{{ $dd->shop_name }}</a></h3>

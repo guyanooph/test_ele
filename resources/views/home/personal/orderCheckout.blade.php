@@ -2,12 +2,12 @@
 <html ng-app="eleme" perf-error="desktop/" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
-    
+
 
     <title ng-bind="SEO.title" class="ng-binding">饿了么-网上订餐_外卖_饿了么订餐官网</title>
 
-    
-    
+
+
     <meta name="format-detection" content="telephone=no, email=no">
 
     <meta name="application-name" content="饿了么网上订餐">
@@ -175,10 +175,20 @@
                     <h2>收货地址 <a ng-show="addressList.length" class="checkout-addaddress" href="javascript:" ng-click="addAddress()">添加新地址</a></h2><!-- ngIf: !addressList.length -->
                     <ul ng-hide="!addressList.length" class="checkout-address-list" ng-class="{ showmore: showMoreAddress, showfirst: noInitAddress }"><!-- ngRepeat: item in addressList -->
 
-                        @if( !count($addressList) )
+                        @if( empty($addressList) )
                         <a onclick="" class="checkout-noaddress ng-scope" ng-if="!addressList.length" href="javascript:" ng-click="addAddress()">+ 添加新地址</a>
                         @else
-                        @foreach( $addressList as $address )
+                        @foreach( $addressList as $k=>$address )
+                        @if($k==0)
+                        <li class="checkout-address ng-scope active" ng-repeat="item in addressList" ng-click="selectAddress($event, item)" ng-class="{active: address.id === item.id}" ng-mouseenter="selectAddress($event, item)"><i class="checkout-address-icon icon-location-line"></i>
+                            <div class="checkout-address-info">
+                                <p ng-bind="item.name + [' ', ' 先生 ', ' 女士 '][item.sex] + item.phone" class="ng-binding">{{ $address['name']." ".['', ' 先生 ', '女士 '][$address['sex']]." ".$address['phone'] }}</p>
+                                <p class="color-weak ng-binding" ng-bind="item.address + item.address_detail">{{ $address['address'] }}</p>
+                            </div>
+                            <div class="checkout-address-edit"><a href="javascript:" ng-click="editAddress($event, item)">修改</a> <a href="javascript:" ng-click="removeAddress($event, item)">×</a>
+                            </div><!-- ngIf: !item.st_geohash --><!-- ngIf: !item.is_deliverable -->
+                        </li><!-- end ngRepeat: item in addressList -->
+                        @else
                         <li class="checkout-address ng-scope" ng-repeat="item in addressList" ng-click="selectAddress($event, item)" ng-class="{active: address.id === item.id}" ng-mouseenter="selectAddress($event, item)"><i class="checkout-address-icon icon-location-line"></i>
                             <div class="checkout-address-info">
                                 <p ng-bind="item.name + [' ', ' 先生 ', ' 女士 '][item.sex] + item.phone" class="ng-binding">{{ $address['name']." ".['', ' 先生 ', '女士 '][$address['sex']]." ".$address['phone'] }}</p>
@@ -188,6 +198,7 @@
                             </div><!-- ngIf: !item.st_geohash --><!-- ngIf: !item.is_deliverable -->
                             <p ng-if="!item.is_deliverable" ng-show="!item.is_deliverable" class="checkout-address-needupgrade ng-scope">地址超出配送范围</p><!-- end ngIf: !item.is_deliverable --><!-- ngIf: item.st_geohash && item.poi_type === 1 && isbaisheng -->
                         </li><!-- end ngRepeat: item in addressList -->
+                        @endif
                         @endforeach
                         @endif
 
@@ -306,7 +317,7 @@
         var  _food_num_price_1 = "1_3_3_1";
         var  _food_num_price_2 = "2_4_4_2";
         */
-        
+
         var url = "/" + {{ $ob->shopid }} + "/addorder";
         var addressid = 1;
         var service_time = "18:30";
@@ -337,7 +348,7 @@
             temp.appendChild(crsf);
             temp.submit();
         }
-        
+
 
     </script>
     <script>

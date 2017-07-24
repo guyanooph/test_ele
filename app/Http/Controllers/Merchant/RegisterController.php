@@ -247,13 +247,13 @@ class RegisterController extends Controller
                     //dd($path);
                     //return "上传成功,图片UR:" . $path;
                 }else{
-                    return "上传失败";
+                    return "上传失败1";
                 }
             } else {
                 return "没有文件1";
 
             }
-
+            
             if ($request->hasFile('logoname')) {
                 $file = $request->file('logoname');
                 $disk = \Storage::disk('qiniu');
@@ -265,13 +265,12 @@ class RegisterController extends Controller
                     $path = $disk->downloadUrl('upload/image' . $filename2);
                     //return "上传成功,图片UR:" . $path;
                 }else{
-                    return "上传失败";
+                    return "上传失败2";
                 }
             } else {
                 return "没有文件1";
 
             }
-
 //            if ($request->file('picname') && $request->file('picname')->isValid()) {
 //                //获取上传文件信息
 //                $file = $request->file('picname');

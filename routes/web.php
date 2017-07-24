@@ -15,27 +15,27 @@
 //前台路由
 Route::get("/home", "Home\LocationController@location");  //定位页面
 Route::get("/setlocationsession", "Home\LocationController@setLocationSession");  //定位页面
-Route::get("/personal/test", "Home\PersonalController@test"); //test
 
 //以下所有前台路由均经过一个定位中间件,在中间件里检测session是否有定位信息，没有就重定向到定位页面
 Route::group(['middleware'=>'location'], function(){
 
     //前台主页，附近商家列表，同/shoplist
-    Route::get("/", "Home\ShopController@index"); 
+    Route::get("/", "Home\ShopController@index");
 
     //购物车,
     Route::get('/addtocart/{shopid}/{foodid}', 'Home\ShopcartController_2@addCart')->middleware("shopcart");
     Route::get('/clearcart/{shopid}', 'Home\ShopcartController_2@clearCart')->middleware("shopcart");
 
     //订单
-    Route::get("/{shopid}/ordercheckout", "Home\OrderController@index")->middleware("personal","shopcart");
-    Route::post("/{shopid}/addorder", "Home\OrderController@addOrder")->middleware("personal","shopcart"); //下单
-    //Route::get()->middleware();
-    
+    Route::get("/{shopid}/ordercheckout", "Home\OrderController@index")->middleware("profile","shopcart");
+    Route::post("/{shopid}/addorder", "Home\OrderController@addOrder")->middleware("profile","shopcart"); //下单
+    Route::get("/pay/{shopid}/{orderid}","Home\OrderController@showPayInfo")->middleware("profile"); //展示支付信息
+    Route::post("/pay/{shopid}/{orderid}","Home\OrderController@doPay")->middleware("profile"); //确认支付
+
     //用户注册
     Route::get('/register',"Home\RegisterController@index");//用户注册认证
     Route::get('/register/sendmessage',"Home\RegisterController@sendSms");//用户注册认证
-    
+
     //用户登录
     Route::post('/doregister',"Home\RegisterController@doRegister");//用户登录认证
     Route::get('/login',"Home\LoginController@index"); //加载前台登录界面
@@ -48,9 +48,9 @@ Route::group(['middleware'=>'location'], function(){
     Route::post('/shoplist','Home\ShopController@loadShops'); //附近商家信息列表，同/
     Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
     Route::get('/shoplist/{id}/rate','Home\ShopController@rate'); //菜品信息列表
-    
+
     //个人中心
-    Route::group(["prefix" => "personal","middlware" => "personal"], function () {
+    Route::group(["prefix" => "personal","middleware" => "profile"], function () {
     	Route::get('/','Home\PersonalController@index'); //个人中心
     	Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
 
@@ -90,12 +90,13 @@ Route::group(['middleware'=>'location'], function(){
     	Route::get('/logout','Home\PersonalController@logout'); //退出登录
     
 	    // 页头页尾小链接
-	    Route::get("/guize" , "home\PersonalController@guize"); //规则中心
-	    Route::get("/wenti" , "home\PersonalController@wenti"); //常见问题  服务
-	    Route::get("/lianxi" , "home\PersonalController@lianxi"); //联系我们
-	    Route::get("/jieshao" , "home\PersonalController@jieshao"); //饿了么介绍
+	    Route::get("/guize" , "Home\PersonalController@guize"); //规则中心
+	    Route::get("/wenti" , "Home\PersonalController@wenti"); //常见问题  服务
+	    Route::get("/lianxi" , "Home\PersonalController@lianxi"); //联系我们
+	    Route::get("/jieshao" , "Home\PersonalController@jieshao"); //饿了么介绍
   
     });
+    
 });
  
   
