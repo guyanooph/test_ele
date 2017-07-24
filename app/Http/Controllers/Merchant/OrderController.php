@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-		$table = Orders::where('shopid',session('merchantname')->shopid)->whereNotIn("status", [0])->paginate(10);//查询所有数据
+		$table = Orders::where('shopid',session('merchantname')->shopid)->whereNotIn("status", [0,5])->paginate(5);//查询所有数据
 		/* //判断并封装搜索条件
         $params = array();
         if(!empty($_GET['name'])){
@@ -27,6 +27,12 @@ class OrderController extends Controller
         //$list = $table->sortBy("id"); //10条每页浏览
 		//dd($list); */
 		//return "你好！";
+        foreach ($table as $v)
+        {
+            //dd($v->addressid);
+            $v->addressid = \DB::table('delivery_address')->where('id',$v->addressid)->first();
+        }
+        //dd($table);
         return view("merchant.order.index",["table"=>$table]);//加载商家管理
     }
 

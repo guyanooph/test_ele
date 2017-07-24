@@ -48,9 +48,13 @@ Route::group(['middleware'=>'location'], function(){
     Route::post('/shoplist','Home\ShopController@loadShops'); //附近商家信息列表，同/
     Route::get('/shoplist/{id}','Home\FoodController@index'); //菜品信息列表
     Route::get('/shoplist/{id}/rate','Home\ShopController@rate'); //菜品信息列表
-    
+    Route::get('/shoplist/{shopid}/license','Home\ShopController@license');
+
+    //评价
+    Route::get('/eva/{id}','Home\EvaController@index');//对商户和菜品的评价
+
     //个人中心
-    Route::group(["prefix" => "personal","middlware" => "personal"], function () {
+    Route::group(["prefix" => "personal","middleware" => "personal"], function () {
     	Route::get('/','Home\PersonalController@index'); //个人中心
     	Route::get('/order','Home\PersonalController@order'); //个人中心/个人订单
 

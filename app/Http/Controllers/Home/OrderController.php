@@ -43,7 +43,7 @@ class OrderController extends Controller
         $toOrder['shop_name'] = $ob->shopname;
         $toOrder['shop_phone'] = $ob->phone;
         $toOrder['goods_num'] = $shopcart['num'];
-        $toOrder['create_time'] = date("Y-m-d H:i:s", time());
+        $toOrder['create_time'] = date("Y-m-d H:i:s", time()+8*3600);
         $toOrder['amount'] = $shopcart['total'];
         $toOrder['status'] = 0; //未支付
         $twoFood = array_slice($shopcart['shopcart'],0,2);

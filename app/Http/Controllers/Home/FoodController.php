@@ -40,7 +40,11 @@ class FoodController extends Controller
 		$shopcart = $request->session()->get("shopcart");
         //dd($shopcart);
         //unset($shopcart[1]['shopcart'][1]);
-        $collect = \DB::table("collect")->where(['userid'=>$user->id, 'shopid'=>$id,])->first();
+        if(empty($user)){
+            $collect = null;
+        }else{
+            $collect = \DB::table("collect")->where(['userid'=>$user->id, 'shopid'=>$id,])->first();
+        }
         //dd($collect);
 		return view('home.food.foodlist', ['type_list'=>$food_type,'ob'=>$ob, 'shopcart'=>$shopcart[$id],'user' => $user, 'collect' => $collect]);
 	}

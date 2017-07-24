@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Models\Merchant\Mer_register;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Shop_list;
@@ -94,5 +95,11 @@ class ShopController extends Controller
     public function rate()
     {
         return view("home.shop.rate");
+    }
+
+    public function license(Request $request, $shopid)
+    {
+        $shop = \DB::table('mer_register')->find($shopid);
+        return view('home.shop.license',compact('shop'));
     }
 }

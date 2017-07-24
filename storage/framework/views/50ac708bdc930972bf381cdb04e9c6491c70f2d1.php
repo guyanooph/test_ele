@@ -1,5 +1,4 @@
-@extends("home.base")
-@section("content")
+<?php $__env->startSection("content"); ?>
 
 <!-- ngView:  -->
 <div ng-view="" role="main" class="ng-scope">
@@ -7,7 +6,7 @@
 		<div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location="">
 			<span>当前位置:</span> <span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4sp1s1gff"
 			                                                     ubt-click="401" ng-bind="place.name || place.address"
-			                                                     href="/?address={{ $location['address'] }}&position={{ $location['position'] }}">{{ $location['address'] }}</a></span>
+			                                                     href="/?address=<?php echo e($location['address']); ?>&position=<?php echo e($location['position']); ?>"><?php echo e($location['address']); ?></a></span>
 			<span class="location-change location-hashistory"
 			      ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length > 0 }"><a
 						ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a></span> <span ng-transclude=""></span>
@@ -42,11 +41,11 @@
                     href="javascript:" ng-repeat="category in rstCategories"
 				    ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
 				    ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">全部商家</a>
-                @foreach($type as $item)
-				<a onclick="loadChildType(this)" typeid="{{ "f".$item['id'] }}" class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories"
+                <?php $__currentLoopData = $type; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+				<a onclick="loadChildType(this)" typeid="<?php echo e("f".$item['id']); ?>" class="excavator-filter-item ng-binding ng-scope" href="javascript:" ng-repeat="category in rstCategories"
 				    ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-				    ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">{{ $item['title'] }}</a>
-                @endforeach
+				    ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380"><?php echo e($item['title']); ?></a>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					
 				<div id="childtype" ng-show="subCategories" class="excavator-filter-subbox ng-hide">
 				</div>
@@ -97,7 +96,7 @@
                             type:"POST",
                             data:"typeid="+typeid,
                             datatype:"json",
-                            headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
+                            headers: { 'X-CSRF-TOKEN' : '<?php echo e(csrf_token()); ?>' },
                             success:function(data){
                                 var str = "<div id=\"shoplistbody\" class=\"clearfix\" data=\"filteredRestaurants = (rstStream.restaurants | filter: rstStream.filter | filter: otherFilter | orderBy: [ '-is_opening', rstStream.orderBy || 'index' ])\" style=\"height: " + Math.ceil(data.length/4)*138 + "px\">";
                                 for(var i in data){
@@ -140,36 +139,36 @@
 			<div id="shoplistbody" class="clearfix"
 			     data="filteredRestaurants = (rstStream.restaurants | filter: rstStream.filter | filter: otherFilter | orderBy: [ '-is_opening', rstStream.orderBy || 'index' ])"
 			     style="height: 840px;">
-				 @foreach( $list as $vo)
-				 <a href="/shoplist/{{$vo->shopid}}" data-rst-id="" data-bidding="" target="_blank"
+				 <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $vo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+				 <a href="/shoplist/<?php echo e($vo->shopid); ?>" data-rst-id="" data-bidding="" target="_blank"
 			                               class="rstblock">
 					<div class="rstblock-logo">
-					<img src="{{ QINIU_PREFIX }}{{$vo->logo }}?imageMogr2/thumbnail/70x70"
-					width="70" height="70" alt="{{ $vo->shopname }}" class="rstblock-logo-icon"><span>{{ $vo->service_time }}分钟</span>
+					<img src="<?php echo e(QINIU_PREFIX); ?><?php echo e($vo->logo); ?>?imageMogr2/thumbnail/70x70"
+					width="70" height="70" alt="<?php echo e($vo->shopname); ?>" class="rstblock-logo-icon"><span><?php echo e($vo->service_time); ?>分钟</span>
 					</div>
 					<div class="rstblock-content">
-						<div class="rstblock-title">{{ $vo->shopname }}</div>
-						<div class="starrating icon-star"><span class="icon-star" style="width:{{ ($vo->rate+$vo->food_rate)*10 }}%;"></span></div>
-						<span class="rstblock-monthsales">月售{{ $vo->month_num }}单</span>
-						<div class="rstblock-cost">配送费¥{{ $vo->money }}</div>
+						<div class="rstblock-title"><?php echo e($vo->shopname); ?></div>
+						<div class="starrating icon-star"><span class="icon-star" style="width:<?php echo e(($vo->rate+$vo->food_rate)*10); ?>%;"></span></div>
+						<span class="rstblock-monthsales">月售<?php echo e($vo->month_num); ?>单</span>
+						<div class="rstblock-cost">配送费¥<?php echo e($vo->money); ?></div>
 						<div class="rstblock-activity">
-							@if($vo->commit[0] == 1)
+							<?php if($vo->commit[0] == 1): ?>
 							<i style="background:#E75959;">新</i>
-							@endif
-							@if($vo->commit[1] == 1)
+							<?php endif; ?>
+							<?php if($vo->commit[1] == 1): ?>
 							<i style="background:#57A9FF;">准</i>
-							@endif
-							@if($vo->commit[2] == 1)
+							<?php endif; ?>
+							<?php if($vo->commit[2] == 1): ?>
 							<i style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i>
-							@endif
-							@if($vo->commit[3] == 1)
+							<?php endif; ?>
+							<?php if($vo->commit[3] == 1): ?>
 							<i style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i>
-							@endif
+							<?php endif; ?>
 
 						</div>
 					</div>
 				  </a>
-				 @endforeach
+				 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				</div>
 				
 				
@@ -179,7 +178,7 @@
 			<div id="loading" class="loading ng-binding ng-isolate-scope ng-hide" ng-show="rstStream.status === 'LOADING'" loading=""
 			     content="正在载入更多商家..." type="normal"><!-- ngIf: type==='profile' --> <!-- ngIf: type==='normal' --><img
 						ng-if="type==='normal'" class="normal ng-scope"
-						src="{{asset('images/jiazai.gif')}}" alt="正在加载">
+						src="<?php echo e(asset('images/jiazai.gif')); ?>" alt="正在加载">
 				<!-- end ngIf: type==='normal' -->正在载入更多商家...
 			</div>
 			<div id="fetchMoreRst" ng-show="rstStream.status === 'NEED_USER_ACTION'" class="ng-hide">点击加载更多商家...</div>
@@ -195,4 +194,6 @@
 </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make("home.base", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

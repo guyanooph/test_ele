@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+<style type="text/css">@charset  "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
 
-    <title ng-bind="SEO.title" class="ng-binding">{{ $ob->shopname }}  {{ $ob->address }}-饿了么网上订餐</title>
+    <title ng-bind="SEO.title" class="ng-binding"><?php echo e($ob->shopname); ?>  <?php echo e($ob->address); ?>-饿了么网上订餐</title>
 
     
     <meta name="format-detection" content="telephone=no, email=no">
@@ -29,11 +29,11 @@
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon-32x32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="//static2.ele.me/eleme/desktop/media/img/favicon.png" type="image/png" sizes="96x96">
 
-    <link href="{{ asset('css/vendor.0cb970.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/vendor.0cb970.css')); ?>" rel="stylesheet">
     
-    <link href="{{ asset('css/main.5e33c3.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/main.5e33c3.css')); ?>" rel="stylesheet">
 
-	<link href="{{ asset('css/certification.b6ed867.css')}}" rel="stylesheet">
+	<link href="<?php echo e(asset('css/certification.b6ed867.css')); ?>" rel="stylesheet">
 	<style type="text/css">
 		.ElemeHeader-wrapper_3axzyZv {
 			position: relative;
@@ -117,7 +117,7 @@
 			}
 		}
 
-		@keyframes Captcha-showAlert_24ewgzq {
+		@keyframes  Captcha-showAlert_24ewgzq {
 			0% {
 				-webkit-transform: scale(0);
 				transform: scale(0)
@@ -244,7 +244,7 @@
 			font-weight: 700
 		}</style>
 
-    <script src="{{ asset('js/jquery-1.8.3.min.js') }}" type="text/javascript" crossorigin="anonymous"></script>
+    <script src="<?php echo e(asset('js/jquery-1.8.3.min.js')); ?>" type="text/javascript" crossorigin="anonymous"></script>
     <base href="/">
   <meta name="mobile-agent" content="format=html5;url=https://h5.ele.me/shop/#id=150045824">
   <meta name="description" content="兄弟小馆位于北京市北京经济技术开发区荣华中路7号院4幢1028、1029，主要美食有煎鸡蛋、三鲜炒饭、辣白菜、馒头、鱼香肉丝饭等，了解更多美食外卖，上饿了么网上订餐">
@@ -278,11 +278,11 @@
 
 <div class="topbar-profilebox">
 
-@if(empty($user))
+<?php if(empty($user)): ?>
                             <!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> 
                                 <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span> 
                                 <span ng-show="!$root.user.username" class="">
-                                    <a ng-href="{{ url('/login')}}" target="_blank" href="{{ url('/login') }}">登录/注册</a>
+                                    <a ng-href="<?php echo e(url('/login')); ?>" target="_blank" href="<?php echo e(url('/login')); ?>">登录/注册</a>
                                 </span>
                                 <span class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> 
                                     <span class="topbar-profilebox-username ng-binding"></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
@@ -295,18 +295,18 @@
                                         <a class="icon-logout" href="/logout" ng-click="logout()">退出登录</a>
                                     </div>
                                 </span>
-                            @else
-                                <img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="{{ QINIU_PREFIX }}{{ $user->picname }}?imageMogr2/thumbnail/26x26"><!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' -->
+                            <?php else: ?>
+                                <img class="topbar-profilebox-avatar ng-scope" ng-src="//fuss10.elemecdn.com/4/ef/70827800a8437d1ae1c0b8194fe41jpeg.jpeg?imageMogr2/thumbnail/26x26/format/webp/quality/85" ng-if="$root.user.avatar &amp;&amp; $root.topbarType !== 'checkout'" alt="个人头像" src="<?php echo e(QINIU_PREFIX); ?><?php echo e($user->picname); ?>?imageMogr2/thumbnail/26x26"><!-- end ngIf: $root.user.avatar && $root.topbarType !== 'checkout' -->
                                 <span class="topbar-profilebox-avatar icon-profile ng-hide" ng-show="!$root.user.username"></span>
                                 <span ng-show="!$root.user.username" class="ng-hide"><a ng-href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F" target="_blank" href="//h5.ele.me//login/#redirect=https%3A%2F%2Fwww.ele.me%2F">登录/注册</a>
                                 </span>
                                 <span class="topbar-profilebox-wrapper" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' -->
-                                    <span class="topbar-profilebox-username ng-binding">{{ $user->username }}</span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
+                                    <span class="topbar-profilebox-username ng-binding"><?php echo e($user->username); ?></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' -->
                                     <span class="topbar-profilebox-btn icon-arrow-down ng-scope" ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' -->
-                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="{{ url('/personal') }}" hardjump="">个人中心</a> <a class="icon-star" href="{{ url('/personal/collect') }}" hardjump="">我的收藏</a> <a class="icon-location" href="{{ url('/personal/address') }}" hardjump="">我的地址</a> <a class="icon-setting" href="{{ url('/personal/security') }}" hardjump="">安全设置</a> <a class="icon-logout" href="{{ url('/logout') }}" ng-click="logout()">退出登录</a>
+                                    <div class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="<?php echo e(url('/personal')); ?>" hardjump="">个人中心</a> <a class="icon-star" href="<?php echo e(url('/personal/collect')); ?>" hardjump="">我的收藏</a> <a class="icon-location" href="<?php echo e(url('/personal/address')); ?>" hardjump="">我的地址</a> <a class="icon-setting" href="<?php echo e(url('/personal/security')); ?>" hardjump="">安全设置</a> <a class="icon-logout" href="<?php echo e(url('/logout')); ?>" ng-click="logout()">退出登录</a>
                                     </div>
                                 </span>
-                            @endif
+                            <?php endif; ?>
 
 
 </div>
@@ -355,30 +355,30 @@
 <div class="shopguide ng-isolate-scope" shop-guide="" data="shop" isdisabled="shop.disabled">
 <div class="container" ng-show="shop" itemscope="" itemtype="http://schema.org/Restaurant">
 <div class="shopguide-info"><meta itemprop="url" content="https://www.ele.me/shop/150045824">
-<img ng-src="{{ QINIU_PREFIX }}{{ $ob->logo }}?imageMogr2/thumbnail/95x95"
- alt="兄弟小馆" itemprop="image" src="{{ QINIU_PREFIX }}{{ $ob->logo }}?imageMogr2/thumbnail/95x95">
+<img ng-src="<?php echo e(QINIU_PREFIX); ?><?php echo e($ob->logo); ?>?imageMogr2/thumbnail/95x95"
+ alt="兄弟小馆" itemprop="image" src="<?php echo e(QINIU_PREFIX); ?><?php echo e($ob->logo); ?>?imageMogr2/thumbnail/95x95">
 <div class="shopguide-info-wrapper"><div>
-<h1 title="兄弟小馆" ng-class="{hastip: shop.tip}" itemprop="name" class="ng-binding hastip">{{ $ob->shopname }}</h1>
+<h1 title="兄弟小馆" ng-class="{hastip: shop.tip}" itemprop="name" class="ng-binding hastip"><?php echo e($ob->shopname); ?></h1>
 
-@if($ob->status==1)
+<?php if($ob->status==1): ?>
 <span ng-if="shop.tip" ng-style="{'background-color': shop.tip.bgColor}" class="shopguide-tip ng-binding ng-scope ng-hide"
  style="background-color: rgb(192, 192, 192);">商家休息</span>
-@else
+<?php else: ?>
 <span ng-if="shop.tip" ng-style="{'background-color': shop.tip.bgColor}" class="shopguide-tip ng-binding ng-scope "
 style="background-color: rgb(192, 192, 192);">商家休息</span>
-@endif
+<?php endif; ?>
 
 <a ng-href="/shop/150045824/info" href="/shop/150045824/info"></a></div>
 <p class="shopguide-info-rate">
-<div class="starrating icon-star ng-isolate-scope" title="评分{{ $ob->rate }}分" rate-star="" rating="shop.rating">
-<span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: {{ ($ob->rate+$ob->food_rate)*10 }}%;"></span></div>
- (<a ng-href="/shop/150045824/rate" class="ng-binding" href="/shop/150045824/rate">{{ $ob->rate_num }}</a>)
- <span class="ng-binding">月售{{ $ob->month_num }}单</span></p>
+<div class="starrating icon-star ng-isolate-scope" title="评分<?php echo e($ob->rate); ?>分" rate-star="" rating="shop.rating">
+<span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: <?php echo e(($ob->rate+$ob->food_rate)*10); ?>%;"></span></div>
+ (<a ng-href="/shop/150045824/rate" class="ng-binding" href="/shop/150045824/rate"><?php echo e($ob->rate_num); ?></a>)
+ <span class="ng-binding">月售<?php echo e($ob->month_num); ?>单</span></p>
  <p></p></div>
  <div class="shopguide-info-extra"><ul>
  <li class="shopguide-extra-item shopguide-extra-compete ng-scope" ng-if="shopRatingScore">
  <div itemscope="" itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating">
- <h2 class="color-stress ng-binding" itemprop="ratingValue">{{ ($ob->rate+$ob->food_rate)/2 }}</h2>
+ <h2 class="color-stress ng-binding" itemprop="ratingValue"><?php echo e(($ob->rate+$ob->food_rate)/2); ?></h2>
  <meta itemprop="bestRating" content="5">
  <meta itemprop="reviewCount" content="2366"><p>综合评价<br>
  <span class="color-mute ng-binding">高于周边商家</span>
@@ -386,40 +386,40 @@ style="background-color: rgb(192, 192, 192);">商家休息</span>
  </p></div>
  <div><p>服务态度<div class="starrating icon-star ng-isolate-scope" title="评分4.7分" rate-star="" rating="shopRatingScore.service_score">
  <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 93.494%;"></span></div> 
- <span class="color-stress ng-binding">{{ $ob->rate }}分</span></p>
+ <span class="color-stress ng-binding"><?php echo e($ob->rate); ?>分</span></p>
  <p>菜品评价<div class="starrating icon-star ng-isolate-scope" title="评分4.6分" rate-star="" rating="shopRatingScore.food_score">
- <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: {{  ($ob->rate+$ob->food_rate) * 10 }}%;"></span></div>
- <span class="color-stress ng-binding">{{ $ob->food_rate }}分</span></p></div></li>
- <li class="shopguide-extra-item ng-binding ng-scope" ng-if="shop.description" itemprop="description">{{ $ob->desc }}</li>
+ <span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: <?php echo e(($ob->rate+$ob->food_rate) * 10); ?>%;"></span></div>
+ <span class="color-stress ng-binding"><?php echo e($ob->food_rate); ?>分</span></p></div></li>
+ <li class="shopguide-extra-item ng-binding ng-scope" ng-if="shop.description" itemprop="description"><?php echo e($ob->desc); ?></li>
  <li class="shopguide-extra-item address">
  <p itemscope="" itemprop="streetAddress" itemtype="http://schema.org/PostalAddress">
- <span class="label">商家地址：{{ $ob->address }}</span><br/>
- <span class="label">商家描述：</span><span class="ng-binding">{{ $ob->desc }}</span>
+ <span class="label">商家地址：<?php echo e($ob->address); ?></span><br/>
+ <span class="label">商家描述：</span><span class="ng-binding"><?php echo e($ob->desc); ?></span>
  <span class="ng-binding"></span>
  <meta itemprop="telephone" content="15830461171 15801421533"></p>
  <p><span class="label">营业时间：</span> 
- <span itemprop="openingHours" class="ng-binding">{{ $ob->opentime."-".$ob->closetime }}</span></p></li>
+ <span itemprop="openingHours" class="ng-binding"><?php echo e($ob->opentime."-".$ob->closetime); ?></span></p></li>
  <li class="shopguide-extra-item">
- <p class="shopguide-extra-delivery">由<span class="ng-binding">{{ $ob->shopname }}</span>提供配送服务</p></li></ul></div></div>
+ <p class="shopguide-extra-delivery">由<span class="ng-binding"><?php echo e($ob->shopname); ?></span>提供配送服务</p></li></ul></div></div>
  <div class="shopguide-server">
 <span ng-hide="shop.id == 656683" class=""><em>起送价</em>
- <em class="shopguide-server-value ng-binding">{{ $ob->givemoney }}元</em>
+ <em class="shopguide-server-value ng-binding"><?php echo e($ob->givemoney); ?>元</em>
 </span>
  <span ng-hide="shop.id == 656683" class=""><em>配送费</em>
- <em class="shopguide-server-value ng-binding">配送费¥ {{ $ob->money }}</em>
+ <em class="shopguide-server-value ng-binding">配送费¥ <?php echo e($ob->money); ?></em>
 </span>
  <span ng-hide="shop.id == 656683" class=""><em>平均送达速度</em> 
- <em class="shopguide-server-value ng-binding">{{ $ob->service_time }}分钟</em>
+ <em class="shopguide-server-value ng-binding"><?php echo e($ob->service_time); ?>分钟</em>
 </span></div>
-@if(!$collect)
- <a class="shopguide-favor" onclick="addcollet(this,{{ $ob->shopid }})" href="javascript:" ng-click="favor()">
+<?php if(!$collect): ?>
+ <a class="shopguide-favor" onclick="addcollet(this,<?php echo e($ob->shopid); ?>)" href="javascript:" ng-click="favor()">
  <i ng-if="!isFavorShop" class="icon-favorite ng-scope"></i>
  <span ng-if="!isFavorShop"  class="ng-scope">收藏</span></a></div></div>
-@else
- <a class="shopguide-favor" onclick="addcollet(this,{{ $ob->shopid }})" href="javascript:" ng-click="favor()">
+<?php else: ?>
+ <a class="shopguide-favor" onclick="addcollet(this,<?php echo e($ob->shopid); ?>)" href="javascript:" ng-click="favor()">
  <i ng-if="!isFavorShop" class="icon-unfavorite ng-scope"></i>
  <span ng-if="!isFavorShop"  class="ng-scope">已收藏</span></a></div></div>
-@endif
+<?php endif; ?>
 <script>
     function addcollet(e,shopid){
         if($(e).children("i").hasClass("icon-favorite")){
@@ -468,9 +468,9 @@ style="background-color: rgb(192, 192, 192);">商家休息</span>
 <div shop-nav="" data="shop" filter-data="shop.filter" display-type="shop.displayType" 
 shop-action="shopAction" class="ng-scope ng-isolate-scope">
 <div class="shopnav"><div class="container clearfix"><div class="shopnav-left">
-<a class="shopnav-tab active" href="javascript:" id="shop_all" onclick="loadEva(this,{{ $ob->shopid }})" ng-class="{active: shop.tab === 'index'}">所有商品</a>
-<a class="shopnav-tab" href="javascript:" id="shop_eva" onclick="loadEva(this,{{ $ob->shopid }})" ng-class="{active: shop.tab === 'rate'}">评价</a>
-<a class="shopnav-tab" href="javascript:" id="shop_info" onclick="loadEva(this,{{ $ob->shopid }})" ng-class="{active: shop.tab === 'info'}">商家资质</a>
+<a class="shopnav-tab active" href="javascript:" id="shop_all" onclick="loadEva(this,<?php echo e($ob->shopid); ?>)" ng-class="{active: shop.tab === 'index'}">所有商品</a>
+<a class="shopnav-tab" href="javascript:" id="shop_eva" onclick="loadEva(this,<?php echo e($ob->shopid); ?>)" ng-class="{active: shop.tab === 'rate'}">评价</a>
+<a class="shopnav-tab" href="javascript:" id="shop_info" onclick="loadEva(this,<?php echo e($ob->shopid); ?>)" ng-class="{active: shop.tab === 'info'}">商家资质</a>
 <span class="shopnav-filter ng-scope" ng-if="shopAction === 'menu'">
 <a href="javascript:" ng-click="filter('default')" 
 ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
@@ -552,7 +552,7 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 
 	<!--商家资质-->
 	<div id = "info" ng-if="shopAction === 'info'" shop-info="" data="shop" class="shopinfo ng-isolate-scope ng-hide" perf-click="desktop/203">
-		<iframe class="shopinfo-iframe" ng-src="https://h5.ele.me/shop/certification/#/?restaurant_id=6331218470514804&amp;realId=257604" frameborder="0" src="/shoplist/{{ $ob->shopid }}/license">
+		<iframe class="shopinfo-iframe" ng-src="https://h5.ele.me/shop/certification/#/?restaurant_id=6331218470514804&amp;realId=257604" frameborder="0" src="/shoplist/<?php echo e($ob->shopid); ?>/license">
 
 		</iframe>
 	</div>
@@ -567,9 +567,9 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 
 		<!--分类-->
 	<div ng-show="!loading &amp;&amp; !searchEnv" class="shopmenu-nav ng-isolate-scope" sticky="" sticky-class="sticky" sticky-body-class="shopmenu-nav-sticky" sticky-fn="shopNavSticky">
-	@foreach ($type_list as $type)
-	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope active">{{ $type->title }}</a>
-	@endforeach
+	<?php $__currentLoopData = $type_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+	<a href="javascript:" ng-repeat="category in categorys" ng-click="scrollToCategory(category)" ng-class="{active: currentCategory.id === category.id}" class="ng-binding ng-scope active"><?php echo e($type->title); ?></a>
+	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	</div>
 		
 		
@@ -580,29 +580,29 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 			
 			
 			<!-- 只是一个分类（需要遍历分类表，加载多个） -->
-			@foreach ( $type_list as $type)
+			<?php $__currentLoopData = $type_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<div class="shopmenu-list clearfix ng-scope" ng-repeat="category in categorys">
 			
-			<h3 class="shopmenu-title ng-binding">{{ $type->title }} <span class="shopmenu-des ng-binding">大家喜欢吃，才叫真好吃。</span></h3>
-			@foreach($type->food as $cp)
+			<h3 class="shopmenu-title ng-binding"><?php echo e($type->title); ?> <span class="shopmenu-des ng-binding">大家喜欢吃，才叫真好吃。</span></h3>
+			<?php $__currentLoopData = $type->food; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<div class="shopmenu-food ng-isolate-scope" ng-class="{noimg: !food.image_path}" id="534306490" ng-repeat="food in category.foods" shop-menu-item="" food="food" shop="shopCache">
 				<span class="col-1 ng-scope" ng-if="food.image_path">
 				<a href="javascript:" ng-click="showInfo(food)">
-				<img ng-src="//fuss10.elemecdn.com/4/0c/48ecf64ee7c95655cfb6e8a684142jpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="煎鸡蛋的图片" src="{{ QINIU_PREFIX  }}{{  $cp->picname }}?imageMogr2/thumbnail/100x100"></a></span>
-				<div class="col-2 shopmenu-food-main"><h3 class="shopmenu-food-name ui-ellipsis ng-binding">{{ $cp->title }}</h3>
+				<img ng-src="//fuss10.elemecdn.com/4/0c/48ecf64ee7c95655cfb6e8a684142jpeg.jpeg?imageMogr2/thumbnail/100x100/format/webp/quality/85" alt="煎鸡蛋的图片" src="<?php echo e(QINIU_PREFIX); ?><?php echo e($cp->picname); ?>?imageMogr2/thumbnail/100x100"></a></span>
+				<div class="col-2 shopmenu-food-main"><h3 class="shopmenu-food-name ui-ellipsis ng-binding"><?php echo e($cp->title); ?></h3>
 				<p class="color-mute ui-ellipsis ng-binding" tooltip=""></p>
-				<p><div class="starrating icon-star ng-isolate-scope" title="评分{{ $cp->rate }}分" rate-star="" rating="food.rating">
+				<p><div class="starrating icon-star ng-isolate-scope" title="评分<?php echo e($cp->rate); ?>分" rate-star="" rating="food.rating">
 				<span class="icon-star" ng-style="{ width: (rating * 20) + '%' }" style="width: 86.2%;"></span></div>
-				<span class="color-mute ng-binding">({{ $cp->rate_num }})</span> <span class="color-mute ng-binding">月售{{ $cp->num }}份</span></p></div>
-				<span class="col-3 shopmenu-food-price color-stress ng-binding">{{ $cp->price }}<small class="ng-binding"></small></span>
+				<span class="color-mute ng-binding">(<?php echo e($cp->rate_num); ?>)</span> <span class="color-mute ng-binding">月售<?php echo e($cp->num); ?>份</span></p></div>
+				<span class="col-3 shopmenu-food-price color-stress ng-binding"><?php echo e($cp->price); ?><small class="ng-binding"></small></span>
 				<span class="col-4"><div shop-cartbutton="" food="food" ng-hide="shop.id == '656683'" class="ng-isolate-scope">
 				<div ng-if="!menuFood.hasSpec" class="ng-scope">
-				<button onclick="addShopcart(this,1)" foodid="{{ $cp->id }}" class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车</button>
+				<button onclick="addShopcart(this,1)" foodid="<?php echo e($cp->id); ?>" class="shop-cartbutton ng-binding ng-scope" ng-if="!cartItem.quantity &amp;&amp; menuFood.stock" ng-click="cartItem.add($event)">加入购物车</button>
 				</div></div></span></div>
-			@endforeach
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			
 			</div>
-			@endforeach
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			<div shop-cart="" cart-link="cartLink" ng-hide="shopCache.id == 656683" class="ng-isolate-scope">
 			
     			<div class="shop-cart">
@@ -623,56 +623,58 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
         			        </div>
         		        </div>
 
-                        @if(!$shopcart['shopcart'])
+                        <?php if(!$shopcart['shopcart']): ?>
         			    <div id="emptycart" class="shop-cartbasket-empty ng-scope" ng-if="!shopCart.vm.groups[shopCart.currentGroupIndex].length">
         			        <div class="icon-cart"></div>
                             <p>购物车是空的，赶紧选购吧</p>
                         </div>
-                        @else
-                        @foreach($shopcart['shopcart'] as $id=>$food)    
-                        <div foodid="{{ $id }}" ng-repeat="item in shopCart.vm.groups[shopCart.currentGroupIndex]" class="shop-cartbasket-tablerow ng-scope" entityid="547033283">
-                            <div class="cell itemname ng-binding" ng-bind="item.name" title="{{ $food['food']->title }}">
-                                {{ $food['food']->title }}
+                        <?php else: ?>
+                        <?php $__currentLoopData = $shopcart['shopcart']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id=>$food): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>    
+                        <div foodid="<?php echo e($id); ?>" ng-repeat="item in shopCart.vm.groups[shopCart.currentGroupIndex]" class="shop-cartbasket-tablerow ng-scope" entityid="547033283">
+                            <div class="cell itemname ng-binding" ng-bind="item.name" title="<?php echo e($food['food']->title); ?>">
+                                <?php echo e($food['food']->title); ?>
+
                             </div>
                             <div class="cell itemquantity">
-                                <button foodid="{{ $id }}" onclick="addShopcart(this,-1)" ng-click="shopCart.subEntity(item, $event)">-</button><input ng-model="item.quantity" ng-blur="shopCart.updateFromInput(item, item.quantity)" class="ng-pristine ng-valid" value="{{ $food['num'] }}"><button foodid="{{ $id }}" onclick="addShopcart(this,1)" ng-click="shopCart.addEntity(item, $event)">+</button>
+                                <button foodid="<?php echo e($id); ?>" onclick="addShopcart(this,-1)" ng-click="shopCart.subEntity(item, $event)">-</button><input ng-model="item.quantity" ng-blur="shopCart.updateFromInput(item, item.quantity)" class="ng-pristine ng-valid" value="<?php echo e($food['num']); ?>"><button foodid="<?php echo e($id); ?>" onclick="addShopcart(this,1)" ng-click="shopCart.addEntity(item, $event)">+</button>
                             </div>
                             <div class="cell itemtotal ng-binding" ng-bind="'¥' + ((item.price * item.quantity).toFixed(2) | number)">
-                                ￥{{ $food['food']->price * $food['num'] }}
+                                ￥<?php echo e($food['food']->price * $food['num']); ?>
+
                             </div>
                         </div>
-                        @endforeach
-                        @endif
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
 
         			</div>
     			
-                    @if(!$shopcart['shopcart'])
+                    <?php if(!$shopcart['shopcart']): ?>
     			    <div onclick="shopcartToggle(this)" class="shop-cartfooter" ng-click="shopCart.toggleCart()">
     			        <span class="icon-cart shop-carticon"></span>
-    			        <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ {{ $ob->givemoney }}</div>
+    			        <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ <?php echo e($ob->givemoney); ?></div>
     			        <button  class="shop-cartfooter-checkout ng-binding disabled" ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
     			ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" 
     			ng-click="checkout($event)" >购物车是空的</button>
                     </div>
-                    @elseif( $shopcart['total'] < $shopcart['givemoney'] )
+                    <?php elseif( $shopcart['total'] < $shopcart['givemoney'] ): ?>
                     <div onclick="shopcartToggle(this)" class="shop-cartfooter" ng-click="shopCart.toggleCart()">
     			        <span class="icon-cart shop-carticon"></span>
-                        <p class="shop-cartfooter-text price ng-binding ng-scope" ng-if="shopCart.vm.quantity > 0" ng-bind="shopCart.vm.total | number">{{ $shopcart['total'] }}</p>
-    			        <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ {{ $ob->givemoney }}</div>
+                        <p class="shop-cartfooter-text price ng-binding ng-scope" ng-if="shopCart.vm.quantity > 0" ng-bind="shopCart.vm.total | number"><?php echo e($shopcart['total']); ?></p>
+    			        <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ <?php echo e($ob->givemoney); ?></div>
     			        <button  class="shop-cartfooter-checkout ng-binding disabled" ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
     			ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" 
-    			ng-click="checkout($event)" >还差{{ $shopcart['givemoney'] - $shopcart['total'] }}元起送</button>
+    			ng-click="checkout($event)" >还差<?php echo e($shopcart['givemoney'] - $shopcart['total']); ?>元起送</button>
                     </div>
-                    @else
+                    <?php else: ?>
                     <div onclick="shopcartToggle(this)" class="shop-cartfooter" ng-click="shopCart.toggleCart()">
    			            <span class="icon-cart shop-carticon"></span>
-                        <p class="shop-cartfooter-text price ng-binding ng-scope" ng-if="shopCart.vm.quantity > 0" ng-bind="shopCart.vm.total | number">{{ $shopcart['total'] }}</p>
-   			            <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ {{ $ob->givemoney }}</div>
-   			            <button onclick="javascrip:window.location.href='/{{ $ob->shopid }}/ordercheckout'" class="shop-cartfooter-checkout ng-binding " ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
+                        <p class="shop-cartfooter-text price ng-binding ng-scope" ng-if="shopCart.vm.quantity > 0" ng-bind="shopCart.vm.total | number"><?php echo e($shopcart['total']); ?></p>
+   			            <div class="shop-cartfooter-text extras ng-binding" ng-bind-html="shopCart.vm.picewiseText">配送费￥ <?php echo e($ob->givemoney); ?></div>
+   			            <button onclick="javascrip:window.location.href='/<?php echo e($ob->shopid); ?>/ordercheckout'" class="shop-cartfooter-checkout ng-binding " ng-class="{disabled: shopCart.vm.button.name !== 'CAN_ORDER'}"
    			ng-disabled="shopCart.vm.button.disabled" ng-bind="shopCart.vm.button.text" 
    			ng-click="checkout($event)" >去结算</button>
                    </div>
-                   @endif
+                   <?php endif; ?>
 
 
     			    <div class="shop-carthelper-opener" ng-class="{show: shopCart.cartHelper.show}" ng-click="showCartHelper()"></div>
@@ -700,7 +702,7 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
                 function addShopcart(e,m){
                     var foodid = e.getAttribute('foodid');
                     $.ajax({
-                        url:"/addtocart/"+ {{ $ob->shopid }} + "/" + foodid,
+                        url:"/addtocart/"+ <?php echo e($ob->shopid); ?> + "/" + foodid,
                         type:"get",
                         data:"m=" + m,
                         datatype:"json",
@@ -755,25 +757,25 @@ ng-class="{active: filterData === 'default'}" class="active">默认排序</a>
 	<div class="shopmain-right ng-isolate-scope" shop-bulletin="" data="shop">
 	<div class="shopbulletin"><div class="shopbulletin-section">
 	<h3 class="shopbulletin-section-title">商家公告</h3>
-	<p class="shopbulletin-content ng-binding">{{ $ob->desc }}</p>
+	<p class="shopbulletin-content ng-binding"><?php echo e($ob->desc); ?></p>
 	<div class="shopbulletin-delivery"><h4>配送说明：</h4>
-	<p class="ng-binding">配送费￥ {{ $ob->money }}</p></div>
+	<p class="ng-binding">配送费￥ <?php echo e($ob->money); ?></p></div>
 
 
 
 	<ul class="shopbulletin-supports">
-		@if($ob->commit[2] == 1)
+		<?php if($ob->commit[2] == 1): ?>
 		<li ng-repeat="support in shop.supports" class="ng-binding ng-scope"><span ng-style="{'background-color': '#' + support.icon_color}" class="ng-binding"
 	style="background-color: rgb(153, 153, 153);">保</span>已加入“外卖保”计划，食品安全有保障</li>
-		@endif
-		@if($ob->commit[3] == 1)
+		<?php endif; ?>
+		<?php if($ob->commit[3] == 1): ?>
 		<li ng-repeat="support in shop.supports" class="ng-binding ng-scope"><span ng-style="{'background-color': '#' + support.icon_color}" class="ng-binding"
 	style="background-color: rgb(153, 153, 153);">票</span> 该商家支持开发票，开票订单金额50.0元起，请在下单时填写好发票抬头</li>
-		@endif
-		@if($ob->commit[1] == 1)
+		<?php endif; ?>
+		<?php if($ob->commit[1] == 1): ?>
 		<li ng-repeat="support in shop.supports" class="ng-binding ng-scope"><span ng-style="{'background-color': '#' + support.icon_color}" class="ng-binding"
 	style="background-color: rgb(87, 169, 255);">准</span>准时必达，超时秒赔</li>
-		@endif
+		<?php endif; ?>
 	</ul>
 
 

@@ -1,0 +1,62 @@
+str = "
+<li class=\"commentitem\" comment-item=\"\" ng-repeat=\"comment in ratingStorage[filter.type].data\"> <span
+        class=\"commentitem-avatar\"> <img
+        ng-src=\"//fuss10.elemecdn.com/0/00/bb262cf587894b97ecab46ac93494jpeg.jpeg?imageMogr2/thumbnail/60x60/format/webp/quality/85\"
+        alt=\"匿**户\"
+        src=\"//fuss10.elemecdn.com/0/00/bb262cf587894b97ecab46ac93494jpeg.jpeg?imageMogr2/thumbnail/60x60/format/webp/quality/85\"> </span>
+<div class=\"commentitem-content\"><h4 class=\"commentitem-username ng-binding\">匿**户</h4>
+    <div class=\"commentitem-main\">
+        <div class=\"commentitem-stars rate ng-isolate-scope\
+        " config=\"rateConfig\" value=\"rate\" isreadonly=\"true\" rate=\"\"> <p id=\"rate_id_" + all_eva[i].id + "\"
+        class=\"rate-star readonly star level1\" ng-class=\"{readonly: isreadonly, star: starStyle}\">
+        <!-- ngIf: label --> <span ng-click=\"doRate($event)\" ng-mouseover=\"doRate($event)\"
+                                   ng-mouseleave=\"doRate($event)\" data-level=\"4\"> <a class=\"icon-star-rate active\" href=\"javascript:\" data-level=\"1\" ng-class=\"{active : rateLevel >= 1}\"></a>
+        <a class=\"icon-star-rate
+           active\" href=\"javascript:\" data-level=\"2\" ng-class=\"{active : rateLevel >= 2}\"></a> <a
+                class=\"icon-star-rate active\" href=\"javascript:\" data-level=\"3\" ng-class=\"{active : rateLevel >= 3}\"></a>
+        <a class=\"icon-star-rate
+           active\" href=\"javascript:\" data-level=\"4\" ng-class=\"{active : rateLevel >= 4}\"></a> <a
+                class=\"icon-star-rate\" href=\"javascript:\" data-level=\"5\" ng-class=\"{active :
+                rateLevel>= 5}\"></a> </span> <!-- ngIf: config.tipText --> <span ng-if=\"config.tipText\"
+                                                                                  class=\"active rate-star-text
+                                                                                  ng-binding ng-scope\"
+        ng-bind=\"config.tipText[rateLevel]\">满意</span><!-- end ngIf: config.tipText --> </p>
+        <!-- ngIf: config.mutiContent --><!-- ngIf: !config.mutiContent -->
+        <div ng-if=\"!config.mutiContent\" class=\"rate-content simple ng-scope ng-hide\
+        " ng-show=\"!config.mutiContent &amp;&amp; value.value > 0\" ng-hide=\"copyVal.value || value.value === 0\">
+        <textarea ng-attr-placeholder=\"config.placeholder[rateLevel - 1]\" ng-model=\"value.text\" class=\"ng-pristine
+        ng-valid\" placeholder=\"\"></textarea> </div><!-- end ngIf: !config.mutiContent --><!-- ngIf: copyVal.text -->
+</div> <span class=\"commentitem-time
+             ng-binding\" ng-bind=\"comment.time_spent_desc\">" + all_eva[i].service_time + "分钟送达</span><!-- ngIf: comment.rating_text -->
+<p class=\"commentitem-text ng-binding
+   ng-scope\" ng-if=\"comment.rating_text\"></p> </div><!-- ngRepeat: food in comment.item_rating_list --><!-- ngIf: comment.item_rating_list -->";
+for(var j in all_eva[i].foods_rate){
+str += "
+<div class=\"shoprate-itemrating shoprate-itemratinglist
+     ng-isolate-scope\" item-rating-list=\"\" data=\"food\" ng-if=\"comment.item_rating_list\" ng-repeat=\"food in comment.item_rating_list\">
+<span class=\"shoprate-itemratinglist-name ng-binding\">麻辣脆皮鸡饭-小份</span>
+<div class=\"commentitem-stars rate
+     ng-isolate-scope\" config=\"rateConfig\" value=\"ratingValue\" isreadonly=\"true\" rate=\"\"> <p id=\"
+                                                                                                      food_rate_id_" +all_eva[i].foods_rate[j].id +"\" class=\"rate-star readonly level4\" ng-class=\"{readonly: isreadonly, star: starStyle}\"><!-- ngIf: label -->
+<span ng-click=\"doRate($event)\" ng-mouseover=\"doRate($event)\" ng-mouseleave=\"doRate($event)\" data-level=\"4\"> <a
+        class=\"icon-star-good
+        active\" href=\"javascript:\" data-level=\"1\" ng-class=\"{active : rateLevel >= 1}\"></a> <a
+        class=\"icon-star-good
+        active\" href=\"javascript:\" data-level=\"2\" ng-class=\"{active : rateLevel >= 2}\"></a> <a
+        class=\"icon-star-good
+        active\" href=\"javascript:\" data-level=\"3\" ng-class=\"{active : rateLevel >= 3}\"></a> <a
+        class=\"icon-star-good
+        active\" href=\"javascript:\" data-level=\"4\" ng-class=\"{active : rateLevel >= 4}\"></a> <a
+        class=\"icon-star-good\" href=\"javascript:\" data-level=\"5\" ng-class=\"{active :
+        rateLevel>= 5}\"></a> </span> <!-- ngIf: config.tipText --> <span ng-if=\"config.tipText\" class=\"active
+                                                                          rate-star-text ng-binding
+                                                                          ng-scope\" ng-bind=\"config.tipText[rateLevel]\">满意</span><!-- end ngIf: config.tipText --> </p><!-- ngIf: config.mutiContent --><!-- ngIf: !config.mutiContent -->
+<div ng-if=\"!config.mutiContent\" class=\"rate-content simple ng-scope
+     ng-hide\" ng-show=\"!config.mutiContent &amp;&amp; value.value > 0\" ng-hide=\"copyVal.value || value.value === 0\">
+<textarea ng-attr-placeholder=\"{config.placeholder[rateLevel -
+          1]}\" ng-model=\"value.text\" class=\"ng-pristine ng-valid\" placeholder=\"\"></textarea> </div><!-- end ngIf: !config.mutiContent --><!-- ngIf: copyVal.text --> </div>
+<a href=\"javascript:\"
+   ng-click=\"linkToFood(data.food_id)\">查看商品</a><!-- ngIf: data.rating_text --><!-- ngIf: data.reply_text --> <p
+        class=\"shoprate-itemratinglist-text ng-binding
+        ng-scope\" ng-if=\"data.rating_text\"></p> </div><!-- end ngIf: comment.item_rating_list --><!-- end ngRepeat: food in comment.item_rating_list -->";
+}
