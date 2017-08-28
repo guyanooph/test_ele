@@ -1,5 +1,4 @@
-@extends('admin.base')
-    @section('content')
+    <?php $__env->startSection('content'); ?>
         <!-- Content Header (Page header) -->
         <!-- Main content -->
         <section class="content">
@@ -12,16 +11,16 @@
                   <h3 class="box-title"><i class="fa fa-plus"></i> 添加管理员信息</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-               <form action="{{url('admin/user')}}" method="post" class="form-horizontal"  enctype="multipart/form-data">
-                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+               <form action="<?php echo e(url('admin/user')); ?>" method="post" class="form-horizontal"  enctype="multipart/form-data">
+                   <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                    <div class="form-group">
                        <label for="inputEmail3" class="col-sm-2 control-label">类型:</label>
                        <div class="col-sm-4">
                            <select style="width:100px;"  id="role" name="role">
                                <option>账号类型</option>
-                               @foreach($roles as $role)
-                                   <option  style="width:150px;" value="{{$role->id}}">{{$role->name}}</option>
-                               @endforeach
+                               <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                   <option  style="width:150px;" value="<?php echo e($role->id); ?>"><?php echo e($role->name); ?></option>
+                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                            </select>
                        </div>
                    </div>
@@ -33,7 +32,7 @@
                            <script type="text/javascript">
                               function loadDistrict(upid){
                                   $.ajax({
-                                      url:"{{URL('/admin/district')}}/"+upid,
+                                      url:"<?php echo e(URL('/admin/district')); ?>/"+upid,
                                       type:"get",
                                       dataType:"json",
                                       async:true,
@@ -107,4 +106,5 @@
             </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

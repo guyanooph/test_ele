@@ -1,9 +1,5 @@
 <?php
-//普通会员管理器
 namespace App\Http\Controllers\Admin;
-
-use App\Models\Admin_user;
-use App\Models\Admin_role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Query\Builder;
@@ -21,15 +17,30 @@ class UserController extends Controller
     {
 
 
-        $list = \DB::table("admin_user")->paginate(10);
+        $list = \DB::table("admin_user")->paginate(3);
         //管理员表里的role字段替换成文本
-        foreach($list as $v){
-            $aa = \DB::table('admin_role')->where('id',$v->role)->first();
-            $v->role = isset($aa->role)?$aa->role:"尚未分配";
-        }
         //dd($list);
         return view("admin.user.index", ["list" => $list]);
 
+    }
+
+    //搜索管理员
+    public function child(Request $request)
+    {
+        $db = \DB::table('admin_user')->orderBy("id","desc");
+        $where = [];
+        //判断搜索账号是否存在
+        if(!empty($request->has('name'))){
+            //获取搜索账号
+            $name = $request->input('name');
+            //拼装搜索条件
+            $db->where("name","like","%{$name}%");
+            $where ['name'] = $name;
+        }
+        //dd($where);
+        //每页显示6条
+        $list = $db->paginate(1);
+        return view("admin.user.child",["list"=>$list,'where'=>$where]);
     }
 
     /**
@@ -39,8 +50,13 @@ class UserController extends Controller
      */
     public function create()
     {
-
-        $roles = Admin_role::all();
+        $adminuser = \Session::get('adminuser');
+        //dd($adminuser->cityid);
+        //判断是否有cityid 显示无权限添加管理员
+         if($adminuser->cityid !="-请选择-"){
+             return redirect("admin/user")->with('err', "仅系统管理员可操作"); 
+         }
+        $roles = \DB::table('admin_type')->get();
         //dd($roles);
         return view("admin.user.create",compact('roles'));
     }
@@ -54,47 +70,28 @@ class UserController extends Controller
     //执行普通管理员添加
     public function store(Request $request)
     {
-        //dd($_FILES);
-
-        //判断是否有文件上传
-        if ($request->hasFile('picname')) {
-            //获取文件，file对应的是前端表单上传input的name
-            $file = $request->file("picname");
-            //初始化
-            $disk = QiniuStorage::disk("qiniu");
-            //重命名文件
-            $filename = md5($file->getClientOriginalName() . time() . rand()) . "." . $file->getClientOriginalExtension();
-            //判断是否上传成功
-            $bool = $disk->put('upload/image' . $filename, file_get_contents($file->getRealPath()));
-            if ($bool) {
-                // $path = $disk->downloadUrl('iwanli/image_'.$fileName);
-                // print_r($path);die;
-                $path = $disk->downloadUrl('upload/image'. $filename);
-            } else {
-                return '上传失败';
-            }
-
-        }else{
-        return '没有文件';
-    }
-
-
-        $data['picname'] = $filename;
+        date_default_timezone_set('prc');
+        //dd($request->input('cityid'));
+        $password = $request->input('password');
+        $password2 = $request->input('password2');
+        if($password != $password2){
+           return redirect("admin/user")->with('err', "密码不一致，请重新添加");
+        }
         //获取表单中的姓名和密码
         $data['name'] = $request->input('name');
+        $data['cityid'] = $request->input('cityid');
         $data['password'] = HASH::make($request->input('password'));
-        $data['phone'] = $request->input('phone');
         //dd($request->input('role'));
         $data['role'] = $request->input('role');
+        $adminuser = \Session::get('adminuser');
+        $data['create_person'] = $adminuser->name;
+        //$data['create_person'] =  "root";
         //dd($data['role']);
         $data['addtime'] = date("Y-m-d H:i:s", time());
             //执行添加
         //dd($data);
-        $res1 = \DB::table('admin_user')->insertGetId($data);
-        $info['uid'] = $res1;
-        $info['rid'] = $data['role'];
-        $res2 = \DB::table('u_r')->insertGetId($info);
-        if ($res1 && $res2) {
+        $res = \DB::table('admin_user')->insertGetId($data);
+        if ($res) {
         return redirect("admin/user")->with('err', "添加成功");
     }
 
@@ -118,12 +115,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $a=Admin_user::find($id);
-        //dd($a);
-        $a ->role = \DB::table('admin_role')->where('id',$a->role)->first()->role;
-        //dd($a);
-        $roles = Admin_role::all();
-        return view("admin.user.edit",["v"=>$a,'roles'=>$roles]);
+        $adminuser = \Session::get('adminuser');
+        //dd($adminuser->cityid);
+        //判断是否有cityid 显示无权限添加管理员
+         if($adminuser->cityid !="-请选择-"){
+             return redirect("admin/user")->with('err', "仅系统管理员可操作"); 
+         }
+        //仅支持修改密码
+        $admin_user=\DB::table('admin_user')->find($id);
+        //dd($admin_user);
+        $roles = \DB::table('admin_type')->get();
+        //dd($roles);
+        return view("admin.user.edit",["v"=>$admin_user,"roles"=>$roles]);
     }
     /**
      * Update the specified resource in storage.
@@ -134,20 +137,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {  
-
-        //dd($request->role);
-        $rid = \DB::table('admin_role')->where('role',$request->role)->first()->id;
-        //dd($rid);
-        $data['name']=$request->name;
-
+        $password = $request->input('password');
+        $password2 = $request->input('password2');
+        if($password != $password2){
+           return redirect("admin/user")->with('err', "密码不一致，请重新修改");
+        }
+        
        $data['password']=HASH::make($request->password);
        $data['updated_at']=date("Y-m-d H:i:s",time());
-       $data['role'] = $rid;
        $res1 = \DB::table("admin_user")->where("id",$id)->update($data);
-       $info['rid'] =  $rid;
-       $res2 = \DB::table("u_r")->where("uid",$id)->update($info);
-      
-       if($res1 && $res2){
+       if($res1){
 
        return redirect("admin/user")->with("err","修改成功");
    }
@@ -161,13 +160,15 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $a =Admin_user::destroy($id);
-        //$a = $b->delete($id);
-       // $a=\DB::table("admin_user")->delete($id);
-        $id2 = \DB::table('u_r')->where('uid',$id)->first()->id;
-        $b = \DB::table('u_r')->delete($id2);
-
-        if($a && $b){
+        $adminuser = \Session::get('adminuser');
+        //dd($adminuser->cityid);
+        //判断是否有cityid 显示无权限添加管理员
+         if($adminuser->cityid !="-请选择-"){
+             return redirect("admin/user")->with('err', "仅系统管理员可操作"); 
+         }
+        $a=\DB::table("admin_user")->delete($id);
+        
+        if($a){
             $info="删除成功";
         }else{
             $info="删除失败";

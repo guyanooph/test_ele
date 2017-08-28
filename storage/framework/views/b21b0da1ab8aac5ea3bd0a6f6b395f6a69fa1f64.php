@@ -1,13 +1,10 @@
+        <?php $__env->startSection('content'); ?>
 
-@extends('admin.base')
-
-        @section('content')
-
-          @if(session("msg"))
-            <p class="login-box-msg" style="color:red;">{{session("msg")}}</p >
-          @else
+          <?php if(session("msg")): ?>
+            <p class="login-box-msg" style="color:red;"><?php echo e(session("msg")); ?></p >
+          <?php else: ?>
             <p class="login-box-msg"></p >
-          @endif
+          <?php endif; ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -24,7 +21,7 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>{{ $act_count}}</h3>
+                  <h3><?php echo e($act_count); ?></h3>
                   <p>活动总数</p>
                 </div>
                 <div class="icon">
@@ -37,7 +34,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>{{ $act_browse}}<sup style="font-size: 20px"></sup></h3>
+                  <h3><?php echo e($act_browse); ?><sup style="font-size: 20px"></sup></h3>
                   <p>活动浏览总数</p>
                 </div>
                 <div class="icon">
@@ -50,7 +47,7 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>{{ $works_count}}</h3>
+                  <h3><?php echo e($works_count); ?></h3>
                   <p>作品总数</p>
                 </div>
                 <div class="icon">
@@ -63,7 +60,7 @@
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>{{ $tickets_count}}</h3>
+                  <h3><?php echo e($tickets_count); ?></h3>
                   <p>投票总数</p>
                 </div>
                 <div class="icon">
@@ -79,4 +76,6 @@
           </div><!-- /.row (main row) -->
 
         </section><!-- /.content -->
-        @endsection
+        <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

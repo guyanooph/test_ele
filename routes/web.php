@@ -114,14 +114,41 @@ Route::post("/ad/plogin","Admin\LoginController@plogin");//执行手机验证
 
 Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::get("/","Admin\IndexController@index");//后台首页
-
 	Route::get("root","Admin\RootController@index");//超级管理员
-
-	//Route::resource("user","Admin\UserController");//普通管理员
 	Route::get("user","Admin\UserController@index");//普通管理员首页
+    Route::get("district","Admin\DistrictController@index");//城市级联
+    Route::get("district/{upid}","Admin\DistrictController@show");//城市级联加载
     Route::get("role","Admin\RoleController@index");//角色管理首页
 
+
+        Route::get("user/create","Admin\UserController@create");//管理员添加模板
+        Route::post("user","Admin\UserController@store");//管理员执行添加
+        Route::get("user/edit/{id}","Admin\UserController@edit");//管理员添加编辑模板
+        Route::put("user/{id}","Admin\UserController@update");//执行管理员修改
+        Route::delete("user/{id}","Admin\UserController@destroy");//执行管理员删除
+        Route::get("/user/child","Admin\UserController@child");//管理员搜索
+
+        Route::get("/act","Admin\ActController@index");//活动首页
+        Route::get("/act/create","Admin\ActController@create");//活动添加
+        Route::post("/act","Admin\ActController@store");//执行添加
+        
+        //查看活动详情
+        Route::get('/act/{id}',"Admin\ActController@show");
+        Route::get("/act/child",function(){
+            echo "aa";
+        });//活的名字搜索
+
+
+        Route::get("role/create","Admin\RoleController@create");//角色加载添加页
+        Route::post("role","Admin\RoleController@store");//角色执行添加
+        Route::get("role/edit/{id}","Admin\RoleController@edit");//加载角色编辑模板
+        Route::put("role/{id}","Admin\RoleController@update");//执行角色修改
+        Route::delete('/role/destroy/{id}',"Admin\RoleController@destroy");//角色删除操作
+        Route::get("role/loadNode/{id}","Admin\RoleController@loadNode");//加载节点分配模板
+        Route::post("role/saveNode","Admin\RoleController@saveNode");//保存节点信息
+
     //权限分配
+        /*
     Route::group(["middleware" => "role"],function(){
         Route::get("user/create","Admin\UserController@create");//普通管理员添加模板
         Route::post("user","Admin\UserController@store");//普通管理员执行添加
@@ -138,7 +165,7 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
         Route::post("role/saveNode","Admin\RoleController@saveNode");//保存节点信息
     });
 
-
+        */
 	Route::get("node","Admin\NodeController@index");//节点管理首页
 	Route::post("node","Admin\NodeController@store");//执行节点添加
 	Route::get("node/edit/{id}","Admin\NodeController@edit");//加载节点修改
@@ -149,18 +176,22 @@ Route::group(["prefix" => "admin","middleware" => "admin"], function () {
     Route::get('vip/edit/{id}',"Admin\VipController@edit");//加载修改会员状态修改
     Route::put("vip/{id}","Admin\VipController@update");//执行会员修改
 
-	Route::get("shop/index","Admin\ShopController@index");//待审核商家管理页面
-	Route::get("shop/detail/{id}","Admin\ShopController@detail");//待审核商家详情
-    Route::get("shop/check/{id}/{state}","Admin\ShopController@check");//商家审核操作
+	Route::get("works/index","Admin\WorksController@index");//待审核作品管理页面
+	Route::get("works/detail/{id}","Admin\WorksController@detail");//待审核作品详情
+    Route::get("works/check/{id}/{state}","Admin\WorksController@check");//作品审核操作
+    Route::get("works/child","Admin\WorksController@child");//待审核作品搜索
 
-    Route::get("shopCom","Admin\ShopController@indexCom");//加载普通商家信息
-    Route::get("shop/detailCom/{id}","Admin\ShopController@detailCom");//加载普通商家详情信息
-    Route::get("shop/checkCom/{id}/{state}","Admin\ShopController@checkCom");//违规商家手动处理
+    
+    Route::get("shopCom","Admin\WorksController@indexCom");//加载普通作品信息
+    Route::get("shop/detailCom/{id}","Admin\WorksController@detailCom");//加载普通作品详情信息
+    Route::get("shop/childCom","Admin\WorksController@childCom");//已审核作品搜索
+    Route::get("shop/checkCom/{id}/{state}","Admin\WorksController@checkCom");//违规作品手动处理
+    
 
-
-    Route::get("fail","Admin\ShopController@indexFail");//加载审核未通过商家信息
-    Route::get("fail/detail/{id}","Admin\ShopController@detailFail");//加载审核未通过商家详情信息
-    Route::get("shop/checkFail/{id}/{state}","Admin\ShopController@checkFail");//违规商家手动处理
+    Route::get("fail","Admin\WorksController@indexFail");//加载审核未通过作品信息
+    Route::get("fail/detail/{id}","Admin\WorksController@detailFail");//加载审核未通过作品详情信息
+     Route::get("fail/childCom","Admin\WorksController@childFail");//审核未通过作品搜索
+    Route::get("shop/checkFail/{id}/{state}","Admin\WorksController@checkFail");//违规作品手动处理
 
     Route::get("disabled","Admin\ShopController@indexDisabled");//加载禁用商家信息
     Route::get("disabled/detail/{id}","Admin\ShopController@detailDisabled");//加载禁用商家详情信息

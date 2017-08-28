@@ -16,7 +16,7 @@ class LocationMiddleware
     public function handle($request, Closure $next)
     {
         if(!$request->session()->has("location")){
-            return redirect("/home");
+            return redirect("/admin");
         }
         return $next($request);
     }

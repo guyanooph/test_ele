@@ -6,36 +6,36 @@
     <!-- 告诉浏览器响应屏幕宽度 -->
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="{{asset('myadmin/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />    
+    <link href="<?php echo e(asset('myadmin/bootstrap/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />    
     <!-- FontAwesome 4.3.0 -->
-    <link href="{{asset('myadmin/bootstrap/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/bootstrap/css/font-awesome.min.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Ionicons 2.0.0 -->
-    <link href="{{asset('myadmin/bootstrap/css/ionicons.min.css')}}" rel="stylesheet" type="text/css" />    
+    <link href="<?php echo e(asset('myadmin/bootstrap/css/ionicons.min.css')); ?>" rel="stylesheet" type="text/css" />    
     <!-- Theme style -->
-    <link href="{{asset('myadmin/dist/css/AdminLTE.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/dist/css/AdminLTE.min.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
-    <link href="{{asset('myadmin/dist/css/skins/_all-skins.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/dist/css/skins/_all-skins.min.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="{{asset('myadmin/plugins/iCheck/flat/blue.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/iCheck/flat/blue.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Morris chart -->
-    <link href="{{asset('myadmin/plugins/morris/morris.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/morris/morris.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
-    <link href="{{asset('myadmin/plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/jvectormap/jquery-jvectormap-1.2.2.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Date Picker -->
-    <link href="{{asset('myadmin/plugins/datepicker/datepicker3.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/datepicker/datepicker3.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- Daterange picker -->
-    <link href="{{asset('myadmin/plugins/daterangepicker/daterangepicker-bs3.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/daterangepicker/daterangepicker-bs3.css')); ?>" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
-    <link href="{{asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')); ?>" rel="stylesheet" type="text/css" />
    <!-- jQuery 2.1.4 -->
-    <script src="{{asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')); ?>"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="{{asset('myadmin/bootstrap/js/html5shiv.min.js')}}"></script>
-        <script src="{{asset('myadmin/bootstrap/js/respond.min.js')}}"></script>
-        <script src="{{asset('js/Pregister.js')}}"></script>
+        <script src="<?php echo e(asset('myadmin/bootstrap/js/html5shiv.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('myadmin/bootstrap/js/respond.min.js')); ?>"></script>
+        <script src="<?php echo e(asset('js/Pregister.js')); ?>"></script>
 
     <![endif]-->
   </head>
@@ -73,7 +73,7 @@
                       <li><!-- start message 
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image"/>
                           </div>
                           <h4>
                             支持团队
@@ -85,7 +85,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user3-128x128.jpg')}}" class="img-circle" alt="user image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user3-128x128.jpg')); ?>" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             AdminLTE 设计团队
@@ -97,7 +97,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user4-128x128.jpg')}}" class="img-circle" alt="user image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user4-128x128.jpg')); ?>" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             开发商
@@ -109,7 +109,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user3-128x128.jpg')}}" class="img-circle" alt="user image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user3-128x128.jpg')); ?>" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             卖场部
@@ -121,7 +121,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{asset('myadmin/dist/img/user4-128x128.jpg')}}" class="img-circle" alt="user image"/>
+                            <img src="<?php echo e(asset('myadmin/dist/img/user4-128x128.jpg')); ?>" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             审稿人
@@ -251,14 +251,14 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <!-- <img src="{{asset('myadmin/dist/img/u38.png')}}" class="user-image" alt="User Image"/> -->
+                  <!-- <img src="<?php echo e(asset('myadmin/dist/img/u38.png')); ?>" class="user-image" alt="User Image"/> -->
                   <p class="glyphicon glyphicon-user"></p>
-                  <span class="hidden-xs">{{session('adminuser')->name}}</span>
+                  <span class="hidden-xs"><?php echo e(session('adminuser')->name); ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <!-- <li class="user-header">
-                    <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+                    <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image" />
                     <p>
                      华人频道
                       <small>欢迎您</small>
@@ -283,7 +283,7 @@
                       <a href="#" class="btn btn-default btn-flat">简介</a>
                     </div> -->
                     <div class="pull-right">
-                      <a href="{{url('admin/login/logOut')}}" class="btn btn-default btn-flat">签出</a>
+                      <a href="<?php echo e(url('admin/login/logOut')); ?>" class="btn btn-default btn-flat">签出</a>
                     </div>
                   </li>
                 </ul>
@@ -301,11 +301,11 @@
           <!-- Sidebar user panel -->
          <!--  <div class="user-panel">
             <div class="pull-left image">
-              <img src="{{asset('myadmin/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+              <img src="<?php echo e(asset('myadmin/dist/img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
              
-              <a href="{{url('admin/login/logOut')}}"><i class="fa fa-circle text-success"></i>退出</a>
+              <a href="<?php echo e(url('admin/login/logOut')); ?>"><i class="fa fa-circle text-success"></i>退出</a>
             </div>
           </div> -->
 
@@ -318,7 +318,7 @@
                 <i class="fa fa-gittip"></i><span>超级管理员</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{ URL('admin/root') }}"><i class="fa fa-youtube-play"></i> 超级管理员信息</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/root')); ?>"><i class="fa fa-youtube-play"></i> 超级管理员信息</a></li>
               </ul>
             </li>
             -->
@@ -327,7 +327,7 @@
                 <i class="fa fa-gittip"></i><span>后台首页</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('/admin')}}"><i class="fa fa-youtube-play"></i>数据统计</a></li>
+                <li class="active"><a href="<?php echo e(URL('/admin')); ?>"><i class="fa fa-youtube-play"></i>数据统计</a></li>
               </ul>
             </li>     
 
@@ -336,7 +336,7 @@
                 <i class="fa fa-gittip"></i><span>管理员管理</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('admin/user')}}"><i class="fa fa-youtube-play"></i> 管理员管理</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/user')); ?>"><i class="fa fa-youtube-play"></i> 管理员管理</a></li>
                 </ul>
             </li>
      
@@ -345,7 +345,7 @@
                 <i class="fa fa-bomb"></i> <span> 活动管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{url('admin/act')}}"><i class="fa fa-circle-o"></i>活动列表</a></li>
+                <li class="active"><a href="<?php echo e(url('admin/act')); ?>"><i class="fa fa-circle-o"></i>活动列表</a></li>
               </ul>
             </li>
 
@@ -354,9 +354,9 @@
                 <i class="fa fa-gittip"></i> <span>作品管理</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="{{URL('admin/works/index')}}"><i class="fa fa-circle-o"></i> 待审核作品</a></li>
-                <li><a href="{{url('admin/shopCom')}}"><i class="fa fa-circle-o"></i> 已审核作品</a></li>
-                <li><a href="{{url('admin/fail')}}"><i class="fa fa-circle-o"></i> 审核未通过作品</a></li》
+                <li class="active"><a href="<?php echo e(URL('admin/works/index')); ?>"><i class="fa fa-circle-o"></i> 待审核作品</a></li>
+                <li><a href="<?php echo e(url('admin/shopCom')); ?>"><i class="fa fa-circle-o"></i> 已审核作品</a></li>
+                <li><a href="<?php echo e(url('admin/fail')); ?>"><i class="fa fa-circle-o"></i> 审核未通过作品</a></li》
               </ul>
             </li>
           </ul>
@@ -366,9 +366,9 @@
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-          @section('content')
+          <?php $__env->startSection('content'); ?>
             这是页面主内容区。
-          @show
+          <?php echo $__env->yieldSection(); ?>
       </div><!-- /.content-wrapper -->
       <div class='control-sidebar-bg'></div>
     </div><!-- ./wrapper -->
@@ -394,56 +394,49 @@
     <!-- xdl-model-end -->
     
     <!-- jQuery 2.1.4 -->
-    <script src="{{asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/jQuery/jQuery-2.1.4.min.js')); ?>"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="{{asset('myadmin/bootstrap/js/jquery-ui.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/jquery-ui.min.js')); ?>" type="text/javascript"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       //$.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="{{asset('myadmin/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>  
-        {{--    
-    <!-- Morris.js charts -->
-    <script src="{{asset('myadmin/bootstrap/js/raphael-min.js')}}"></script>
-    <script src="{{asset('myadmin/plugins/morris/morris.min.js')}}" type="text/javascript"></script>
-        --}}
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/bootstrap.min.js')); ?>" type="text/javascript"></script>  
+        
     <!-- Sparkline -->
-    <script src="{{asset('myadmin/plugins/sparkline/jquery.sparkline.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/sparkline/jquery.sparkline.min.js')); ?>" type="text/javascript"></script>
     <!-- jvectormap -->
-    <script src="{{asset('myadmin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('myadmin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')); ?>" type="text/javascript"></script>
     <!-- jQuery Knob Chart -->
-    <script src="{{asset('myadmin/plugins/knob/jquery.knob.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/knob/jquery.knob.js')); ?>" type="text/javascript"></script>
     <!-- daterangepicker -->
-    <script src="{{asset('myadmin/bootstrap/js/moment.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('myadmin/plugins/daterangepicker/daterangepicker.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/moment.min.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/daterangepicker/daterangepicker.js')); ?>" type="text/javascript"></script>
     <!-- datepicker -->
-    <script src="{{asset('myadmin/plugins/datepicker/bootstrap-datepicker.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/datepicker/bootstrap-datepicker.js')); ?>" type="text/javascript"></script>
     <!-- Bootstrap WYSIHTML5 -->
-    <script src="{{asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')); ?>" type="text/javascript"></script>
     <!-- Slimscroll -->
-    <script src="{{asset('myadmin/plugins/slimScroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/plugins/slimScroll/jquery.slimscroll.min.js')); ?>" type="text/javascript"></script>
     <!-- FastClick -->
-    <script src='{{asset('myadmin/plugins/fastclick/fastclick.min.js')}}'></script>
+    <script src='<?php echo e(asset('myadmin/plugins/fastclick/fastclick.min.js')); ?>'></script>
     <!-- AdminLTE App -->
-    <script src="{{asset('myadmin/dist/js/app.min.js')}}" type="text/javascript"></script>    
-        {{--
-    <!-- AdminLTE 仪表板演示（这只是用于演示目的） -->
-    <script src="{{asset('myadmin/dist/js/pages/dashboard.js')}}" type="text/javascript"></script>
-    --}}
+    <script src="<?php echo e(asset('myadmin/dist/js/app.min.js')); ?>" type="text/javascript"></script>    
+        
     <!-- XDL-model-提示框 -->
-    <script src="{{asset('myadmin/bootstrap/js/xdl-modal-alert-confirm.js')}}" type="text/javascript"></script> 
+    <script src="<?php echo e(asset('myadmin/bootstrap/js/xdl-modal-alert-confirm.js')); ?>" type="text/javascript"></script> 
     <!-- AdminLTE 用于演示目的 -->
-    <script src="{{asset('myadmin/dist/js/demo.js')}}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('myadmin/dist/js/demo.js')); ?>" type="text/javascript"></script>
     
-    @if(session("err"))
+    <?php if(session("err")): ?>
         <script type="text/javascript">
-            Modal.alert({msg: "{{session('err')}}",title: ' 信息提示',btnok: '确定',btncl:'取消'});
+            Modal.alert({msg: "<?php echo e(session('err')); ?>",title: ' 信息提示',btnok: '确定',btncl:'取消'});
         </script>
-    @endif
+    <?php endif; ?>
     
-    @yield('myscript')
+    <?php echo $__env->yieldContent('myscript'); ?>
     
   </body>
 </html>

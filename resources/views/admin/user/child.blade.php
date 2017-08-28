@@ -1,3 +1,4 @@
+
 @extends('admin.base')
     @section('content')
         <!-- Content Header (Page header) -->
@@ -58,7 +59,7 @@
                   </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                 {{ $list->render() }}
+                 {{  $list->appends($where)->render() }}
                 </div>
               </div><!-- /.box -->
 
