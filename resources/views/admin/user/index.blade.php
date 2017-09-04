@@ -19,7 +19,7 @@
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><i class="fa fa-th"></i> 普通管理员管理</h3>&nbsp;&nbsp;	
+                  <h3 class="box-title"><i class="fa fa-th"></i> 活动管理</h3>&nbsp;&nbsp;	
                   <button class="btn btn-sm btn-primary" onclick="window.location='{{ URL('admin/user/create') }}'">添加</button>
                   <div class="box-tools">
                     <form action="{{url('admin/stu')}}" method="get">

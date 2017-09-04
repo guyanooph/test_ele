@@ -114,11 +114,11 @@ Route::post("/ad/plogin","Admin\LoginController@plogin");//执行手机验证
 
 Route::group(["prefix" => "admin","middleware" => "admin"], function () {
 	Route::get("/","Admin\IndexController@index");//后台首页
-
 	Route::get("root","Admin\RootController@index");//超级管理员
-
 	//Route::resource("user","Admin\UserController");//普通管理员
 	Route::get("user","Admin\UserController@index");//普通管理员首页
+    Route::get("district","Admin\DistrictController@index");//城市级联
+    Route::get("district/{upid}","Admin\DistrictController@show");//城市级联加载
     Route::get("role","Admin\RoleController@index");//角色管理首页
 
     //权限分配

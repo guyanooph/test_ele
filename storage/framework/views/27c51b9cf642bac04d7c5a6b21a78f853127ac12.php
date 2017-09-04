@@ -326,6 +326,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="active"><a href="<?php echo e(URL('admin/user')); ?>"><i class="fa fa-youtube-play"></i> 用户管理</a></li>
+                <li class="active"><a href="<?php echo e(URL('admin/district')); ?>"><i class="fa fa-youtube-play"></i> 城市级联</a></li>
                 <li class="active"><a href="<?php echo e(URL('admin/role')); ?>"><i class="fa fa-youtube-play"></i> 角色管理</a></li>
                 <li class="active"><a href="<?php echo e(URL('admin/node')); ?>"><i class="fa fa-youtube-play"></i> 节点管理</a></li>
               </ul>

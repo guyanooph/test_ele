@@ -1,0 +1,87 @@
+
+.shipin{
+	height:40%;
+	width:100%;
+	z-index: 900;
+	position: relative;
+}
+.shipin video{
+	width:100%;
+	height:100%;
+}
+
+/*.kaishi{
+	height:100%;
+	width:100%;
+	position: absolute;
+	top:0;
+	z-index: 999;
+	background: rgba(0,0,0,0.3);
+}
+.kai{
+	height:1.875rem;
+	width:1.875rem;
+	border-radius: 50%;
+	background:red;
+	margin:0 auto;
+	margin-top:3.125rem;
+}*/
+.name{
+	height:1.875rem;
+	width:100%;
+	background:#ccc;
+	text-align: center;
+	line-height: 1.875rem;
+	color:#fff;
+	font-size: 0.875rem;
+}
+.jieshao,.guize{
+	width:96%;
+	margin:0 auto;
+}
+.jieshao p{
+	height:2.5rem;
+	line-height: 2.5rem;
+	color:#A50A0A;
+	font-weight: 900;
+	font-size: 0.875rem;
+}
+.guize p{
+	height:2.5rem;
+	line-height: 2.5rem;
+	color:#A50A0A;
+	font-weight: 900;
+	font-size: 0.875rem;
+}
+.jiehao1,.guize1{
+	width:100%;
+}
+.footer1{
+	width:100%;
+	height:3.75rem;
+	background:#fff;
+	position: fixed;
+	bottom: 0;
+}
+.footer1 div{
+	float:left;
+	width:25%;
+	height:3.125rem;
+	text-align: center;
+	margin-top:0.5rem;
+
+}
+.biao{
+	display: block;
+	height:30px;
+	width:30px;
+	margin:0 auto;
+	background: blue;
+}
+.footer1 div a{
+	color:#585858;
+}
+.zhanwei2{
+	height:3.125rem;
+	width:100%;
+}

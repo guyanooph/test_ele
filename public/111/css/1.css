@@ -1,0 +1,18 @@
+
+
+body{
+	width:100%
+}	
+.btn{
+	height:1.875rem;
+	width:30%;
+	background:#B2050F;
+	text-align: center;
+	line-height: 1.875rem;
+	position: absolute;
+	bottom:3.125rem;
+	left:35%;
+}
+.btn a{
+	color:#fff;
+}

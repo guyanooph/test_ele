@@ -1,0 +1,26 @@
+.content{
+	width: 100%;
+}
+.content form{
+	margin-top: 0.5rem;
+	margin-left:0.5rem;
+}
+.content .xing{
+	margin-right:0.5rem;
+	float:left;
+}
+.content .inp{
+	float:left;
+}
+.footer1{
+	width:100%;
+	height:2.25rem;
+	background:#B2050F;
+	position: fixed;
+	bottom: 0;
+}
+
+.footer1 a{
+	color:#fff;
+	text-align: center;
+}
